@@ -11,8 +11,11 @@
 |
 */
 
-// route
+Route::GET('/locale/{locale}','LocaleController@locale')->name('locale');
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware'=>'locale'],function(){
+    Route::get('/', [
+        'as' =>'/',
+        'uses' => 'HomeController@index'
+    ]);
 });
