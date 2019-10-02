@@ -13,7 +13,7 @@ class AddContentsToContentsDetails extends Migration
      */
     public function up()
     {
-        Schema::table('contents_details', function (Blueprint $table) {
+        Schema::table('content_details', function (Blueprint $table) {
             $table->foreign('content_id')->references('id')->on('contents')->onUpdate('cascade')->onDelete('cascade');
         });
     }
@@ -25,8 +25,8 @@ class AddContentsToContentsDetails extends Migration
      */
     public function down()
     {
-        Schema::table('contents_details', function (Blueprint $table) {
-            $table->dropForeign('contents_details_content_id_foreign');
+        Schema::table('content_details', function (Blueprint $table) {
+            $table->dropForeign('content_details_content_id_foreign');
         });
     }
 }
