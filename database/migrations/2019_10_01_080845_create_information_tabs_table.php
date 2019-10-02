@@ -17,9 +17,9 @@ class CreateInformationTabsTable extends Migration
         Schema::create('information_tabs', function (Blueprint $table) {
             //컬럼 명세
             $table->bigIncrements('id');
-            $table->string('tab_name_ko', 20)->comment('탭 이름(한)');
-            $table->string('tab_name_cn', 20)->comment('탭 이름(중)');
-            $table->string('tab_name_en', 20)->comment('탭 이름(영)');
+            $table->string('name_ko', 20)->comment('탭 이름(한)');
+            $table->string('name_cn', 20)->comment('탭 이름(중)');
+            $table->string('name_en', 20)->comment('탭 이름(영)');
             $table->timestamps();
         });
         //테이블 명세

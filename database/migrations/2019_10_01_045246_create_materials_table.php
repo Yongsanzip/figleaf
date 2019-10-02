@@ -18,7 +18,7 @@ class CreateMaterialsTable extends Migration
             //컬럼 명세
             $table->bigIncrements('id');
             $table->bigInteger('group_id')->unsigned()->comment('그룹 id');
-            $table->string('material_name', 50)->comment('재질명');
+            $table->string('name', 50)->comment('재질명(한)');
             $table->timestamps();
         });
         //테이블 명세

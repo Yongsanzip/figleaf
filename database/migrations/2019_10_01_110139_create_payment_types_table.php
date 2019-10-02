@@ -17,8 +17,9 @@ class CreatePaymentTypesTable extends Migration
         Schema::create('payment_types', function (Blueprint $table) {
             //컬럼 명세
             $table->bigIncrements('id');
-            $table->tinyInteger('payments_type')->default(0)->comment('결제수단');
+            $table->bigInteger('select_id')->unsigned()->comment('결제수단');
             $table->timestamps();
+            $table->softDeletes();
         });
         //테이블 명세
         DB::statement('ALTER TABLE `payment_types` COMMENT = "결제 수단 테이블"');

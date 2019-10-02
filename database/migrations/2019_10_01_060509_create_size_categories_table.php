@@ -17,7 +17,9 @@ class CreateSizeCategoriesTable extends Migration
         Schema::create('size_categories', function (Blueprint $table) {
             //컬럼 명세
             $table->bigIncrements('id');
-            $table->string('category_name')->comment('카테고리 이름');
+            $table->string('category_name_ko')->comment('카테고리 이름(한)');
+            $table->string('category_name_cn')->comment('카테고리 이름(중)');
+            $table->string('category_name_en')->comment('카테고리 이름(영)');
             $table->timestamps();
         });
         //테이블 명세

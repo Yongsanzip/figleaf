@@ -17,7 +17,9 @@ class CreateGroupsTable extends Migration
         Schema::create('groups', function (Blueprint $table) {
             //컬럼 명세
             $table->bigIncrements('id');
-            $table->string('name', 50)->comment('그룹명');
+            $table->string('name_ko', 50)->comment('그룹명(한)');
+            $table->string('name_cn', 50)->comment('그룹명(중)');
+            $table->string('name_en', 50)->comment('그룹명(영)');
             $table->timestamps();
         });
         //테이블 명세
