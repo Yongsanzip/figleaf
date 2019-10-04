@@ -33,7 +33,8 @@ class DatabaseSeeder extends Seeder
             GroupsTableSeeder::class,
             //재질 테이블 데이터 세팅
             MaterialsTableSeeder::class,
-
+            //배너 테이블 데이터 세팅
+            BannersTableSeeder::class,
 
             //부가 요소
         ]);
