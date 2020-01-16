@@ -1,0 +1,369 @@
+$color-main:#89954c;
+$color-light:#d1e65d;
+
+/***** main page *****/
+.main-hero{
+    .hero-slide{
+        height:600px;
+        padding-bottom:56px;
+        box-sizing: content-box;
+        img{
+            width: 100%;
+            height:100%;
+            object-fit: cover;
+        }
+        .swiper-pagination{
+            position: relative;
+            bottom: auto;
+            left: auto;
+            margin-top:24px;
+            .swiper-pagination-bullet{
+                width: 12px;
+                height:12px;
+                border-radius: 0;
+                margin:0 6px;
+            }
+            .swiper-pagination-bullet-active{
+                background: $color-main;
+            }
+        }
+        .swiper-button-next{
+            width: 30px;
+            height: 64px;
+            z-index: 1;
+            background-size: 30px 64px;
+            background-image: url('/images/common/ic-arrow-right-hero.png');
+            right:32px;
+            margin-top: -60px;
+        }
+        .swiper-button-prev{
+            width: 30px;
+            height: 64px;
+            z-index: 1;
+            background-size: 30px 64px;
+            background-image: url('/images/common/ic-arrow-left-hero.png');
+            left:32px;
+            margin-top: -60px;
+        }
+    }
+}
+.con-designer{
+    margin-top:80px;
+    margin-bottom:120px;
+    .designer-slide{
+        padding-bottom:20px;
+        .card{
+            .card-contents{
+                min-height: 120px;
+            }
+        }
+        .swiper-button-next{
+            width: 32px;
+            height: 32px;
+            z-index: 1;
+            background-size: 32px 32px;
+            background-image: url('/images/common/ic-arrow-right-32-white.png');
+            right:0;
+            margin-top: -60px;
+            opacity: 0.8;
+        }
+        .swiper-button-prev{
+            width: 32px;
+            height: 32px;
+            z-index: 1;
+            background-size: 32px 32px;
+            background-image: url('/images/common/ic-arrow-left-32-white.png');
+            left:0;
+            opacity: 0.8;
+            margin-top: -60px;
+        }
+    }
+
+}
+.con-brand{
+    margin-top:80px;
+    margin-bottom:120px;
+    .brand-slide{
+        padding:0 5px 10px;
+        .swiper-button-next{
+            width: 32px;
+            height: 32px;
+            z-index: 1;
+            background-size: 32px 32px;
+            background-image: url('/images/common/ic-arrow-right-32-white.png');
+            right:0;
+            margin-top: -60px;
+            opacity: 0.8;
+        }
+        .swiper-button-prev{
+            width: 32px;
+            height: 32px;
+            z-index: 1;
+            background-size: 32px 32px;
+            background-image: url('/images/common/ic-arrow-left-32-white.png');
+            left:0;
+            opacity: 0.8;
+            margin-top: -60px;
+        }
+        .card{
+            .card-contents{
+                min-height: 120px;
+            }
+        }
+    }
+}
+.con-news{
+    margin-top:80px;
+    margin-bottom:120px;
+}
+.con-project{
+    margin-top:80px;
+    margin-bottom:120px;
+    .recommend-project-slide,
+    .new-project-slide{
+        padding:0 5px 10px;
+        .swiper-button-next{
+            width: 32px;
+            height: 32px;
+            z-index: 1;
+            background-size: 32px 32px;
+            background-image: url('/images/common/ic-arrow-right-32-white.png');
+            right:0;
+            margin-top: -60px;
+            opacity: 0.8;
+        }
+        .swiper-button-prev{
+            width: 32px;
+            height: 32px;
+            z-index: 1;
+            background-size: 32px 32px;
+            background-image: url('/images/common/ic-arrow-left-32-white.png');
+            left:0;
+            opacity: 0.8;
+            margin-top: -60px;
+        }
+    }
+    .card{
+        .card-contents{
+            min-height: 170px;
+            .card-title{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                word-wrap: break-word;
+            }
+            .text-box{
+                min-height: 96px;
+            }
+            .info-box-list{
+                margin-top:10px;
+            }
+            .info-box{
+                display: inline-block;
+                font-size:12px;
+                color:#2d2d2d;
+                line-height: 20px;
+                margin-right: 16px;
+                padding-left:20px;
+                &::before{
+                    content: '';
+                    position: absolute;
+                    left:0;
+                    top:2px;
+                    display: inline-block;
+                    width: 16px;
+                    height:16px;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: contain;
+                }
+            }
+            .amount::before{
+                background-image: url('/images/common/ic-product.png');
+            }
+            .date::before{
+                background-image: url('/images/common/ic-calandar.png');
+            }
+        }
+        .badge{
+            position: absolute;
+            top:0;
+            right:0;
+        }
+    }
+}
+.con-search{
+    margin-top:32px;
+    margin-bottom:120px;
+    .card{
+        .card-contents{
+            min-height: 170px;
+            .card-title{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                word-wrap: break-word;
+            }
+            .text-box{
+                min-height: 96px;
+            }
+            .info-box-list{
+                margin-top:10px;
+            }
+            .info-box{
+                display: inline-block;
+                font-size:12px;
+                color:#2d2d2d;
+                line-height: 20px;
+                margin-right: 16px;
+                padding-left:20px;
+                &::before{
+                    content: '';
+                    position: absolute;
+                    left:0;
+                    top:2px;
+                    display: inline-block;
+                    width: 16px;
+                    height:16px;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: contain;
+                }
+            }
+            .amount::before{
+                background-image: url('/images/common/ic-product.png');
+            }
+            .date::before{
+                background-image: url('/images/common/ic-calandar.png');
+            }
+        }
+        .badge{
+            position: absolute;
+            top:0;
+            right:0;
+        }
+    }
+}
+.news-list{
+    font-size:0;
+    .card{
+        width: calc(25% - 24px);
+        margin-right:32px;
+        margin-bottom:40px;
+        &:nth-child(4n){
+            margin-right: 0;
+        }
+        &:nth-last-child(-n+4){
+            margin-bottom: 0;
+        }
+        .card-image{
+            padding-bottom:75%;
+        }
+        .card-contents{
+            min-height: 86px;
+            .card-title{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                word-wrap: break-word;
+            }
+
+
+
+        }
+    }
+}
+.card-list{
+    font-size:0;
+    .card{
+        width: calc(25% - 15px);
+        margin-right:20px;
+        margin-bottom: 40px;
+        &:nth-child(4n){
+            margin-right:0;
+        }
+        &:nth-last-child(-n+4){
+            margin-bottom: 0;
+        }
+        .badge{
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+}
+.btn-wrap{
+    margin-top:40px;
+    text-align: center;
+    .btn-more{
+        display: inline-block;
+        width: 300px;
+        background: black;
+        color:white;
+        font-size:14px;
+        padding:10px 12px;
+    }
+}
+.search-result-text{
+    font-size:16px;
+    font-weight: 500;
+    margin-top:12px;
+}
+.search-result-none{
+    padding:64px 0;
+    text-align: center;
+    font-size:24px;
+}
+.category-title-wrap {
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    padding-bottom:64px;
+    text-align: center;
+}
+.category-detail-list{
+    display: block;
+    text-align: center;
+    font-size:0;
+    border-bottom: 1px solid #dadce0;
+    margin-bottom:54px;
+    li{
+        display: inline-block;
+        font-size:12px;
+        color:#2d2d2d;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        font-weight: 300;
+        a{
+            padding:16px 0;
+            width: 100%;
+            height:100%;
+        }
+    }
+    .on{
+        font-weight: 900;
+        &::after{
+            content: '';
+            width: 100%;
+            height: 2px;
+            background:#181818;
+            position: absolute;
+            left:0;
+            bottom:-1px;
+        }
+    }
+}
+.category-detail-10{
+    li{
+        width: 10%;
+    }
+}
+
+
