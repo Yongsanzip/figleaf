@@ -40,7 +40,7 @@
 
                 </div>
 
-                <ul class="category-detail-list">
+                <ul class="category-detail-list category-detail-10">
                     <li class="on">
                         <a href="">view all</a>
                     </li>
