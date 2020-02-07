@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../scss/reset.css">
+    <link rel="stylesheet" href="../scss/layout.css">
+    <link rel="stylesheet" href="../scss/client.css">
+    <script src="../js/common.js"></script>
+    <script src="../js/includeHTML.js"></script>
+    <title>Document</title>
+
+    <!-- add -->
+    <script src="../js/portfolioCreate.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <header class="header" include-html="/public/html/common/header.html"></header>
+
+
+    <main class="container">
+        <div class="inner">
+            <div class="con-portfolio-create">
+                <h2 class="portfolio-headline">
+                    portfolio
+                </h2>
+                <!-- headline -->
+                <div class="headline-wrap">
+                    <h2 class="headline">포트폴리오 만들기/수정하기</h2>
+                </div>
+                <div class="portfolio-btn-wrap">
+                    <a href="" class="btn-white">미리보기</a>
+                    <button class="btn-black">저장하기</button>
+                    <div class="portfolio-options">
+                        <label class="checkbox-wrap">
+                            <input type="checkbox">
+                            <p>포트폴리오 숨기기</p>
+                        </label>
+                        <button class="help" type="button">도움말</button>
+                    </div>
+
+                </div>
+                <!-- //headline -->
+
+                <ul class="tab-list">
+                    <li class="tab-on fill"><span>디자이너 프로필</span></li>
+                    <li><span>브랜드</span></li>
+                    <li><span>룩북</span></li>
+                    <li><span>프로젝트</span></li>
+                    <li><span>뉴스&블로그</span></li>
+                    <li><span>연락처</span></li>
+                </ul>
+
+                <!-- tab contents -->
+                <div class="contents-wrap">
+                    <form>
+                        <!-- 01 프로필 -->
+                        <div class="tab-contents-box edit-on">
+                            <!-- 01-A 대표이미지 -->
+                            <div class="input-item">
+                                <h3 class="title">대표이미지(썸네일)</h3>
+                                <p class="text-caption">최소 280*360px의 jpg, jpeg, png파일(10MB 미만)</p>
+                                <label class="upload-file">
+                                    <input type="file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
+                                    <div class="file-button">파일선택</div>
+                                    <p class="file-name">선택한 파일 없음</p>
+                                </label>
+                            </div>
+                            <!-- 01-B 프로필설명 -->
+                            <div class="input-item">
+                                <h3 class="title">프로필 설명</h3>
+                                <div class="lang-list">
+                                    <label class="lang-check">
+                                        <input type="checkbox" checked disabled>
+                                        <div class="shape">한국어</div>
+                                    </label>
+                                    <label class="lang-check">
+                                        <input type="checkbox">
+                                        <div class="shape">ENG</div>
+                                    </label>
+                                    <label class="lang-check">
+                                        <input type="checkbox">
+                                        <div class="shape">汉语</div>
+                                    </label>
+                                </div>
+                                <div class="textarea-list">
+                                    <textarea class="textarea" placeholder="한국어"></textarea>
+                                    <!-- add script item -->
+                                </div>
+                            </div>
+                            <!-- 01-C 히스토리 -->
+                            <div class="input-item">
+                                <h3 class="title">히스토리</h3>
+                                <div class="lang-list">
+                                    <label class="lang-check">
+                                        <input type="checkbox" checked disabled>
+                                        <div class="shape">한국어</div>
+                                    </label>
+                                    <label class="lang-check">
+                                        <input type="checkbox">
+                                        <div class="shape">ENG</div>
+                                    </label>
+                                    <label class="lang-check">
+                                        <input type="checkbox">
+                                        <div class="shape">汉语</div>
+                                    </label>
+                                </div>
+                                <div class="history-list">
+                                    <div class="year-item">
+                                        <div class="year-row">
+                                            <input type="text" class="input-field" placeholder="ex)2019/연도를 입력하세요.">
+                                            <button class="btn-white" type="button">삭제</button>
+                                        </div>
+                                        <!-- active item -->
+                                        <div class="active-item">
+                                            <ul class="active-list">
+                                                <li><input type="text" class="input-field" placeholder="활동(한국어)"></li>
+                                                <li><input type="text" class="input-field" placeholder="Activities(English)"></li>
+                                                <li><input type="text" class="input-field" placeholder="活动(汉语)"></li>
+                                            </ul>
+                                            <div class="btn-box">
+<!--                                                <button class="btn-white" type="button">삭제</button>-->
+                                                <button class="btn-black" type="button">추가</button>
+                                            </div>
+                                        </div>
+                                        <!-- //active item -->
+                                        <div class="active-item">
+                                            <ul class="active-list">
+                                                <li><input type="text" class="input-field" placeholder="활동(한국어)"></li>
+                                                <li><input type="text" class="input-field" placeholder="Activities(English)"></li>
+                                                <li><input type="text" class="input-field" placeholder="活动(汉语)"></li>
+                                            </ul>
+                                            <div class="btn-box">
+                                                <button class="btn-white" type="button">삭제</button>
+                                                <button class="btn-black" type="button">추가</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn-black" type="button">연도추가</button>
+                                </div>
+                            </div>
+                            <!-- 01-D 수상내역 -->
+                            <div class="input-item">
+                                <h3 class="title">수상내역</h3>
+                                <div class="lang-list">
+                                    <label class="lang-check">
+                                        <input type="checkbox" checked disabled>
+                                        <div class="shape">한국어</div>
+                                    </label>
+                                    <label class="lang-check">
+                                        <input type="checkbox">
+                                        <div class="shape">ENG</div>
+                                    </label>
+                                    <label class="lang-check">
+                                        <input type="checkbox">
+                                        <div class="shape">汉语</div>
+                                    </label>
+                                </div>
+                                <div class="history-list">
+                                    <div class="year-item">
+                                        <div class="year-row">
+                                            <input type="text" class="input-field" placeholder="ex)2019/연도를 입력하세요.">
+                                            <button class="btn-white" type="button">삭제</button>
+                                        </div>
+                                        <!-- active item -->
+                                        <div class="active-item">
+                                            <ul class="active-list">
+                                                <li><input type="text" class="input-field" placeholder="활동(한국어)"></li>
+                                                <li><input type="text" class="input-field" placeholder="Activities(English)"></li>
+                                                <li><input type="text" class="input-field" placeholder="活动(汉语)"></li>
+                                            </ul>
+                                            <div class="btn-box">
+                                                <!--                                                <button class="btn-white" type="button">삭제</button>-->
+                                                <button class="btn-black" type="button">추가</button>
+                                            </div>
+                                        </div>
+                                        <!-- //active item -->
+                                        <div class="active-item">
+                                            <ul class="active-list">
+                                                <li><input type="text" class="input-field" placeholder="활동(한국어)"></li>
+                                                <li><input type="text" class="input-field" placeholder="Activities(English)"></li>
+                                                <li><input type="text" class="input-field" placeholder="活动(汉语)"></li>
+                                            </ul>
+                                            <div class="btn-box">
+                                                <button class="btn-white" type="button">삭제</button>
+                                                <button class="btn-black" type="button">추가</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn-black" type="button">연도추가</button>
+                                </div>
+                            </div>
+                            <!-- 01-E 협회 -->
+                            <div class="input-item">
+                                <h3 class="title">협회</h3>
+                                <div class="lang-list">
+                                    <label class="lang-check">
+                                        <input type="checkbox" checked disabled>
+                                        <div class="shape">한국어</div>
+                                    </label>
+                                    <label class="lang-check">
+                                        <input type="checkbox">
+                                        <div class="shape">ENG</div>
+                                    </label>
+                                    <label class="lang-check">
+                                        <input type="checkbox">
+                                        <div class="shape">汉语</div>
+                                    </label>
+                                </div>
+                                <div class="society-list">
+                                    <div class="year-item">
+                                        <div class="year-row">
+                                            <input type="text" class="input-field" placeholder="가입연도">
+                                            <span class="waves">~</span>
+                                            <input type="text" class="input-field" placeholder="가입연도">
+                                        </div>
+                                        <div class="active-item">
+                                            <ul class="active-list">
+                                                <li><input type="text" class="input-field" placeholder="활동(한국어)"></li>
+                                                <li><input type="text" class="input-field" placeholder="Activities(English)"></li>
+                                                <li><input type="text" class="input-field" placeholder="活动(汉语)"></li>
+                                            </ul>
+                                            <div class="btn-box">
+                                                <button class="btn-white" type="button">삭제</button>
+                                                <button class="btn-black" type="button">추가</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- script add item -->
+                                    <button class="btn-black" type="button">협회추가</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 02 브랜드 -->
+                        <div class="tab-contents-box"></div>
+                        <!-- 03 룩북 -->
+                        <div class="tab-contents-box"></div>
+                        <!-- 04 프로젝트 -->
+                        <div class="tab-contents-box"></div>
+                        <!-- 05 뉴스블로그 -->
+                        <div class="tab-contents-box"></div>
+                        <!-- 06 연락처 -->
+                        <div class="tab-contents-box"></div>
+
+                    </form>
+                </div>
+                <!--// tab contents -->
+
+            </div>
+        </div>
+
+    </main>
+
+
+    <footer class="footer" include-html="/public/html/common/footer.html"></footer>
+    <script>includeHTML();</script>
+</div>
+</body>
+</html>
