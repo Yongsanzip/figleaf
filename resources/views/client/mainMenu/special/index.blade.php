@@ -1,5 +1,5 @@
 <?php
-// url : /special
+// url : /women
 ?>
 @extends('client.layouts.app')
 @section('content')
@@ -36,9 +36,48 @@
             <section class="con-project">
 
                 <div class="category-title-wrap">
+<<<<<<< HEAD
                     <h2 class="category-title">special</h2>
                 </div>
 
+=======
+                    <h2 class="category-title">Special</h2>
+
+                </div>
+
+                <ul class="category-detail-list">
+                    <li class="on">
+                        <a href="">view all</a>
+                    </li>
+                    <li>
+                        <a href="">outer</a>
+                    </li>
+                    <li>
+                        <a href="">top</a>
+                    </li>
+                    <li>
+                        <a href="">t-shirts/handie</a>
+                    </li>
+                    <li>
+                        <a href="">pants</a>
+                    </li>
+                    <li>
+                        <a href="">sports</a>
+                    </li>
+                    <li>
+                        <a href="">dress</a>
+                    </li>
+                    <li>
+                        <a href="">skirts</a>
+                    </li>
+                    <li>
+                        <a href="">shoes</a>
+                    </li>
+                    <li>
+                        <a href="">accessories</a>
+                    </li>
+                </ul>
+>>>>>>> 66b21b60f584e7b49d2576c82120e878f217dcc6
 
                 <div class="card-list">
                     <!-- card * 20 -->
@@ -384,8 +423,11 @@
     </main>
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 66b21b60f584e7b49d2576c82120e878f217dcc6
     <script src="{{asset('js/swiper.min.js')}}"></script>
     <script>
 

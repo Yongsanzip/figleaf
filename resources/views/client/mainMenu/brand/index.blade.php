@@ -37,7 +37,7 @@
             <section class="con-brand">
                 <div class="section-title-wrap">
                     <h2 class="section-title">brand</h2>
-                    <span class="caption">브랜</span>
+                    <span class="caption">브랜드</span>
                     <a href="" class="more">전체보기</a>
                 </div>
 

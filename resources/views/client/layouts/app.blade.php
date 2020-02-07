@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset('scss/layout.css')}}">
     <link rel="stylesheet" href="{{asset('scss/client.css')}}">
     <script src="{{asset('js/common.js')}}"></script>
-
+    <script src="{{asset('js/includeHTML.js')}}"></script>
     <title>Figleaf</title>
 </head>
 <body>

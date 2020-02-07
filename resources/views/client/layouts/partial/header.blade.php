@@ -19,7 +19,7 @@
             <ul class="menu-user">
                 <li><a href="/mypage_information">마이페이지</a></li>
                 <li><a href="/agree">회원가입</a></li>
-                <li><a href="">로그인</a></li>
+                <li><a href="/login">로그인</a></li>
                 <li><button class="btn-search" onclick="fnOpenSearch();">검색</button></li>
             </ul>
         </div>

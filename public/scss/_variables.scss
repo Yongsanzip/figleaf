@@ -1,0 +1,181 @@
+// Colors
+$color-main: #a8b270;
+$color-main-light01: #f6f9e8;
+$color-main-light02: #D8E39C;
+$color-main-dark01: #8A954C;
+$color-main-dark02: #5B6234;
+$color-main-dark03: #232612;
+$color-black: #000000;
+$color-gray-07: #181818;
+$color-gray-06: #303030;
+$color-gray-05: #4a4a4a;
+$color-gray-04: #777777;
+$color-gray-03: #a8a8a8;
+$color-gray-02: #cccccc;
+$color-gray-01: #e8e8e8;
+$color-gray-00: #fafafa;
+$color-white: #ffffff;
+$color-background: #ffffff;
+$color-surface: #ffffff;
+$color-nav: #2d2d2d;
+
+// Font Sizes
+@mixin font-sizes {
+  @for $i from 0 through 20{
+    .font-size-#{$i * 4}{
+      font-size: $i * 4px;
+    }
+  }
+}
+@include font-sizes;
+
+// Font Weights
+@mixin font-weights {
+  @for $i from 1 through 9{
+    .font-weight-#{$i * 100}{
+      font-weight: $i * 100;
+    }
+  }
+}
+@include font-weights;
+
+// Line Heights
+@mixin line-heights {
+  @for $i from 1 through 6{
+    .line-height-#{8 + $i * 2}{
+      line-height: 0.8 + $i * 0.2;
+    }
+  }
+}
+@include line-heights;
+
+// Centerings
+@mixin center-absolute($horizontal: true, $vertical: true) {
+  position: absolute;
+  @if ($horizontal and $vertical) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else if ($horizontal) {
+    left: 50%;
+    transform: translate(-50%, 0);
+  } @else if ($vertical) {
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+}
+
+// Paddings
+@mixin paddings {
+  @for $i from 1 through 50{
+    .p#{$i * 4}{padding: $i * 4px !important;}
+    .pt#{$i * 4}{padding-top: $i * 4px !important;}
+    .pb#{$i * 4}{padding-bottom: $i * 4px !important;}
+    .pl#{$i * 4}{padding-left: $i * 4px !important;}
+    .pr#{$i * 4}{padding-right: $i * 4px !important;}
+    .ptb#{$i * 4}{padding-top: $i * 4px !important;padding-bottom: $i * 4px !important;}
+    .plr#{$i * 4}{padding-left: $i * 4px !important;padding-right: $i * 4px !important;}
+  }
+}
+@include paddings;
+
+// Margins
+@mixin margins {
+  @for $i from 1 through 50{
+    .m#{$i * 4}{margin: $i * 4px !important;}
+    .mt#{$i * 4}{margin-top: $i * 4px !important;}
+    .mb#{$i * 4}{margin-bottom: $i * 4px !important;}
+    .ml#{$i * 4}{margin-left: $i * 4px !important;}
+    .mr#{$i * 4}{margin-right: $i * 4px !important;}
+    .mtb#{$i * 4}{margin-top: $i * 4px !important;margin-bottom: $i * 4px !important;}
+    .mlr#{$i * 4}{margin-left: $i * 4px !important;margin-right: $i * 4px !important;}
+  }
+}
+@include margins;
+
+
+// Widths
+@mixin widths {
+  @for $i from 1 through 100{
+    .w#{$i}{
+      width: $i * 1% !important;
+      display: inline-block !important;
+    }
+  }
+}
+@include widths;
+
+//height
+@mixin heights {
+  @for $i from 1 through 100{
+    .height#{$i}{
+      height: $i * 1px;
+    }
+  }
+}
+
+@include heights;
+
+// Box Shadows
+@mixin box-shadows{
+  .box-shadow-low {
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+  .box-shadow-mid {
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.20), 0 2px 5px rgba(0, 0, 0, 0.32);
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.20), 0 2px 5px rgba(0, 0, 0, 0.32);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.20), 0 2px 5px rgba(0, 0, 0, 0.32);
+  }
+  .box-shadow-high {
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.28), 0 3px 6px rgba(0, 0, 0, 0.40);
+    -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.28), 0 3px 6px rgba(0, 0, 0, 0.40);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.28), 0 3px 6px rgba(0, 0, 0, 0.40);
+  }
+}
+@include box-shadows;
+
+// Transitions
+@mixin transitions($type : all, $time : 0.4s, $effect : ease){
+  -webkit-transition: $type $time $effect;
+  -moz-transition: $type $time $effect;
+  -ms-transition: $type $time $effect;
+  -o-transition: $type $time $effect;
+  transition: $type $time $effect;
+}
+
+// Opacities
+@mixin opacities {
+  @for $i from 0 through 10{
+    .opacity#{$i}{
+      opacity: $i / 10;
+    }
+  }
+}
+@include opacities;
+
+@mixin columns{
+  @for $i from 1 through 12{
+    .col-#{$i}{
+      display: inline-block;
+      width: 1 / 12 * $i * 100%;
+    }
+  }
+}
+@include columns;
+
+
+// Media Queries
+
+@mixin mobile {
+  @media (max-width: #{480px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{481px}) {
+    @content;
+  }
+}

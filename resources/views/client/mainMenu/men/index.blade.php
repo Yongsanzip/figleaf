@@ -1,5 +1,5 @@
 <?php
-// url : /men
+// url : /women
 ?>
 @extends('client.layouts.app')
 @section('content')
@@ -36,11 +36,19 @@
             <section class="con-project">
 
                 <div class="category-title-wrap">
+<<<<<<< HEAD
                     <h2 class="category-title">men’s Apparel</h2>
 
                 </div>
 
                 <ul class="category-detail-list category-detail-8">
+=======
+                    <h2 class="category-title">Men’s Apparel</h2>
+
+                </div>
+
+                <ul class="category-detail-list">
+>>>>>>> 66b21b60f584e7b49d2576c82120e878f217dcc6
                     <li class="on">
                         <a href="">view all</a>
                     </li>
@@ -60,6 +68,15 @@
                         <a href="">sports</a>
                     </li>
                     <li>
+<<<<<<< HEAD
+=======
+                        <a href="">dress</a>
+                    </li>
+                    <li>
+                        <a href="">skirts</a>
+                    </li>
+                    <li>
+>>>>>>> 66b21b60f584e7b49d2576c82120e878f217dcc6
                         <a href="">shoes</a>
                     </li>
                     <li>
@@ -411,8 +428,11 @@
     </main>
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 66b21b60f584e7b49d2576c82120e878f217dcc6
     <script src="{{asset('js/swiper.min.js')}}"></script>
     <script>
 
