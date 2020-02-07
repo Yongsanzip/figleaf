@@ -73,6 +73,22 @@ class RegisterController extends Controller
 
     protected function create(Request $request)
     {
+        error_log($request);
+        User::create([
+            'role_id'       => 1,
+            'email'         => $request->email,
+            'password'      => bcrypt($request->password),
+            'name'          => $request->name,
+            'home_phone'    => $request->home_phone,
+            'cellphone'     => $request->cellphone,
+            'zip_code'      => $request->zip_code,
+            'address'       => $request->address,
+            'address_detail'=> $request->address_detail,
+            'gender'        => $request->gender,
+            'grade'         => 0,
+            'email_yn'      => 0,
+            'sms_yn'        => 0,
+        ]);
         return view('auth.register.success');
     }
 

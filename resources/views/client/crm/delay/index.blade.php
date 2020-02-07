@@ -1,5 +1,13 @@
 <?php
-// url : /delay
+// url : /
 ?>
+@extends('client.layouts.app')
+@section('content')
+    <link rel="stylesheet" href="{{asset('/css/swiper.min.css')}}">
 
-배송지연관련정책
+
+
+
+
+
+@endsection

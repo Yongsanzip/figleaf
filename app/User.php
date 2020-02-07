@@ -16,7 +16,24 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'id'
+        , 'role_id'
+        , 'email'
+        , 'password'
+        , 'name'
+        , 'home_phone'
+        , 'cellphone'
+        , 'zipcode'
+        , 'address'
+        , 'address_detail'
+        , 'gender'
+        , 'grade'
+        , 'email_yn'
+        , 'sms_yn'
+        , 'email_verified_at'
+        , 'created_at'
+        , 'update_at'
+        , 'delete_at'
     ];
 
     /**
@@ -36,4 +53,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role(){
+        return $this->belongsTo('App\Role','role_id','id');
+    }
 }

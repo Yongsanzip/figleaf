@@ -15,7 +15,7 @@ class InformationController extends Controller
      */
     public function index()
     {
-        return view('admin.user.user.index');
+        return view('admin.user.information.index');
     }
 
     /**
@@ -48,7 +48,7 @@ class InformationController extends Controller
      */
     public function show($id)
     {
-        return view('admin.user.user.partial.show.index');
+        return view('admin.user.information.partial.show.index');
     }
 
     /**
@@ -60,7 +60,7 @@ class InformationController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.user.user.partial.edit.index');
+        return view('admin.user.information.partial.edit.index');
     }
 
     /**

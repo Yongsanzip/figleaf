@@ -100,7 +100,7 @@
                         </div>
                     </div>
                     <div class="btn-wrap">
-                        <button class="btn-black">next</button>
+                        <button type="button" class="btn-black" onclick="location.href='/register'">next</button>
                     </div>
                 </form>
             </div>

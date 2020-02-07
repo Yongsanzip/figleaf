@@ -36,6 +36,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('cascade');
         });
         //테이블 명세
         DB::statement('ALTER TABLE `users` COMMENT = "유저테이블"');
