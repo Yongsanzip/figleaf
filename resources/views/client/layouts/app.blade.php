@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="{{asset('scss/layout.css')}}">
     <link rel="stylesheet" href="{{asset('scss/client.css')}}">
     <script src="{{asset('js/common.js')}}"></script>
+    <script src="{{asset('js/includeHTML.js')}}"></script>
+    <script src="{{asset('js/portfolioCreate.js')}}"></script>
+    <script src="{{asset('js/project.js')}}"></script>
+    <script src="{{asset('js/projectView.js')}}"></script>
+    <script src="{{asset('js/sponsorView.js')}}"></script>
+    <script src="{{asset('js/swiper.min.js')}}"></script>
+    <script src="{{asset('js/swiper-hero.js')}}"></script>
 
     <title>Figleaf</title>
 </head>
