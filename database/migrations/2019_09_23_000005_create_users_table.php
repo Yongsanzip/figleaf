@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->boolean('email_yn')->comment('이메일 수신여부(미수신:0, 수신:1)');
             $table->boolean('sms_yn')->comment('SMS 수신여부(미수신:0, 수신:1)');
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('thumbnail')->nullable()->comment('썸네일 (디자이너 이미지)');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

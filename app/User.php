@@ -31,6 +31,7 @@ class User extends Authenticatable
         , 'email_yn'
         , 'sms_yn'
         , 'email_verified_at'
+        , 'thumbnail'
         , 'created_at'
         , 'update_at'
         , 'delete_at'

@@ -370,8 +370,6 @@
   width: 12.5%;
 }
 
-<<<<<<< HEAD
-=======
 /****** auth ******/
 .con-login {
   margin: auto;
@@ -4262,6 +4260,10 @@
   display: block;
 }
 
+.category-detail-8 li {
+  width: 12.5%;
+}
+
 /****** popup ******/
 .popup {
   padding: 24px 32px 50px;
@@ -4292,5 +4294,4 @@
   line-height: 36px;
 }
 
->>>>>>> 66b21b60f584e7b49d2576c82120e878f217dcc6
 /*# sourceMappingURL=client.css.map */
