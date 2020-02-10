@@ -8,7 +8,7 @@
         <div class="inner">
 
             <div class="con-join">
-                <form>
+                <form action="/register" method="GET" onsubmit="return fn_register_submit();">
 
 
                     <div class="join-header">
@@ -22,7 +22,7 @@
                     <div class="agree-wrap">
                         <div class="agree-all">
                             <label class="checkbox-wrap">
-                                <input type="checkbox">
+                                <input type="checkbox" name="chk_all">
                                 <p>전체동의</p>
                             </label>
                             <p class="text">회원가입 약관, 서비스 이용약관, 개인정보처리방침, 서비스이용료정책,  SMS/이메일 수신에 모두 동의합니다.</p>
@@ -37,7 +37,7 @@
                             </div>
                             <div>
                                 <label class="checkbox-wrap">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="agree1">
                                     <p>약관에 동의합니다.</p>
                                 </label>
                             </div>
@@ -53,7 +53,7 @@
                             </div>
                             <div>
                                 <label class="checkbox-wrap">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="agree2">
                                     <p>약관에 동의합니다.</p>
                                 </label>
                             </div>
@@ -69,7 +69,7 @@
                             </div>
                             <div>
                                 <label class="checkbox-wrap">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="agree3">
                                     <p>약관에 동의합니다.</p>
                                 </label>
                             </div>
@@ -85,7 +85,7 @@
                             </div>
                             <div>
                                 <label class="checkbox-wrap">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="agree4">
                                     <p>약관에 동의합니다.</p>
                                 </label>
                             </div>
@@ -100,12 +100,63 @@
                         </div>
                     </div>
                     <div class="btn-wrap">
-                        <button type="button" class="btn-black" onclick="location.href='/register'">next</button>
+                        <button type="submit" class="btn-black" >next</button>
                     </div>
                 </form>
             </div>
 
         </div>
-
     </main>
+    <script>
+        $(document).ready(function(){
+            $('.text-error').hide();
+            // 모두선택
+            $("input[name=chk_all]").click(function() {
+                if ($(this).prop('checked')) {
+                    $("input[name^=agree]").prop('checked', true);
+                } else {
+                    $("input[name^=agree]").prop("checked", false);
+                }
+            });
+
+
+            $("input[name^=agree]").click(function(e){
+                $('#error'+e.currentTarget.value).hide();
+            })
+        });
+
+        var fn_register_submit = function(f) {
+            if (!f.agree1.checked) {
+                alert("회원가입약관의 내용에 동의하셔야 회원가입 하실 수 있습니다.");
+                f.agree1.focus();
+                $('#error1').show();
+                return false;
+            }
+
+            if (!f.agree2.checked) {
+                alert("서비스 이용약관의 내용에 동의하셔야 회원가입 하실 수 있습니다.");
+                f.agree2.focus();
+                $('#error2').show();
+                return false;
+            }
+
+            if (!f.agree3.checked) {
+                alert("개인정보 처리방침의 내용에 동의하셔야 회원가입 하실 수 있습니다.");
+                f.agree3.focus();
+                $('#error3').show();
+                return false;
+            }
+
+            if (!f.agree4.checked) {
+                alert("서비스이용료정책의 내용에 동의하셔야 회원가입 하실 수 있습니다.");
+                f.agree4.focus();
+                $('#error4').show();
+                return false;
+            }
+
+            return true;
+        }
+
+
+    </script>
 @endsection

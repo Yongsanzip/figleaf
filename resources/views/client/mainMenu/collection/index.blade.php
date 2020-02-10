@@ -36,14 +36,9 @@
             <section class="con-project">
 
                 <div class="category-title-wrap">
-<<<<<<< HEAD
                     <h2 class="category-title">collection</h2>
                 </div>
 
-=======
-                    <h2 class="category-title">Collection</h2>
-
-                </div>
 
                 <ul class="category-detail-list">
                     <li class="on">
@@ -77,7 +72,6 @@
                         <a href="">accessories</a>
                     </li>
                 </ul>
->>>>>>> 66b21b60f584e7b49d2576c82120e878f217dcc6
 
                 <div class="card-list">
                     <!-- card * 20 -->
@@ -422,14 +416,8 @@
 
     </main>
 
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 66b21b60f584e7b49d2576c82120e878f217dcc6
     <script src="{{asset('js/swiper.min.js')}}"></script>
-    <script>
+    <script type="text/javascript">
 
         // hero slide
         var swiper = new Swiper('.hero-slide', {
