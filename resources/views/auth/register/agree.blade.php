@@ -8,7 +8,7 @@
         <div class="inner">
 
             <div class="con-join">
-                <form action="/register" method="GET" onsubmit="return fn_register_submit();">
+                <form action="/register" method="GET" onsubmit="return fn_register_submit(this);">
 
 
                     <div class="join-header">
