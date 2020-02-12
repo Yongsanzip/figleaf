@@ -24,5 +24,6 @@
 
     @include('client.layouts.partial.footer')
 </div>
+@yield('script')
 </body>
 </html>

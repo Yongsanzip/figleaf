@@ -33,6 +33,7 @@ class CreateSizesTable extends Migration
             $table->double('thigh')->unsigned()->nullable()->comment('엉덩이단면');
             $table->double('string_length')->unsigned()->nullable()->comment('끈길이');
             $table->double('horizontal')->unsigned()->nullable()->comment('가로');
+            $table->double('vertical')->unsigned()->nullable()->comment('세로');
             $table->double('forefoot')->unsigned()->nullable()->comment('앞굽');
             $table->double('heels')->unsigned()->nullable()->comment('뒷굽');
             $table->timestamps();

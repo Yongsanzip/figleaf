@@ -34,7 +34,7 @@
             </p>
         </div>
         <div class="btn-wrap">
-            <button class="btn-black" type="button">닫기</button>
+            <button class="btn-black" type="button" onclick="window.close();">닫기</button>
         </div>
     </main>
 </div>

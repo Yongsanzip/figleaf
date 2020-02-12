@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
             //필수 요소
             //유저 권한 테이블 데이터 세팅
             RolesTableSeeder::class,
+            //유저 테이블
+            UserTableSeeder::class,
             //메인메뉴 상단 1차 카테고리 테이블 데이터 세팅
             CategoriesTableSeeder::class,
             //메인메뉴 상단 2차 카테고리 테이블 데이터 세팅(women's, men's)

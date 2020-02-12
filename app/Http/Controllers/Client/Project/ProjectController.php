@@ -2,6 +2,20 @@
 
 namespace App\Http\Controllers\Client\Project;
 
+use App\Account;
+use App\Category;
+use App\CategoryDetail;
+use App\Fabirc;
+use App\Group;
+use App\Information;
+use App\InformationSelectList;
+use App\InformationTab;
+use App\Introduction;
+use App\Material;
+use App\Option;
+use App\Project;
+use App\Size;
+use App\SizeCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,7 +39,15 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        $main_categories = Category::where('id', 4)->orWhere('id', 5)->get();           // 1차 카테고리
+        $second_categories = CategoryDetail::get();                                     // 2차 카테고리
+        $size_categories = SizeCategory::get();                                         // 사이즈 카테고리
+        $information_tab = InformationTab::get();                                       // 취급정보 탭
+        $information_list = InformationSelectList::get();                               // 취급정보 리스트
+        $groups = Group::get();
+        $materials = Material::get();
+        return view('client.project.partial.create.index',
+            compact('main_categories', 'second_categories', 'materials', 'size_categories', 'information_tab', 'information_list', 'groups'));
     }
 
     /**
@@ -36,8 +58,116 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // table: projects, options, sizes, fabrics, introductions, accounts, informations
+        error_log($request->getContent());
+        error_log($request->project_title);
+        dd($request);
+        // 프로젝트 생성
+        $project = Project::create([
+            'user_id'       => '',
+            'category_id'   => $request->frist_category,
+            'category2_id'  => $request->second_category ? $request->second_category : '',
+            'total_cost'    => '', // ?
+            'supporter'     => '', // ?
+            'count'         => '', // ?
+            'condition'     => 0,
+            'title'         => $request->project_title,
+            'summary'       => $request->summary,
+            'success_count' => $request->success_count,
+            'comment'       => $request->comment,
+            'deadline'      => $request->deadline,
+            'account_date'  => $request->account_date,
+            'delivery_date' => $request->delivery_date,
+            'delay_date'    => $request->delay_date,
+            'storytelling'  => '',
+        ]);
+
+        $options_name = $request->option_name;
+        $options_price = $request->option_price;
+        // 옵션 테이블 저장
+        for ($i = 0; $i < count($options_name); $i++) {
+            Option::create([
+                'project_id'    => $project->id,
+                'option_name'   => $options_name[$i],
+                'price'         => $options_price[$i],
+            ]);
+        }
+
+        // for문으로 저장해야함
+        $sizes_count = $request->size;
+        // 사이즈 테이블 저장
+        for ($i = 0; $i < count($sizes_count); $i++){
+            Size::create([
+                'project_id'    => $project->id,
+                'category_id'   => '',
+                'size'          => $request->size[$i],
+                'total_length'  => $request->total_length[$i],
+                'shoulder'      => $request->shoulder[$i],
+                'chest'         => $request->chest[$i],
+                'arms_length'   => $request->arms_length[$i],
+                'sleeve'        => $request->sleeve[$i],
+                'armhole'       => $request->armhole[$i],
+                'waist'         => $request->waist[$i],
+                'hem'           => $request->hem[$i],
+                'crotch'        => $request->crotch[$i],
+                'hip'           => $request->hip[$i],
+                'thigh'         => $request->thigh[$i],
+                'string_length' => $request->string_length[$i],
+                'horizontal'    => $request->horizontal[$i],
+                'vertical'      => $request->vertical[$i],
+                'forefoot'      => $request->forefoot[$i],
+                'heels'         => $request->heels[$i],
+            ]);
+        }
+
+        // for문
+        $fabrics = Fabirc::create([
+            'project_id'    => $project->id,
+            'material_id'   => '',
+            'rate'          => ''
+        ]);
+
+        // 취급정보 추가하기
+        $informations = Information::create([
+            'project'    => '',
+            'detail_id'  => '',
+        ]);
+
+        // 디자이너/브랜드 소개
+        $introduction = Introduction::create([
+            'project_id'            => $project->id,
+            'condition'             => '',
+            'contents'              => '',
+            'brand_name'            => $request->brand_name,
+            'designer_name'         => $request->designer_name,
+            'email'                 => $request->email,
+            'phone'                 => $request->phone,
+            'facebook'              => $request->facebook,
+            'instagram'             => $request->instagram,
+            'twitter'               => $request->twitter,
+            'homepage'              => $request->homepage,
+            'brand_name_hidden'     => '', // 이거는 없는디'-'?
+            'designer_name_hidden'  => '', // 이것도 없는디 ㅇ-ㅇ?
+            'email_hidden'          => $request->email_hidden,
+            'phone_hidden'          => $request->phone_hidden,
+            'facebook_hidden'       => $request->facebook_hidden,
+            'instagram_hidden'      => $request->instagram_hidden,
+            'twitter_hidden'        => $request->twitter_hidden,
+            'homepage_hidden'       => $request->hompage_hidden
+        ]);
+
+        $account = Account::create([
+            'project_id'            => $project->id,
+            'condition'             => '',
+            'company_number'        => '',
+            'email'                 => '',
+            'phone'                 => ''
+        ]);
+
+
+        // return
     }
+
 
     /**
      * Display the specified resource.
@@ -47,7 +177,10 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        error_log($id);
+        $select_category = CategoryDetail::where('category_id', $id)->get();
+        error_log($select_category);
+        return response()->json($select_category, 200, [], JSON_PRETTY_PRINT);
     }
 
     /**

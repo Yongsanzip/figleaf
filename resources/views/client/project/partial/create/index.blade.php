@@ -2,6 +2,7 @@
 // 프로젝트 만들기
 ?>
 @extends('client.layouts.app')
+<script src="../js/project.js"></script>
 @section('content')
     <link rel="stylesheet" href="{{asset('/css/swiper.min.css')}}">
 
@@ -26,8 +27,8 @@
                 </div>
                 <div class="project-btn-wrap">
                     <a href="" class="btn-white">미리보기</a>
-                    <button class="btn-white">중도저장하기</button>
-                    <button class="btn-black">검토요청하기</button>
+                    <button type="button" class="btn-white">중도저장하기</button>
+                    <button type="button" class="btn-black" id="store_btn">검토요청하기</button>
                 </div>
                 <!-- //headline -->
 
@@ -42,42 +43,43 @@
 
                 <!-- tab contents -->
                 <div class="contents-wrap">
-                    <form>
+                    <form action="{{route('project.store')}}" id="project_form" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <!-- 01 개요 -->
                         <div class="tab-contents-box edit-on">
                             <!-- 01-A 프로젝트 제목 -->
                             <div class="input-item">
                                 <h3 class="title">프로젝트 제목</h3>
-                                <input type="text" class="input-field" placeholder="30자 이내로 입력해주세요">
+                                <input type="text" class="input-field" name="project_title" placeholder="30자 이내로 입력해주세요">
                             </div>
                             <!-- 01-B 프로젝트 카테고리 -->
                             <div class="input-item">
                                 <h3 class="title">프로젝트 카테고리</h3>
                                 <div>
-                                    <select class="select">
+                                    <select class="select" name="first_category" id="first_category" onchange="category(this)">
                                         <option selected disabled>- 1차 카테고리 -</option>
-                                        <option>카테고리</option>
-                                        <option>카테고리</option>
+                                        @foreach($main_categories as $main_category)
+                                        <option value="{{ $main_category->id }}">{{ $main_category->category_name }}</option>
+                                        @endforeach
                                     </select>
                                     <span class="arrow">></span>
-                                    <select class="select">
+                                    <select class="select" name="second_category" id="second_category">
                                         <option selected disabled>- 2차 카테고리 -</option>
-                                        <option>카테고리</option>
-                                        <option>카테고리</option>
+
                                     </select>
                                 </div>
                             </div>
                             <!-- 01-C 프로젝트 개요 -->
                             <div class="input-item">
                                 <h3 class="title">프로젝트 개요</h3>
-                                <input type="text" class="input-field" placeholder="최소 10자 ~ 최대 50자">
+                                <input type="text" class="input-field" name="project_summary" placeholder="최소 10자 ~ 최대 50자">
                             </div>
                             <!-- 01-D 대표이미지 -->
                             <div class="input-item">
                                 <h3 class="title">대표이미지(썸네일)</h3>
                                 <p class="text-caption">최소 280*360px의 jpg, jpeg, png파일(10MB 미만)</p>
                                 <label class="upload-file">
-                                    <input type="file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
+                                    <input type="file" onchange="fnUploadFile(this)" name="main_file" accept="image/jpeg, image/jpg, image/png">
                                     <div class="file-button">파일선택</div>
                                     <p class="file-name">선택한 파일 없음</p>
                                 </label>
@@ -85,7 +87,7 @@
                             <!-- 01-D 성공갯수 -->
                             <div class="input-item">
                                 <h3 class="title">성공 갯수</h3>
-                                <input type="text" class="input-field" placeholder="최소 10개 ~ 최대 30개">
+                                <input type="text" class="input-field" name="success_count" placeholder="최소 10개 ~ 최대 30개">
                             </div>
                         </div>
                         <!-- 02 상품정보 -->
@@ -99,11 +101,11 @@
                                             <div class="option-num">1</div>
                                             <label class="option-field">
                                                 <p>옵션명</p>
-                                                <input type="text" class="input-field" placeholder="30자 이내">
+                                                <input type="text" class="input-field" name="option_name[]" placeholder="30자 이내">
                                             </label>
                                             <label class="option-field price">
                                                 <p>가격</p>
-                                                <input type="text" class="input-field" placeholder="30자 이내">
+                                                <input type="text" class="input-field" name="option_price[]" placeholder="30자 이내">
                                             </label>
                                         </div>
                                         <!-- script add items -->
@@ -120,14 +122,11 @@
                                 <div class="drop-item">
                                     <div class="size-category">
                                         <p class="text-caption">- 카테고리 -</p>
-                                        <select class="select">
+                                        <select class="select" name="size_category">
                                             <option selected disabled>- 1차 카테고리 -</option>
-                                            <option>상의(아우터, 티셔츠, 탑 등)</option>
-                                            <option>원피스</option>
-                                            <option>치마</option>
-                                            <option>바지</option>
-                                            <option>구두</option>
-                                            <option>악세사리</option>
+                                            @foreach($size_categories as $size_category)
+                                                <option value="{{ $size_category->id }}">{{ $size_category->category_name_ko }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="size-table-wrap">
@@ -182,74 +181,74 @@
                                             <tr>
                                                 <!-- 사이즈 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="size[]">
                                                 </td>
                                                 <!-- 총기장 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="total_length[]">
                                                 </td>
                                                 <!-- 어깨 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="shoulder[]">
                                                 </td>
                                                 <!-- 가슴 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="chest[]">
                                                 </td>
                                                 <!-- 팔길이 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="arms_length[]">
                                                 </td>
 
                                                 <!-- 소매단면 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="sleeve[]">
                                                 </td>
                                                 <!-- 암홀 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="armhole[]">
                                                 </td>
                                                 <!-- 허리 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="waist[]">
                                                 </td>
                                                 <!-- 밑단 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="hem[]">
                                                 </td>
                                                 <!-- 밑위 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="crotch[]">
                                                 </td>
 
                                                 <!-- 엉덩이단면 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="hip[]">
                                                 </td>
                                                 <!-- 허벅지단면 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="thigh[]">
                                                 </td>
                                                 <!-- 끈길이 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="string_length[]">
                                                 </td>
                                                 <!-- 가로 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="horizontal[]">
                                                 </td>
                                                 <!-- 세로 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="vertical[]">
                                                 </td>
 
                                                 <!-- 앞굽 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="forefoot[]">
                                                 </td>
                                                 <!-- 뒷굽 -->
                                                 <td>
-                                                    <input type="text">
+                                                    <input type="text" name="heels[]">
                                                 </td>
                                                 <!-- 버튼 -->
                                                 <!-- <td class="row-btn"> -->
@@ -279,10 +278,16 @@
                                             </div>
                                             <div class="fabric-item">
                                                 <div class="fabric-name">
-                                                    <input type="text" class="input-field">
+                                                    <select class="select" name="material">
+                                                        <option>-선택-</option>
+                                                        <option>되돌아가기</option>
+                                                        @foreach($groups as $group)
+                                                        <option value="{{ $group->id }}">{{ $group->name_ko }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                                 <div class="fabric-ratio">
-                                                    <input type="number" max="100" min="0" class="input-field">
+                                                    <input type="number" max="100" min="0" class="input-field" name="fabric_ratio[]">
                                                 </div>
                                             </div>
                                             <!-- script add item -->
@@ -291,7 +296,7 @@
                                     </div>
                                     <div class="designer-comment-wrap">
                                         <p class="subtitle">디자이너 코멘트</p>
-                                        <textarea class="textarea" placeholder="디자이너 코멘트를 입력해주세요"></textarea>
+                                        <textarea class="textarea" name="comment" placeholder="디자이너 코멘트를 입력해주세요"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -300,11 +305,9 @@
                                 <div class="drop-header">취급정보</div>
                                 <div class="drop-item">
                                     <ul class="handling-tab">
-                                        <li class="handling-on">물세탁</li>
-                                        <li>표백</li>
-                                        <li>다림질</li>
-                                        <li>드라이클리닝</li>
-                                        <li>건조</li>
+                                        @foreach($information_tab as $tab)
+                                            <li class="{{ $tab->id == 1 ? 'handling-on' : '' }}">{{ $tab->name_ko }}</li>
+                                        @endforeach
                                     </ul>
                                     <div class="handling-contents-wrap">
                                         <!-- 02-D-A 물세탁 -->
@@ -608,7 +611,7 @@
                         <!-- 03 스토리텔링 -->
                         <div class="tab-contents-box">
                             <div class="storytelling-wrap">
-                                <div class="notice"><span>가이드를 확인</span>하시고 작성해주세요</div>
+                                <div class="notice"><span id="popup_guide">가이드를 확인</span>하시고 작성해주세요</div>
                                 <div class="storytelling">
                                     텍스트 에디터 영역
                                 </div>
@@ -621,24 +624,29 @@
                                     <span>프로젝트 마감일</span>은 오늘로부터
                                     <input type="number" class="input-field short">
                                     일 뒤인
-                                    <input type="date" class="input-field">
+                                    <input type="date" class="input-field" name="deadline">
                                     이며,
                                 </div>
                                 <div class="schedule">
                                     이에 따라 <span>프로젝트 정산일</span>은 영업일 7일 뒤인
-                                    <input type="date" class="input-field">이고,
+                                    <input type="date" class="input-field" name="account_date">이고,
                                 </div>
                                 <div class="schedule">
                                     프로젝트 마감일 후
-                                    <input type="number" class="input-field short">
+                                    <input type="number" class="input-field short" name="delivery_date">
                                     일 뒤인
                                     <input type="date" class="input-field">
                                     에 배송을 진행하되,
                                 </div>
                                 <div class="schedule">
                                     제작 상황에 따라 최대
-                                    <select class="select">
+                                    <select class="select" name="delay_date">
                                         <option selected disabled>- 지연일자 -</option>
+                                        <option value="3">3일</option>
+                                        <option value="5">5일</option>
+                                        <option value="7">7일</option>
+                                        <option value="15">15일</option>
+                                        <option value="30">30일</option>
                                     </select>
                                     까지 지연될 수 있고,
                                 </div>
@@ -658,57 +666,57 @@
                             <div class="introduction-wrap">
                                 <div class="introduction-item">
                                     <span class="item-name">디자이너명</span>
-                                    <input type="text" class="input-field" placeholder="디자이너명을 입력하세요">
+                                    <input type="text" class="input-field" name="designer_name" placeholder="디자이너명을 입력하세요">
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">브랜드명</span>
-                                    <input type="text" class="input-field" placeholder="브랜드명을 입력하세요">
+                                    <input type="text" class="input-field" name="brand_name" placeholder="브랜드명을 입력하세요">
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">이메일</span>
-                                    <input type="email" class="input-field" placeholder="이메일을 입력하세요">
+                                    <input type="email" class="input-field" name="email" placeholder="이메일을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="email_hidden">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">전화번호</span>
-                                    <input type="tel" class="input-field" placeholder="전화번호를 입력하세요">
+                                    <input type="tel" class="input-field" name="phone" placeholder="전화번호를 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="phone_hidden">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">페이스북</span>
-                                    <input type="text" class="input-field" placeholder="페이스북 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="facebook" placeholder="페이스북 계정을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="facebook_hidden">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">인스타그램</span>
-                                    <input type="text" class="input-field" placeholder="인스타그램 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="instagram" placeholder="인스타그램 계정을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="instagram_hidden">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">트위터</span>
-                                    <input type="text" class="input-field" placeholder="트위터 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="twitter" placeholder="트위터 계정을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="twitter_hidden">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">홈페이지</span>
-                                    <input type="text" class="input-field" placeholder="홈페이지 url을 입력하세요">
+                                    <input type="text" class="input-field" name="homepage" placeholder="홈페이지 url을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="homepage_hidden">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
@@ -726,34 +734,28 @@
                         </div>
                         <!-- 06 정산정보 -->
                         <div class="tab-contents-box">
-                            <div class="notice"><span>수수료정책</span>을 먼저 확인해주세요</div>
+                            <div class="notice"><span id="popup_fee">수수료정책</span>을 먼저 확인해주세요</div>
                             <div class="pay-info-item">
                                 <h3 class="title">사업자/개인구분</h3>
                                 <div>
                                     <label class="checkbox-wrap">
-                                        <input type="radio">
+                                        <input type="radio" name="condition" value="1">
                                         <p>사업자</p>
                                     </label>
                                     <label class="checkbox-wrap">
-                                        <input type="radio">
+                                        <input type="radio" name="condition" value="0">
                                         <p>개인</p>
                                     </label>
                                 </div>
                                 <div>
                                     <p class="overline">사업자등록번호</p>
-                                    <div class="input-list">
-                                        <input type="tel">
-                                        <span>-</span>
-                                        <input type="tel">
-                                        <span>-</span>
-                                        <input type="tel">
-                                    </div>
+                                    <input type="tel" name="company_number">
                                 </div>
                                 <div>
                                     <p class="overline">사업자등록증</p>
                                     <p class="caption">jpg,jpeg,png 파일(10mb 미만)</p>
                                     <label class="upload-file">
-                                        <input type="file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
+                                        <input type="file" name="company_file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
                                         <div class="file-button">파일선택</div>
                                         <p class="file-name">선택한 파일 없음</p>
                                     </label>
@@ -763,7 +765,7 @@
                                 <h3 class="title">통장사본</h3>
                                 <p class="caption">jpg,jpeg,png 파일(10mb 미만)</p>
                                 <label class="upload-file">
-                                    <input type="file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
+                                    <input type="file" name="bank_file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
                                     <div class="file-button">파일선택</div>
                                     <p class="file-name">선택한 파일 없음</p>
                                 </label>
@@ -771,12 +773,12 @@
                             <div class="pay-info-item">
                                 <div class="method-item">
                                     <h3 class="subtitle">이메일</h3>
-                                    <input type="email" class="input-field" placeholder="이메일 주소를 입력해주세요">
+                                    <input type="email" class="input-field" name="account_email" placeholder="이메일 주소를 입력해주세요">
                                     <p class="caption">약정서 발송에 필요한 정보입니다.</p>
                                 </div>
                                 <div class="method-item">
                                     <h3 class="subtitle">전화번호</h3>
-                                    <input type="tel" class="input-field" placeholder="하이픈('-')없이 입력해주세요">
+                                    <input type="tel" class="input-field" name="account_phone" placeholder="하이픈('-')없이 입력해주세요">
                                     <p class="caption">약정서 발송에 필요한 정보입니다.</p>
                                 </div>
                             </div>
@@ -790,7 +792,50 @@
         </div>
 
     </main>
+@endsection
+@section('script')
+<script>
+    document.getElementById('popup_guide').addEventListener('click', function () {
+        popup("/story_telling", "가이드");
+    });
 
+    document.getElementById('popup_fee').addEventListener('click', function () {
+        popup("/popup_fees", "수수료 정책");
+    });
 
+    document.getElementById('store_btn').addEventListener('click', function () {
+        document.getElementById('project_form').submit();
+    })
 
+    // 팝업
+    function popup(url, name) {
+        var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+        window.open(url, name, option);
+    }
+
+    // 카테고리
+    function category(e){
+        var id = e.value;
+        $.ajax({
+            url: '/project/'+id,
+            dataType: 'json',
+            type: 'GET',
+            success: function (result) {
+                var second_category = document.getElementById('second_category');
+                second_category.options.length = 1;
+                for (var i = 0; i < result.length; i++){
+                    var addOption = document.createElement('option');
+                    addOption.textContent = result[i].category_name;
+                    addOption.value = result[i].id;
+                    second_category.append(addOption);
+                }
+            }
+        });
+    }
+
+    function material() {
+
+    }
+
+</script>
 @endsection

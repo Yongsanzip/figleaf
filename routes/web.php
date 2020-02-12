@@ -68,6 +68,12 @@ Route::group(['middleware'=>'locale'],function(){
     Route::get('delay', 'Client\Crm\DelayController@index');
     // 스토리텔링 작성가이드
     Route::get('story_telling', 'Client\Crm\StoryTellingController@index');
+
+    /****** 팝업 ******/
+    // 수수료 정책
+    Route::get('popup_fees', 'Client\Popup\FeesController@index');
+
+
     // 프로젝트
     Route::resource('project', 'Client\Project\ProjectController');
     // 포트폴리오

@@ -15,6 +15,7 @@ class StoryTellingController extends Controller
      */
     public function index()
     {
-        return view('client.crm.storyTelling.index');
+        // return view('client.crm.storyTelling.index');
+        return view('client.project.partial.popup.storytelling');
     }
 }

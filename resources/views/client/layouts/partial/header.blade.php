@@ -14,7 +14,7 @@
                         <option value="ch">ch</option>
                     </select>
                 </div>
-                <a href="" class="btn-project">프로젝트 만들기</a>
+                <a href="{{ route('project.create') }}" class="btn-project">프로젝트 만들기</a>
             </div>
             <ul class="menu-user">
                 <li><a href="/mypage_information">마이페이지</a></li>
