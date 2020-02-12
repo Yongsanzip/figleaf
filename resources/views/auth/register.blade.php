@@ -71,7 +71,7 @@
                                 <input type="text" class="input-field" name="address" id="address" placeholder="주소">
                                 <button type="button" class="btn-black btn-adress" id="address_btn">검색</button>
                             </div>
-                            <input type="text" class="input-field" name="address_detail" placeholder="상세주소">
+                            <input type="text" class="input-field" name="address_detail" placeholder="상세주소" >
                         </div>
                         <div class="input-item">
                             <p class="input-name">성별</p>
@@ -98,7 +98,7 @@
 
     </main>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script>
+    <script type="text/javascript">
         document.getElementById('address_btn').addEventListener('click', function () {
             var zipcode = document.getElementById('zipcode');
             var address = document.getElementById('address');

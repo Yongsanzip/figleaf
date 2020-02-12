@@ -71,6 +71,10 @@ class RegisterController extends Controller
         ]);
     }*/
 
+   protected function showRegistrationForm(Request $request){
+       error_log($request);
+       return view('auth.register');
+   }
     protected function create(Request $request)
     {
         error_log($request);
