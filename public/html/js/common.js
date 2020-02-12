@@ -41,3 +41,13 @@ function fnCloseOverlay(e){
         fnCloseSearch();
     }
 }
+
+/**********************************************************
+ *  name        : fnUploadFileInit
+ *  description : upload file and change file name
+ *  author      : minyeong kim
+ ***********************************************************/
+function fnUploadFileInit(fileInput){
+    var fileName = fileInput.parentNode.getElementsByClassName('file-name')[0];
+    fileName.innerHTML = fileInput.files[0].name;
+}

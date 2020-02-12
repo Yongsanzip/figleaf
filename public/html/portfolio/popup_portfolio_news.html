@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../scss/reset.css">
+    <link rel="stylesheet" href="../scss/layout.css">
+    <link rel="stylesheet" href="../scss/client.css">
+    <script src="../js/common.js"></script>
+    <title>Document</title>
+
+</head>
+<body>
+<div class="wrap">
+    <main class="popup">
+        <h1 class="headline">뉴스 불러오기</h1>
+        <div class="pop-news-wrap">
+            <div class="news-url">
+                <input type="text" class="input-field" placeholder="뉴스 URL을 입력해주세요">
+                <button type="button" class="btn-white">불러오기</button>
+            </div>
+            <ul class="news-info-list">
+                <li>
+                    <label>
+                        <span>제목:</span>
+                        <input type="text"  class="input-field" placeholder="제목">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <span>출처:</span>
+                        <input type="text"  class="input-field" placeholder="출처">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <span>등록일:</span>
+                        <input type="date" class="input-field">
+                    </label>
+                </li>
+            </ul>
+            <div class="news-image-list">
+                <h2 class="overline">뉴스 이미지 선택하기</h2>
+                <div class="news-image-option">
+                    <div class="row">
+                        <label class="checkbox-wrap">
+                            <input type="checkbox">
+                            <p>이미지 없음</p>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <label class="checkbox-wrap">
+                            <input type="checkbox">
+                            <p>수동으로 이미지 올리기</p>
+                        </label>
+                        <label class="upload-file">
+                            <input type="file" onchange="fnUploadFileInit(this)" accept="image/jpeg, image/jpg, image/png">
+                            <div class="file-button">파일선택</div>
+                            <p class="file-name">선택한 파일 없음</p>
+                        </label>
+                    </div>
+                </div>
+                <div class="news-image-wrap">
+                    <label class="news-image">
+                        <img src="../images/dummy/img-dummy-01.png" alt="">
+                        <input type="checkbox">
+                        <span class="checkbox-shape"></span>
+                    </label>
+                    <label class="news-image">
+                        <img src="../images/dummy/img-dummy-01.png" alt="">
+                        <input type="checkbox">
+                        <span class="checkbox-shape"></span>
+                    </label>
+                    <label class="news-image">
+                        <img src="../images/dummy/img-dummy-01.png" alt="">
+                        <input type="checkbox">
+                        <span class="checkbox-shape"></span>
+                    </label>
+                    <label class="news-image">
+                        <img src="../images/dummy/img-dummy-01.png" alt="">
+                        <input type="checkbox">
+                        <span class="checkbox-shape"></span>
+                    </label>
+                    <label class="news-image">
+                        <img src="../images/dummy/img-dummy-01.png" alt="">
+                        <input type="checkbox">
+                        <span class="checkbox-shape"></span>
+                    </label>
+                    <label class="news-image">
+                        <img src="../images/dummy/img-dummy-01.png" alt="">
+                        <input type="checkbox">
+                        <span class="checkbox-shape"></span>
+                    </label>
+                    <label class="news-image">
+                        <img src="../images/dummy/img-dummy-01.png" alt="">
+                        <input type="checkbox">
+                        <span class="checkbox-shape"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="btn-wrap">
+            <button class="btn-black" type="button">등록하기</button>
+        </div>
+    </main>
+</div>
+</body>
+</html>
