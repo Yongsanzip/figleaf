@@ -48,6 +48,8 @@ Route::group(['middleware'=>'locale'],function(){
     Route::resource('search', 'Client\Search\SearchController');
     // 회원가입 - 약관동의
     Route::get('/agree', 'Auth\AgreeController@index');
+
+    Route::post('/agree_complete','Auth\AgreeController@complete');
     // 회원가입
     Route::post('/register', 'Auth\RegisterController@create')->name('register');
     // 이메일 찾기

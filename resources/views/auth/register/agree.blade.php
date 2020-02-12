@@ -8,9 +8,8 @@
         <div class="inner">
 
             <div class="con-join">
-                <form action="/register" method="GET" onsubmit="return fn_register_submit(this);">
-
-
+                <form action="/agree_complete" method="POST" onsubmit="return fn_register_submit(this);">
+                    @csrf
                     <div class="join-header">
                         <h2 class="join-title">create acount</h2>
                         <ul class="join-step">
@@ -94,7 +93,7 @@
                         <div class="agree-item">
                             <p class="agree-title">SMS/이메일 수신(선택)</p>
                             <label class="checkbox-wrap">
-                                <input type="checkbox">
+                                <input type="checkbox" name="sns_email_check">
                                 <p>동의합니다.</p>
                             </label>
                         </div>
@@ -153,7 +152,8 @@
                 $('#error4').show();
                 return false;
             }
-
+            f.preventDefault();
+            window.location = "/register" + escape($(this).find("input[name^=agree]").val());
             return true;
         }
 
