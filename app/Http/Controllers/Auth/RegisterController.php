@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -87,4 +88,9 @@ class RegisterController extends Controller
         return view('auth.register.success');
     }
 
+    public function email(){
+        $token = Str::random(60);
+        $mail = Mail::to('deyeo@yongsanzip.com')->send(new VerifyMail('test','test',$token));
+        return view('client.index');
+    }
 }

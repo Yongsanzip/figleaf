@@ -21,7 +21,7 @@ class VerifyMail extends Mailable
     {
         $this->user = $user;
         $this->subject = $subject;
-        $this->verify_token    =$verify_token;
+        $this->token    =$verify_token;
     }
 
     /**
