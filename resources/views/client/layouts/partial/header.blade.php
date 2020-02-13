@@ -83,9 +83,6 @@
                 <li>
                     <a href="/event">Event</a>
                 </li>
-                <li>
-                    <a href="/email_test">email_test</a>
-                </li>
             </ul>
 
         </nav>

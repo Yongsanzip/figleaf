@@ -67,7 +67,7 @@ class RegisterController extends Controller
        return view('auth.register',compact('sms_check','email_check'));
    }
     protected function create(Request $request) {
-        $user = User::create([
+        $user = User::firstOrCreate([
             'role_id'       => 1,
             'email'         => $request->email,
             'password'      => bcrypt($request->password),
@@ -82,15 +82,11 @@ class RegisterController extends Controller
             'email_yn'      => $request->email_check,
             'sms_yn'        => $request->sms_check,
         ]);
-        $subject ='';
+        $user->verified_token = Str::random(60);
+        $user->save();
+        $subject ='가입인증메일';
 
-        //$mail = Mail::to($request->email)->send(new VerifyMail($user,$subject,$check_user->verify_token));
+        $mail = Mail::to($request->email)->send(new VerifyMail($user,$subject,$user->verified_token));
         return view('auth.register.success');
-    }
-
-    public function email(){
-        $token = Str::random(60);
-        $mail = Mail::to('deyeo@yongsanzip.com')->send(new VerifyMail('test','test',$token));
-        return view('client.index');
     }
 }

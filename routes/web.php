@@ -14,7 +14,6 @@
 Route::GET('/locale/{locale}','LocaleController@locale')->name('locale');
 
 Auth::routes();
-Route::get('/email_test','Auth\RegisterController@email');
 /*Route::group(['middleware'=>'locale'],function(){
     Route::get('/', [
         'as' =>'/',

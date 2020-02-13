@@ -14,8 +14,6 @@ class HomeController extends Controller
      * @return view
      */
     public function index() {
-        flash("성공")->success();
-        flash()->overlay('모달창','모달타이틀');
         return view('client.index');
     }
 }
