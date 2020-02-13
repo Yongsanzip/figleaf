@@ -3,10 +3,10 @@
 ?>
 @extends('client.layouts.app')
 <script src="../js/project.js"></script>
+<script src="../js/projectAction.js"></script>
+<script type="text/javascript" src="../se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 @section('content')
     <link rel="stylesheet" href="{{asset('/css/swiper.min.css')}}">
-
-
     <main class="container">
         <div class="header-sub">
             <div class="inner">
@@ -278,13 +278,8 @@
                                             </div>
                                             <div class="fabric-item">
                                                 <div class="fabric-name">
-                                                    <select class="select" name="material">
-                                                        <option>-선택-</option>
-                                                        <option>되돌아가기</option>
-                                                        @foreach($groups as $group)
-                                                        <option value="{{ $group->id }}">{{ $group->name_ko }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <input type="text" class="input-field" name="fabric[]" id="material_name0" onclick="popup_material(0)" readonly>
+                                                    <input type="hidden" name="material_id" id="material_id0">
                                                 </div>
                                                 <div class="fabric-ratio">
                                                     <input type="number" max="100" min="0" class="input-field" name="fabric_ratio[]">
@@ -312,308 +307,79 @@
                                     <div class="handling-contents-wrap">
                                         <!-- 02-D-A 물세탁 -->
                                         <div class="handling-contents handling-con-on">
-                                            <label class="handling-item water-01">
+                                            @foreach($information_list_water as $key => $list)
+                                            <label class="handling-item water-0{{$key+1}}">
                                                 <div class="item-image"></div>
-                                                <input type="radio">
+                                                <input type="radio" name="information_water" value="{{ $list->id }}">
                                                 <ul class="item-caption">
-                                                    <li>물온도 95℃로 세탁</li>
-                                                    <li>세탁기/손세탁 가능</li>
-                                                    <li>세제종류 제한 없음</li>
-                                                    <li>삶을 수 있음</li>
+                                                    <li>{!! $list->description_ko !!}</li>
                                                 </ul>
                                                 <div class="shape"></div>
                                             </label>
-                                            <label class="handling-item water-02">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>물온도 60℃로 세탁</li>
-                                                    <li>세탁기/손세탁 가능</li>
-                                                    <li>세제종류 제한 없음</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item water-03">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>물온도 40℃로 세탁</li>
-                                                    <li>세탁기/손세탁 가능</li>
-                                                    <li>세제종류 제한 없음</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item water-04">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>물온도 40℃로 세탁</li>
-                                                    <li>세탁기로 약하게 세탁</li>
-                                                    <li>약하게 손세탁 가능</li>
-                                                    <li>중성세제 사용</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item water-05">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>물온도 30℃로 세탁</li>
-                                                    <li>세탁기로 약하게 세탁</li>
-                                                    <li>약하게 손세탁 가능</li>
-                                                    <li>중성세제 사용</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item water-06">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>물온도 30℃로 세탁</li>
-                                                    <li>세탁기 사용불가</li>
-                                                    <li>약하게 손세탁 가능</li>
-                                                    <li>중성세제 사용</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item water-07">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>물세탁 안됨</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
+                                            @endforeach
                                         </div>
                                         <!-- 02-D-B 표백 -->
                                         <div class="handling-contents">
-                                            <label class="handling-item bleach-01">
+                                            @foreach($information_list_bleach as $key => $list)
+                                            <label class="handling-item bleach-0{{ $key+1 }}">
                                                 <div class="item-image"></div>
-                                                <input type="radio">
+                                                <input type="radio" name="information_bleach" value="{{ $list->id }}">
                                                 <ul class="item-caption">
-                                                    <li>염소계 표백제로 표백</li>
+                                                    <li>{!! $list->description_ko !!}</li>
                                                 </ul>
                                                 <div class="shape"></div>
                                             </label>
-                                            <label class="handling-item bleach-02">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>염소계 표백제로 표백할 수 없음</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item bleach-03">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>산소계 표백제로 표백</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item bleach-04">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>산소계 표백제로 표백할 수 없음</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item bleach-05">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>산소,염소계 표백제로 표백</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item bleach-06">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>산소,염소계 표백제로 표백할 수 없음</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
+                                            @endforeach
                                         </div>
                                         <!-- 02-D-C 다림질 -->
                                         <div class="handling-contents">
-                                            <label class="handling-item iron-01">
+                                            @foreach($information_list_iron as $key => $list)
+                                            <label class="handling-item iron-0{{ $key+1 }}">
                                                 <div class="item-image"></div>
-                                                <input type="radio">
+                                                <input type="radio" name="information_iron" value="{{ $list->id }}">
                                                 <ul class="item-caption">
-                                                    <li>180~210℃로 다림질</li>
+                                                    <li>{!! $list->description_ko !!}</li>
                                                 </ul>
                                                 <div class="shape"></div>
                                             </label>
-                                            <label class="handling-item iron-02">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>원단 위에 천을 덮고 180~210℃로 다림질</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item iron-03">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>140~160℃로 다림질</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item iron-04">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>원단 위에 천을 덮고 140~160℃로 다림질</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item iron-05">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>80~120℃로 다림질</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item iron-06">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>원단 위에 천을 덮고 80~120℃로 다림질</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item iron-07">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>다림질 할 수 없음</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
+                                            @endforeach
                                         </div>
                                         <!-- 02-D-D 드라이클리닝 -->
                                         <div class="handling-contents">
-                                            <label class="handling-item drycleaning-01">
+                                            @foreach($information_list_drycleaning as $key => $list)
+                                            <label class="handling-item drycleaning-0{{ $key+1 }}">
                                                 <div class="item-image"></div>
-                                                <input type="radio">
+                                                <input type="radio" name="information_drycleacing" value="{{ $list->id }}">
                                                 <ul class="item-caption">
-                                                    <li>드라이클리닝 가능</li>
-                                                    <li>용제는 클로로에틸렌 또는 석유계 사용</li>
+                                                    <li>{!! $list->description_ko !!}</li>
                                                 </ul>
                                                 <div class="shape"></div>
                                             </label>
-                                            <label class="handling-item drycleaning-02">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>드라이클리닝 가능</li>
-                                                    <li>용제는 석유계 사용</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item drycleaning-03">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>드라이클리닝 할 수 있으나 셀프 서비스는 할 수 없음(전문점에서만 가능)</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item drycleaning-04">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>드라이클리닝 불가함</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-
+                                            @endforeach
                                         </div>
                                         <!-- 02-D-E 건조 -->
                                         <div class="handling-contents">
-                                            <label class="handling-item dry-01">
+                                            @foreach($information_list_dry as $key => $list)
+                                            <label class="handling-item dry-0{{ $key+1 }}">
                                                 <div class="item-image"></div>
-                                                <input type="radio">
+                                                <input type="radio" name="information_dry" value="{{ $list->id }}">
                                                 <ul class="item-caption">
-                                                    <li>햇빛에 건조</li>
-                                                    <li>옷걸이에 걸어서 건조</li>
+                                                    <li>{!! $list->description_ko !!}</li>
                                                 </ul>
                                                 <div class="shape"></div>
                                             </label>
-                                            <label class="handling-item dry-02">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>그늘에 건조</li>
-                                                    <li>옷걸이에 걸어서 건조</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item dry-03">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>햇빛에 건조</li>
-                                                    <li>바닥에 뉘어서 건조</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item dry-04">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>그늘에 건조</li>
-                                                    <li>바닥에 뉘어서 건조</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item dry-05">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>세탁 후 건조할 때 기계 건조 할 수 있음</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item dry-06">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>세탁 후 건조할 때 기계 건조 할 수 없음</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item dry-07">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>손으로 약하게 짬</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
-                                            <label class="handling-item dry-08">
-                                                <div class="item-image"></div>
-                                                <input type="radio">
-                                                <ul class="item-caption">
-                                                    <li>손으로 짜면 안됨</li>
-                                                </ul>
-                                                <div class="shape"></div>
-                                            </label>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- 03 스토리텔링 -->
-                        <div class="tab-contents-box">
+                        <div class="tab-contents-box" id="editor">
                             <div class="storytelling-wrap">
                                 <div class="notice"><span id="popup_guide">가이드를 확인</span>하시고 작성해주세요</div>
                                 <div class="storytelling">
-                                    텍스트 에디터 영역
+                                    <textarea name="ir1" id="ir1" rows="10" cols="100" style="width: 100%; height: 500px">123</textarea>
                                 </div>
                             </div>
                         </div>
@@ -792,50 +558,41 @@
         </div>
 
     </main>
-@endsection
-@section('script')
-<script>
-    document.getElementById('popup_guide').addEventListener('click', function () {
-        popup("/story_telling", "가이드");
-    });
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded',function () {
+            var oEditors = [];
+            nhn.husky.EZCreator.createInIFrame({
+                oAppRef: oEditors,
+                elPlaceHolder: "ir1",
+                sSkinURI: "../se2/SmartEditor2Skin.html",
+                fCreator: "createSEditor2",
 
-    document.getElementById('popup_fee').addEventListener('click', function () {
-        popup("/popup_fees", "수수료 정책");
-    });
-
-    document.getElementById('store_btn').addEventListener('click', function () {
-        document.getElementById('project_form').submit();
-    })
-
-    // 팝업
-    function popup(url, name) {
-        var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-        window.open(url, name, option);
-    }
-
-    // 카테고리
-    function category(e){
-        var id = e.value;
-        $.ajax({
-            url: '/project/'+id,
-            dataType: 'json',
-            type: 'GET',
-            success: function (result) {
-                var second_category = document.getElementById('second_category');
-                second_category.options.length = 1;
-                for (var i = 0; i < result.length; i++){
-                    var addOption = document.createElement('option');
-                    addOption.textContent = result[i].category_name;
-                    addOption.value = result[i].id;
-                    second_category.append(addOption);
+                fOnAppLoad: function () {
+                    // document.getElementById("editor").setAttribute('style','display:none;')
+                                       $("iframe").css("width", "100%").css("height", "100%");
+                    $('#reload_editor').trigger('click');
+                     // after();
+                    // $('.class_smarteditor2').css('height', '300px'); // 스마트 에디터 height 지정
+                    // $('.class_smarteditor2').attr('src',$('.class_smarteditor2').attr('src')); // 스마트 에디터 iframe 새로고칭
                 }
-            }
+
+            });
+
         });
-    }
 
-    function material() {
+        function after() {
+            var test = $('.reload_editor');
+            console.log(test);
+            // $('.reload_editor').trigger('click');
 
-    }
+            /*var iframe = document.getElementsByTagName("iframe");
+            var smEditor = iframe[0];
+            if (smEditor) {
+                smEditor.style.height = "300px";
+            }*/
+            // document.getElementById("editor").setAttribute('style','position: absolute !important; left: -9999px !important; top: -9999px !important; ');
+            // document.getElementById("editor").setAttribute('style',"position:static; left:0px; top:0px; display:block;");
+        }
 
-</script>
+    </script>
 @endsection
