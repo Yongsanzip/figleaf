@@ -19,11 +19,14 @@
 <body>
 <div class="wrap">
     @include('client.layouts.partial.header')
-
     @yield('content')
-
+    @include('flash::message')
     @include('client.layouts.partial.footer')
 </div>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
+    $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+</script>
 @yield('script')
 </body>
 </html>

@@ -91,9 +91,16 @@
 
                         </div>
                         <div class="agree-item">
-                            <p class="agree-title">SMS/이메일 수신(선택)</p>
+                            <p class="agree-title">SMS 수신(선택)</p>
                             <label class="checkbox-wrap">
-                                <input type="checkbox" name="sns_email_check">
+                                <input type="checkbox" name="sms_check">
+                                <p>동의합니다.</p>
+                            </label>
+                        </div>
+                        <div class="agree-item">
+                            <p class="agree-title">이메일 수신(선택)</p>
+                            <label class="checkbox-wrap">
+                                <input type="checkbox" name="email_check">
                                 <p>동의합니다.</p>
                             </label>
                         </div>

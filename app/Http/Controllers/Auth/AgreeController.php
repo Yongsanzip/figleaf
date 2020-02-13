@@ -24,8 +24,8 @@ class AgreeController extends Controller
      * @return view
      ************************************************************************/
     public function complete(Request $request) {
-        $sns_email_check =  $request->sns_email_check ? 1 : 0;
-        //return view('auth.register',compact('sns_email_check'));
-        return redirect()->route('register')->with( ['sns_email_check' => $sns_email_check]);
+        $request->session()->put('sms_check',$request->sms_check ? 1 : 0);                                              // SMS 수신 체크
+        $request->session()->put('email_check',$request->email_check ? 1 : 0);                                          // 이메일 수신 체크
+        return redirect()->route('register');
     }
 }

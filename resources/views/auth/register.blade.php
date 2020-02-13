@@ -91,6 +91,8 @@
                             <button class="btn-black">join</button>
                         </div>
                     </div>
+                    <input type="hidden" name="sms_check" id="sms_check" value="{{$sms_check}}">
+                    <input type="hidden" name="email_check" id="email_check" value="{{$email_check}}">
                 </form>
             </div>
 

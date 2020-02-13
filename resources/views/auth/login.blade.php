@@ -8,20 +8,20 @@
         <div class="inner">
 
             <div class="con-login">
-                <form>
-
+                <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+                    @csrf
                     <h2 class="title">login</h2>
 
                     <div class="input-box">
                         <div class="input-item">
                             <p class="input-name">이메일</p>
-                            <input type="email" class="input-field" placeholder="이메일" autofocus>
+                            <input type="email" class="input-field" placeholder="이메일" autofocus required>
                             <!-- error -->
                             <!-- <p class="text-error">이메일 형식이 올바르지 않습니다.</p> -->
                         </div>
                         <div class="input-item">
                             <p class="input-name">비밀번호</p>
-                            <input type="password" class="input-field" placeholder="비밀번호">
+                            <input type="password" class="input-field" placeholder="비밀번호" required>
                             <!-- error -->
                             <!-- <p class="text-error">등록되지 않은 이메일이거나, 이메일 또는 비밀번호가 회원정보와 일치하지 않습니다.</p> -->
                         </div>

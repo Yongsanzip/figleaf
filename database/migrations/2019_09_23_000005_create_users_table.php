@@ -18,9 +18,9 @@ class CreateUsersTable extends Migration
             //컬럼 명세
             $table->bigIncrements('id');
             $table->bigInteger('role_id')->unsigned()->default(1)->comment('유저 role');
-            $table->string('email')->unique();
+            $table->string('email',60)->unique();
             $table->string('password')->comment('비밀번호');
-            $table->string('name')->comment('이름');
+            $table->string('name',30)->comment('이름');
             $table->string('home_phone',50)->comment('전화번호');
             $table->string('cellphone', 50)->comment('휴대폰번호');
             $table->string('zipcode', 30)->nullable()->comment('우편번호');
@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('grade')->comment('등급(ex.골드회원, 실버회원)');
             $table->boolean('email_yn')->comment('이메일 수신여부(미수신:0, 수신:1)');
             $table->boolean('sms_yn')->comment('SMS 수신여부(미수신:0, 수신:1)');
+            $table->string('verified_token')->nullable()->comment('이메일인증토큰');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('thumbnail')->nullable()->comment('썸네일 (디자이너 이미지)');
             $table->rememberToken();
