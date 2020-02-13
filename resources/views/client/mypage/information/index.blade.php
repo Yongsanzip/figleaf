@@ -15,12 +15,12 @@
                 <div class="text-center">
                     <div class="user-info-wrap">
                         <div class="user-info">
-                            <p class="user-id">김해우(hwkim920615)<span>님</span></p>
+                            <p class="user-id">{{$datas->name}}({{$datas->email}})<span>님</span></p>
                             <div class="badge badge-skyblue">new</div>
                         </div>
-                        <div class="user-point">
+                        <div class="user-point" style="display: none">
                             <p class="caption">point</p>
-                            <p class="point">3,442</p>
+                            <p class="point">{{$datas->saving_point}}</p>
                         </div>
                     </div>
                 </div>

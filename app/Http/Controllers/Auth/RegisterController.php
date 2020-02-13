@@ -38,8 +38,7 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('guest');
     }
 
@@ -58,20 +57,6 @@ class RegisterController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-   /* protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }*/
 
    protected function showRegistrationForm(Request $request){
        $sms_check = $request->session()->get('sms_check');                                                          // SMS 수신 체크
@@ -98,7 +83,7 @@ class RegisterController extends Controller
         ]);
         $subject ='';
 
-        $mail = Mail::to($request->email)->send(new VerifyMail($user,$subject,$check_user->verify_token));
+        //$mail = Mail::to($request->email)->send(new VerifyMail($user,$subject,$check_user->verify_token));
         return view('auth.register.success');
     }
 
