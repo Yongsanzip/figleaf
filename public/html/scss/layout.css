@@ -986,6 +986,64 @@
   .header .mobile {
     display: block;
   }
+
+  /* card */
+  .card .card-contents {
+    padding: 10px;
+  }
+  .card .card-contents .card-title {
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .card .card-contents .card-text {
+    font-size: 11px;
+  }
+  .card .card-contents .card-info .rating {
+    background: #e8e9ea;
+    height: 8px;
+    font-size: 0;
+  }
+  .card .card-contents .card-info .rating .rating-bar {
+    height: 100%;
+    background: black;
+  }
+  .card .card-footer {
+    font-size: 12px;
+    padding: 0 10px 12px;
+  }
+  .card .card-footer > p {
+    display: inline-block;
+  }
+  .card .card-footer .card-date {
+    float: right;
+  }
+
+  .section-title-wrap {
+    margin-bottom: 20px;
+  }
+  .section-title-wrap .section-title {
+    font-size: 16px;
+    letter-spacing: 0.4px;
+    padding-left: 0;
+  }
+  .section-title-wrap .section-title:after {
+    width: 32px;
+    height: 3px;
+    bottom: -4px;
+  }
+  .section-title-wrap .caption {
+    font-size: 13px;
+    margin-top: 4px;
+    margin-left: 5px;
+  }
+  .section-title-wrap .count {
+    font-size: 12px;
+    margin-top: 4px;
+    margin-left: 0;
+  }
+  .section-title-wrap .more {
+    font-size: 13px;
+  }
 }
 @media screen and (max-width: 640px) {
   /* footer */

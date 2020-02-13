@@ -1,4 +1,8 @@
 @charset "UTF-8";
+button {
+  outline: none;
+}
+
 /***** main page *****/
 .main-hero .hero-slide {
   height: 600px;
@@ -33,6 +37,7 @@
   background-image: url("../images/common/ic-arrow-right-hero.png");
   right: 32px;
   margin-top: -60px;
+  outline: none;
 }
 .main-hero .hero-slide .swiper-button-prev {
   width: 30px;
@@ -42,6 +47,7 @@
   background-image: url("../images/common/ic-arrow-left-hero.png");
   left: 32px;
   margin-top: -60px;
+  outline: none;
 }
 
 .con-designer {

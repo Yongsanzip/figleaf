@@ -4,6 +4,10 @@ $color-dark: #5b6234;
 $commonPath: '../images/common';
 $cleaningPath: '../images/cleaning';
 
+button{
+    outline: none;
+}
+
 /***** main page *****/
 .main-hero {
     .hero-slide {
@@ -43,6 +47,7 @@ $cleaningPath: '../images/cleaning';
             background-image: url('#{$commonPath}/ic-arrow-right-hero.png');
             right: 32px;
             margin-top: -60px;
+            outline: none;
         }
 
         .swiper-button-prev {
@@ -53,6 +58,7 @@ $cleaningPath: '../images/cleaning';
             background-image: url('#{$commonPath}/ic-arrow-left-hero.png');
             left: 32px;
             margin-top: -60px;
+            outline: none;
         }
     }
 }
