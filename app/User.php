@@ -15,27 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'id'
-        , 'role_id'
-        , 'email'
-        , 'password'
-        , 'name'
-        , 'home_phone'
-        , 'cellphone'
-        , 'zipcode'
-        , 'address'
-        , 'address_detail'
-        , 'gender'
-        , 'grade'
-        , 'email_yn'
-        , 'sms_yn'
-        , 'email_verified_at'
-        , 'thumbnail'
-        , 'created_at'
-        , 'update_at'
-        , 'delete_at'
-    ];
+    protected  $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -57,5 +37,41 @@ class User extends Authenticatable
 
     public function role(){
         return $this->belongsTo('App\Role','role_id','id');
+    }
+
+    /**************************************************************
+     * @function in_admin
+     * @description 최고 관리자 체크
+     * @return boolean
+     **************************************************************/
+    public function in_admin(){
+        if($this->role_id == 4){
+            return true;
+        }
+        return false;
+    }
+
+    /**************************************************************
+     * @function in_semi_admin
+     * @description 프로젝트 허가자 체크
+     * @return boolean
+     **************************************************************/
+    public function in_semi_admin(){
+        if($this->role_id == 3){
+            return true;
+        }
+        return false;
+    }
+
+    /**************************************************************
+     * @function is_designer
+     * @description 디자이너 체크
+     * @return boolean
+     **************************************************************/
+    public function is_designer(){
+        if($this->role_id == 2){
+            return true;
+        }
+        return false;
     }
 }

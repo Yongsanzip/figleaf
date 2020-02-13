@@ -14,12 +14,21 @@
                         <option value="ch">ch</option>
                     </select>
                 </div>
-                <a href="{{ route('project.create') }}" class="btn-project">프로젝트 만들기</a>
+                @auth
+                    @if(auth()->user()->is_designer())
+                        <a href="{{ route('project.create') }}" class="btn-project">프로젝트 만들기</a>
+                    @endif
+                @endauth
             </div>
             <ul class="menu-user">
+                @auth
                 <li><a href="/mypage_information">마이페이지</a></li>
+                <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">로그아웃</a></li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+                @else
                 <li><a href="/agree">회원가입</a></li>
                 <li><a href="/login">로그인</a></li>
+                @endauth
                 <li><button class="btn-search" onclick="fnOpenSearch();">검색</button></li>
             </ul>
         </div>

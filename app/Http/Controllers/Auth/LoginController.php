@@ -41,21 +41,24 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
-        error_log("access");
-        $credentials = request(['email', 'password']);
-        var_dump($credentials);
-        if (!Auth::attempt($credentials)) {
-            flash()->overlay("이메일 또는 비밀번호가 잘못되었습니다",'로그인 불가')->error();
+        error_log($request->email);
+        error_log($request->password);
+        if(!auth()->attempt($request->only('email','password'), $request->has('remeber'))){
+            flash("이메일 또는 비밀번호가 잘못되었습니다")->error();
             return back();
         }
-        error_log(auth()->user()->id);
-        if(auth()->user()->role_id == 3){
+        if(auth()->user()->role_id == 4){
             $forward = '/admin';
-            flash(auth()->user()->name . ' 님 환영합니다.')->important();
-        }
-        else if(auth()->user()->role_id == 3){
+            flash(auth()->user()->name . ' 님 환영합니다.')->success();
+        } else if(auth()->user()->role_id == 3){
+            $forward = '/admin';
+            flash(auth()->user()->name . ' 님 환영합니다.')->success();
+        } else if(auth()->user()->role_id == 2) {
             $forward = '/';
-            flash(auth()->user()->name . ' 님 환영합니다.')->important();
+            flash(auth()->user()->name . ' 님 환영합니다.')->success();
+        } else if(auth()->user()->role_id == 1){
+            $forward = '/';
+            flash(auth()->user()->name . ' 님 환영합니다.')->success();
         } else {
             Auth::logout();
             $forward = '/';

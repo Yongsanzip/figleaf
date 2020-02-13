@@ -11,9 +11,8 @@ class UserTableSeeder extends Seeder
      * @return void
      */
     public function run() {
-
-        DB::table('users')->insertGetId([
-            'role_id' => 3,
+        \App\User::firstOrCreate([
+            'role_id' => 4,
             'email' => 'admin@figleaf.com',
             'password' => bcrypt('123123'),
             'name' => '관리자',
@@ -26,13 +25,12 @@ class UserTableSeeder extends Seeder
             'grade' => 0,
             'email_yn' => 1,
             'sms_yn' => 1,
-            'email_verified_at' => date('Y-m-d H:i:s', time()),
+            'email_verified_at' => \Carbon\Carbon::today(),
             'thumbnail' => '1',
-            'created_at' => date('Y-m-d H:i:s', time()),
-            'updated_at' => date('Y-m-d H:i:s', time()),]);
+        ]);
 
         for($i=1;$i<5;$i++){
-            DB::table('users')->insertGetId([
+            DB::table('users')->insert([
                 'role_id' => 1,
                 'email' => 'test'.$i.'@test.com',
                 'password' => bcrypt('123123'),

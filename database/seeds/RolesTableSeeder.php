@@ -11,11 +11,11 @@ class RolesTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         //데이터 세팅
-        DB::statement("INSERT INTO roles SET role=1, role_name='일반사용자', created_at=NOW(), updated_at=NOW()");
-        DB::statement("INSERT INTO roles SET role=5, role_name='프로젝트허가자', created_at=NOW(), updated_at=NOW()");
-        DB::statement("INSERT INTO roles SET role=9, role_name='관리자', created_at=NOW(), updated_at=NOW()");
+        \App\Role::firstOrcreate(['role'=>1,'role_name'=>'일반사용자']);
+        \App\Role::firstOrcreate(['role'=>3,'role_name'=>'디자이너']);
+        \App\Role::firstOrcreate(['role'=>5,'role_name'=>'프로젝트허가자']);
+        \App\Role::firstOrcreate(['role'=>9,'role_name'=>'관리자']);
     }
 }
