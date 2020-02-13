@@ -39,8 +39,7 @@
                         <a href="/register">회원가입</a>
                     </div>
                     <div class="login-menu">
-                        <a href="">이메일 찾기</a>
-                        <a href="">비밀번호 찾기</a>
+                        <a href="{{route('password.request')}}">비밀번호 찾기</a>
                     </div>
                 </div>
             </div>

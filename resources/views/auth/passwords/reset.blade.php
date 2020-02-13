@@ -10,9 +10,9 @@
         <div class="inner">
 
             <div class="con-login">
-                <form>
+                <form action="{{route('password.reset',['token'=>$token])}}">
 
-                    <h2 class="title margin-none">비밀번호 찾기</h2>
+                    <h2 class="title margin-none">비밀번호 변경</h2>
 
                     <p class="text">
                         사용하실 새 비밀번호를 입력해주세요
@@ -31,7 +31,7 @@
                             <!-- error -->
                             <!-- <p class="text-error">동일한 비밀번호를 입력해주세요</p> -->
                             <p class="text-caption">영문, 숫자, 특수문자(!@#$%^&*+=-)를 조합한 n자 이상</p>
-
+                            <input type="hidden" name="email" value="{{$email}}">
                         </div>
                     </div>
 

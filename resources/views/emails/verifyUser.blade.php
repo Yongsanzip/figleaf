@@ -1,9 +1,9 @@
 <html>
 <head></head>
 <body>
-<form action="' + req.protocol + '://' + req.get('host') + '/password_reset" method="get">
-    <input type="hidden" name="verify" value=${arg}>
-    <input type="hidden" name="email" value=${email}>
+<form action="{{route('verified_email',['verified_token'=>$user->verified_token,'email'=>$user->email])}}" method="get">
+    <input type="hidden" name="verified_token" value={{$user->verified_token}}>
+    <input type="hidden" name="email" value={{$user->email}}>
     <div style="width:100%;max-width:800px;margin: auto;text-align: center;">
         <div style="padding:80px 0;">
             <div style="width: 50%;min-width:150px;max-width: 240px;margin: auto;margin-bottom:50px;">
@@ -16,7 +16,7 @@
             <button style="display: inline-block;background: #181818;color:white;vertical-align:middle;
                      padding:8px 16px;border-radius: 3px;font-weight: 500;text-transform: uppercase;
                      border:none;text-align: center;font-size:14px;width:240px;height:40px;box-sizing: border-box;
-                     text-decoration: none;line-height: 30px;"href="{{route('verified_email'),['token'=>$user->verified_token,'email'=>$user->email]}}">이메일 인증하기</button>
+                     text-decoration: none;line-height: 30px;">이메일 인증하기</button>
         </div>
         <div style="padding:12px 0;border-top:1px solid #e0e0e0;">
             <p style="font-size:14px;color:#181818">본 메일은 발신 전용입니다. 궁금하신점이나 불편사항은 피그리프 홈페이지의 [고객센터]를 이용해주시기 바랍니다.</p>

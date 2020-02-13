@@ -80,8 +80,8 @@ class RegisterController extends Controller
             'address_detail'=> $request->address_detail,
             'gender'        => $request->gender,
             'grade'         => 0,
-            'email_yn'      => $request->email_check,
-            'sms_yn'        => $request->sms_check,
+            'email_yn'      => $request->email_check ? $request->email_check : 0,
+            'sms_yn'        => $request->sms_check ? $request->sms_check : 0,
         ]);
         $user->verified_token = Str::random(60);
         $user->save();
@@ -92,9 +92,9 @@ class RegisterController extends Controller
     }
 
     public function verified_email(Request $request){
-        if(!auth()->attempt($request->only('email','token'))){                   // 로그인 (세션정보저장)
+        if(!auth()->attempt($request->only('email','verified_token'))){                   // 로그인 (세션정보저장)
             flash("잘못된 형식이거나 만료된 토큰입니다. 다시 인증하여주십시오")->error();
-            return back();
+            return redirect('/login');
         }
         $user = auth()->user()->email_verified_at = Carbon::today();
         $user->save();
