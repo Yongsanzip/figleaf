@@ -14,13 +14,8 @@
 Route::GET('/locale/{locale}','LocaleController@locale')->name('locale');
 
 Auth::routes();
-/*Route::group(['middleware'=>'locale'],function(){
-    Route::get('/', [
-        'as' =>'/',
-        'uses' => 'HomeController@index'
-    ]);
-});*/
 
+Route::match(array('GET','POST'),'verified_email','Auth\RegisterController@verified_email')->name('verified_email');
 /************************************** Client **************************************/
 Route::group(['middleware'=>'locale'],function(){
     // 메인

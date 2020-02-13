@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Mail\VerifyMail;
 use App\User;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -88,5 +89,15 @@ class RegisterController extends Controller
 
         $mail = Mail::to($request->email)->send(new VerifyMail($user,$subject,$user->verified_token));
         return view('auth.register.success');
+    }
+
+    public function verified_email(Request $request){
+        if(!auth()->attempt($request->only('email','token'))){                   // 로그인 (세션정보저장)
+            flash("잘못된 형식이거나 만료된 토큰입니다. 다시 인증하여주십시오")->error();
+            return back();
+        }
+        $user = auth()->user()->email_verified_at = Carbon::today();
+        $user->save();
+        return redirect('/');
     }
 }

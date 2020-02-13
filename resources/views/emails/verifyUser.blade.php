@@ -1,50 +1,28 @@
-<!DOCTYPE html>
 <html>
-<meta charset="utf-8">
-<head>
-    <title>Welcome Email</title>
-</head>
+<head></head>
 <body>
-<table style="width:100%;border-top:2px solid #00bfa5;border-bottom:1px solid #000;border-spacing:0">
-    <tr>
-        <td height="50"></td>
-    </tr>
-    <tr>
-        <td width="50"></td>
-        <td>
-            <table style="width:100%;text-align:center;font-size:16px;border-spacing:0">
-                <tr>
-                    <td height="20"></td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="{{asset('../images/common/logo-horizontal-black.png')}}" alt="logo">
-                    </td>
-                </tr>
-                <tr>
-                    <td height="20"></td>
-                </tr>
-                <tr>
-                    <td>
-                        <p style="font-size:24px;">感谢您注册<strong style="color: #00bfa5">STARPOLL</strong></p>
-                        <p style="color:#000;">您要验证的ID为 : {{$user->email}}</p>
-                        <p style="color:#000;">认证编号 : <strong style="font-size: 20px;">{{$user->verify_token}}</strong></p>
-                        <p style="color:#000;">按下面的按钮激活。</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td height="20"></td>
-                </tr>
-
-                <tr>
-                    <td height="50"></td>
-                </tr>
-            </table>
-        </td>
-        <td width="50"></td>
-    </tr>
-</table>
-
+<form action="' + req.protocol + '://' + req.get('host') + '/password_reset" method="get">
+    <input type="hidden" name="verify" value=${arg}>
+    <input type="hidden" name="email" value=${email}>
+    <div style="width:100%;max-width:800px;margin: auto;text-align: center;">
+        <div style="padding:80px 0;">
+            <div style="width: 50%;min-width:150px;max-width: 240px;margin: auto;margin-bottom:50px;">
+                <img src="{{asset('../images/common/logo-horizontal-black.png')}}" alt="logo">
+            </div>
+            <h2 style="font-size:32px;font-weight: 300;color:#181818;margin-bottom:40px;">안녕하세요 피그리프입니다.</h2>
+            <p style="font-size:14px;color:#181818;font-weight:400;margin-bottom:40px;">
+                회원가입을 진행하기 위해<br/>
+                메일 하단의 [인증하기]버튼을 눌러 이메일을 인증해주세요</p>
+            <button style="display: inline-block;background: #181818;color:white;vertical-align:middle;
+                     padding:8px 16px;border-radius: 3px;font-weight: 500;text-transform: uppercase;
+                     border:none;text-align: center;font-size:14px;width:240px;height:40px;box-sizing: border-box;
+                     text-decoration: none;line-height: 30px;"href="{{route('verified_email'),['token'=>$user->verified_token,'email'=>$user->email]}}">이메일 인증하기</button>
+        </div>
+        <div style="padding:12px 0;border-top:1px solid #e0e0e0;">
+            <p style="font-size:14px;color:#181818">본 메일은 발신 전용입니다. 궁금하신점이나 불편사항은 피그리프 홈페이지의 [고객센터]를 이용해주시기 바랍니다.</p>
+            <p style="font-size:12px;color:#a8a8a8;margin-top:8px;">COPYRIGHT ⓒ 2020 피그리프 ALL RIGHT RESERVED</p>
+        </div>
+    </div>
+</form>
 </body>
-
 </html>

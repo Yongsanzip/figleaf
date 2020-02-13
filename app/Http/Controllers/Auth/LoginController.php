@@ -41,27 +41,35 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
-        error_log($request->email);
-        error_log($request->password);
-        if(!auth()->attempt($request->only('email','password'), $request->has('remeber'))){
+
+        if(!auth()->attempt($request->only('email','password'), $request->has('remeber'))){                   // 로그인 (세션정보저장)
             flash("이메일 또는 비밀번호가 잘못되었습니다")->error();
             return back();
         }
-        if(auth()->user()->role_id == 4){
-            $forward = '/admin';
-            flash(auth()->user()->name . ' 님 환영합니다.')->success();
-        } else if(auth()->user()->role_id == 3){
-            $forward = '/admin';
-            flash(auth()->user()->name . ' 님 환영합니다.')->success();
-        } else if(auth()->user()->role_id == 2) {
-            $forward = '/';
-            flash(auth()->user()->name . ' 님 환영합니다.')->success();
-        } else if(auth()->user()->role_id == 1){
-            $forward = '/';
-            flash(auth()->user()->name . ' 님 환영합니다.')->success();
-        } else {
+
+        if(auth()->user()->email_verified_a ==null){                                                                    // 이메일 인증이 체크
+            $email = auth()->user()->email;
             Auth::logout();
-            $forward = '/';
+            $forward = '/login';
+            flash($email . '의 계정이 인증되지 않았습니다. 메일함을 확인해주세요')->warning();
+        } else {
+
+            if(auth()->user()->role_id == 4){                                                                           // 최고 관리자일 경우
+                $forward = '/admin';
+                flash(auth()->user()->name . ' 님 환영합니다.')->success();
+            } else if(auth()->user()->role_id == 3){                                                                    // 프로젝트허가자 일경우
+                $forward = '/admin';
+                flash(auth()->user()->name . ' 님 환영합니다.')->success();
+            } else if(auth()->user()->role_id == 2) {                                                                   // 디자이너일 경우
+                $forward = '/';
+                flash(auth()->user()->name . ' 님 환영합니다.')->success();
+            } else if(auth()->user()->role_id == 1){                                                                    // 일반 유저일경
+                $forward = '/';
+                flash(auth()->user()->name . ' 님 환영합니다.')->success();
+            } else {
+                Auth::logout();
+                $forward = '/';
+            }
         }
 
         return redirect($forward);
