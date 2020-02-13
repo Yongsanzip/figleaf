@@ -28,8 +28,6 @@ class CreateIntroductionsTable extends Migration
             $table->string('instagram', 100)->nullable()->comment('인스타그램');
             $table->string('twitter', 100)->nullable()->comment('트위터');
             $table->string('homepage', 100)->nullable()->comment('홈페이지');
-            $table->tinyInteger('brand_name_hidden')->comment('브랜드명 히든');
-            $table->tinyInteger('designer_name_hidden')->comment('디자이너명 히든');
             $table->tinyInteger('email_hidden')->comment('이메일 히든');
             $table->tinyInteger('phone_hidden')->comment('전화번호 히든');
             $table->tinyInteger('facebook_hidden')->comment('페이스북 히든');

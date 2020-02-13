@@ -69,9 +69,10 @@ Route::group(['middleware'=>'locale'],function(){
     Route::get('story_telling', 'Client\Crm\StoryTellingController@index');
 
     /****** 팝업 ******/
-    // 수수료 정책
+    // 프로젝트 만들기 - 수수료 정책
     Route::get('popup_fees', 'Client\Popup\FeesController@index');
-
+    // 프로젝트 만들기 - 원단/재질
+    Route::get('popup_material', 'Client\Popup\MaterialController@index');
 
     // 프로젝트
     Route::resource('project', 'Client\Project\ProjectController');

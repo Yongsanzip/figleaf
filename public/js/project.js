@@ -170,11 +170,14 @@ function fnRemoveSize(e) {
  *  description : add fabric item
  *  author      : minyeong kim
  ***********************************************************/
+var num = 0;
 function fnAddFabric(){
+    num++;
     var fabricList = document.getElementsByClassName('fabric-list')[0];
     var fabricItem = '<div class="fabric-item">' +
         '                <div class="fabric-name">' +
-        '                    <input type="text" class="input-field" name="fabric[]">' +
+        '                    <input type="text" class="input-field" name="fabric[]" id="material_name'+num+'" onclick="popup_material('+num+')" readonly>' +
+        '                    <input type="hidden" name="material_id" id="material_id'+num+'">' +
         '                </div>' +
         '                <div class="fabric-ratio">' +
         '                    <input type="number" max="100" min="0" class="input-field" name="fabric_ratio[]">' +

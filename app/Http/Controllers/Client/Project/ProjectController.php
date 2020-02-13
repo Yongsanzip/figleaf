@@ -27,9 +27,18 @@ class ProjectController extends Controller
      * @url /project
      * @return view
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('client.project.index');
+        if ($request->material_id > 0){      // 1차 -> 2차 카테고리
+            $datas = Material::where('group_id', $request->material_id)->get();
+            $name = 'material';
+        }
+        if ($request->ajax()){
+            $view = view('client.project.partial.render.material', compact('datas','name'))->render();
+            return response()->json(['html'=>$view],200, [],JSON_PRETTY_PRINT);
+        } else {
+            return view('client.project.index');
+        }
     }
 
     /**
@@ -39,15 +48,20 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $main_categories = Category::where('id', 4)->orWhere('id', 5)->get();           // 1차 카테고리
-        $second_categories = CategoryDetail::get();                                     // 2차 카테고리
-        $size_categories = SizeCategory::get();                                         // 사이즈 카테고리
-        $information_tab = InformationTab::get();                                       // 취급정보 탭
-        $information_list = InformationSelectList::get();                               // 취급정보 리스트
-        $groups = Group::get();
-        $materials = Material::get();
+        $main_categories = Category::where('id', 4)->orWhere('id', 5)->get();                  // 1차 카테고리
+        $second_categories = CategoryDetail::get();                                            // 2차 카테고리
+        $size_categories = SizeCategory::get();                                                // 사이즈 카테고리
+        $information_tab = InformationTab::get();                                              // 취급정보 탭
+        $information_list_water = InformationSelectList::where('tab_id', 1)->get();            // 취급정보 리스트 - 물세탁
+        $information_list_bleach = InformationSelectList::where('tab_id', 2)->get();           // 취급정보 리스트 - 표백
+        $information_list_iron = InformationSelectList::where('tab_id', 3)->get();             // 취급정보 리스트 - 다림질
+        $information_list_drycleaning = InformationSelectList::where('tab_id', 4)->get();      // 취급정보 리스트 - 드라이클리닝
+        $information_list_dry = InformationSelectList::where('tab_id', 5)->get();              // 취급정보 리스트 - 건조
+        $groups = Group::get();                                                                // 원단 그룹
+        $materials = Material::get();                                                          // 원단 - 재질
         return view('client.project.partial.create.index',
-            compact('main_categories', 'second_categories', 'materials', 'size_categories', 'information_tab', 'information_list', 'groups'));
+            compact('main_categories', 'second_categories', 'materials', 'size_categories', 'information_tab', 'information_list', 'groups',
+            'information_list_water', 'information_list_bleach', 'information_list_iron', 'information_list_drycleaning', 'information_list_dry'));
     }
 
     /**
