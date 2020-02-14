@@ -15,7 +15,10 @@ Route::GET('/locale/{locale}','LocaleController@locale')->name('locale');
 
 Auth::routes();
 
+// 이메일 인증
 Route::get('verified_email','Auth\RegisterController@verified_email')->name('verified_email');
+// 비밀번호 재설정 send_reset_email 보내기
+Route::post('send_reset_email','Auth\ResetPasswordController@send_reset_email')->name('send_reset_email');
 /************************************** Client **************************************/
 Route::group(['middleware'=>'locale'],function(){
     // 메인

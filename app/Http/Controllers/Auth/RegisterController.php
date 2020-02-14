@@ -59,7 +59,13 @@ class RegisterController extends Controller
         ]);
     }
 
-
+    /************************************************************************
+     * Display register view
+     * @description : 회원가입 - 회원가입 폼 view
+     * @url         : /register
+     * @method      : get
+     * @return      : view
+     ************************************************************************/
    protected function showRegistrationForm(Request $request){
        $sms_check = $request->session()->get('sms_check');                                                          // SMS 수신 체크
        $email_check = $request->session()->get('email_check');                                                      // 이메일 수신 체크
@@ -67,6 +73,14 @@ class RegisterController extends Controller
        $request->session()->forget('email_check');                                                                 // 이메일 세션 삭제
        return view('auth.register',compact('sms_check','email_check'));
    }
+
+    /************************************************************************
+     * Display register view
+     * @description : 회원가입 - 회원가입 액션
+     * @url         : /register
+     * @method      : post
+     * @return      : view
+     ************************************************************************/
     protected function create(Request $request) {
         $user = User::firstOrCreate([
             'role_id'       => 1,
@@ -91,6 +105,13 @@ class RegisterController extends Controller
         return view('auth.register.success');
     }
 
+    /************************************************************************
+     * Verified register user
+     * @description : 이메일 인증 - 이메일 인증 액션
+     * @url         : /verified_email
+     * @method      : get
+     * @return      : view
+     ************************************************************************/
     public function verified_email(Request $request){
         if(!auth()->attempt($request->only('email','verified_token'))){                   // 로그인 (세션정보저장)
             flash("잘못된 형식이거나 만료된 토큰입니다. 다시 인증하여주십시오")->error();

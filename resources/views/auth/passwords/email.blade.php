@@ -9,8 +9,8 @@
         <div class="inner">
 
             <div class="con-login">
-                <form>
-
+                <form action="{{route('send_reset_email')}}" method="POST">
+                    @csrf
                     <h2 class="title margin-none">비밀번호 찾기</h2>
 
                     <p class="text">
@@ -21,13 +21,13 @@
                     <div class="input-box">
                         <div class="input-item">
                             <p class="input-name">이메일</p>
-                            <input type="email" class="input-field" placeholder="가입하신 이메일 주소를 입력해주세요" autofocus>
+                            <input type="email" name="email" class="input-field" placeholder="가입하신 이메일 주소를 입력해주세요" autofocus>
                             <!-- error -->
                             <!-- <p class="text-error">이메일 형식이 올바르지 않습니다.</p> -->
                         </div>
                     </div>
 
-                    <button class="btn-black">비밀번호 재설정</button>
+                    <button type="submit" class="btn-black">비밀번호 재설정</button>
 
                 </form>
 

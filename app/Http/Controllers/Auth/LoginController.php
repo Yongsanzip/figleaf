@@ -40,6 +40,13 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    /************************************************************************
+     * Action to Login process
+     * @description : 로그인 - 로그인 액션
+     * @url         : /login
+     * @method      : post
+     * @return      : view
+     ************************************************************************/
     public function login(Request $request){
 
         if(!auth()->attempt($request->only('email','password'), $request->has('remeber'))){                   // 로그인 (세션정보저장)

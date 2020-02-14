@@ -11,6 +11,7 @@ class AgreeController extends Controller
      * Display a listing of the resource.
      * @description 회원가입 - 약관동의
      * @url : /agree
+     * @method : get
      * @return view
      ************************************************************************/
     public function index() {
@@ -21,6 +22,7 @@ class AgreeController extends Controller
      * Display a listing of the resource.
      * @description 회원가입 - 약관동의 완료
      * @url : /agree_complete
+     * @method      : post
      * @return view
      ************************************************************************/
     public function complete(Request $request) {
