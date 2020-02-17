@@ -13,6 +13,7 @@ use App\InformationTab;
 use App\Introduction;
 use App\Material;
 use App\Option;
+use App\Portfolio;
 use App\Project;
 use App\Size;
 use App\SizeCategory;
@@ -33,10 +34,14 @@ class ProjectController extends Controller
             $datas = Material::where('group_id', $request->material_id)->get();
             $name = 'material';
         }
-        if ($request->ajax()){
+
+        if ($request->ajax()){              // 원단/재질 카테고리
             $view = view('client.project.partial.render.material', compact('datas','name'))->render();
             return response()->json(['html'=>$view],200, [],JSON_PRETTY_PRINT);
         } else {
+            // 브랜드 소개 default 값
+            // $introduction = Portfolio::where('user_id', auth()->user()->id);
+
             return view('client.project.index');
         }
     }
@@ -113,7 +118,7 @@ class ProjectController extends Controller
         for ($i = 0; $i < count($sizes_count); $i++){
             Size::create([
                 'project_id'    => $project->id,
-                'category_id'   => '',
+                'category_id'   => $request->size_category,
                 'size'          => $request->size[$i],
                 'total_length'  => $request->total_length[$i],
                 'shoulder'      => $request->shoulder[$i],
@@ -135,23 +140,56 @@ class ProjectController extends Controller
         }
 
         // for문
-        $fabrics = Fabirc::create([
-            'project_id'    => $project->id,
-            'material_id'   => '',
-            'rate'          => ''
-        ]);
+        $fabric_count = count($request->fabric_ration);
+        for ($i = 0; $i < $fabric_count; $i++){
+            $fabrics = Fabirc::create([
+                'project_id'    => $project->id,
+                'material_id'   => $request->material_id[$i],
+                'rate'          => $request->fabric_ratio[$i]
+            ]);
+        }
 
         // 취급정보 추가하기
-        $informations = Information::create([
-            'project'    => '',
-            'detail_id'  => '',
-        ]);
+        if ($request->information_water) {                          // 물세탁
+            Information::create([
+                'project_id'    => $project->id,
+                'detail_id'     => $request->information_water,
+            ]);
+        }
+
+        if ($request->information_bleach) {                         // 표백
+            Information::create([
+                'project_id'    => $project->id,
+                'detail_id'     => $request->information_bleach,
+            ]);
+        }
+
+        if ($request->information_iron) {                           // 다림질
+            Information::create([
+                'project_id'    => $project->id,
+                'detail_id'     => $request->information_iron,
+            ]);
+        }
+
+        if ($request->information_drycleacing) {                    // 드라이클리닝
+            Information::create([
+                'project_id'    => $project->id,
+                'detail_id'     => $request->information_drycleacing,
+            ]);
+        }
+
+        if ($request->information_dry) {                            // 건조
+            Information::create([
+                'project_id'    => $project->id,
+                'detail_id'     => $request->information_dry,
+            ]);
+        }
 
         // 디자이너/브랜드 소개
-        $introduction = Introduction::create([
+        Introduction::create([
             'project_id'            => $project->id,
-            'condition'             => '',
-            'contents'              => '',
+            'condition'             => '',                          // 포트폴리오
+            'contents'              => '',                          // 포트폴리오 직접입력
             'brand_name'            => $request->brand_name,
             'designer_name'         => $request->designer_name,
             'email'                 => $request->email,
@@ -160,8 +198,6 @@ class ProjectController extends Controller
             'instagram'             => $request->instagram,
             'twitter'               => $request->twitter,
             'homepage'              => $request->homepage,
-            'brand_name_hidden'     => '', // 이거는 없는디'-'?
-            'designer_name_hidden'  => '', // 이것도 없는디 ㅇ-ㅇ?
             'email_hidden'          => $request->email_hidden,
             'phone_hidden'          => $request->phone_hidden,
             'facebook_hidden'       => $request->facebook_hidden,
@@ -170,12 +206,13 @@ class ProjectController extends Controller
             'homepage_hidden'       => $request->hompage_hidden
         ]);
 
-        $account = Account::create([
+        // 정산정보
+        Account::create([
             'project_id'            => $project->id,
-            'condition'             => '',
-            'company_number'        => '',
-            'email'                 => '',
-            'phone'                 => ''
+            'condition'             => $request->condition,
+            'company_number'        => $request->comppany_number,
+            'email'                 => $request->account_email,
+            'phone'                 => $request->account_phone
         ]);
 
 

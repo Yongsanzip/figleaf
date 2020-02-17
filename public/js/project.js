@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded',function () {
             //클릭한 탭에 맞는 컨텐츠 토글
             document.getElementsByClassName('edit-on')[0].classList.remove('edit-on');
             contentsBox[this.getAttribute('data-index')].classList.add('edit-on');
+
+            setTimeout(function () {
+                window.frames[0].document.getElementsByClassName('se2_to_html')[0].click();
+                window.frames[0].document.getElementsByClassName('se2_to_editor')[0].click();
+            }, 10);
+
         });
     }
 
@@ -50,6 +56,36 @@ document.addEventListener('DOMContentLoaded',function () {
             handlingContentsBox[this.getAttribute('data-index')].classList.add('handling-con-on');
         })
     }
+
+    // 개요 -> 상품정보
+    document.getElementById('product_information').addEventListener('click', function () {
+        var title = document.getElementById('project_title').value;                 // 프로젝트 제목
+        var first_category = document.getElementById('first_category').value;       // 프로젝트 1차카테고리
+        var second_category = document.getElementById('second_category').value;     // 프로젝트 2차 카테고리
+        var summary = document.getElementById('project_summary').value;             // 프로젝트 개요
+        var main_file = document.getElementById('main_file').value;                 // 프로젝트 대표이미지
+        var success_count = document.getElementById('success_count').value;         // 프로젝트 성공개수
+
+        if (title.length > 30) {
+            alert('프로젝트 제목이 30자가 초과되었습니다');
+        } else if (first_category === '0') {
+            alert('1차 카테고리를 선택해주세요.');
+        } else if (second_category === '0') {
+            alert('2차 카테고리를 선택해주세요.');
+        } else if (!main_file) {
+            alert('대표이미지(썸네일)은 필수입니다.')
+        } else if (summary.length < 10) {
+            alert('프로젝트 개요는 최소 10자 이상입니다.')
+        } else if (summary.length > 50) {
+            alert('프로젝트 개요가 50자가 초과되었습니다');
+        } else if (success_count.length < 10) {
+            alert('프로젝트 성공 개수는 최소 10개 이상입니다.');
+        } else if (success_count.length > 30) {
+            alert('최대 30개 까지만 설정 가능합니다');
+        } else {
+            // submit
+        }
+    });
 });
 
 
