@@ -13,18 +13,6 @@ $tab='info';
         <div class="inner">
             <div class="con-mypage">
                 <h2 class="title">my page</h2>
-                <div class="text-center">
-                    <div class="user-info-wrap">
-                        <div class="user-info">
-                            <p class="user-id">{{$datas->name}}({{$datas->email}})<span>님</span></p>
-                            <div class="badge badge-skyblue">new</div>
-                        </div>
-                        <div class="user-point" style="display: none">
-                            <p class="caption">point</p>
-                            <p class="point">{{$datas->saving_point}}</p>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- menu list -->
                     @include('client.mypage.partial.navi')

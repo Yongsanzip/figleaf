@@ -1,3 +1,17 @@
+@auth
+<div class="text-center">
+    <div class="user-info-wrap">
+        <div class="user-info">
+            <p class="user-id">{{auth()->user()->name}}({{auth()->user()->email}})<span>님</span></p>
+            <div class="badge badge-skyblue">new</div>
+        </div>
+        <div class="user-point" style="display: none">
+            <p class="caption">point</p>
+            <p class="point">{{auth()->user()->saving_point}}</p>
+        </div>
+    </div>
+</div>
+@endauth
 <!-- menu list -->
 <ul class="menu-list">
     <li {{$tab == 'info' ? 'class=on' : ''}}>
