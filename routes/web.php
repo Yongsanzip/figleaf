@@ -79,6 +79,8 @@ Route::group(['middleware'=>'locale'],function(){
     // middleware - auth
     // 마이페이지 - 회원정보
     Route::resource('mypage_information', 'Client\MyPage\InformationController');
+    // 마이페이지 - 회원정보 - 비밀번호 체크
+    Route::POST('/check_password','Client\MyPage\InformationController@check_password');
     // 마이페이지 - 후원현황
     Route::resource('mypage_support', 'Client\MyPage\SupportController');
     // 마이페이지 - 내가 만든 프로젝트

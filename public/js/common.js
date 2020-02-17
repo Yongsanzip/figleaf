@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded',function () {
 
 });
 
-
 //navigation open
 function fnOpenNav(){
     document.getElementsByClassName('overlay')[0].classList.add('overlay-on');
@@ -60,4 +59,50 @@ function checkPasswordPattern(str) {
     if(!pattern1.test(str) || !pattern2.test(str) || !pattern3.test(str) || str.length < 8) { return false; } else { return true; }
 }
 
+/***********************************************************************
+ * function Name : formAjax
+ * description : 폼데이터 Ajax
+ *
+ ***********************************************************************/
+var formAjax = function(methodType,asyncType,urlPath,formData,errorFunc,successFunc){
+    try{
+        $.ajax({
+            type : methodType,
+            url : urlPath,
+            async : asyncType,
+            cache : false,
+            contentType :false,
+            processData: false,
+            data : formData,
+            error : errorFunc,
+            success : successFunc
+        });
+    }catch(e){
+        alert("에러코드 : " + e.code + "\r\n 에러내용 : " + e.message);
+    }
+};
+
+/***********************************************************************
+ * function Name : callAjax
+ * description : 공통 Ajax
+ *
+ ***********************************************************************/
+var callAjax = function(methodType,asyncType,urlPath,dataReceiveType,sendContentType,sendData,errorFunc,successFunc){
+    try{
+        $.ajax({
+            type : methodType,
+            url : urlPath,
+            async : asyncType,
+            timeout : "5000", // 150000
+            cache : false,
+            contentType : "application/x-www-form-urlencoded; charset=utf-8",
+            dataType : dataReceiveType,
+            data : (sendData != "") ? ((sendContentType == "json" || sendContentType == "application/json") ? JSON.parse(sendData) : sendData) : "",
+            error : errorFunc,
+            success : successFunc
+        });
+    }catch(e){
+        alert("에러코드 : " + e.code + "\r\n 에러내용 : " + e.message);
+    }
+};
 

@@ -32,7 +32,7 @@ $tab='info';
 
                 <!-- mypage contents -->
                 <div class="mypage-contents">
-                    <form>
+                    <form method="POST" onsubmit="return fn_mypage_info_submit(this);">
                         <table class="user-table">
                             <colgroup>
                                 <col width="160px">
@@ -49,25 +49,26 @@ $tab='info';
                             <tr>
                                 <th>기존 비밀번호</th>
                                 <td>
-                                    <input type="password" class="input-field" placeholder="비밀번호">
+                                    <input type="password" id="old_password" class="input-field" placeholder="비밀번호">
+                                    <button type="button" class="btn-white" id="password_check" style="margin-left: 1%">비밀번호확인</button>
                                 </td>
                             </tr>
                             <tr>
                                 <th>신규 비밀번호</th>
                                 <td class="new-password">
-                                    <input type="password" class="input-field" placeholder="신규 비밀번호">
-                                    <input type="password" class="input-field" placeholder="신규 비밀번호 재입력">
+                                    <input type="password" name="new_password" class="input-field" placeholder="신규 비밀번호" disabled>
+                                    <input type="password" name="new_password_check" class="input-field" placeholder="신규 비밀번호 재입력" disabled>
                                 </td>
                             </tr>
                             <tr>
                                 <th>성별</th>
                                 <td class="gender">
                                     <label class="checkbox-wrap">
-                                        <input type="radio">
+                                        <input type="radio" name="gender" {{$datas->gender == 0 ? 'checked' : ''}}>
                                         <p>남자</p>
                                     </label>
                                     <label class="checkbox-wrap">
-                                        <input type="radio">
+                                        <input type="radio" name="gender" {{$datas->gender == 1 ? 'checked' : ''}}>
                                         <p>여자</p>
                                     </label>
                                 </td>
@@ -76,9 +77,9 @@ $tab='info';
                                 <th>이메일</th>
                                 <td class="email">
                                     <div>
-                                        <p class="text">hwkim@yongsanzip.com</p>
+                                        <p class="text">{{$datas->email}}</p>
                                         <label class="checkbox-wrap">
-                                            <input type="checkbox">
+                                            <input type="checkbox" name="email_yn" {{$datas->email_yn == 1 ? 'checked' : ''}}>
                                             <p>정보메일을 수신하겠습니다.</p>
                                         </label>
                                     </div>
@@ -89,12 +90,20 @@ $tab='info';
                                 </td>
                             </tr>
                             <tr>
+                                <th>전화번호</th>
+                                <td class="phone">
+                                    <div>
+                                        <input type="tel" class="input-field" name="home_phone" value="{{$datas->home_phone}}" placeholder="전화번호">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>휴대폰번호</th>
                                 <td class="phone">
                                     <div>
-                                        <input type="tel" class="input-field" placeholder="휴대폰번호">
+                                        <input type="tel" class="input-field" name="cellphone" value="{{$datas->cellphone}}" placeholder="휴대폰번호">
                                         <label class="checkbox-wrap">
-                                            <input type="checkbox">
+                                            <input type="checkbox" name="sms_yn" {{$datas->sms_yn == 1 ? 'checked' : ''}}>
                                             <p>SMS를 수신하겠습니다.</p>
                                         </label>
                                     </div>
@@ -109,13 +118,13 @@ $tab='info';
                                 <td class="address">
                                     <div class="postal">
                                         <label>
-                                            <input type="text" class="input-field" name="zipcode" id="zipcode" placeholder="우편번호" value="{{$datas->zip_code}}">
+                                            <input type="text" class="input-field" name="zip_code" id="zip_code" placeholder="우편번호" value="{{$datas->zip_code}}">
                                             <button type="button" class="btn-white" id="address_btn">주소찾기</button>
                                         </label>
                                     </div>
                                     <div class="detail">
-                                        <input type="text" class="input-field" name="address" id="address" placeholder="주소">
-                                        <input type="text" class="input-field" name="address_detail" placeholder="상세주소" >
+                                        <input type="text" class="input-field" name="address" id="address" placeholder="주소" value="{{$datas->address}}">
+                                        <input type="text" class="input-field" name="address_detail" placeholder="상세주소" value="{{$datas->address_detail}}">
                                     </div>
                                 </td>
                             </tr>
@@ -136,13 +145,13 @@ $tab='info';
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript">
         document.getElementById('address_btn').addEventListener('click', function () {
-            var zipcode = document.getElementById('zipcode');
+            var zip_code = document.getElementById('zip_code');
             var address = document.getElementById('address');
             new daum.Postcode({
                 oncomplete: function(data) {
                     // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
                     // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-                    zipcode.value = data.zonecode;
+                    zip_code.value = data.zonecode;
                     if (data.userSelectedType === 'R') {
                         // 사용자가 도로명 주소를 선택했을 경우
                         address.value =  data.roadAddress;
@@ -153,6 +162,19 @@ $tab='info';
                 }
             }).open();
         });
-    </script>
+        document.getElementById('password_check').addEventListener('click',function () {
+            var params = {password:document.getElementById('old_password').value};
+            callAjax('POST',true,'/check_password',"JSON",'JSON',params,fn_check_password_ajax_error,fn_check_password_ajax_success);
+        });
+        var fn_check_password_ajax_success = function(e){
 
+        }
+        var fn_check_password_ajax_error = function(e){
+            console.log(e);
+            alert(e);
+        }
+        var fn_mypage_info_submit = function(f){
+
+        }
+    </script>
 @endsection
