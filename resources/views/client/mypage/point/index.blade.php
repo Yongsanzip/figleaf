@@ -1,6 +1,7 @@
 <?php
 // url : /mypage_point
 // 적립금
+$tab='point';
 ?>
 @extends('client.layouts.app')
 @section('content')
