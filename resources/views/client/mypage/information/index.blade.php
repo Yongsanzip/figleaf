@@ -32,7 +32,9 @@ $tab='info';
 
                 <!-- mypage contents -->
                 <div class="mypage-contents">
-                    <form method="POST" onsubmit="return fn_mypage_info_submit(this);">
+                    <form method="POST" action="{{route('mypage_information.update',['id'=>'action'])}}" onsubmit="return fn_mypage_info_submit(this);">
+                        {{method_field('PUT')}}
+                        @csrf
                         <table class="user-table">
                             <colgroup>
                                 <col width="160px">
@@ -49,26 +51,27 @@ $tab='info';
                             <tr>
                                 <th>기존 비밀번호</th>
                                 <td>
-                                    <input type="password" id="old_password" class="input-field" placeholder="비밀번호">
+                                    <input type="password" id="old_password" name="old_password" class="input-field" placeholder="비밀번호">
+                                    <input type="checkbox" id="password_change_check" style="display: none;">
                                     <button type="button" class="btn-white" id="password_check" style="margin-left: 1%">비밀번호확인</button>
                                 </td>
                             </tr>
                             <tr>
                                 <th>신규 비밀번호</th>
                                 <td class="new-password">
-                                    <input type="password" name="new_password" class="input-field" placeholder="신규 비밀번호" disabled>
-                                    <input type="password" name="new_password_check" class="input-field" placeholder="신규 비밀번호 재입력" disabled>
+                                    <input type="password" name="new_password" id="new_password" class="input-field" placeholder="신규 비밀번호" disabled>
+                                    <input type="password" name="new_password_check" id="new_password_check" class="input-field" placeholder="신규 비밀번호 재입력" disabled>
                                 </td>
                             </tr>
                             <tr>
                                 <th>성별</th>
                                 <td class="gender">
                                     <label class="checkbox-wrap">
-                                        <input type="radio" name="gender" {{$datas->gender == 0 ? 'checked' : ''}}>
+                                        <input type="radio" name="gender" {{$datas->gender == 0 ? 'checked' : ''}} value="0">
                                         <p>남자</p>
                                     </label>
                                     <label class="checkbox-wrap">
-                                        <input type="radio" name="gender" {{$datas->gender == 1 ? 'checked' : ''}}>
+                                        <input type="radio" name="gender" {{$datas->gender == 1 ? 'checked' : ''}} value="1">
                                         <p>여자</p>
                                     </label>
                                 </td>
@@ -118,12 +121,12 @@ $tab='info';
                                 <td class="address">
                                     <div class="postal">
                                         <label>
-                                            <input type="text" class="input-field" name="zip_code" id="zip_code" placeholder="우편번호" value="{{$datas->zip_code}}">
+                                            <input type="text" class="input-field" name="zip_code" id="zip_code" placeholder="우편번호" value="{{$datas->zip_code}}" readonly>
                                             <button type="button" class="btn-white" id="address_btn">주소찾기</button>
                                         </label>
                                     </div>
                                     <div class="detail">
-                                        <input type="text" class="input-field" name="address" id="address" placeholder="주소" value="{{$datas->address}}">
+                                        <input type="text" class="input-field" name="address" id="address" placeholder="주소" value="{{$datas->address}}" readonly>
                                         <input type="text" class="input-field" name="address_detail" placeholder="상세주소" value="{{$datas->address_detail}}">
                                     </div>
                                 </td>
@@ -163,18 +166,84 @@ $tab='info';
             }).open();
         });
         document.getElementById('password_check').addEventListener('click',function () {
+            if(!gn_nullCheck(document.getElementById('old_password').value)){
+                alert('비밀번호를 입력해주세요');
+                document.getElementById('old_password').focus();
+                return false;
+            }
             var params = {password:document.getElementById('old_password').value};
             callAjax('POST',true,'/check_password',"JSON",'JSON',params,fn_check_password_ajax_error,fn_check_password_ajax_success);
         });
         var fn_check_password_ajax_success = function(e){
-
+            alert(e.msg);
+            document.getElementById('password_check').setAttribute('disabled',true);
+            document.getElementById('old_password').setAttribute('disabled',true);
+            document.getElementById('new_password').removeAttribute('disabled');
+            document.getElementById('new_password_check').removeAttribute('disabled');
+            document.getElementById('password_change_check').checked = true;
         }
         var fn_check_password_ajax_error = function(e){
-            console.log(e);
-            alert(e);
+            alert(e.responseJSON.msg);
         }
-        var fn_mypage_info_submit = function(f){
 
+        var fn_mypage_info_submit = function(f){
+            if(confirm("입력하신 정보 수정하시겠습니까?")){
+
+                if(document.getElementById('password_change_check').checked){
+                    if(!gn_nullCheck(f.new_password.value)){
+                        alert('신규 비밀번호를 입력해주세요');
+                        f.new_password.focus();
+                        return false;
+                    }
+                    if(!gn_nullCheck(f.new_password_check.value)){
+                        alert('신규 비밀번호를 한번더 입력해주세요');
+                        f.new_password_check.focus();
+                        return false;
+                    }
+
+                    if(f.new_password.value != f.new_password_check.value){
+                        f.new_password.focus();
+                        alert('신규 비밀번호와 신규 비밀번호 확인이 일치하지 않습니다.');
+                        return false;
+                    }
+
+                    if(!checkPasswordPattern(f.new_password_check.value) || !checkPasswordPattern(f.new_password.value)){
+                        f.new_password.focus();
+                        alert("비밀번호는 8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다.");
+                        return false;
+                    }
+                }
+
+                if(!gn_nullCheck(f.home_phone.value)){
+                    f.home_phone.focus();
+                    alert("전화번호를 입력해주세요!");
+                    return false;
+                }
+
+                if(!gn_nullCheck(f.cellphone.value)){
+                    f.home_phone.focus();
+                    alert("휴대폰번호를 입력해주세요!");
+                    return false;
+                }
+
+                if(!gn_nullCheck(f.zip_code.value)){
+                    f.zip_code.focus();
+                    alert("우편번호를 입력해주세요!");
+                    return false;
+                }
+
+                if(!gn_nullCheck(f.address.value)){
+                    f.address.focus();
+                    alert("주소를 입력해주세요!");
+                    return false;
+                }
+
+                return true;
+
+            } else {
+                return false;
+            }
+            return false;
         }
     </script>
 @endsection
