@@ -1,4 +1,5 @@
 <?php
+$tab='portfolio';
 ?>
 @extends('client.layouts.app')
 @section('content')

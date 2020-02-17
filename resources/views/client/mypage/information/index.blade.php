@@ -1,6 +1,7 @@
 <?php
 // url : /mypage_information
 // 마이페이지 - 회원정보
+$tab='info';
 ?>
 
 @extends('client.layouts.app')
@@ -26,29 +27,7 @@
                 </div>
 
                 <!-- menu list -->
-                <ul class="menu-list">
-                    <li class="on">
-                        <a href="">회원정보</a>
-                    </li>
-                    <li>
-                        <a href="">후원 현황</a>
-                    </li>
-                    <li>
-                        <a href="">내가 만든 프로젝트</a>
-                    </li>
-                    <li>
-                        <a href="">작성한 커뮤니티</a>
-                    </li>
-                    <li>
-                        <a href="">메시지</a>
-                    </li>
-                    <li>
-                        <a href="">1:1 문의</a>
-                    </li>
-                    <li>
-                        <a href="">포트폴리오</a>
-                    </li>
-                </ul>
+                    @include('client.mypage.partial.navi')
                 <!--// menu list -->
 
                 <!-- mypage contents -->

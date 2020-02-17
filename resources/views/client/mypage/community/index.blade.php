@@ -1,10 +1,11 @@
 <?php
+$tab='community';
 ?>
 
 @extends('client.layouts.app')
 @section('content')
     <link rel="stylesheet" href="{{asset('/css/swiper.min.css')}}">
-    
+
     <main class="container">
 
         <div class="inner">
@@ -23,31 +24,7 @@
                     </div>
                 </div>
 
-                <!-- menu list -->
-                <ul class="menu-list">
-                    <li>
-                        <a href="">회원정보</a>
-                    </li>
-                    <li>
-                        <a href="">후원 현황</a>
-                    </li>
-                    <li>
-                        <a href="">내가 만든 프로젝트</a>
-                    </li>
-                    <li class="on">
-                        <a href="">작성한 커뮤니티</a>
-                    </li>
-                    <li>
-                        <a href="">메시지</a>
-                    </li>
-                    <li>
-                        <a href="">1:1 문의</a>
-                    </li>
-                    <li>
-                        <a href="">포트폴리오</a>
-                    </li>
-                </ul>
-                <!--// menu list -->
+            @include('client.mypage.partial.navi')
 
                 <!-- mypage contents -->
                 <div class="mypage-contents">
