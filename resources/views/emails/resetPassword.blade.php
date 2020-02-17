@@ -1,8 +1,8 @@
 <html>
 <head></head>
 <body>
-<form action="{{route('password.reset',['token'=>$user->verified_token.'?email='.$user->email])}}" method="get">
-    <input type="hidden" name="verify" value={{$user->verified_token}}>
+<form action="{{route('password.reset',['token'=>$token])}}" method="get">
+    <input type="hidden" name="token" value={{$token}}>
     <input type="hidden" name="email" value={{$user->email}}>
     <div style="width:100%;max-width:800px;margin: auto;text-align: center;">
         <div style="padding:80px 0;">

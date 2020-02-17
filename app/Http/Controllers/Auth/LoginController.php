@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -54,7 +54,7 @@ class LoginController extends Controller
             return back();
         }
 
-        if(auth()->user()->email_verified_a ==null){                                                                    // 이메일 인증이 체크
+        if(auth()->user()->email_verified_at ==null){                                                                    // 이메일 인증이 체크
             $email = auth()->user()->email;
             Auth::logout();
             $forward = '/login';
