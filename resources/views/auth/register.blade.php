@@ -67,7 +67,7 @@
                         <div class="input-item">
                             <p class="input-name">주소</p>
                             <div class="address">
-                                <input type="text" class="input-field" name="zipcode" id="zipcode" placeholder="우편번호">
+                                <input type="text" class="input-field" name="zip_code" id="zip_code" placeholder="우편번호">
                                 <input type="text" class="input-field" name="address" id="address" placeholder="주소">
                                 <button type="button" class="btn-black btn-adress" id="address_btn">검색</button>
                             </div>
@@ -102,7 +102,7 @@
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript">
         document.getElementById('address_btn').addEventListener('click', function () {
-            var zipcode = document.getElementById('zipcode');
+            var zipcode = document.getElementById('zip_code');
             var address = document.getElementById('address');
             new daum.Postcode({
                 oncomplete: function(data) {

@@ -42,7 +42,7 @@ $tab='info';
                             <tr>
                                 <th>이름</th>
                                 <td>
-                                    <input type="text" class="input-field" placeholder="이름">
+                                    <input type="text" class="input-field" placeholder="이름" value="{{$datas->name}}">
                                     <div class="badge badge-skyblue">new</div>
                                 </td>
                             </tr>
@@ -109,13 +109,13 @@ $tab='info';
                                 <td class="address">
                                     <div class="postal">
                                         <label>
-                                            <input type="text" class="input-field" placeholder="우편번호">
-                                            <button class="btn-white">주소찾기</button>
+                                            <input type="text" class="input-field" name="zipcode" id="zipcode" placeholder="우편번호" value="{{$datas->zip_code}}">
+                                            <button type="button" class="btn-white" id="address_btn">주소찾기</button>
                                         </label>
                                     </div>
                                     <div class="detail">
-                                        <input type="text" class="input-field" placeholder="주소">
-                                        <input type="text" class="input-field" placeholder="상세주소">
+                                        <input type="text" class="input-field" name="address" id="address" placeholder="주소">
+                                        <input type="text" class="input-field" name="address_detail" placeholder="상세주소" >
                                     </div>
                                 </td>
                             </tr>
@@ -132,7 +132,27 @@ $tab='info';
 
             </div>
         </div>
-
     </main>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script type="text/javascript">
+        document.getElementById('address_btn').addEventListener('click', function () {
+            var zipcode = document.getElementById('zipcode');
+            var address = document.getElementById('address');
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                    // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+                    zipcode.value = data.zonecode;
+                    if (data.userSelectedType === 'R') {
+                        // 사용자가 도로명 주소를 선택했을 경우
+                        address.value =  data.roadAddress;
+                    } else {
+                        // 사용자가 지번 주소를 선택했을 경우(J)
+                        address.value = data.jibunAddress;
+                    }
+                }
+            }).open();
+        });
+    </script>
 
 @endsection
