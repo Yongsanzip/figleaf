@@ -65,7 +65,7 @@ class ProjectController extends Controller
         $groups = Group::get();                                                                // 원단 그룹
         $materials = Material::get();                                                          // 원단 - 재질
         return view('client.project.partial.create.index',
-            compact('main_categories', 'second_categories', 'materials', 'size_categories', 'information_tab', 'information_list', 'groups',
+            compact('main_categories', 'second_categories', 'materials', 'size_categories', 'information_tab', 'groups',
             'information_list_water', 'information_list_bleach', 'information_list_iron', 'information_list_drycleaning', 'information_list_dry'));
     }
 

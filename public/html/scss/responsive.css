@@ -200,283 +200,72 @@
   }
 
   /****** auth ******/
-  .con-login {
-    margin: auto;
-    max-width: 320px;
-    padding: 80px 10px 120px;
-  }
   .con-login .title {
-    font-size: 32px;
-    font-weight: 300;
-    letter-spacing: 10px;
-    text-transform: uppercase;
-    margin-bottom: 56px;
-    text-align: center;
-  }
-  .con-login .title.margin-none {
-    letter-spacing: normal;
+    font-size: 24px;
+    letter-spacing: 8px;
+    margin-bottom: 40px;
   }
   .con-login .text {
-    font-size: 14px;
-    text-align: center;
-    word-break: keep-all;
-    margin-bottom: 40px;
-    font-weight: 300;
-  }
-  .con-login .input-item {
+    font-size: 12px;
     margin-bottom: 32px;
   }
-  .con-login .input-item:last-child {
-    margin-bottom: 0;
-  }
-  .con-login .input-item .input-name {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .con-login .input-item .input-field {
-    font-size: 14px;
-    color: #4a4a4a;
-    width: 100%;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-    padding: 8px 0;
-    border-bottom: 1px solid #cccccc;
-  }
-  .con-login .input-item .input-field::placeholder {
-    color: #cccccc;
-  }
-  .con-login .input-item .text-caption {
-    margin-top: 8px;
-  }
-  .con-login .input-item .text-error {
-    margin-top: 8px;
-  }
-  .con-login .checkbox-wrap {
-    margin-top: 20px;
-  }
-  .con-login .btn-black {
-    width: 100%;
-    display: block;
-    margin-top: 30px;
-  }
-  .con-login .login-footer {
-    font-size: 14px;
-    text-align: center;
-    margin-top: 56px;
-  }
-  .con-login .login-footer .login-intro {
-    padding-bottom: 32px;
-  }
-  .con-login .login-footer .login-intro > p, .con-login .login-footer .login-intro > a {
-    display: inline-block;
-  }
-  .con-login .login-footer .login-intro > p {
-    margin-right: 16px;
-  }
-  .con-login .login-footer .login-intro > a:hover {
-    text-decoration: underline;
-  }
-  .con-login .login-footer .login-menu {
-    border-top: 1px solid #eeeeee;
-    padding-top: 16px;
-    color: #474747;
-  }
-  .con-login .login-footer .login-menu a {
-    margin: 0 8px;
-  }
   .con-login .find-email {
-    width: calc(100% + 80px);
-    margin-left: -40px;
+    width: 100%;
+    margin-left: 0;
     margin-bottom: 80px;
   }
   .con-login .find-email .result {
-    padding: 16px 20px;
-    background: #f8f8f8;
-    border-top: 1px solid #cccccc;
-    border-bottom: 1px solid #cccccc;
-    text-align: center;
+    word-break: break-all;
   }
 
   .con-join {
-    padding: 80px 0 120px;
+    padding: 32px 0 80px;
   }
   .con-join .join-header {
-    border-bottom: 1px solid #979797;
-    padding-bottom: 16px;
+    padding-bottom: 4px;
   }
   .con-join .join-header .join-title {
-    font-size: 32px;
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: 10px;
-    display: inline-block;
+    font-size: 24px;
+    letter-spacing: 4px;
   }
   .con-join .join-header .join-step {
-    display: inline-block;
-    position: absolute;
-    right: 0;
-    bottom: 16px;
-  }
-  .con-join .join-header .join-step li {
-    display: inline-block;
-    margin-left: 24px;
-  }
-  .con-join .join-header .join-step li::after {
-    content: "";
-    position: relative;
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-left: 8px;
-    background: url("../images/common/ic-check-grey.png") no-repeat center;
-    background-size: contain;
-  }
-  .con-join .join-header .join-step li:first-child {
-    margin-left: 0;
-  }
-  .con-join .join-header .join-step .on::after {
-    background: url("../images/common/ic-check-black.png") no-repeat center;
-    background-size: contain;
+    display: none;
   }
   .con-join .agree-wrap {
-    max-width: 800px;
-    padding: 80px 10px 0;
-    margin: auto;
-  }
-  .con-join .agree-wrap .agree-all {
-    margin-bottom: 40px;
+    padding: 24px 10px 0;
   }
   .con-join .agree-wrap .agree-all .checkbox-wrap p {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 14px;
   }
   .con-join .agree-wrap .agree-all .text {
-    font-size: 14px;
-    margin-top: 12px;
+    font-size: 12px;
+    margin-top: 4px;
   }
   .con-join .agree-wrap .agree-item {
     margin-bottom: 48px;
   }
-  .con-join .agree-wrap .agree-item .agree-title {
-    font-size: 14px;
-    font-weight: 700;
-    display: inline-block;
-  }
-  .con-join .agree-wrap .agree-item .text-error {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .con-join .agree-wrap .agree-item .agree-text {
+  .con-join .agree-wrap .agree-item .checkbox-wrap > p {
     font-size: 12px;
-    border: 1px solid #cccccc;
-    background: #f8f8f8;
-    padding: 12px;
-    height: 160px;
-    overflow: auto;
-    margin-bottom: 8px;
-  }
-  .con-join .agree-wrap .agree-item .checkbox-wrap {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .con-join .btn-wrap {
-    margin-top: 80px;
-    font-size: 0;
-  }
-  .con-join .btn-wrap .btn-black, .con-join .btn-wrap .btn-white {
-    width: calc(50% - 5px);
-    max-width: 160px;
-    text-transform: uppercase;
-  }
-  .con-join .btn-wrap .btn-black:last-child, .con-join .btn-wrap .btn-white:last-child {
-    margin-left: 10px;
   }
   .con-join .join-box {
-    max-width: 480px;
-    padding: 80px 10px 0;
-    margin: auto;
+    padding: 32px 10px 0;
   }
   .con-join .join-box .join-notice {
-    background: #f4f5f6;
-    margin: auto;
-    margin-bottom: 32px;
-    padding: 12px;
-    width: 300px;
-  }
-  .con-join .join-box .input-item {
-    width: 300px;
-    margin: auto;
-    margin-bottom: 32px;
-  }
-  .con-join .join-box .input-item:last-child {
-    margin-bottom: 0;
-  }
-  .con-join .join-box .input-item .input-name {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .con-join .join-box .input-item .input-field {
-    font-size: 14px;
-    color: #4a4a4a;
     width: 100%;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-    padding: 8px 0;
-    border-bottom: 1px solid #cccccc;
-  }
-  .con-join .join-box .input-item .input-field::placeholder {
-    color: #cccccc;
-  }
-  .con-join .join-box .input-item .text-caption {
-    margin-top: 8px;
-  }
-  .con-join .join-box .input-item .text-error {
-    margin-top: 8px;
-  }
-  .con-join .join-box .input-item .address {
-    font-size: 0;
-    white-space: nowrap;
-    margin-bottom: 12px;
-  }
-  .con-join .join-box .input-item .address .input-field {
-    display: inline-block;
-  }
-  .con-join .join-box .input-item .address .input-field:first-child {
-    width: 60px;
+    font-size: 13px;
   }
   .con-join .join-box .input-item .address .input-field:nth-child(2) {
-    width: calc(100% - 72px);
-    margin-left: 12px;
-  }
-  .con-join .join-box .input-item .address .btn-black {
-    height: 34px;
-    line-height: 34px;
-    width: 80px;
-    margin-left: 12px;
-  }
-  .con-join .join-box .input-item .gender {
-    margin-top: 8px;
-  }
-  .con-join .join-box .input-item .gender .checkbox-wrap {
-    margin-right: 24px;
-    cursor: pointer;
+    width: calc(100% - 164px);
   }
   .con-join .complate-box {
-    text-align: center;
-    padding-top: 80px;
+    padding-top: 40px;
   }
   .con-join .complate-box > img {
-    max-width: 280px;
+    max-width: 240px;
   }
   .con-join .complate-box .text {
-    font-size: 14px;
-    margin-top: 50px;
+    font-size: 13px;
+    margin-top: 32px;
   }
   .con-join .complate-box .btn-black {
     margin-top: 80px;

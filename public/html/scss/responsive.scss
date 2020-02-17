@@ -260,339 +260,92 @@ $cleaningPath: '../images/cleaning';
     }
     /****** auth ******/
     .con-login {
-        margin: auto;
-        max-width: 320px;
-        padding: 80px 10px 120px;
 
         .title {
-            font-size: 32px;
-            font-weight: 300;
-            letter-spacing: 10px;
-            text-transform: uppercase;
-            margin-bottom: 56px;
-            text-align: center;
-        }
-
-        .title.margin-none {
-            letter-spacing: normal;
-        }
-
-        .text {
-            font-size: 14px;
-            text-align: center;
-            word-break: keep-all;
+            font-size: 24px;
+            letter-spacing: 8px;
             margin-bottom: 40px;
-            font-weight: 300;
         }
-
-        .input-item {
+        .text {
+            font-size: 12px;
             margin-bottom: 32px;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-
-            .input-name {
-                font-size: 14px;
-                font-weight: 700;
-                margin-bottom: 4px;
-            }
-
-            .input-field {
-                font-size: 14px;
-                color: #4a4a4a;
-                width: 100%;
-                box-sizing: border-box;
-                border: none;
-                outline: none;
-                padding: 8px 0;
-                border-bottom: 1px solid #cccccc;
-
-                &::placeholder {
-                    color: #cccccc;
-                }
-            }
-
-            .text-caption {
-                margin-top: 8px;
-            }
-
-            .text-error {
-                margin-top: 8px;
-            }
         }
-
-        .checkbox-wrap {
-            margin-top: 20px;
-        }
-
-        .btn-black {
-            width: 100%;
-            display: block;
-            margin-top: 30px;
-        }
-
-        .login-footer {
-            font-size: 14px;
-            text-align: center;
-            margin-top: 56px;
-
-            .login-intro {
-                padding-bottom: 32px;
-
-                > p, > a {
-                    display: inline-block;
-                }
-
-                > p {
-                    margin-right: 16px;
-                }
-
-                > a:hover {
-                    text-decoration: underline;
-                }
-            }
-
-            .login-menu {
-                border-top: 1px solid #eeeeee;
-                padding-top: 16px;
-                color: #474747;
-
-                a {
-                    margin: 0 8px;
-                }
-            }
-        }
-
         .find-email {
-            width: calc(100% + 80px);
-            margin-left: -40px;
+            width: 100%;
+            margin-left: 0;
             margin-bottom: 80px;
 
             .result {
-                padding: 16px 20px;
-                background: #f8f8f8;
-                border-top: 1px solid #cccccc;
-                border-bottom: 1px solid #cccccc;
-                text-align: center;
+                word-break: break-all;
             }
         }
     }
 
     .con-join {
-        padding: 80px 0 120px;
+        padding: 32px 0 80px;
 
         .join-header {
-            border-bottom: 1px solid #979797;
-            padding-bottom: 16px;
+            padding-bottom: 4px;
 
             .join-title {
-                font-size: 32px;
-                font-weight: 300;
-                text-transform: uppercase;
-                letter-spacing: 10px;
-                display: inline-block;
+                font-size: 24px;
+                letter-spacing: 4px;
             }
 
             .join-step {
-                display: inline-block;
-                position: absolute;
-                right: 0;
-                bottom: 16px;
-
-                li {
-                    display: inline-block;
-                    margin-left: 24px;
-
-                    &::after {
-                        content: '';
-                        position: relative;
-                        display: inline-block;
-                        width: 16px;
-                        height: 16px;
-                        margin-left: 8px;
-                        background: url('#{$commonPath}/ic-check-grey.png') no-repeat center;
-                        background-size: contain;
-                    }
-
-                    &:first-child {
-                        margin-left: 0;
-                    }
-                }
-
-                .on::after {
-                    background: url('#{$commonPath}/ic-check-black.png') no-repeat center;
-                    background-size: contain;
-                }
+                display: none;
             }
         }
 
         .agree-wrap {
-            max-width: 800px;
-            padding: 80px 10px 0;
-            margin: auto;
-
+            padding: 24px 10px 0;
             .agree-all {
-                margin-bottom: 40px;
-
                 .checkbox-wrap p {
-                    font-size: 16px;
-                    font-weight: 700;
-                }
-
-                .text {
                     font-size: 14px;
-                    margin-top: 12px;
+                }
+                .text {
+                    font-size: 12px;
+                    margin-top: 4px;
                 }
             }
 
             .agree-item {
                 margin-bottom: 48px;
-
-                .agree-title {
-                    font-size: 14px;
-                    font-weight: 700;
-                    display: inline-block;
-                }
-
-                .text-error {
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                }
-
-                .agree-text {
-                    font-size: 12px;
-                    border: 1px solid #cccccc;
-                    background: #f8f8f8;
-                    padding: 12px;
-                    height: 160px;
-                    overflow: auto;
-                    margin-bottom: 8px;
-                }
-
                 .checkbox-wrap {
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                }
-            }
-        }
-
-        .btn-wrap {
-            margin-top: 80px;
-            font-size: 0;
-
-            .btn-black, .btn-white {
-                width: calc(50% - 5px);
-                max-width: 160px;
-                text-transform: uppercase;
-
-                &:last-child {
-                    margin-left: 10px;
+                    >p{
+                        font-size:12px;
+                    }
                 }
             }
         }
 
         .join-box {
-            max-width: 480px;
-            padding: 80px 10px 0;
-            margin: auto;
+            padding: 32px 10px 0;
 
             .join-notice {
-                background: #f4f5f6;
-                margin: auto;
-                margin-bottom: 32px;
-                padding: 12px;
-                width: 300px;
+                width: 100%;
+                font-size:13px;
             }
 
             .input-item {
-                width: 300px;
-                margin: auto;
-                margin-bottom: 32px;
-
-                &:last-child {
-                    margin-bottom: 0;
-                }
-
-                .input-name {
-                    font-size: 14px;
-                    font-weight: 700;
-                    margin-bottom: 4px;
-                }
-
-                .input-field {
-                    font-size: 14px;
-                    color: #4a4a4a;
-                    width: 100%;
-                    box-sizing: border-box;
-                    border: none;
-                    outline: none;
-                    padding: 8px 0;
-                    border-bottom: 1px solid #cccccc;
-
-                    &::placeholder {
-                        color: #cccccc;
-                    }
-                }
-
-                .text-caption {
-                    margin-top: 8px;
-                }
-
-                .text-error {
-                    margin-top: 8px;
-                }
-
                 .address {
-                    font-size: 0;
-                    white-space: nowrap;
-                    margin-bottom: 12px;
-
                     .input-field {
-                        display: inline-block;
-
-                        &:first-child {
-                            width: 60px;
-                        }
-
                         &:nth-child(2) {
-                            width: calc(100% - 72px);
-                            margin-left: 12px;
+                            width: calc(100% - 164px);
                         }
-                    }
-
-                    .btn-black {
-                        height: 34px;
-                        line-height: 34px;
-                        width: 80px;
-                        margin-left: 12px;
-                    }
-                }
-
-                .gender {
-                    margin-top: 8px;
-
-                    .checkbox-wrap {
-                        margin-right: 24px;
-                        cursor: pointer;
                     }
                 }
             }
         }
 
         .complate-box {
-            text-align: center;
-            padding-top: 80px;
-
+            padding-top: 40px;
             > img {
-                max-width: 280px;
+                max-width: 240px;
             }
-
             .text {
-                font-size: 14px;
-                margin-top: 50px;
+                font-size: 13px;
+                margin-top: 32px;
             }
 
             .btn-black {
