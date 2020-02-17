@@ -147,13 +147,22 @@ document.addEventListener('DOMContentLoaded',function () {
         // projectForm2
         var form = new FormData($('#projectForm2')[0]);
         formAjax('POST', false, '/project', form, function(e) {
-             alert('오류입니다. 처음부터 다시 시작해주세요.');
+            alert('오류입니다. 처음부터 다시 시작해주세요.');
             location.href = '/project/create';
         }, function(data) {
 
         });
         valueCheck = true;
 
+    });
+
+
+    // 프로젝트 일정 -> 디자이너/브랜드 소개
+    document.getElementById('introduction').addEventListener('click', function () {
+        var agree = document.getElementById('agree');
+        if (agree.checked == false) {
+            alert('약관을 동의해주세요.');
+        }
     });
 
 

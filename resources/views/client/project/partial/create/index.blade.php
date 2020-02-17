@@ -383,6 +383,10 @@
                         </div>
                     </form>
                         <!-- 03 스토리텔링 -->
+                    <form action="{{route('project.store')}}" id="projectForm3" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" class="projectId" name="project_id" value="">
+                        <input type="hidden" name="project_3" value="project3">
                         <div class="tab-contents-box" id="editor">
                             <div class="storytelling-wrap">
                                 <div class="notice"><span id="popup_guide">가이드를 확인</span>하시고 작성해주세요</div>
@@ -391,6 +395,7 @@
                                 </div>
                             </div>
                         </div>
+                    </form>
                         <!-- 04 프로젝트 일정 -->
                         <div class="tab-contents-box">
                             <div class="schedule-wrap">
@@ -557,33 +562,25 @@
                 elPlaceHolder: "ir1",
                 sSkinURI: "../se2/SmartEditor2Skin.html",
                 fCreator: "createSEditor2",
-
                 fOnAppLoad: function () {
                     // document.getElementById("editor").setAttribute('style','display:none;')
-                                       $("iframe").css("width", "100%").css("height", "100%");
-                    $('#reload_editor').trigger('click');
-                     // after();
-                    // $('.class_smarteditor2').css('height', '300px'); // 스마트 에디터 height 지정
-                    // $('.class_smarteditor2').attr('src',$('.class_smarteditor2').attr('src')); // 스마트 에디터 iframe 새로고칭
+                    $("iframe").css("width", "100%").css("height", "100%");
                 }
 
             });
 
+            // 스토리텔링
+            document.getElementById('project_date').addEventListener('click', function () {
+                oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+                var form = new FormData($('#projectForm3')[0]);
+                formAjax('POST', false, '/project', form, function (e) {
+                    alert('오류입니다. 처음부터 다시 시작해주세요.');
+                    location.href = '/project/create';
+                }, function (data) {
+                });
+                valueCheck = true;
+            });
+
         });
-
-        function after() {
-            var test = $('.reload_editor');
-            console.log(test);
-            // $('.reload_editor').trigger('click');
-
-            /*var iframe = document.getElementsByTagName("iframe");
-            var smEditor = iframe[0];
-            if (smEditor) {
-                smEditor.style.height = "300px";
-            }*/
-            // document.getElementById("editor").setAttribute('style','position: absolute !important; left: -9999px !important; top: -9999px !important; ');
-            // document.getElementById("editor").setAttribute('style',"position:static; left:0px; top:0px; display:block;");
-        }
-
     </script>
 @endsection

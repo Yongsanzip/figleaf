@@ -25,19 +25,6 @@ document.addEventListener('DOMContentLoaded',function () {
     });
 
 
-
-
-
-
-
-    // 프로젝트 일정 -> 디자이너/브랜드 소개
-    document.getElementById('introduction').addEventListener('click', function () {
-        var agree = document.getElementById('agree');
-        if (agree.checked == false) {
-            alert('약관을 동의해주세요.');
-        }
-    });
-
     // 디자이너/브랜드 소래 -> 정산정보
     document.getElementById('account').addEventListener('click', function () {
         var designer_name = document.getElementById('designer_name').value;
