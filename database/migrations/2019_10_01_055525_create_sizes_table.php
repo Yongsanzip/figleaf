@@ -19,7 +19,7 @@ class CreateSizesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('project_id')->unsigned()->comment('프로젝트 id');
             $table->bigInteger('category_id')->unsigned()->comment('사이즈 카테고리 id');
-            $table->double('size')->unsigned()->nullable()->comment('사이즈');
+            $table->string('size',5)->nullable()->comment('사이즈');
             $table->double('total_length')->unsigned()->nullable()->comment('총기장');
             $table->double('shoulder')->unsigned()->nullable()->comment('어깨');
             $table->double('chest')->unsigned()->nullable()->comment('가슴');

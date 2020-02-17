@@ -2,6 +2,7 @@
 // 프로젝트 만들기
 ?>
 @extends('client.layouts.app')
+<script src="../js/common.js"></script>
 <script src="../js/project.js"></script>
 <script src="../js/projectAction.js"></script>
 <script type="text/javascript" src="../se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
@@ -42,9 +43,11 @@
 
                 <!-- tab contents -->
                 <div class="contents-wrap">
-                    <form action="{{route('project.store')}}" id="project_form" method="POST" enctype="multipart/form-data">
-                        @csrf
                         <!-- 01 개요 -->
+                    <form action="{{route('project.store')}}" id="projectForm1" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" class="projectId" name="project_id" value="">
+                        <input type="hidden" name="project_1" value="project1">
                         <div class="tab-contents-box edit-on">
                             <!-- 01-A 프로젝트 제목 -->
                             <div class="input-item">
@@ -89,7 +92,12 @@
                                 <input type="text" class="input-field" name="success_count" id="success_count" placeholder="최소 10개 ~ 최대 30개">
                             </div>
                         </div>
+                    </form>
                         <!-- 02 상품정보 -->
+                    <form action="{{route('project.store')}}" id="projectForm2" method="POST" enctype="multipart/form-data">
+                        @csrf
+                    <input type="hidden" class="projectId" name="project_id" value="">
+                        <input type="hidden" name="project_2" value="project_2">
                         <div class="tab-contents-box">
                             <!-- 02-A 옵션  -->
                             <div class="drop-box">
@@ -373,6 +381,7 @@
                                 </div>
                             </div>
                         </div>
+                    </form>
                         <!-- 03 스토리텔링 -->
                         <div class="tab-contents-box" id="editor">
                             <div class="storytelling-wrap">
@@ -533,8 +542,6 @@
                                 </div>
                             </div>
                         </div>
-
-                    </form>
                 </div>
                 <!--// tab contents -->
 

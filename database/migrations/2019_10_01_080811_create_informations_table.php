@@ -3,12 +3,11 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
 
 class CreateInformationsTable extends Migration
 {
     /**
-     * 프로젝트 - 취급정보 테이블
+     * Run the migrations.
      *
      * @return void
      */
@@ -27,7 +26,7 @@ class CreateInformationsTable extends Migration
     }
 
     /**
-     * 취급 정보 테이블 삭제
+     * Reverse the migrations.
      *
      * @return void
      */

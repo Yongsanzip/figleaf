@@ -1,4 +1,161 @@
 document.addEventListener('DOMContentLoaded',function () {
+    // 개요 -> 상품정보
+    document.getElementById('product_information').addEventListener('click', function () {
+        var title = document.getElementById('project_title').value;                 // 프로젝트 제목
+        var first_category = document.getElementById('first_category').value;       // 프로젝트 1차카테고리
+        var second_category = document.getElementById('second_category').value;     // 프로젝트 2차 카테고리
+        var summary = document.getElementById('project_summary').value;             // 프로젝트 개요
+        var main_file = document.getElementById('main_file').value;                 // 프로젝트 대표이미지
+        var success_count = document.getElementById('success_count').value;         // 프로젝트 성공개수
+
+        if (title.length > 30) {
+            alert('프로젝트 제목이 30자가 초과되었습니다');
+            valueCheck = false;
+        } else if (first_category === '0') {
+            alert('1차 카테고리를 선택해주세요.');
+            valueCheck = false;
+        } else if (second_category === '0') {
+            alert('2차 카테고리를 선택해주세요.');
+            valueCheck = false;
+        } else if (!main_file) {
+            alert('대표이미지(썸네일)은 필수입니다.');
+            valueCheck = false;
+        } else if (summary.length < 10) {
+            alert('프로젝트 개요는 최소 10자 이상입니다.');
+            valueCheck = false;
+        } else if (summary.length > 50) {
+            alert('프로젝트 개요가 50자가 초과되었습니다');
+            valueCheck = false;
+        } else if (success_count < 10) {
+            alert('프로젝트 성공 개수는 최소 10개 이상입니다.');
+            valueCheck = false;
+        }
+        else if (success_count > 30) {
+            alert('프로젝트 성공 개수는 최대 30개 까지만 설정 가능합니다');
+            valueCheck = false;
+        } else { // submit
+            var form = new FormData($('#projectForm1')[0]);
+            formAjax('POST', false, '/project', form, function(e) {
+                alert('오류입니다. 처음부터 다시 시작해주세요.');
+                location.href = '/project/create';
+            }, function(data) {
+                var project_id = document.getElementsByClassName('projectId');
+                for (var i = 0; i < project_id.length; i++) {
+                    project_id[i].value = data;
+                }
+            });
+            valueCheck = true;
+        }
+    });
+
+
+    // 상품정보 -> 스토리텔링
+    document.getElementById('story_telling').addEventListener('click', function () {
+        var option_name = document.getElementsByClassName('option_name');                          // 옵션명
+        var option_price = document.getElementsByClassName('option_price');                        // 옵션가격
+        var size_category = document.getElementById('size_category').value;                         // 사이즈 카테고리
+        var information_water = document.getElementsByClassName('information_water');              // 물세탁
+        var information_bleach = document.getElementsByClassName('information_bleach');            // 표백
+        var information_iron = document.getElementsByClassName('information_iron');                // 다림질
+        var information_drycleacing = document.getElementsByClassName('information_drycleacing');  // 드라이클리닝
+        var information_dry = document.getElementsByClassName('information_dry');                  // 건조
+        var size = document.getElementById('size').value;                                           // 사이즈
+        var fabric = document.getElementsByClassName('fabric');                                    // 원단/재질
+
+
+        // 1. 재질명은 있는데 비율이 없을 때
+        // 2. 비율은 있는데 재질명이 없을 때
+
+        var num = 0;
+        for (var i = 0; i < information_water.length; i++) {
+            if (information_water[i].checked) {
+                num++;
+            }
+        }
+
+        for (var i = 0; i < information_bleach.length; i++) {
+            if (information_bleach[i].checked) {
+                num++;
+            }
+        }
+
+        for (var i = 0; i < information_iron.length; i++) {
+            if (information_iron[i].checked) {
+                num++;
+            }
+        }
+
+        for (var i = 0; i < information_drycleacing.length; i++) {
+            if (information_drycleacing[i].checked) {
+                num++;
+            }
+        }
+        for (var i = 0; i < information_dry.length; i++) {
+            if (information_dry[i].checked) {
+                num++;
+            }
+        }
+
+        if (num != 5) {
+            num = 0;
+            alert('취급정보는 필수 선택입니다.');
+            valueCheck = false;
+            return false;
+        }
+
+        for (var i = 0; i < option_name.length; i++) {
+            if (option_name[i].value.length > 30) {
+                alert('옵션명: 30자가 초과 되었습니다.');
+                valueCheck = false;
+                return false;
+            }
+            if (!option_price[i].value){
+                alert('옵션명 또는 가격을 입력해주세요.');
+                valueCheck = false;
+                return false;
+            }
+        }
+
+        for (var j = 0; j < option_price.length; j++){
+            if (option_price[j].value.length > 30) {
+                alert('옵션가격: 30자가 초과 되었습니다.');
+                valueCheck = false;
+                return false;
+            }
+            if (!option_name[j].value) {
+                alert('옵션명 또는 가격을 입력해주세요.');
+                valueCheck = false;
+                return false;
+            }
+        }
+
+
+        if (size_category === '0') {
+            alert('사이즈 카테고리를 선택해주세요.');
+            valueCheck = false;
+            return false;
+        } else if (!size) {
+            alert('사이즈는 필수 입력입니다.');
+            valueCheck = false;
+            return false;
+        } else if (!information_water || !information_bleach || !information_iron || !information_drycleacing || !information_dry) {
+            alert('취급정보를 선택해주세요.');
+            valueCheck = false;
+            return false;
+        }
+
+        // projectForm2
+        var form = new FormData($('#projectForm2')[0]);
+        formAjax('POST', false, '/project', form, function(e) {
+             alert('오류입니다. 처음부터 다시 시작해주세요.');
+            location.href = '/project/create';
+        }, function(data) {
+
+        });
+        valueCheck = true;
+
+    });
+
 
     /**** header hide ****/
     document.getElementsByClassName('header')[0].style.display='none';
@@ -36,44 +193,6 @@ document.addEventListener('DOMContentLoaded',function () {
             window.frames[0].document.getElementsByClassName('se2_to_editor')[0].click();
         }, 10);
     }
-
-    // 개요 -> 상품정보
-    document.getElementById('product_information').addEventListener('click', function () {
-        var title = document.getElementById('project_title').value;                 // 프로젝트 제목
-        var first_category = document.getElementById('first_category').value;       // 프로젝트 1차카테고리
-        var second_category = document.getElementById('second_category').value;     // 프로젝트 2차 카테고리
-        var summary = document.getElementById('project_summary').value;             // 프로젝트 개요
-        var main_file = document.getElementById('main_file').value;                 // 프로젝트 대표이미지
-        var success_count = document.getElementById('success_count').value;         // 프로젝트 성공개수
-
-        if (title.length > 30) {
-            alert('프로젝트 제목이 30자가 초과되었습니다');
-            valueCheck = false;
-        } else if (first_category === '0') {
-            alert('1차 카테고리를 선택해주세요.');
-            valueCheck = false;
-        } else if (second_category === '0') {
-            alert('2차 카테고리를 선택해주세요.');
-            valueCheck = false;
-        } else if (!main_file) {
-            alert('대표이미지(썸네일)은 필수입니다.');
-            valueCheck = false;
-        } else if (summary.length < 10) {
-            alert('프로젝트 개요는 최소 10자 이상입니다.');
-            valueCheck = false;
-        } else if (summary.length > 50) {
-            alert('프로젝트 개요가 50자가 초과되었습니다');
-            valueCheck = false;
-        } else if (success_count.length > 30) {
-            alert('최대 30개 까지만 설정 가능합니다');
-            valueCheck = false;
-        } else {
-            // submit
-            valueCheck = true;
-        }
-    });
-
-
 
 
     /***** drop box *****/
@@ -230,7 +349,7 @@ function fnAddFabric(){
     var fabricItem = '<div class="fabric-item">' +
         '                <div class="fabric-name">' +
         '                    <input type="text" class="input-field" name="fabric[]" id="material_name'+num+'" onclick="popup_material('+num+')" readonly>' +
-        '                    <input type="hidden" name="material_id" id="material_id'+num+'">' +
+        '                    <input type="hidden" name="material_id[]" id="material_id'+num+'">' +
         '                </div>' +
         '                <div class="fabric-ratio">' +
         '                    <input type="number" max="100" min="0" class="input-field" name="fabric_ratio[]">' +

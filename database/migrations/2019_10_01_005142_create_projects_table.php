@@ -39,10 +39,11 @@ class CreateProjectsTable extends Migration
             $table->date('delivery_date')->nullable()->comment('배송일');
             $table->date('delay_date')->nullable()->comment('지연일자');
             $table->text('storytelling')->nullable()->comment('스토리텔링');
+            $table->tinyInteger('process')->default(0)->comment('진행률');
             $table->timestamps();
             $table->softDeletes();
         });
-        //테이블 명세
+       //테이블 명세
         DB::statement('ALTER TABLE `projects` COMMENT = "프로젝트 테이블"');
     }
 

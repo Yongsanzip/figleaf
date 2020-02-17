@@ -28,95 +28,13 @@ document.addEventListener('DOMContentLoaded',function () {
 
 
 
-    // 상품정보 -> 스토리텔링
-    document.getElementById('story_telling').addEventListener('click', function () {
-        var option_name = document.getElementsByClassName('option_name');                          // 옵션명
-        var option_price = document.getElementsByClassName('option_price');                        // 옵션가격
-        var size_category = document.getElementById('size_category').value;                         // 사이즈 카테고리
-        var information_water = document.getElementsByClassName('information_water');              // 물세탁
-        var information_bleach = document.getElementsByClassName('information_bleach');            // 표백
-        var information_iron = document.getElementsByClassName('information_iron');                // 다림질
-        var information_drycleacing = document.getElementsByClassName('information_drycleacing');  // 드라이클리닝
-        var information_dry = document.getElementsByClassName('information_dry');                  // 건조
-        var size = document.getElementById('size').value;                                           // 사이즈
-        var fabric = document.getElementsByClassName('fabric');                                    // 원단/재질
 
-        // 1. 재질명은 있는데 비율이 없을 때
-        // 2. 비율은 있는데 재질명이 없을 때
-
-        var num = 0;
-        for (var i = 0; i < information_water.length; i++) {
-            if (information_water[i].checked) {
-                num++;
-            }
-        }
-
-        for (var i = 0; i < information_bleach.length; i++) {
-            if (information_bleach[i].checked) {
-                num++;
-            }
-        }
-
-        for (var i = 0; i < information_iron.length; i++) {
-            if (information_iron[i].checked) {
-                num++;
-            }
-        }
-
-        for (var i = 0; i < information_drycleacing.length; i++) {
-            if (information_drycleacing[i].checked) {
-                num++;
-            }
-        }
-        for (var i = 0; i < information_dry.length; i++) {
-            if (information_dry[i].checked) {
-                num++;
-            }
-        }
-
-        if (num != 5) {
-            num = 0;
-            alert('취급정보는 필수 선택입니다.');
-            return false;
-        }
-
-        for (var i = 0; i < option_name.length; i++) {
-            if (option_name[i].value.length > 30) {
-                alert('옵션명: 30자가 초과 되었습니다.');
-                return false;
-            }
-            if (!option_price[i].value){
-                alert('옵션명 또는 가격을 입력해주세요.');
-                return false;
-            }
-        }
-
-        for (var j = 0; j < option_price.length; j++){
-            if (option_price[j].value.length > 30) {
-                alert('옵션가격: 30자가 초과 되었습니다.');
-                return false;
-            }
-            if (!option_name[j].value) {
-                alert('옵션명 또는 가격을 입력해주세요.');
-            }
-        }
-
-
-        if (size_category === '0') {
-            alert('사이즈 카테고리를 선택해주세요.')
-        } else if (!size) {
-            alert('사이즈는 필수 입력입니다.')
-        } else if (!information_water || !information_bleach || !information_iron || !information_drycleacing || !information_dry) {
-            alert('취급정보를 선택해주세요.');
-        }
-
-    });
 
     // 프로젝트 일정 -> 디자이너/브랜드 소개
     document.getElementById('introduction').addEventListener('click', function () {
         var agree = document.getElementById('agree');
         if (agree.checked == false) {
-            alert('동의해주세요.');
+            alert('약관을 동의해주세요.');
         }
     });
 
