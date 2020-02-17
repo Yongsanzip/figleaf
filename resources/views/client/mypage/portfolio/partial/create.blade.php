@@ -8,6 +8,7 @@ $tab = 'portfolio';
     <main class="container">
         <div class="inner">
             <div class="con-portfolio-create">
+                <form action="{{route('mypage_portfolio.store')}}" method="POST" enctype="multipart/form-data" onsubmit="return fn_portfolio_submit(this);">
                 <h2 class="portfolio-headline">
                     portfolio
                 </h2>
@@ -17,10 +18,10 @@ $tab = 'portfolio';
                 </div>
                 <div class="portfolio-btn-wrap">
                     <a href="" class="btn-white">미리보기</a>
-                    <button class="btn-black">저장하기</button>
+                    <button type="submit" class="btn-black">저장하기</button>
                     <div class="portfolio-options">
                         <label class="checkbox-wrap">
-                            <input type="checkbox">
+                            <input type="checkbox" name="hidden_yn"  value="1">
                             <p>포트폴리오 숨기기</p>
                         </label>
                         <button class="help" type="button">도움말</button>
@@ -40,9 +41,8 @@ $tab = 'portfolio';
 
                 <!-- tab contents -->
                 <div class="contents-wrap">
-                    <form action="{{route('mypage_portfolio.store')}}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <!-- 01 프로필 -->
+                    @csrf
+                    <!-- 01 프로필 -->
                         <div class="tab-contents-box edit-on">
                             <!-- 01-A 대표이미지 -->
                             <div class="input-item">
@@ -73,9 +73,9 @@ $tab = 'portfolio';
                                     </label>
                                 </div>
                                 <div class="textarea-list profile-text-list">
-                                    <textarea class="textarea" lang="ko" placeholder="한국어"></textarea>
-                                    <textarea class="textarea hide" lang="en" placeholder="English"></textarea>
-                                    <textarea class="textarea hide" lang="ch" placeholder="汉语"></textarea>
+                                    <textarea class="textarea" id="context_ko" name="context_ko" lang="ko" placeholder="한국어"></textarea>
+                                    <textarea class="textarea hide" id="context_en" name="context_ko" lang="en" placeholder="English"></textarea>
+                                    <textarea class="textarea hide" id="context_ch" name="context_ko" lang="ch" placeholder="汉语"></textarea>
                                 </div>
                             </div>
                             <!-- 01-C 히스토리 -->
@@ -439,62 +439,67 @@ $tab = 'portfolio';
                             <div class="sns-wrap">
                                 <div class="sns-item">
                                     <span class="item-name">이메일</span>
-                                    <input type="email" class="input-field" placeholder="이메일을 입력하세요">
+                                    <input type="email" class="input-field" name="email"  placeholder="이메일을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="email_hidden" value="1">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="sns-item">
                                     <span class="item-name">전화번호</span>
-                                    <input type="tel" class="input-field" placeholder="전화번호를 입력하세요">
+                                    <input type="tel" class="input-field" name="phone" placeholder="전화번호를 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="phone_hidden" value="1">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="sns-item">
                                     <span class="item-name">홈페이지</span>
-                                    <input type="text" class="input-field" placeholder="홈페이지 url을 입력하세요">
+                                    <input type="text" class="input-field" name="homepage" placeholder="홈페이지 url을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="homepage_hidden" value="1">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="sns-item">
                                     <span class="item-name">페이스북</span>
-                                    <input type="text" class="input-field" placeholder="페이스북 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="facebook" placeholder="페이스북 계정을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="facebook_hidden" value="1">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="sns-item">
                                     <span class="item-name">트위터</span>
-                                    <input type="text" class="input-field" placeholder="트위터 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="twitter" placeholder="트위터 계정을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="twitter_hidden" value="1">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="sns-item">
                                     <span class="item-name">인스타그램</span>
-                                    <input type="text" class="input-field" placeholder="인스타그램 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="instagram" placeholder="인스타그램 계정을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="ingstagram_hidden" value="1">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                             </div>
                         </div>
-
-                    </form>
                 </div>
                 <!--// tab contents -->
-
+                </form>
             </div>
         </div>
 
     </main>
     <script type="text/javascript" src="{{asset('js/portfolioCreate.js')}}"></script>
+    <script type="text/javascript">
+        var fn_portfolio_submit = function(f){
+
+            return true;
+        }
+    </script>
+
 @endsection

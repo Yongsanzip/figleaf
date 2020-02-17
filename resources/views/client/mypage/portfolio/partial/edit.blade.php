@@ -20,7 +20,7 @@ $tab = 'portfolio';
                     <button class="btn-black">저장하기</button>
                     <div class="portfolio-options">
                         <label class="checkbox-wrap">
-                            <input type="checkbox">
+                            <input type="checkbox" name="hidden_yn"  {{$datas ? ($datas->hidden_yn == 1 ? 'checked value='.$datas->hidden_yn.'' : '') : 'value=1'}}>
                             <p>포트폴리오 숨기기</p>
                         </label>
                         <button class="help" type="button">도움말</button>
@@ -40,7 +40,8 @@ $tab = 'portfolio';
 
                 <!-- tab contents -->
                 <div class="contents-wrap">
-                    <form action="{{route('mypage_portfolio.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('mypage_portfolio.update',['id'=>$datas->id])}}" method="PUT" enctype="multipart/form-data" onsubmit="return fn_portfolio_submit(this);">
+                        {{method_field('PUT')}}
                         @csrf
                         <!-- 01 프로필 -->
                         <div class="tab-contents-box edit-on">
@@ -52,7 +53,7 @@ $tab = 'portfolio';
                                     <input type="file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
                                     <div class="file-button">파일선택</div>
                                     <p class="file-name">선택한 파일 없음</p>
-                                    
+
                                 </label>
                             </div>
                             <!-- 01-B 프로필설명 -->
@@ -64,18 +65,18 @@ $tab = 'portfolio';
                                         <div class="shape">한국어</div>
                                     </label>
                                     <label class="lang-check">
-                                        <input type="checkbox" lang="en" onchange="fnProfileLang(this)">
+                                        <input type="checkbox" lang="en" onchange="fnProfileLang(this)" {{$datas->content_en ? 'checked' : ''}}>
                                         <div class="shape">ENG</div>
                                     </label>
                                     <label class="lang-check">
-                                        <input type="checkbox" lang="ch" onchange="fnProfileLang(this)">
+                                        <input type="checkbox" lang="ch" onchange="fnProfileLang(this)" {{$datas->content_en ? 'checked' : ''}}>
                                         <div class="shape">汉语</div>
                                     </label>
                                 </div>
                                 <div class="textarea-list profile-text-list">
-                                    <textarea class="textarea" lang="ko" placeholder="한국어"></textarea>
-                                    <textarea class="textarea hide" lang="en" placeholder="English"></textarea>
-                                    <textarea class="textarea hide" lang="ch" placeholder="汉语"></textarea>
+                                    <textarea class="textarea" id="context_kor" lang="ko" placeholder="한국어">{{$datas->content_en ? $datas->content_ko}}</textarea>
+                                    <textarea class="textarea hide" id="context_eng" lang="en" placeholder="English">{{$datas->content_en ? $datas->content_en : ''}}</textarea>
+                                    <textarea class="textarea hide" id="context_chn" lang="ch" placeholder="汉语">{{$datas->content_en ? $datas->content_cn}}</textarea>
                                 </div>
                             </div>
                             <!-- 01-C 히스토리 -->
@@ -439,49 +440,49 @@ $tab = 'portfolio';
                             <div class="sns-wrap">
                                 <div class="sns-item">
                                     <span class="item-name">이메일</span>
-                                    <input type="email" class="input-field" placeholder="이메일을 입력하세요">
+                                    <input type="email" class="input-field" name="email"  placeholder="이메일을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="email_hidden" value="1" {{$datas->email_hidden == 1 ? 'checked' : ''}}>
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="sns-item">
                                     <span class="item-name">전화번호</span>
-                                    <input type="tel" class="input-field" placeholder="전화번호를 입력하세요">
+                                    <input type="tel" class="input-field" name="phone" placeholder="전화번호를 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="phone_hidden" value="1" {{$datas->phone_hidden  == 1 ? 'checked' : ''}}>
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="sns-item">
                                     <span class="item-name">홈페이지</span>
-                                    <input type="text" class="input-field" placeholder="홈페이지 url을 입력하세요">
+                                    <input type="text" class="input-field" name="homepage" placeholder="홈페이지 url을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="homepage_hidden" value="1" {{$datas->homepage_hidden  == 1 ? 'checked' : ''}}>
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="sns-item">
                                     <span class="item-name">페이스북</span>
-                                    <input type="text" class="input-field" placeholder="페이스북 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="facebook" placeholder="페이스북 계정을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="facebook_hidden" value="1" {{$datas->facebook_hidden  == 1 ? 'checked' : ''}}>
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="sns-item">
                                     <span class="item-name">트위터</span>
-                                    <input type="text" class="input-field" placeholder="트위터 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="twitter" placeholder="트위터 계정을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="twitter_hidden" value="1" {{$datas->twitter_hidden  == 1 ? 'checked' : ''}}>
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="sns-item">
                                     <span class="item-name">인스타그램</span>
-                                    <input type="text" class="input-field" placeholder="인스타그램 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="instagram" placeholder="인스타그램 계정을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox">
+                                        <input type="checkbox" name="ingstagram_hidden" value="1" {{$datas->ingstagram_hidden  == 1 ? 'checked' : ''}}>
                                         <p>숨기기</p>
                                     </label>
                                 </div>
@@ -497,4 +498,11 @@ $tab = 'portfolio';
 
     </main>
     <script type="text/javascript" src="{{asset('js/portfolioCreate.js')}}"></script>
+    <script type="text/javascript">
+        var fn_portfolio_submit = function(f){
+
+            return true;
+        }
+    </script>
+
 @endsection

@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="{{asset('scss/reset.css')}}">
     <link rel="stylesheet" href="{{asset('scss/layout.css')}}">
     <link rel="stylesheet" href="{{asset('scss/client.css')}}">
-    <link rel="stylesheet" href="{{asset('scss/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('scss/client.css')}}">
+    <link rel="stylesheet" href="{{asset('scss/responsive.css')}}">
     <script src="{{asset('js/common.js')}}"></script>
     <script src="{{asset('js/includeHTML.js')}}"></script>
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>

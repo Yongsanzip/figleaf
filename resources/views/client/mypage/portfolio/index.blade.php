@@ -31,6 +31,6 @@ $tab = 'portfolio';
 
     </main>
 
-
+    <script type="text/javascript" src="{{asset('js/portfolioCreate.js')}}"></script>
 
 @endsection

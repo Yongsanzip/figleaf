@@ -243,9 +243,9 @@
 .header .mobile .logo {
   margin: auto;
   font-size: 0;
-  width: 87px;
-  height: 40px;
-  background: url("../images/common/logo.png") no-repeat center;
+  width: 120px;
+  height: 48px;
+  background: url("../images/common/logo-horizontal-black.png") no-repeat center;
   background-size: contain;
 }
 .header .mobile .logo a {
@@ -921,70 +921,80 @@
   }
   .header .search .inner {
     padding: 12px 20px;
+    height: 150px;
   }
   .header .search .search-box {
     border-bottom: 3px solid black;
   }
-  .header .search .search-box .search-field {
-    width: calc(100% - 40px);
-    border: none;
-    font-size: 16px;
-    display: inline-block;
-    background-color: transparent;
-    padding: 12px 0;
-    box-sizing: border-box;
-    outline: none;
-    color: #181818;
-  }
-  .header .search .search-box .search-field::placeholder {
-    color: #cccccc;
-  }
-  .header .search .search-box .btn-search {
-    position: absolute;
-    right: 0;
-    top: 8px;
-    width: 32px;
-    height: 32px;
-    font-size: 0;
-    border: none;
-    outline: none;
-    background: url("../images/common/ic-search.png") no-repeat center;
-    cursor: pointer;
-  }
-  .header .search .btn-close {
-    width: 32px;
-    width: 32px;
-    font-size: 0;
-    position: absolute;
-    top: 16px;
-    background: transparent;
-    border: none;
-    outline: none;
-    right: 8px;
-    cursor: pointer;
-  }
-  .header .search .btn-close::before {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 2px;
-    background: black;
-    top: 10px;
-    left: 1px;
-    transform: rotate(45deg);
-  }
-  .header .search .btn-close::after {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 2px;
-    background: black;
-    top: 10px;
-    left: 1px;
-    transform: rotate(-45deg);
-  }
   .header .mobile {
     display: block;
+  }
+
+  /* card */
+  .card .card-contents {
+    padding: 10px;
+  }
+  .card .card-contents .card-title {
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .card .card-contents .card-text {
+    font-size: 11px;
+  }
+  .card .card-contents .card-info .rating {
+    background: #e8e9ea;
+    height: 8px;
+    font-size: 0;
+  }
+  .card .card-contents .card-info .rating .rating-bar {
+    height: 100%;
+    background: black;
+  }
+  .card .card-footer {
+    font-size: 12px;
+    padding: 0 10px 12px;
+  }
+  .card .card-footer > p {
+    display: inline-block;
+  }
+  .card .card-footer .card-date {
+    float: right;
+  }
+
+  /* headline */
+  .headline-wrap {
+    margin-top: 48px;
+  }
+
+  .headline {
+    font-size: 18px;
+  }
+
+  .section-title-wrap {
+    margin-bottom: 20px;
+  }
+  .section-title-wrap .section-title {
+    font-size: 16px;
+    letter-spacing: 0.4px;
+    padding-left: 0;
+  }
+  .section-title-wrap .section-title:after {
+    width: 32px;
+    height: 3px;
+    bottom: -4px;
+  }
+  .section-title-wrap .caption {
+    font-size: 13px;
+    margin-top: 4px;
+    margin-left: 5px;
+  }
+  .section-title-wrap .count {
+    font-size: 12px;
+    margin-top: 4px;
+    margin-left: 0;
+  }
+  .section-title-wrap .more {
+    font-size: 13px;
   }
 }
 @media screen and (max-width: 640px) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client\MyPage;
 
 use App\Portfolio;
+use App\PortfolioImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -36,8 +37,7 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function create(){
-        $datas = null;
-        return view('client.mypage.portfolio.partial.edit',compact('datas'));
+        return view('client.mypage.portfolio.partial.create');
     }
 
     /************************************************************************
@@ -48,7 +48,49 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function store(Request $request){
+        try {
+            $check = Portfolio::whereUserId(auth()->user()->id)->first();
+            if(isset($check)) {flash('포트폴리오가 존재합니다.')->warning(); return back();}
+            $portfolio = Portfolio::create([
+                'user_id'           =>auth()->user()->id,                                                                // 사용자 ID
+                'content_ko'        =>$request->content_ko,                                                              // 한글내용
+                'content_cn'        =>$request->content_cn,                                                              // 중문내용
+                'content_en'        =>$request->content_en,                                                              // 영문내용
+                'hidden_yn'         =>$request->hidden_yn ? 1 : 0,                                                       // 포트폴리오 숨김처리
+                'email'             =>$request->email,                                                                   // 이메일
+                'home_phone'        =>$request->home_phone,                                                              // 전화번호
+                'facebook'          =>$request->facebook,                                                                // 페이스북
+                'instagram'         =>$request->instagram,                                                               // 인스타그램
+                'twitter'           =>$request->twitter,                                                                 // 트위터
+                'hompage'           =>$request->hompage,                                                                 // 홈페이지
+                'email_hidden'      =>$request->email_hidden ? 1 : 0,                                                    // 이메일 숨김처리
+                'phone_hidden'      =>$request->phone_hidden ? 1 : 0,                                                    // 전화번호 숨김처리
+                'facebook_hidden'   =>$request->facebook_hidden ? 1 : 0,                                                 // 페이스북 숨김처리
+                'instagram_hidden'  =>$request->instagram_hidden ? 1 : 0,                                                // 인스타그램 숨김처리
+                'twitter_hidden'    =>$request->twitter_hidden ? 1 : 0,                                                  // 트위터 숨김처리
+                'homepage_hidden'   =>$request->homepage_hidden ? 1 : 0,                                                 // 홈페이지 숨김처리
+            ]);
 
+            $file = $request->file('file');
+            if($file){
+                $size = $file->getSize();
+                $fileName = 'portfolio_'.$portfolio->id.'.'.$file->getClientOriginalExtension();
+                $savePath = 'portfolio/'.$fileName;
+                // 이미지 등록
+                PortfolioImage::create([
+                    'portfolio_id'      => $portfolio->id,
+                    'image_division'    =>'',
+                    'image_type'        =>$file->getMimeType(),
+                    'image_path'        =>$savePath,
+                    'origin_name'       =>$file->getClientOriginalName(),
+                ]);
+            }
+            return redirect(route('mypage_portfolio.index'));
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            return back();
+        }
     }
 
     /************************************************************************
@@ -88,7 +130,13 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function update(Request $request, $id){
+        try {
 
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            return back();
+        }
     }
 
     /************************************************************************
@@ -99,6 +147,12 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function destroy($id) {
-        //
+        try {
+
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            return back();
+        }
     }
 }
