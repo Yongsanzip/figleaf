@@ -19,7 +19,7 @@ class CreatePortfolioImagesTable extends Migration
             //컬럼 명세
             $table->bigIncrements('id');
             $table->bigInteger('portfolio_id')->unsigned()->comment('포트폴리오 id');
-            //대표이미지 1, 브랜드로고 2, 뉴스 3
+            //대표이미지 1, 브랜드로고 2, 브랜드 thumbnail 3, 뉴스 4
             //룩북은 룩북 이미지 테이블로 대체
             $table->tinyInteger('image_division')->unsigned()->comment('이미지 구분(마이그레이션 참조)');
             $table->string('image_type', 10)->comment('이미지타입 ex.jpg, gif...');
