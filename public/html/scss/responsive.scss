@@ -384,713 +384,403 @@ $cleaningPath: '../images/cleaning';
         .menu-list {
             margin-top: 32px;
             display: flex;
+            li a{
+                font-size:10px;
+                padding:12px 2px;
+            }
         }
 
         .mypage-contents {
             margin-top: 30px;
 
             .user-table {
-                border-top: 2px solid black;
-                width: 100%;
-
+                table-layout: fixed;
                 tr {
-                    border-bottom: 1px solid #cccccc;
-                    height: 56px;
-                    text-align: left;
-
-                    th, td {
-                        vertical-align: middle;
-                        font-size: 13px;
-                    }
-
                     th {
-                        letter-spacing: 0.4px;
-                        padding-left: 32px;
-                        border-right: 1px solid #cccccc;
-
-                        &::after {
-                            content: '';
-                            position: absolute;
-                            display: inline-block;
-                            left: 12px;
-                            top: 0;
-                            bottom: 0;
-                            margin: auto;
-                            width: 12px;
-                            height: 12px;
-                            background: url('#{$commonPath}/ic-check-black.png') center no-repeat;
-                            background-size: contain;
-                        }
+                        letter-spacing: 0;
+                        padding-left: 30px;
+                        width: 120px;
                     }
 
                     td {
-                        padding: 12px 16px;
+                        padding: 10px;
 
                         .input-field {
-                            height: 32px;
-                            border: 1px solid #cccccc;
+                            width: 100%;
                             min-width: auto;
-                            font-size: 13px;
-                            padding: 8px 12px;
-                            box-sizing: border-box;
-
-                            &::placeholder {
-                                color: #adadad;
-                            }
+                            margin-bottom: 5px;
                         }
 
                         .badge {
-                            vertical-align: middle;
-                            margin-left: 8px;
-                        }
-
-                        .caption {
-                            font-size: 10px;
-                            color: #9b9b9b;
+                            margin-left: 0;
                         }
                     }
 
                     .new-password {
                         .input-field:first-child {
-                            margin-right: 8px;
-                        }
-                    }
-
-                    .gender {
-                        .checkbox-wrap {
-                            margin-right: 24px;
+                            margin-right: 0;
                         }
                     }
 
                     .email, .phone {
                         > div {
-                            margin-bottom: 4px;
+                            margin-bottom: 8px;
                         }
 
                         .text {
-                            min-width: 330px;
-                            margin-right: 12px;
-                            display: inline-block;
+                            min-width: auto;
+                            margin-right: 0;
                         }
 
                         .checkbox-wrap {
                             vertical-align: middle;
+                            margin-top:8px;
+                            p{
+                                font-size:12px;
+                            }
                         }
                     }
 
                     .address {
                         .postal {
-                            margin-bottom: 8px;
-
                             .input-field {
-                                min-width: 160px;
-                                margin-right: 4px;
-                            }
-
-                            .btn-white {
-                                height: 32px;
-                                line-height: 30px;
-                                border: 1px solid #a8a8a8;
-                                vertical-align: middle;
-                                width: 80px;
+                                min-width: auto;
+                                margin-right: 0;
+                                width:100%;
                             }
                         }
 
                         .detail {
                             .input-field:first-child {
-                                margin-right: 4px;
+                                margin-right: 0;
                             }
                         }
                     }
-                }
-            }
-
-            .btn-wrap {
-                .btn-black, .btn-white {
-                    width: 200px;
-                }
-
-                .btn-white {
-                    border-color: #777777;
                 }
             }
 
             .project-list {
-                font-size: 0;
 
                 .project-card {
-                    display: inline-block;
-                    width: calc(25% - 15px);
-                    margin-right: 20px;
-                    margin-bottom: 40px;
-
-                    &:nth-child(4n) {
-                        margin-right: 0;
-                    }
-
+                    width: 100%;
+                    margin-right: 0;
+                    margin-bottom: 32px;
                     .card {
-                        width: 100%;
-
+                        font-size: 0;
+                        >div{
+                            display: inline-block;
+                        }
                         .card-image {
-                            width: 100%;
-                            padding-bottom: 133.3%;
-                            background-size: cover;
-
-                            img {
-                                position: absolute;
-                                width: 100%;
-                                height: 100%;
-                                top: 0;
-                                left: 0;
-                                object-fit: cover;
-                            }
+                            width: 50%;
+                            padding-bottom: 68%;
                         }
 
                         .card-contents {
-                            min-height: 210px;
-                            padding: 0;
+                            width: 50%;
+                            min-height: auto;
 
                             .project-info {
-                                border-bottom: 1px solid #eeeeee;
-                                padding: 12px;
-
+                                padding: 8px;
                                 .project-title {
-                                    font-size: 16px;
-                                    font-weight: 700;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                    display: -webkit-box;
-                                    -webkit-line-clamp: 2;
-                                    -webkit-box-orient: vertical;
-                                    word-wrap: break-word;
+                                    font-size: 14px;
+                                    -webkit-line-clamp: 3;
                                     min-height: 48px;
                                 }
-
                                 .project-name {
-                                    font-size: 14px;
-                                    margin-top: 8px;
+                                    font-size: 12px;
                                 }
                             }
 
                             .project-item {
-                                font-size: 12px;
-                                padding: 8px 12px 8px 24px;
-                                border-bottom: 1px solid #eeeeee;
-
+                                font-size: 10px;
+                                padding: 8px 8px 8px 16px;
+                                overflow: hidden;
+                                text-overflow:ellipsis;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                word-wrap:break-word;
                                 &::before {
-                                    content: '';
-                                    width: 3px;
-                                    height: 3px;
-                                    display: inline-block;
-                                    background: black;
-                                    border-radius: 50%;
-                                    position: absolute;
-                                    left: 12px;
-                                    top: 15px;
+                                    left: 8px;
                                 }
-
                                 p {
-                                    white-space: nowrap;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-
+                                    white-space: normal;
                                 }
                             }
 
                             .project-delivery {
-                                padding: 12px;
+                                padding: 8px;
                                 font-size: 12px;
-
-                                .badge {
-                                    color: white;
-                                    margin-top: 8px;
+                                .badge{
                                     position: relative;
-                                }
-
-                                .badge-orange {
-                                    background: #ff7114;
+                                    right:0;
                                 }
                             }
-
                             .project-date {
-                                font-size: 12px;
-                                color: #2d2d2d;
-                                padding: 10px 12px 10px 32px;
-
+                                padding: 8px 8px 8px 32px;
+                                position: absolute;
+                                bottom: 8px;
                                 &::after {
-                                    content: '';
-                                    display: inline-block;
-                                    position: absolute;
-                                    left: 10px;
-                                    width: 16px;
-                                    height: 16px;
-                                    background: url('#{$commonPath}/ic-calandar.png') center no-repeat;
-                                    background-size: contain;
+                                    top:8px;
                                 }
                             }
                         }
 
                         .badge {
-                            position: absolute;
-                            top: 0;
-                            right: 0;
-                            z-index: 1;
+                            right: 50%;
                         }
                     }
-
                     .btn-white {
-                        width: 100%;
-                        margin-top: 15px;
-                        border: 1px solid #9b9b9b;
+                        margin-top: 10px;
                     }
                 }
 
                 .my-card {
                     .card {
+                        .card-image {
+                            width: 120px;
+                            height:160px;
+                            padding-bottom: 0;
+                        }
                         .card-contents {
-                            min-height: 110px;
+                            width: calc(100% - 120px);
+                            height: 160px;
+                            .project-info{
+                                border-bottom: 0;
+                            }
+                        }
+                        .badge{
+                            right: auto;
+                            left:64px;
                         }
                     }
                 }
             }
 
             .project-btn-wrap {
-                text-align: right;
+                text-align: center;
 
                 .btn-black {
-                    width: 200px;
+                    width: 100%;
                 }
             }
-
             .project-notice {
-                border: 1px solid #cccccc;
-                padding: 24px;
-                width: 720px;
-                margin: 50px auto;
-
-                .notice-title {
-                    font-size: 16px;
-                    text-align: center;
-                    text-transform: uppercase;
-                    letter-spacing: 5px;
-                }
-
+                padding: 24px 12px;
+                margin: 32px auto;
+                width: 100%;
                 .notice-list {
-                    margin-top: 32px;
-                    font-size: 12px;
-                    color: #666666;
-
-                    li::before {
-                        content: '- ';
-                    }
+                    margin-top: 24px;
                 }
             }
 
             .community-table {
                 border-top: 2px solid black;
-
-                thead {
-                    tr {
-                        height: 48px;
-                        border-bottom: 1px solid #cccccc;
-
-                        th {
-                            vertical-align: middle;
-                            font-size: 12px;
-                            font-weight: 700;
+                tr{
+                    th,td{
+                        &:nth-child(-n+2){
+                            width: auto;
                         }
-                    }
-                }
-
-                tbody {
-                    tr {
-                        cursor: pointer;
-                        height: 48px;
-                        border-bottom: 1px solid #eeeeee;
-
-                        &:nth-child(2n) {
-                            background: #eeeeee;
-                            border-bottom: none;
+                        &:nth-child(1){
+                            width: 50px;
                         }
-
-                        td {
-                            font-size: 12px;
-                            text-align: center;
-                            padding: 10px;
-                            vertical-align: middle;
-
-                            &:last-child {
-                                text-align: left;
-                            }
+                        &:nth-child(2){
+                            width: 80px;
                         }
                     }
                 }
             }
 
             .mypage-tab-list {
-                font-size: 0;
-
                 .mypage-tab {
-                    display: inline-block;
-                    margin-right: 12px;
-                    font-size: 14px;
-                    color: white;
-                    background: #9b9b9b;
-                    height: 40px;
-                    min-width: 200px;
-                    text-align: center;
-                    line-height: 40px;
-
-                    &:last-child {
-                        margin-right: 0;
-                    }
-                }
-
-                .mypage-tab.on {
-                    background: black;
+                    margin-right: 10px;
+                    min-width: auto;
+                    width: calc(50% - 5px);
                 }
             }
 
             .project-message-list {
-                margin-top: 40px;
-
                 .project-message-card {
-                    font-size: 0;
-                    height: 240px;
-                    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-                    margin-bottom: 20px;
-
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
-
-                    > div {
-                        display: inline-block;
-                    }
-
+                    height:200px;
                     .card-image {
-                        width: 180px;
-                        height: 100%;
-
-                        img {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                        }
+                        width: 140px;
                     }
 
                     .card-contents {
-                        width: calc(100% - 180px);
-                        padding: 16px;
-                        height: 100%;
-
-                        .card-header {
-                            min-height: 72px;
+                        width: calc(100% - 140px);
+                        padding: 12px 8px;
+                        .card-header{
+                            min-height: 0;
                         }
-
                         .card-title {
-                            font-size: 18px;
-                            font-weight: 700;
-                            letter-spacing: 1px;
+                            font-size: 14px;
+                            letter-spacing: 0;
                             display: inline-block;
-                            margin-right: 12px;
-                            max-width: calc(100% - 160px);
-
-                            a:hover {
-                                text-decoration: underline;
-                                text-decoration-color: #4a4a4a;
+                            margin-right: 0;
+                            max-width:none;
+                            width: 100%;
+                            a{
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 3;
+                                -webkit-box-orient: vertical;
+                                word-wrap: break-word;
                             }
                         }
 
                         .new {
-                            display: inline-block;
-                            width: 24px;
-                            height: 24px;
-                            border-radius: 50%;
-                            font-size: 0;
-                            background: #d1e65d;
-
+                            width: 16px;
+                            height: 16px;
+                            position: absolute;
+                            bottom: 0;
+                            left: 84px;
                             &::after {
-                                content: 'N';
-                                font-weight: 700;
-                                position: absolute;
-                                width: 100%;
-                                height: 100%;
-                                display: inline-block;
-                                text-align: center;
-                                line-height: 24px;
-                                font-size: 14px;
+                                line-height: 16px;
+                                font-size: 10px;
                             }
                         }
 
                         .card-date {
-                            font-size: 14px;
-                            position: absolute;
-                            right: 0;
-                            top: 0;
+                            font-size: 10px;
+                            position: relative;
+                            margin:8px 0;
                         }
 
                         .card-name {
-                            font-size: 13px;
-                            color: #606060;
-                            letter-spacing: 1px;
+                            font-size: 12px;
                         }
 
                         .card-message {
-                            font-size: 12px;
-                            margin-top: 12px;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            display: -webkit-box;
-                            -webkit-line-clamp: 6;
-                            -webkit-box-orient: vertical;
-                            word-wrap: break-word;
+                            -webkit-line-clamp: 3;
                         }
                     }
                 }
             }
 
             .message-header {
-                border-bottom: 3px solid black;
-                padding-bottom: 16px;
-
+                padding:0 8px 16px;
                 .message-name {
-                    font-size: 16px;
-                    letter-spacing: 4px;
-                    color: #4a4a4a;
-                    display: inline-block;
+                    display: block;
+                    font-size: 14px;
+                    letter-spacing: 2px;
                 }
 
                 .message-title {
-                    font-size: 18px;
-                    font-weight: 700;
-                    letter-spacing: 0.8px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    max-width: calc(100% - 220px);
+                    margin-top:5px;
+                    max-width:100%;
+                    white-space: normal;
+                    font-size:16px;
                 }
 
                 .btn-white {
-                    position: absolute;
-                    right: 0;
-                    bottom: 16px;
-                    width: 200px;
-                    border: 1px solid #9b9b9b;
+                    position: relative;
+                    width: 100%;
+                    bottom: auto;
+                    margin-top:16px;
                 }
             }
 
             .message-contents {
-                background: #f6f6f6;
-                height: 800px;
-                overflow: auto;
-                padding: 32px 40px;
-                border-bottom: 1px solid #9b9b9b;
+                height: 460px;
+                padding: 24px 16px;
 
                 .message-list {
-                    width: 100%;
-
-                    > li {
-                        margin-bottom: 16px;
-                    }
 
                     .date {
-                        font-size: 16px;
-                        color: #4a4a4a;
+                        font-size: 14px;
                     }
 
-                    .time {
-                        font-size: 12px;
-                        letter-spacing: 0.4px;
-                        color: #4a4a4a;
-                    }
 
                     .bubble {
-                        padding: 12px 15px;
-                        font-size: 14px;
-                        letter-spacing: 0.4px;
-                        display: inline-block;
-                        border-radius: 20px;
-                        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
-                    }
-
-                    .receive {
-                        .bubble {
-                            background: white;
-                            border-top-left-radius: 0;
-                        }
-                    }
-
-                    .send {
-                        text-align: right;
-
-                        .bubble {
-                            color: white;
-                            background: #181818;
-                            border-top-right-radius: 0;
-                        }
-
-                        .time {
-                            color: white;
-                        }
+                        padding: 12px;
                     }
                 }
             }
 
             .message-footer {
-                padding: 24px;
-                font-size: 0;
+                padding: 16px 4px;
 
                 .textarea {
-                    resize: none;
-                    display: inline-block;
-                    box-sizing: border-box;
-                    height: 100px;
-                    border: 1px solid #cccccc;
-                    width: calc(100% - 170px);
-                    padding: 8px;
-                    font-size: 14px;
-                    outline: none;
-                    transition: border 0.3s;
-
-                    &:focus {
-                        border: 1px solid black;
-                    }
+                    height: 80px;
+                    width: calc(100% - 70px);
                 }
 
                 .btn-black {
-                    vertical-align: top;
-                    height: 100px;
-                    margin-left: 20px;
-                    width: 150px;
-                    background: #181818;
+                    height: 80px;
+                    margin-left: 8px;
+                    width: 60px;
                 }
             }
 
             .question-table {
-                width: 100%;
-                border-top: 2px solid black;
-
-                thead tr {
-                    border-bottom: 1px solid #cccccc;
+                border-top: none;
+                thead{
+                    display: none;
                 }
-
                 tbody tr {
                     cursor: pointer;
+                    border-top:2px solid black;
+                    display: block;
+                    margin-bottom: 20px;
+                    &:last-child{
+                        margin-bottom: 0;
+                    }
                 }
 
                 tr {
-                    border-bottom: 1px solid #cccccc;
-
-                    th {
-                        font-size: 12px;
-                        font-weight: 700;
-                        height: 48px;
-                        vertical-align: middle;
-                    }
-
+                    padding:10px 4px 12px;
                     td {
-                        height: 48px;
-                        text-align: center;
-                        vertical-align: middle;
-                        padding: 8px 12px;
-                        font-size: 12px;
+                        display: block;
+                        height: auto;
+                        padding: 0;
                     }
-
+                    th,td{
+                        &:nth-child(1){
+                            display: none;
+                        }
+                        &:nth-child(2){
+                            width:calc(100% - 56px);
+                        }
+                        &:nth-child(4){
+                            width:100%;
+                            text-align: left;
+                            position: absolute;
+                            top:28px;
+                            left:5px;
+                        }
+                        &:nth-child(5){
+                            width:auto;
+                            position: absolute;
+                            top:8px;
+                            right:6px;
+                        }
+                    }
                     .question-title {
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
-                        word-wrap: break-word;
+                        -webkit-line-clamp: 1;
+                        font-weight: 700;
+                        text-align: left;
+                        word-break: break-all;
                     }
 
                     .question-text {
-                        text-align: left;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 3;
-                        -webkit-box-orient: vertical;
-                        word-wrap: break-word;
-                    }
-
-                    .badge {
-                        padding: 1px 8px;
-                        min-width: 48px;
-                    }
-
-                    .badge-grey {
-                        background: #cccccc;
+                        margin-top:28px;
                     }
                 }
             }
 
             .question-row {
                 .btn-white {
-                    width: 200px;
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                    border: 1px solid #777777;
+                    width: 100%;
+                    position: relative;
+                    margin-top:32px;
                 }
             }
 
             .question-form {
-                .input-field {
-                    width: 100%;
-                    height: 32px;
-                    box-sizing: border-box;
-                    padding: 4px 8px;
-                    font-size: 14px;
-                    margin-bottom: 10px;
-                    border: 1px solid #cccccc;
-                    outline: none;
-                    transition: border 0.3s;
-
-                    &::placeholder {
-                        color: #cccccc;
-                    }
-
-                    &:focus {
-                        border-color: #777777;
-                    }
-                }
-
-                .textarea {
-                    width: 100%;
-                    resize: none;
-                    height: 360px;
-                    border: 1px solid #cccccc;
-                    outline: none;
-                    font-size: 14px;
-                    padding: 8px;
-                    transition: border 0.3s;
-                    box-sizing: border-box;
-
-                    &::placeholder {
-                        color: #cccccc;
-                    }
-
-                    &:focus {
-                        border-color: #777777;
-                    }
-                }
-
                 .btn-wrap {
-                    font-size: 0;
-                    text-align: right;
-                    margin-top: 24px;
-
                     .btn-white, .btn-black {
-                        width: 150px;
-                        vertical-align: top;
+                        width:calc(50% - 6px);
                     }
-
                     .btn-white {
                         margin-left: 12px;
                     }
@@ -1098,49 +788,37 @@ $cleaningPath: '../images/cleaning';
             }
 
             .question-wrap {
-                border-top: 2px solid black;
-
+                width: calc(100% + 20px);
+                margin-left: -10px;
+                border-top:none;
                 .qna-box {
+                    border-top: 2px solid black;
                     .qna-header {
-                        background: #f6f6f6;
-                        padding: 20px 20px;
-                        border-bottom: 1px solid #cccccc;
-
                         .qna-title {
-                            font-size: 20px;
-                            font-weight: 500;
-                            display: inline-block;
-                            max-width: calc(100% - 120px);
+                            font-size: 16px;
+                            width: 100%;
+                            max-width: 100%;
                         }
-
                         .qna-date {
-                            display: inline-block;
                             font-size: 14px;
-                            position: absolute;
-                            top: 24px;
-                            right: 20px;
+                            position: relative;
+                            top: auto;
+                            right: auto;
+                            margin-top:4px;
                         }
                     }
 
                     .qna-contents {
-                        padding: 40px;
-                        border-bottom: 1px solid #cccccc;
-
-                        .qna-text {
-                            font-size: 14px;
-                            color: #181818;
-                            line-height: 22px;
-                        }
+                        padding: 20px;
                     }
                 }
 
                 .btn-wrap {
-                    font-size: 0;
-                    text-align: right;
-
+                    padding:0 16px;
                     .btn-white, .btn-black {
-                        width: 150px;
-                        margin-left: 10px;
+                        width: 100%;
+                        margin-left: 0;
+                        margin-bottom: 10px;
                     }
                 }
             }

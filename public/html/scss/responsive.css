@@ -298,511 +298,194 @@
     margin-top: 32px;
     display: flex;
   }
+  .con-mypage .menu-list li a {
+    font-size: 10px;
+    padding: 12px 2px;
+  }
   .con-mypage .mypage-contents {
     margin-top: 30px;
   }
   .con-mypage .mypage-contents .user-table {
-    border-top: 2px solid black;
-    width: 100%;
-  }
-  .con-mypage .mypage-contents .user-table tr {
-    border-bottom: 1px solid #cccccc;
-    height: 56px;
-    text-align: left;
-  }
-  .con-mypage .mypage-contents .user-table tr th, .con-mypage .mypage-contents .user-table tr td {
-    vertical-align: middle;
-    font-size: 13px;
+    table-layout: fixed;
   }
   .con-mypage .mypage-contents .user-table tr th {
-    letter-spacing: 0.4px;
-    padding-left: 32px;
-    border-right: 1px solid #cccccc;
-  }
-  .con-mypage .mypage-contents .user-table tr th::after {
-    content: "";
-    position: absolute;
-    display: inline-block;
-    left: 12px;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    width: 12px;
-    height: 12px;
-    background: url("../images/common/ic-check-black.png") center no-repeat;
-    background-size: contain;
+    letter-spacing: 0;
+    padding-left: 30px;
+    width: 120px;
   }
   .con-mypage .mypage-contents .user-table tr td {
-    padding: 12px 16px;
+    padding: 10px;
   }
   .con-mypage .mypage-contents .user-table tr td .input-field {
-    height: 32px;
-    border: 1px solid #cccccc;
+    width: 100%;
     min-width: auto;
-    font-size: 13px;
-    padding: 8px 12px;
-    box-sizing: border-box;
-  }
-  .con-mypage .mypage-contents .user-table tr td .input-field::placeholder {
-    color: #adadad;
+    margin-bottom: 5px;
   }
   .con-mypage .mypage-contents .user-table tr td .badge {
-    vertical-align: middle;
-    margin-left: 8px;
-  }
-  .con-mypage .mypage-contents .user-table tr td .caption {
-    font-size: 10px;
-    color: #9b9b9b;
+    margin-left: 0;
   }
   .con-mypage .mypage-contents .user-table tr .new-password .input-field:first-child {
-    margin-right: 8px;
-  }
-  .con-mypage .mypage-contents .user-table tr .gender .checkbox-wrap {
-    margin-right: 24px;
+    margin-right: 0;
   }
   .con-mypage .mypage-contents .user-table tr .email > div, .con-mypage .mypage-contents .user-table tr .phone > div {
-    margin-bottom: 4px;
+    margin-bottom: 8px;
   }
   .con-mypage .mypage-contents .user-table tr .email .text, .con-mypage .mypage-contents .user-table tr .phone .text {
-    min-width: 330px;
-    margin-right: 12px;
-    display: inline-block;
+    min-width: auto;
+    margin-right: 0;
   }
   .con-mypage .mypage-contents .user-table tr .email .checkbox-wrap, .con-mypage .mypage-contents .user-table tr .phone .checkbox-wrap {
     vertical-align: middle;
+    margin-top: 8px;
   }
-  .con-mypage .mypage-contents .user-table tr .address .postal {
-    margin-bottom: 8px;
+  .con-mypage .mypage-contents .user-table tr .email .checkbox-wrap p, .con-mypage .mypage-contents .user-table tr .phone .checkbox-wrap p {
+    font-size: 12px;
   }
   .con-mypage .mypage-contents .user-table tr .address .postal .input-field {
-    min-width: 160px;
-    margin-right: 4px;
-  }
-  .con-mypage .mypage-contents .user-table tr .address .postal .btn-white {
-    height: 32px;
-    line-height: 30px;
-    border: 1px solid #a8a8a8;
-    vertical-align: middle;
-    width: 80px;
+    min-width: auto;
+    margin-right: 0;
+    width: 100%;
   }
   .con-mypage .mypage-contents .user-table tr .address .detail .input-field:first-child {
-    margin-right: 4px;
-  }
-  .con-mypage .mypage-contents .btn-wrap .btn-black, .con-mypage .mypage-contents .btn-wrap .btn-white {
-    width: 200px;
-  }
-  .con-mypage .mypage-contents .btn-wrap .btn-white {
-    border-color: #777777;
-  }
-  .con-mypage .mypage-contents .project-list {
-    font-size: 0;
-  }
-  .con-mypage .mypage-contents .project-list .project-card {
-    display: inline-block;
-    width: calc(25% - 15px);
-    margin-right: 20px;
-    margin-bottom: 40px;
-  }
-  .con-mypage .mypage-contents .project-list .project-card:nth-child(4n) {
     margin-right: 0;
   }
-  .con-mypage .mypage-contents .project-list .project-card .card {
+  .con-mypage .mypage-contents .project-list .project-card {
     width: 100%;
+    margin-right: 0;
+    margin-bottom: 32px;
+  }
+  .con-mypage .mypage-contents .project-list .project-card .card {
+    font-size: 0;
+  }
+  .con-mypage .mypage-contents .project-list .project-card .card > div {
+    display: inline-block;
   }
   .con-mypage .mypage-contents .project-list .project-card .card .card-image {
-    width: 100%;
-    padding-bottom: 133.3%;
-    background-size: cover;
-  }
-  .con-mypage .mypage-contents .project-list .project-card .card .card-image img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    object-fit: cover;
+    width: 50%;
+    padding-bottom: 68%;
   }
   .con-mypage .mypage-contents .project-list .project-card .card .card-contents {
-    min-height: 210px;
-    padding: 0;
+    width: 50%;
+    min-height: auto;
   }
   .con-mypage .mypage-contents .project-list .project-card .card .card-contents .project-info {
-    border-bottom: 1px solid #eeeeee;
-    padding: 12px;
+    padding: 8px;
   }
   .con-mypage .mypage-contents .project-list .project-card .card .card-contents .project-info .project-title {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 14px;
+    -webkit-line-clamp: 3;
+    min-height: 48px;
+  }
+  .con-mypage .mypage-contents .project-list .project-card .card .card-contents .project-info .project-name {
+    font-size: 12px;
+  }
+  .con-mypage .mypage-contents .project-list .project-card .card .card-contents .project-item {
+    font-size: 10px;
+    padding: 8px 8px 8px 16px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     word-wrap: break-word;
-    min-height: 48px;
-  }
-  .con-mypage .mypage-contents .project-list .project-card .card .card-contents .project-info .project-name {
-    font-size: 14px;
-    margin-top: 8px;
-  }
-  .con-mypage .mypage-contents .project-list .project-card .card .card-contents .project-item {
-    font-size: 12px;
-    padding: 8px 12px 8px 24px;
-    border-bottom: 1px solid #eeeeee;
   }
   .con-mypage .mypage-contents .project-list .project-card .card .card-contents .project-item::before {
-    content: "";
-    width: 3px;
-    height: 3px;
-    display: inline-block;
-    background: black;
-    border-radius: 50%;
-    position: absolute;
-    left: 12px;
-    top: 15px;
+    left: 8px;
   }
   .con-mypage .mypage-contents .project-list .project-card .card .card-contents .project-item p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
   }
   .con-mypage .mypage-contents .project-list .project-card .card .card-contents .project-delivery {
-    padding: 12px;
+    padding: 8px;
     font-size: 12px;
   }
   .con-mypage .mypage-contents .project-list .project-card .card .card-contents .project-delivery .badge {
-    color: white;
-    margin-top: 8px;
     position: relative;
-  }
-  .con-mypage .mypage-contents .project-list .project-card .card .card-contents .project-delivery .badge-orange {
-    background: #ff7114;
+    right: 0;
   }
   .con-mypage .mypage-contents .project-list .project-card .card .card-contents .project-date {
-    font-size: 12px;
-    color: #2d2d2d;
-    padding: 10px 12px 10px 32px;
+    padding: 8px 8px 8px 32px;
+    position: absolute;
+    bottom: 8px;
   }
   .con-mypage .mypage-contents .project-list .project-card .card .card-contents .project-date::after {
-    content: "";
-    display: inline-block;
-    position: absolute;
-    left: 10px;
-    width: 16px;
-    height: 16px;
-    background: url("../images/common/ic-calandar.png") center no-repeat;
-    background-size: contain;
+    top: 8px;
   }
   .con-mypage .mypage-contents .project-list .project-card .card .badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1;
+    right: 50%;
   }
   .con-mypage .mypage-contents .project-list .project-card .btn-white {
-    width: 100%;
-    margin-top: 15px;
-    border: 1px solid #9b9b9b;
+    margin-top: 10px;
+  }
+  .con-mypage .mypage-contents .project-list .my-card .card .card-image {
+    width: 120px;
+    height: 160px;
+    padding-bottom: 0;
   }
   .con-mypage .mypage-contents .project-list .my-card .card .card-contents {
-    min-height: 110px;
+    width: calc(100% - 120px);
+    height: 160px;
+  }
+  .con-mypage .mypage-contents .project-list .my-card .card .card-contents .project-info {
+    border-bottom: 0;
+  }
+  .con-mypage .mypage-contents .project-list .my-card .card .badge {
+    right: auto;
+    left: 64px;
   }
   .con-mypage .mypage-contents .project-btn-wrap {
-    text-align: right;
+    text-align: center;
   }
   .con-mypage .mypage-contents .project-btn-wrap .btn-black {
-    width: 200px;
+    width: 100%;
   }
   .con-mypage .mypage-contents .project-notice {
-    border: 1px solid #cccccc;
-    padding: 24px;
-    width: 720px;
-    margin: 50px auto;
-  }
-  .con-mypage .mypage-contents .project-notice .notice-title {
-    font-size: 16px;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 5px;
+    padding: 24px 12px;
+    margin: 32px auto;
+    width: 100%;
   }
   .con-mypage .mypage-contents .project-notice .notice-list {
-    margin-top: 32px;
-    font-size: 12px;
-    color: #666666;
-  }
-  .con-mypage .mypage-contents .project-notice .notice-list li::before {
-    content: "- ";
+    margin-top: 24px;
   }
   .con-mypage .mypage-contents .community-table {
     border-top: 2px solid black;
   }
-  .con-mypage .mypage-contents .community-table thead tr {
-    height: 48px;
-    border-bottom: 1px solid #cccccc;
+  .con-mypage .mypage-contents .community-table tr th:nth-child(-n+2), .con-mypage .mypage-contents .community-table tr td:nth-child(-n+2) {
+    width: auto;
   }
-  .con-mypage .mypage-contents .community-table thead tr th {
-    vertical-align: middle;
-    font-size: 12px;
-    font-weight: 700;
+  .con-mypage .mypage-contents .community-table tr th:nth-child(1), .con-mypage .mypage-contents .community-table tr td:nth-child(1) {
+    width: 50px;
   }
-  .con-mypage .mypage-contents .community-table tbody tr {
-    cursor: pointer;
-    height: 48px;
-    border-bottom: 1px solid #eeeeee;
-  }
-  .con-mypage .mypage-contents .community-table tbody tr:nth-child(2n) {
-    background: #eeeeee;
-    border-bottom: none;
-  }
-  .con-mypage .mypage-contents .community-table tbody tr td {
-    font-size: 12px;
-    text-align: center;
-    padding: 10px;
-    vertical-align: middle;
-  }
-  .con-mypage .mypage-contents .community-table tbody tr td:last-child {
-    text-align: left;
-  }
-  .con-mypage .mypage-contents .mypage-tab-list {
-    font-size: 0;
+  .con-mypage .mypage-contents .community-table tr th:nth-child(2), .con-mypage .mypage-contents .community-table tr td:nth-child(2) {
+    width: 80px;
   }
   .con-mypage .mypage-contents .mypage-tab-list .mypage-tab {
-    display: inline-block;
-    margin-right: 12px;
-    font-size: 14px;
-    color: white;
-    background: #9b9b9b;
-    height: 40px;
-    min-width: 200px;
-    text-align: center;
-    line-height: 40px;
-  }
-  .con-mypage .mypage-contents .mypage-tab-list .mypage-tab:last-child {
-    margin-right: 0;
-  }
-  .con-mypage .mypage-contents .mypage-tab-list .mypage-tab.on {
-    background: black;
-  }
-  .con-mypage .mypage-contents .project-message-list {
-    margin-top: 40px;
+    margin-right: 10px;
+    min-width: auto;
+    width: calc(50% - 5px);
   }
   .con-mypage .mypage-contents .project-message-list .project-message-card {
-    font-size: 0;
-    height: 240px;
-    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-  }
-  .con-mypage .mypage-contents .project-message-list .project-message-card:last-child {
-    margin-bottom: 0;
-  }
-  .con-mypage .mypage-contents .project-message-list .project-message-card > div {
-    display: inline-block;
+    height: 200px;
   }
   .con-mypage .mypage-contents .project-message-list .project-message-card .card-image {
-    width: 180px;
-    height: 100%;
-  }
-  .con-mypage .mypage-contents .project-message-list .project-message-card .card-image img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 140px;
   }
   .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents {
-    width: calc(100% - 180px);
-    padding: 16px;
-    height: 100%;
+    width: calc(100% - 140px);
+    padding: 12px 8px;
   }
   .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .card-header {
-    min-height: 72px;
+    min-height: 0;
   }
   .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .card-title {
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    display: inline-block;
-    margin-right: 12px;
-    max-width: calc(100% - 160px);
-  }
-  .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .card-title a:hover {
-    text-decoration: underline;
-    text-decoration-color: #4a4a4a;
-  }
-  .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .new {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    font-size: 0;
-    background: #d1e65d;
-  }
-  .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .new::after {
-    content: "N";
-    font-weight: 700;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    text-align: center;
-    line-height: 24px;
     font-size: 14px;
-  }
-  .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .card-date {
-    font-size: 14px;
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .card-name {
-    font-size: 13px;
-    color: #606060;
-    letter-spacing: 1px;
-  }
-  .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .card-message {
-    font-size: 12px;
-    margin-top: 12px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-    word-wrap: break-word;
-  }
-  .con-mypage .mypage-contents .message-header {
-    border-bottom: 3px solid black;
-    padding-bottom: 16px;
-  }
-  .con-mypage .mypage-contents .message-header .message-name {
-    font-size: 16px;
-    letter-spacing: 4px;
-    color: #4a4a4a;
+    letter-spacing: 0;
     display: inline-block;
-  }
-  .con-mypage .mypage-contents .message-header .message-title {
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: calc(100% - 220px);
-  }
-  .con-mypage .mypage-contents .message-header .btn-white {
-    position: absolute;
-    right: 0;
-    bottom: 16px;
-    width: 200px;
-    border: 1px solid #9b9b9b;
-  }
-  .con-mypage .mypage-contents .message-contents {
-    background: #f6f6f6;
-    height: 800px;
-    overflow: auto;
-    padding: 32px 40px;
-    border-bottom: 1px solid #9b9b9b;
-  }
-  .con-mypage .mypage-contents .message-contents .message-list {
+    margin-right: 0;
+    max-width: none;
     width: 100%;
   }
-  .con-mypage .mypage-contents .message-contents .message-list > li {
-    margin-bottom: 16px;
-  }
-  .con-mypage .mypage-contents .message-contents .message-list .date {
-    font-size: 16px;
-    color: #4a4a4a;
-  }
-  .con-mypage .mypage-contents .message-contents .message-list .time {
-    font-size: 12px;
-    letter-spacing: 0.4px;
-    color: #4a4a4a;
-  }
-  .con-mypage .mypage-contents .message-contents .message-list .bubble {
-    padding: 12px 15px;
-    font-size: 14px;
-    letter-spacing: 0.4px;
-    display: inline-block;
-    border-radius: 20px;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
-  }
-  .con-mypage .mypage-contents .message-contents .message-list .receive .bubble {
-    background: white;
-    border-top-left-radius: 0;
-  }
-  .con-mypage .mypage-contents .message-contents .message-list .send {
-    text-align: right;
-  }
-  .con-mypage .mypage-contents .message-contents .message-list .send .bubble {
-    color: white;
-    background: #181818;
-    border-top-right-radius: 0;
-  }
-  .con-mypage .mypage-contents .message-contents .message-list .send .time {
-    color: white;
-  }
-  .con-mypage .mypage-contents .message-footer {
-    padding: 24px;
-    font-size: 0;
-  }
-  .con-mypage .mypage-contents .message-footer .textarea {
-    resize: none;
-    display: inline-block;
-    box-sizing: border-box;
-    height: 100px;
-    border: 1px solid #cccccc;
-    width: calc(100% - 170px);
-    padding: 8px;
-    font-size: 14px;
-    outline: none;
-    transition: border 0.3s;
-  }
-  .con-mypage .mypage-contents .message-footer .textarea:focus {
-    border: 1px solid black;
-  }
-  .con-mypage .mypage-contents .message-footer .btn-black {
-    vertical-align: top;
-    height: 100px;
-    margin-left: 20px;
-    width: 150px;
-    background: #181818;
-  }
-  .con-mypage .mypage-contents .question-table {
-    width: 100%;
-    border-top: 2px solid black;
-  }
-  .con-mypage .mypage-contents .question-table thead tr {
-    border-bottom: 1px solid #cccccc;
-  }
-  .con-mypage .mypage-contents .question-table tbody tr {
-    cursor: pointer;
-  }
-  .con-mypage .mypage-contents .question-table tr {
-    border-bottom: 1px solid #cccccc;
-  }
-  .con-mypage .mypage-contents .question-table tr th {
-    font-size: 12px;
-    font-weight: 700;
-    height: 48px;
-    vertical-align: middle;
-  }
-  .con-mypage .mypage-contents .question-table tr td {
-    height: 48px;
-    text-align: center;
-    vertical-align: middle;
-    padding: 8px 12px;
-    font-size: 12px;
-  }
-  .con-mypage .mypage-contents .question-table tr .question-title {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    word-wrap: break-word;
-  }
-  .con-mypage .mypage-contents .question-table tr .question-text {
-    text-align: left;
+  .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .card-title a {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -810,103 +493,162 @@
     -webkit-box-orient: vertical;
     word-wrap: break-word;
   }
-  .con-mypage .mypage-contents .question-table tr .badge {
-    padding: 1px 8px;
-    min-width: 48px;
+  .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .new {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    bottom: 0;
+    left: 84px;
   }
-  .con-mypage .mypage-contents .question-table tr .badge-grey {
-    background: #cccccc;
+  .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .new::after {
+    line-height: 16px;
+    font-size: 10px;
+  }
+  .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .card-date {
+    font-size: 10px;
+    position: relative;
+    margin: 8px 0;
+  }
+  .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .card-name {
+    font-size: 12px;
+  }
+  .con-mypage .mypage-contents .project-message-list .project-message-card .card-contents .card-message {
+    -webkit-line-clamp: 3;
+  }
+  .con-mypage .mypage-contents .message-header {
+    padding: 0 8px 16px;
+  }
+  .con-mypage .mypage-contents .message-header .message-name {
+    display: block;
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+  .con-mypage .mypage-contents .message-header .message-title {
+    margin-top: 5px;
+    max-width: 100%;
+    white-space: normal;
+    font-size: 16px;
+  }
+  .con-mypage .mypage-contents .message-header .btn-white {
+    position: relative;
+    width: 100%;
+    bottom: auto;
+    margin-top: 16px;
+  }
+  .con-mypage .mypage-contents .message-contents {
+    height: 460px;
+    padding: 24px 16px;
+  }
+  .con-mypage .mypage-contents .message-contents .message-list .date {
+    font-size: 14px;
+  }
+  .con-mypage .mypage-contents .message-contents .message-list .bubble {
+    padding: 12px;
+  }
+  .con-mypage .mypage-contents .message-footer {
+    padding: 16px 4px;
+  }
+  .con-mypage .mypage-contents .message-footer .textarea {
+    height: 80px;
+    width: calc(100% - 70px);
+  }
+  .con-mypage .mypage-contents .message-footer .btn-black {
+    height: 80px;
+    margin-left: 8px;
+    width: 60px;
+  }
+  .con-mypage .mypage-contents .question-table {
+    border-top: none;
+  }
+  .con-mypage .mypage-contents .question-table thead {
+    display: none;
+  }
+  .con-mypage .mypage-contents .question-table tbody tr {
+    cursor: pointer;
+    border-top: 2px solid black;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .con-mypage .mypage-contents .question-table tbody tr:last-child {
+    margin-bottom: 0;
+  }
+  .con-mypage .mypage-contents .question-table tr {
+    padding: 10px 4px 12px;
+  }
+  .con-mypage .mypage-contents .question-table tr td {
+    display: block;
+    height: auto;
+    padding: 0;
+  }
+  .con-mypage .mypage-contents .question-table tr th:nth-child(1), .con-mypage .mypage-contents .question-table tr td:nth-child(1) {
+    display: none;
+  }
+  .con-mypage .mypage-contents .question-table tr th:nth-child(2), .con-mypage .mypage-contents .question-table tr td:nth-child(2) {
+    width: calc(100% - 56px);
+  }
+  .con-mypage .mypage-contents .question-table tr th:nth-child(4), .con-mypage .mypage-contents .question-table tr td:nth-child(4) {
+    width: 100%;
+    text-align: left;
+    position: absolute;
+    top: 28px;
+    left: 5px;
+  }
+  .con-mypage .mypage-contents .question-table tr th:nth-child(5), .con-mypage .mypage-contents .question-table tr td:nth-child(5) {
+    width: auto;
+    position: absolute;
+    top: 8px;
+    right: 6px;
+  }
+  .con-mypage .mypage-contents .question-table tr .question-title {
+    -webkit-line-clamp: 1;
+    font-weight: 700;
+    text-align: left;
+    word-break: break-all;
+  }
+  .con-mypage .mypage-contents .question-table tr .question-text {
+    margin-top: 28px;
   }
   .con-mypage .mypage-contents .question-row .btn-white {
-    width: 200px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    border: 1px solid #777777;
-  }
-  .con-mypage .mypage-contents .question-form .input-field {
     width: 100%;
-    height: 32px;
-    box-sizing: border-box;
-    padding: 4px 8px;
-    font-size: 14px;
-    margin-bottom: 10px;
-    border: 1px solid #cccccc;
-    outline: none;
-    transition: border 0.3s;
-  }
-  .con-mypage .mypage-contents .question-form .input-field::placeholder {
-    color: #cccccc;
-  }
-  .con-mypage .mypage-contents .question-form .input-field:focus {
-    border-color: #777777;
-  }
-  .con-mypage .mypage-contents .question-form .textarea {
-    width: 100%;
-    resize: none;
-    height: 360px;
-    border: 1px solid #cccccc;
-    outline: none;
-    font-size: 14px;
-    padding: 8px;
-    transition: border 0.3s;
-    box-sizing: border-box;
-  }
-  .con-mypage .mypage-contents .question-form .textarea::placeholder {
-    color: #cccccc;
-  }
-  .con-mypage .mypage-contents .question-form .textarea:focus {
-    border-color: #777777;
-  }
-  .con-mypage .mypage-contents .question-form .btn-wrap {
-    font-size: 0;
-    text-align: right;
-    margin-top: 24px;
+    position: relative;
+    margin-top: 32px;
   }
   .con-mypage .mypage-contents .question-form .btn-wrap .btn-white, .con-mypage .mypage-contents .question-form .btn-wrap .btn-black {
-    width: 150px;
-    vertical-align: top;
+    width: calc(50% - 6px);
   }
   .con-mypage .mypage-contents .question-form .btn-wrap .btn-white {
     margin-left: 12px;
   }
   .con-mypage .mypage-contents .question-wrap {
+    width: calc(100% + 20px);
+    margin-left: -10px;
+    border-top: none;
+  }
+  .con-mypage .mypage-contents .question-wrap .qna-box {
     border-top: 2px solid black;
   }
-  .con-mypage .mypage-contents .question-wrap .qna-box .qna-header {
-    background: #f6f6f6;
-    padding: 20px 20px;
-    border-bottom: 1px solid #cccccc;
-  }
   .con-mypage .mypage-contents .question-wrap .qna-box .qna-header .qna-title {
-    font-size: 20px;
-    font-weight: 500;
-    display: inline-block;
-    max-width: calc(100% - 120px);
+    font-size: 16px;
+    width: 100%;
+    max-width: 100%;
   }
   .con-mypage .mypage-contents .question-wrap .qna-box .qna-header .qna-date {
-    display: inline-block;
     font-size: 14px;
-    position: absolute;
-    top: 24px;
-    right: 20px;
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-top: 4px;
   }
   .con-mypage .mypage-contents .question-wrap .qna-box .qna-contents {
-    padding: 40px;
-    border-bottom: 1px solid #cccccc;
-  }
-  .con-mypage .mypage-contents .question-wrap .qna-box .qna-contents .qna-text {
-    font-size: 14px;
-    color: #181818;
-    line-height: 22px;
+    padding: 20px;
   }
   .con-mypage .mypage-contents .question-wrap .btn-wrap {
-    font-size: 0;
-    text-align: right;
+    padding: 0 16px;
   }
   .con-mypage .mypage-contents .question-wrap .btn-wrap .btn-white, .con-mypage .mypage-contents .question-wrap .btn-wrap .btn-black {
-    width: 150px;
-    margin-left: 10px;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 10px;
   }
 
   /****** notice ******/
