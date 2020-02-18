@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Material extends Model {
     // 컬럼중 노출하지않을것을 표기
     protected $guarded =[];
+
+    public function fabrics() {
+        return $this->hasMany('App\Fabric', 'material_id', 'id');
+    }
 }

@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded',function () {
+    var error_msg = "오류입니다. 다시 입력해주세요.";
     // 개요 -> 상품정보
     document.getElementById('product_information').addEventListener('click', function () {
         var title = document.getElementById('project_title').value;                 // 프로젝트 제목
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded',function () {
         } else { // submit
             var form = new FormData($('#projectForm1')[0]);
             formAjax('POST', false, '/project', form, function(e) {
-                alert('오류입니다. 처음부터 다시 시작해주세요.');
+                alert(error_msg);
                 location.href = '/project/create';
             }, function(data) {
                 var project_id = document.getElementsByClassName('projectId');
@@ -147,7 +148,7 @@ document.addEventListener('DOMContentLoaded',function () {
         // projectForm2
         var form = new FormData($('#projectForm2')[0]);
         formAjax('POST', false, '/project', form, function(e) {
-            alert('오류입니다. 처음부터 다시 시작해주세요.');
+            alert(error_msg);
             location.href = '/project/create';
         }, function(data) {
 
@@ -156,13 +157,93 @@ document.addEventListener('DOMContentLoaded',function () {
 
     });
 
+    // 3. 스토리텔링
+
 
     // 프로젝트 일정 -> 디자이너/브랜드 소개
     document.getElementById('introduction').addEventListener('click', function () {
         var agree = document.getElementById('agree');
-        if (agree.checked == false) {
+        var deadline = document.getElementById('deadline').value;
+        var account_date = document.getElementById('account_date').value;
+        var delivery_date = document.getElementById('delivery_date').value;
+
+        if (!deadline || !account_date || !delivery_date) {
+            alert('프로젝트 일정은 필수 입력입니다.');
+            valueCheck = false;
+        } else if (agree.checked == false) {
             alert('약관을 동의해주세요.');
+            valueCheck = false;
+        } else {
+            // projectForm4
+            var form = new FormData($('#projectForm4')[0]);
+            formAjax('POST', false, '/project', form, function(e) {
+                alert(error_msg);
+                location.href = '/project/create';
+            }, function(data) {
+                valueCheck = true;
+            });
         }
+    });
+
+    // 디자이너/브랜드 소래 -> 정산정보
+    document.getElementById('account').addEventListener('click', function () {
+        var designer_name = document.getElementById('designer_name').value;
+        var brand_name = document.getElementById('brand_name').value;
+        var email = document.getElementById('email').value;
+        var phone = document.getElementById('phone').value;
+        var homepage = document.getElementById('homepage').value;
+        var facebook = document.getElementById('facebook').value;
+        var instagram = document.getElementById('instagram').value;
+        var twitter = document.getElementById('twitter').value;
+
+        if (!designer_name || !brand_name  || !email || !phone || !homepage || !facebook || !instagram || !twitter) {
+            alert('디자이너/브랜드 소개는 필수 입력입니다.');
+            valueCheck = false;
+        } else {
+            var form = new FormData($('#projectForm5')[0]);
+            formAjax('POST', false, '/project', form, function(e) {
+                alert(error_msg);
+                location.href = '/project/create';
+            }, function(data) {
+                valueCheck = true;
+            });
+        }
+    });
+
+    // 검토요청하기
+    document.getElementById('store_btn').addEventListener('click', function () {
+        var company_radio = document.getElementById('company_radio');
+        var company_number = document.getElementById('company_number').value;
+        var company_file = document.getElementById('company_file').value;
+        var bank_file = document.getElementById('bank_file').value;
+        var account_email = document.getElementById('account_email').value;
+        var account_phone = document.getElementById('account_phone').value;
+
+        if (company_radio.checked === true) {
+            if (!company_number) {
+                alert('사업자등록번호를 입력해주세요.');
+                 return false;
+            } else if (!company_file) {
+                alert('사업자등록증을 등록해주세요.');
+                return false;
+            }
+        }
+
+        if (!bank_file) {
+            alert('통장사본을 등록해주세요.');
+        } else if (!account_email || !account_phone) {
+            alert('이메일과 전화번호는 필수 입력입니다.0')
+        } else {
+            var form = new FormData($('#projectForm5')[0]);
+            formAjax('POST', false, '/project', form, function(e) {
+                alert(error_msg);
+                location.href = '/project/create';
+            }, function(data) {
+                alert('완료되었습니다.');
+                valueCheck = true;
+            });
+        }
+
     });
 
 

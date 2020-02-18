@@ -7,13 +7,6 @@ document.addEventListener('DOMContentLoaded',function () {
         popup("/popup_fees", "수수료 정책");
     });
 
-    document.getElementById('store_btn').addEventListener('click', function () {
-        document.getElementById('project_form').submit();
-    });
-
-    // var company_radio = document.getElementById('company_radio');
-    // var personal_radio = document.getElementById('personal_radio');
-
     document.getElementById('company_radio').addEventListener('click', function () {
         document.getElementById('company_number').style.display = "";
         document.getElementById('company_file').style.display = "";
@@ -24,22 +17,15 @@ document.addEventListener('DOMContentLoaded',function () {
         document.getElementById('company_file').style.display = "none";
     });
 
+    // 개요 - 프토젝트 카테고리
+    document.getElementById('first_category').addEventListener('change', function (e) {
+        category(this);
+    });
 
-    // 디자이너/브랜드 소래 -> 정산정보
-    document.getElementById('account').addEventListener('click', function () {
-        var designer_name = document.getElementById('designer_name').value;
-        var brand_name = document.getElementById('brand_name').value;
-        var email = document.getElementById('email').value;
-        var phone = document.getElementById('phone').value;
-        var homepage = document.getElementById('homepage').value;
-        var facebook = document.getElementById('facebook').value;
-        var instagram = document.getElementById('instagram').value;
-        var twitter = document.getElementById('twitter').value;
-
-        if (!designer_name || !brand_name  || !email || !phone || !homepage || !facebook || !instagram || !twitter) {
-            alert('디자이너/브랜드 소개는 필수 입력입니다.');
-        }
-    })
+    var first_category = document.getElementById('first_category');
+    if (first_category.value) {
+        category(first_category);
+    }
 });
 
 
@@ -60,12 +46,16 @@ function category(e){
         type: 'GET',
         success: function (result) {
             var second_category = document.getElementById('second_category');
+            var project_category2_id = document.getElementById('project_category2_id').value;
             second_category.options.length = 1;
             for (var i = 0; i < result.length; i++){
                 var addOption = document.createElement('option');
                 addOption.textContent = result[i].category_name;
                 addOption.value = result[i].id;
                 second_category.appendChild(addOption);
+                if (second_category.options[i].value === project_category2_id) {
+                    second_category.options[i].selected = true;
+                }
             }
         }
     });

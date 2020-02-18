@@ -17,6 +17,7 @@ class CreateInformationsTable extends Migration
             //컬럼명세
             $table->bigIncrements('id');
             $table->bigInteger('project_id')->unsigned()->comment('프로젝트 id');
+            $table->bigInteger('tab_id')->unsigned()->comment('취급정보 id');
             $table->bigInteger('detail_id')->unsigned()->comment('취급상세 id');
             $table->timestamps();
             $table->softDeletes();

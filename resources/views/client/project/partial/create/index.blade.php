@@ -5,7 +5,8 @@
 <script src="../js/common.js"></script>
 <script src="../js/project.js"></script>
 <script src="../js/projectAction.js"></script>
-<script type="text/javascript" src="../se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="../se3/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 @section('content')
     <link rel="stylesheet" href="{{asset('/css/swiper.min.css')}}">
     <main class="container">
@@ -46,22 +47,22 @@
                         <!-- 01 개요 -->
                     <form action="{{route('project.store')}}" id="projectForm1" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" class="projectId" name="project_id" value="">
+                        <input type="hidden" class="projectId" name="project_id" value="{{ $data ? $data->id : '' }}">
                         <input type="hidden" name="project_1" value="project1">
                         <div class="tab-contents-box edit-on">
                             <!-- 01-A 프로젝트 제목 -->
                             <div class="input-item">
                                 <h3 class="title">프로젝트 제목</h3>
-                                <input type="text" class="input-field" name="project_title" id="project_title" placeholder="30자 이내로 입력해주세요">
+                                <input type="text" class="input-field" name="project_title" id="project_title" value="{{ $data ? $data->title : '' }}" placeholder="30자 이내로 입력해주세요">
                             </div>
                             <!-- 01-B 프로젝트 카테고리 -->
                             <div class="input-item">
                                 <h3 class="title">프로젝트 카테고리</h3>
                                 <div>
-                                    <select class="select" name="first_category" id="first_category" onchange="category(this)">
+                                    <select class="select" name="first_category" id="first_category">
                                         <option value="0" selected disabled>- 1차 카테고리 -</option>
                                         @foreach($main_categories as $main_category)
-                                        <option value="{{ $main_category->id }}">{{ $main_category->category_name }}</option>
+                                        <option value="{{ $main_category->id }}" {{ $data ? ($main_category->id == $data->category_id ? 'selected' : '') : '' }}>{{ $main_category->category_name }}</option>
                                         @endforeach
                                     </select>
                                     <span class="arrow">></span>
@@ -69,12 +70,13 @@
                                         <option value="0" selected disabled>- 2차 카테고리 -</option>
 
                                     </select>
+                                    <input type="hidden" id="project_category2_id" value="{{ $data ? $data->category2_id : '' }}">
                                 </div>
                             </div>
                             <!-- 01-C 프로젝트 개요 -->
                             <div class="input-item">
                                 <h3 class="title">프로젝트 개요</h3>
-                                <input type="text" class="input-field" name="project_summary" id="project_summary" placeholder="최소 10자 ~ 최대 50자">
+                                <input type="text" class="input-field" name="project_summary" id="project_summary" value="{{ $data ? $data->summary : '' }}" placeholder="최소 10자 ~ 최대 50자">
                             </div>
                             <!-- 01-D 대표이미지 -->
                             <div class="input-item">
@@ -89,14 +91,14 @@
                             <!-- 01-D 성공갯수 -->
                             <div class="input-item">
                                 <h3 class="title">성공 갯수</h3>
-                                <input type="text" class="input-field" name="success_count" id="success_count" placeholder="최소 10개 ~ 최대 30개">
+                                <input type="text" class="input-field" name="success_count" id="success_count" value="{{ $data ? $data->success_count : '' }}" placeholder="최소 10개 ~ 최대 30개">
                             </div>
                         </div>
                     </form>
                         <!-- 02 상품정보 -->
                     <form action="{{route('project.store')}}" id="projectForm2" method="POST" enctype="multipart/form-data">
                         @csrf
-                    <input type="hidden" class="projectId" name="project_id" value="">
+                    <input type="hidden" class="projectId" name="project_id" value="{{ $data ? $data->id : '' }}">
                         <input type="hidden" name="project_2" value="project_2">
                         <div class="tab-contents-box">
                             <!-- 02-A 옵션  -->
@@ -104,17 +106,35 @@
                                 <div class="drop-header">옵션</div>
                                 <div class="drop-item">
                                     <div class="option-list">
+                                        @if(isset($data))
+                                        @forelse($data->options as $key=>$option)
                                         <div class="option-item">
-                                            <div class="option-num">1</div>
+                                            <div class="option-num">{{ $key+1 }}</div>
                                             <label class="option-field">
                                                 <p>옵션명</p>
-                                                <input type="text" class="input-field option_name" name="option_name[]" placeholder="30자 이내">
+                                                <input type="text" class="input-field option_name" name="option_name[]" value="{{ $option->option_name }}" placeholder="30자 이내">
                                             </label>
                                             <label class="option-field price">
                                                 <p>가격</p>
-                                                <input type="text" class="input-field option_price" name="option_price[]" placeholder="30자 이내">
+                                                <input type="text" class="input-field option_price" name="option_price[]" value="{{ $option->price }}" placeholder="30자 이내">
                                             </label>
                                         </div>
+                                            <input type="hidden" name="option_id[]" value="{{ $option->id }}">
+                                        @empty
+                                            <div class="option-item">
+                                                <div class="option-num">1</div>
+                                                <label class="option-field">
+                                                    <p>옵션명</p>
+                                                    <input type="text" class="input-field option_name" name="option_name[]" value="" placeholder="30자 이내">
+                                                </label>
+                                                <label class="option-field price">
+                                                    <p>가격</p>
+                                                    <input type="text" class="input-field option_price" name="option_price[]" placeholder="30자 이내">
+                                                </label>
+                                            </div>
+                                                <input type="hidden" name="option_id[]" value="">
+                                        @endforelse
+                                        @endif
                                         <!-- script add items -->
                                     </div>
                                     <div class="btn-wrap">
@@ -185,83 +205,167 @@
                                             </tr>
                                             </thead>
                                             <tbody class="size-list">
+                                            @if(isset($data))
+                                            @forelse($data->sizes as $size)
+                                                <input type="hidden" name="size_id[]" value="{{ $size->id }}">
                                             <tr>
                                                 <!-- 사이즈 -->
                                                 <td>
-                                                    <input type="text" name="size[]" id="size">
+                                                    <input type="text" name="size[]" id="size" value="{{ $size->size }}">
                                                 </td>
                                                 <!-- 총기장 -->
                                                 <td>
-                                                    <input type="text" name="total_length[]">
+                                                    <input type="text" name="total_length[]" value="{{ $size->total_length }}">
                                                 </td>
                                                 <!-- 어깨 -->
                                                 <td>
-                                                    <input type="text" name="shoulder[]">
+                                                    <input type="text" name="shoulder[]" value="{{ $size->shoulder }}">
                                                 </td>
                                                 <!-- 가슴 -->
                                                 <td>
-                                                    <input type="text" name="chest[]">
+                                                    <input type="text" name="chest[]" value="{{ $size->chest }}">
                                                 </td>
                                                 <!-- 팔길이 -->
                                                 <td>
-                                                    <input type="text" name="arms_length[]">
+                                                    <input type="text" name="arms_length[]" value="{{ $size->arms_length }}">
                                                 </td>
 
                                                 <!-- 소매단면 -->
                                                 <td>
-                                                    <input type="text" name="sleeve[]">
+                                                    <input type="text" name="sleeve[]" value="{{ $size->sleeve }}">
                                                 </td>
                                                 <!-- 암홀 -->
                                                 <td>
-                                                    <input type="text" name="armhole[]">
+                                                    <input type="text" name="armhole[]" value="{{ $size->armhole }}">
                                                 </td>
                                                 <!-- 허리 -->
                                                 <td>
-                                                    <input type="text" name="waist[]">
+                                                    <input type="text" name="waist[]" value="{{ $size->waist }}">
                                                 </td>
                                                 <!-- 밑단 -->
                                                 <td>
-                                                    <input type="text" name="hem[]">
+                                                    <input type="text" name="hem[]" value="{{ $size->hem }}">
                                                 </td>
                                                 <!-- 밑위 -->
                                                 <td>
-                                                    <input type="text" name="crotch[]">
+                                                    <input type="text" name="crotch[]" value="{{ $size->crotch }}">
                                                 </td>
 
                                                 <!-- 엉덩이단면 -->
                                                 <td>
-                                                    <input type="text" name="hip[]">
+                                                    <input type="text" name="hip[]" value="{{ $size->hip }}">
                                                 </td>
                                                 <!-- 허벅지단면 -->
                                                 <td>
-                                                    <input type="text" name="thigh[]">
+                                                    <input type="text" name="thigh[]" value="{{ $size->thigh }}">
                                                 </td>
                                                 <!-- 끈길이 -->
                                                 <td>
-                                                    <input type="text" name="string_length[]">
+                                                    <input type="text" name="string_length[]" value="{{ $size->string_length }}">
                                                 </td>
                                                 <!-- 가로 -->
                                                 <td>
-                                                    <input type="text" name="horizontal[]">
+                                                    <input type="text" name="horizontal[]" value="{{ $size->horizontal }}">
                                                 </td>
                                                 <!-- 세로 -->
                                                 <td>
-                                                    <input type="text" name="vertical[]">
+                                                    <input type="text" name="vertical[]" value="{{ $size->vertical }}">
                                                 </td>
 
                                                 <!-- 앞굽 -->
                                                 <td>
-                                                    <input type="text" name="forefoot[]">
+                                                    <input type="text" name="forefoot[]" value="{{ $size->forefoot }}">
                                                 </td>
                                                 <!-- 뒷굽 -->
                                                 <td>
-                                                    <input type="text" name="heels[]">
+                                                    <input type="text" name="heels[]" value="{{ $size->heels }}">
                                                 </td>
                                                 <!-- 버튼 -->
                                                 <!-- <td class="row-btn"> -->
                                                 <!-- 123 -->
                                                 <!-- </td> -->
                                             </tr>
+                                            @empty
+                                                <input type="hidden" name="size_id[]" value="">
+                                                <tr>
+                                                    <!-- 사이즈 -->
+                                                    <td>
+                                                        <input type="text" name="size[]" id="size">
+                                                    </td>
+                                                    <!-- 총기장 -->
+                                                    <td>
+                                                        <input type="text" name="total_length[]">
+                                                    </td>
+                                                    <!-- 어깨 -->
+                                                    <td>
+                                                        <input type="text" name="shoulder[]">
+                                                    </td>
+                                                    <!-- 가슴 -->
+                                                    <td>
+                                                        <input type="text" name="chest[]">
+                                                    </td>
+                                                    <!-- 팔길이 -->
+                                                    <td>
+                                                        <input type="text" name="arms_length[]">
+                                                    </td>
+
+                                                    <!-- 소매단면 -->
+                                                    <td>
+                                                        <input type="text" name="sleeve[]">
+                                                    </td>
+                                                    <!-- 암홀 -->
+                                                    <td>
+                                                        <input type="text" name="armhole[]">
+                                                    </td>
+                                                    <!-- 허리 -->
+                                                    <td>
+                                                        <input type="text" name="waist[]">
+                                                    </td>
+                                                    <!-- 밑단 -->
+                                                    <td>
+                                                        <input type="text" name="hem[]">
+                                                    </td>
+                                                    <!-- 밑위 -->
+                                                    <td>
+                                                        <input type="text" name="crotch[]">
+                                                    </td>
+
+                                                    <!-- 엉덩이단면 -->
+                                                    <td>
+                                                        <input type="text" name="hip[]">
+                                                    </td>
+                                                    <!-- 허벅지단면 -->
+                                                    <td>
+                                                        <input type="text" name="thigh[]">
+                                                    </td>
+                                                    <!-- 끈길이 -->
+                                                    <td>
+                                                        <input type="text" name="string_length[]">
+                                                    </td>
+                                                    <!-- 가로 -->
+                                                    <td>
+                                                        <input type="text" name="horizontal[]">
+                                                    </td>
+                                                    <!-- 세로 -->
+                                                    <td>
+                                                        <input type="text" name="vertical[]">
+                                                    </td>
+
+                                                    <!-- 앞굽 -->
+                                                    <td>
+                                                        <input type="text" name="forefoot[]">
+                                                    </td>
+                                                    <!-- 뒷굽 -->
+                                                    <td>
+                                                        <input type="text" name="heels[]">
+                                                    </td>
+                                                    <!-- 버튼 -->
+                                                    <!-- <td class="row-btn"> -->
+                                                    <!-- 123 -->
+                                                    <!-- </td> -->
+                                                </tr>
+                                            @endforelse
+                                            @endif
                                             <!-- script add item -->
                                             </tbody>
                                         </table>
@@ -275,9 +379,10 @@
                             <!-- 02-C 원단 -->
                             <div class="drop-box">
                                 <div class="drop-header">원단</div>
-
                                 <div class="drop-item">
                                     <div class="fabric-list-wrap">
+                                        @if(isset($data))
+                                        @forelse($data->fabrics as $fabric)
                                         <div class="fabric-list">
                                             <div class="fabric-title">
                                                 <div>재질명</div>
@@ -285,20 +390,57 @@
                                             </div>
                                             <div class="fabric-item">
                                                 <div class="fabric-name">
-                                                    <input type="text" class="input-field fabric" name="fabric[]" id="material_name0" onclick="popup_material(0)" readonly>
+                                                    <input type="text" class="input-field fabric" name="fabric[]" id="material_name0" onclick="popup_material(0)" value="{{ $fabric->material->name }}" readonly>
                                                     <input type="hidden" name="material_id[]" id="material_id0">
                                                 </div>
                                                 <div class="fabric-ratio">
-                                                    <input type="number" max="100" min="0" class="input-field" name="fabric_ratio[]">
+                                                    <input type="number" max="100" min="0" class="input-field" name="fabric_ratio[]" value="{{ $fabric->rate }}">
                                                 </div>
                                             </div>
-                                            <!-- script add item -->
+                                            <input type="hidden" name="fabric_id[]" value="{{ $fabric->id }}">
                                         </div>
+                                        @empty
+                                            <div class="fabric-list">
+                                                <div class="fabric-title">
+                                                    <div>재질명</div>
+                                                    <div>비율</div>
+                                                </div>
+                                                <div class="fabric-item">
+                                                    <div class="fabric-name">
+                                                        <input type="text" class="input-field fabric" name="fabric[]" id="material_name0" onclick="popup_material(0)" readonly>
+                                                        <input type="hidden" name="material_id[]" id="material_id0">
+                                                    </div>
+                                                    <div class="fabric-ratio">
+                                                        <input type="number" max="100" min="0" class="input-field" name="fabric_ratio[]">
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="fabric_id[]" value="0">
+                                            </div>
+                                        @endforelse
+                                            @else
+                                            <div class="fabric-list">
+                                                <div class="fabric-title">
+                                                    <div>재질명</div>
+                                                    <div>비율</div>
+                                                </div>
+                                                <div class="fabric-item">
+                                                    <div class="fabric-name">
+                                                        <input type="text" class="input-field fabric" name="fabric[]" id="material_name0" onclick="popup_material(0)" readonly>
+                                                        <input type="hidden" name="material_id[]" id="material_id0">
+                                                    </div>
+                                                    <div class="fabric-ratio">
+                                                        <input type="number" max="100" min="0" class="input-field" name="fabric_ratio[]">
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="fabric_id[]" value="0">
+                                            </div>
+                                        @endif
+                                            <!-- script add item -->
                                         <button class="btn-black" type="button" onclick="fnAddFabric()">재질추가</button>
                                     </div>
                                     <div class="designer-comment-wrap">
                                         <p class="subtitle">디자이너 코멘트</p>
-                                        <textarea class="textarea" name="comment" placeholder="디자이너 코멘트를 입력해주세요"></textarea>
+                                        <textarea class="textarea" name="comment" placeholder="디자이너 코멘트를 입력해주세요">{{ $data ? $data->comment : '' }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -317,7 +459,8 @@
                                             @foreach($information_list_water as $key => $list)
                                             <label class="handling-item water-0{{$key+1}}">
                                                 <div class="item-image"></div>
-                                                <input type="radio" class="information_water" name="information_water" value="{{ $list->id }}">
+                                                <input type="radio" class="information_water" name="information_water">
+                                                <input type="hidden" name="information_water_id">
                                                 <ul class="item-caption">
                                                     <li>{!! $list->description_ko !!}</li>
                                                 </ul>
@@ -385,7 +528,7 @@
                         <!-- 03 스토리텔링 -->
                     <form action="{{route('project.store')}}" id="projectForm3" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" class="projectId" name="project_id" value="">
+                        <input type="hidden" class="projectId" name="project_id" value="{{ $data ? $data->id : '' }}">
                         <input type="hidden" name="project_3" value="project3">
                         <div class="tab-contents-box" id="editor">
                             <div class="storytelling-wrap">
@@ -397,19 +540,25 @@
                         </div>
                     </form>
                         <!-- 04 프로젝트 일정 -->
+                    <form action="{{route('project.store')}}" id="projectForm4" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" class="projectId" name="project_id" value="{{ $data ? $data->id : '' }}">
+                        <input type="hidden" name="project_4" value="project4">
                         <div class="tab-contents-box">
                             <div class="schedule-wrap">
                                 <div class="schedule">
                                     <span>프로젝트 마감일</span>은
-                                    <input type="date" class="input-field" name="deadline" id="deadline">
+                                    <input type="text" class="input-field datepicker" name="deadline" id="deadline" onchange="dateChange()" readonly>
                                     이며,
+
                                 </div>
                                 <div class="schedule">
-                                    이에 따라 <span>프로젝트 정산일</span>은 영업일 7일 뒤고,
+                                    이에 따라 <span>프로젝트 정산일</span>은 영업일 7일 뒤인
+                                    <input type="text" class="input-field" name="account_date" id="account_date" readonly>이고,
                                 </div>
                                 <div class="schedule">
                                     프로젝트 마감일 후
-                                    <input type="date" class="input-field" name="delivery_date" id="delivery_date">
+                                    <input type="text" class="input-field datepicker" name="delivery_date" id="delivery_date" readonly>
                                     에 배송을 진행하되,
                                 </div>
                                 <div class="schedule">
@@ -435,6 +584,11 @@
                                 </div>
                             </div>
                         </div>
+                    </form>
+                    <form action="{{route('project.store')}}" id="projectForm5" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" class="projectId" name="project_id" value="{{ $data ? $data->id : '' }}">
+                        <input type="hidden" name="project_5" value="project5">
                         <!-- 05 디자이너 브랜드 소개 -->
                         <div class="tab-contents-box">
                             <div class="introduction-wrap">
@@ -450,7 +604,7 @@
                                     <span class="item-name">이메일</span>
                                     <input type="email" class="input-field" name="email" id="email" placeholder="이메일을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox" name="email_hidden">
+                                        <input type="checkbox" name="email_hidden" value="1">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
@@ -458,7 +612,7 @@
                                     <span class="item-name">전화번호</span>
                                     <input type="tel" class="input-field" name="phone" id="phone" placeholder="전화번호를 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox" name="phone_hidden">
+                                        <input type="checkbox" name="phone_hidden" value="1">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
@@ -466,7 +620,7 @@
                                     <span class="item-name">페이스북</span>
                                     <input type="text" class="input-field" name="facebook" id="facebook" placeholder="페이스북 계정을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox" name="facebook_hidden">
+                                        <input type="checkbox" name="facebook_hidden" value="1">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
@@ -474,7 +628,7 @@
                                     <span class="item-name">인스타그램</span>
                                     <input type="text" class="input-field" name="instagram" id="instagram" placeholder="인스타그램 계정을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox" name="instagram_hidden">
+                                        <input type="checkbox" name="instagram_hidden" value="1">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
@@ -482,7 +636,7 @@
                                     <span class="item-name">트위터</span>
                                     <input type="text" class="input-field" name="twitter" id="twitter" placeholder="트위터 계정을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox" name="twitter_hidden">
+                                        <input type="checkbox" name="twitter_hidden" value="1">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
@@ -490,13 +644,18 @@
                                     <span class="item-name">홈페이지</span>
                                     <input type="text" class="input-field" name="homepage" id="homepage" placeholder="홈페이지 url을 입력하세요">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox" name="homepage_hidden">
+                                        <input type="checkbox" name="homepage_hidden" value="1">
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                             </div>
                         </div>
+                    </form>
                         <!-- 06 정산정보 -->
+                    <form action="{{route('project.store')}}" id="projectForm6" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" class="projectId" name="project_id" value="{{ $data ? $data->id : '' }}">
+                        <input type="hidden" name="6" value="project6">
                         <div class="tab-contents-box">
                             <div class="notice"><span id="popup_fee">수수료정책</span>을 먼저 확인해주세요</div>
                             <div class="pay-info-item">
@@ -513,13 +672,13 @@
                                 </div>
                                 <div id="company_number" style="display: none">
                                     <p class="overline">사업자등록번호</p>
-                                    <input type="tel" name="company_number">
+                                    <input type="tel" name="company_number" id="company_number">
                                 </div>
                                 <div id="company_file" style="display: none">
                                     <p class="overline">사업자등록증</p>
                                     <p class="caption">jpg,jpeg,png 파일(10mb 미만)</p>
                                     <label class="upload-file">
-                                        <input type="file" name="company_file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
+                                        <input type="file" name="company_file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png" id="company_file">
                                         <div class="file-button">파일선택</div>
                                         <p class="file-name">선택한 파일 없음</p>
                                     </label>
@@ -529,7 +688,7 @@
                                 <h3 class="title">통장사본</h3>
                                 <p class="caption">jpg,jpeg,png 파일(10mb 미만)</p>
                                 <label class="upload-file">
-                                    <input type="file" name="bank_file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
+                                    <input type="file" name="bank_file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png" id="bank_file">
                                     <div class="file-button">파일선택</div>
                                     <p class="file-name">선택한 파일 없음</p>
                                 </label>
@@ -537,16 +696,17 @@
                             <div class="pay-info-item">
                                 <div class="method-item">
                                     <h3 class="subtitle">이메일</h3>
-                                    <input type="email" class="input-field" name="account_email" placeholder="이메일 주소를 입력해주세요">
+                                    <input type="email" class="input-field" name="account_email" placeholder="이메일 주소를 입력해주세요" id="account_email">
                                     <p class="caption">약정서 발송에 필요한 정보입니다.</p>
                                 </div>
                                 <div class="method-item">
                                     <h3 class="subtitle">전화번호</h3>
-                                    <input type="tel" class="input-field" name="account_phone" placeholder="하이픈('-')없이 입력해주세요">
+                                    <input type="tel" class="input-field" name="account_phone" placeholder="하이픈('-')없이 입력해주세요" id="account_phone">
                                     <p class="caption">약정서 발송에 필요한 정보입니다.</p>
                                 </div>
                             </div>
                         </div>
+                    </form>
                 </div>
                 <!--// tab contents -->
 
@@ -554,6 +714,7 @@
         </div>
 
     </main>
+    <script src="../js/datepicker.js"></script>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded',function () {
             var oEditors = [];
@@ -572,15 +733,31 @@
             // 스토리텔링
             document.getElementById('project_date').addEventListener('click', function () {
                 oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+                console.log(document.getElementById('ir1'));
                 var form = new FormData($('#projectForm3')[0]);
                 formAjax('POST', false, '/project', form, function (e) {
                     alert('오류입니다. 처음부터 다시 시작해주세요.');
                     location.href = '/project/create';
                 }, function (data) {
+                    if (data === 'fail') {
+                        alert('이전 단계를 진행해주세요.')
+                    } else {
+                        valueCheck = true;
+                    }
                 });
-                valueCheck = true;
             });
-
         });
+
+
+        function dateChange() {
+            var deadline = document.getElementById('deadline').value;
+            var degreeDate = new Date(deadline);
+            degreeDate.setDate(degreeDate.getDate() + 7);
+            var year = degreeDate.getFullYear();
+            var month = degreeDate.getMonth() < 9 ? "0" + (degreeDate.getMonth() + 1) : (degreeDate.getMonth() + 1); // getMonth() is zero-based
+            var day  = degreeDate.getDate() < 10 ? "0" + degreeDate.getDate() : degreeDate.getDate();
+
+            $('#account_date').val(year+'-'+month+'-'+day);
+        }
     </script>
 @endsection

@@ -23,6 +23,7 @@ class CreateProjectsTable extends Migration
             $table->bigInteger('user_id')->unsigned()->comment('유저ID');
             $table->bigInteger('category_id')->unsigned()->comment('1차 카테고리');
             $table->bigInteger('category2_id')->unsigned()->comment('2차 카테고리');
+            $table->bigInteger('size_category_id')->nullable()->unsigned()->comment('사이즈 카테고리 id');
             $table->integer('total_cost')->default(0)->comment('모인금액');
             $table->integer('supporter')->default(0)->comment('후원자수');
             $table->integer('count')->default(0)->comment('판매수량');
@@ -37,9 +38,9 @@ class CreateProjectsTable extends Migration
             $table->date('deadline')->nullable()->comment('마감일');
             $table->date('account_date')->nullable()->comment('정산일');
             $table->date('delivery_date')->nullable()->comment('배송일');
-            $table->date('delay_date')->nullable()->comment('지연일자');
+            $table->string('delay_date', 10)->nullable()->comment('지연일자');
             $table->text('storytelling')->nullable()->comment('스토리텔링');
-            $table->tinyInteger('process')->default(0)->comment('진행률');
+            $table->tinyInteger('progress')->default(0)->comment('진행률');
             $table->timestamps();
             $table->softDeletes();
         });
