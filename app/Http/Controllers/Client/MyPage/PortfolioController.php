@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Client\MyPage;
 
+use App\Brand;
 use App\Portfolio;
 use App\PortfolioImage;
+use File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -51,7 +53,12 @@ class PortfolioController extends Controller {
         try {
             $check = Portfolio::whereUserId(auth()->user()->id)->first();
             if(isset($check)) {flash('포트폴리오가 존재합니다.')->warning(); return back();}
-            $portfolio = Portfolio::create([
+
+            $request->validate([
+                'portfolio_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $portfolio = Portfolio::firstOrCreate([
                 'user_id'           =>auth()->user()->id,                                                                // 사용자 ID
                 'content_ko'        =>$request->content_ko,                                                              // 한글내용
                 'content_cn'        =>$request->content_cn,                                                              // 중문내용
@@ -71,24 +78,62 @@ class PortfolioController extends Controller {
                 'homepage_hidden'   =>$request->homepage_hidden ? 1 : 0,                                                 // 홈페이지 숨김처리
             ]);
 
-            $file = $request->file('file');
-            if($file){
-                $size = $file->getSize();
-                $fileName = 'portfolio_'.$portfolio->id.'.'.$file->getClientOriginalExtension();
-                $savePath = 'portfolio/'.$fileName;
-                // 이미지 등록
-                PortfolioImage::create([
+            $portfolio_image = $request->file('portfolio_image');
+            if($portfolio_image){
+                $savePath = $portfolio_image->store('images/portfolio/'.$portfolio->id.'/'.date('Y-m-d'), 'public');
+                PortfolioImage::create([                                                                                // 포트폴리오 이미지 등록
                     'portfolio_id'      => $portfolio->id,
-                    'image_division'    =>'',
-                    'image_type'        =>$file->getMimeType(),
+                    'image_division'    => 1,
+                    'image_type'        =>$portfolio_image->getClientMimeType(),
                     'image_path'        =>$savePath,
-                    'origin_name'       =>$file->getClientOriginalName(),
+                    'origin_name'       =>$portfolio_image->getClientOriginalName(),
                 ]);
             }
+
+            // 브랜드 등록
+            $brand = Brand::create([
+                'portfolio_id'  =>$portfolio->id,
+                'name_ko'       =>$request->name_ko ? $request->name_ko : '',
+                'name_cn'       =>$request->name_cn ? $request->name_cn : '',
+                'name_en'       =>$request->name_en ? $request->name_en : '',
+                'contents_ko'   =>$request->contents_ko ? $request->contents_ko : '',
+                'contents_cn'   =>$request->contents_cn ? $request->contents_cn : '',
+                'contents_en'   =>$request->contents_en ? $request->contents_en : '',
+            ]);
+
+
+            $brand_logo_image = $request->file('brand_logo_image');
+            if($brand_logo_image){
+                $savePath = $brand_logo_image->store('images/portfolio/'.$portfolio->id.'/'.date('Y-m-d'), 'public');
+                PortfolioImage::create([                                                                                // 포트폴리오 이미지 등록
+                    'portfolio_id'      => $portfolio->id,
+                    'image_division'    => 2,
+                    'image_type'        =>$brand_logo_image->getClientMimeType(),
+                    'image_path'        =>$savePath,
+                    'origin_name'       =>$brand_logo_image->getClientOriginalName(),
+                ]);
+            }
+
+            $brand_thumbnail_image = $request->file('brand_thumbnail_image');
+            if($brand_thumbnail_image){
+                $savePath = $brand_thumbnail_image->store('images/portfolio/'.$portfolio->id.'/'.date('Y-m-d'), 'public');
+                PortfolioImage::create([                                                                                // 포트폴리오 이미지 등록
+                    'portfolio_id'      => $portfolio->id,
+                    'image_division'    => 3,
+                    'image_type'        =>$brand_thumbnail_image->getClientMimeType(),
+                    'image_path'        =>$savePath,
+                    'origin_name'       =>$brand_thumbnail_image->getClientOriginalName(),
+                ]);
+            }
+
+
+
+
+
             return redirect(route('mypage_portfolio.index'));
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
+            flash($msg)->important();
             return back();
         }
     }

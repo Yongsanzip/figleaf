@@ -49,7 +49,7 @@ $tab = 'portfolio';
                                 <h3 class="title">대표이미지(썸네일)</h3>
                                 <p class="text-caption">최소 280*360px의 jpg, jpeg, png파일(10MB 미만)</p>
                                 <label class="upload-file">
-                                    <input type="file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
+                                    <input type="file" name="portfolio_image" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
                                     <div class="file-button">파일선택</div>
                                     <p class="file-name">선택한 파일 없음</p>
 
@@ -218,9 +218,9 @@ $tab = 'portfolio';
                                     </label>
                                 </div>
                                 <ul class="brand-name-list">
-                                    <li><input type="text" lang="ko" class="input-field" placeholder="협회명(한국어)"></li>
-                                    <li><input type="text" lang="en" class="input-field hide" placeholder="Name of Association(English)"></li>
-                                    <li><input type="text" lang="ch" class="input-field hide" placeholder="请输入协会(汉语)"></li>
+                                    <li><input type="text" lang="ko" name="brand_name_ko" class="input-field" placeholder="협회명(한국어)"></li>
+                                    <li><input type="text" lang="en" name="brand_name_en" class="input-field hide" placeholder="Name of Association(English)"></li>
+                                    <li><input type="text" lang="ch" name="brand_name_cn" class="input-field hide" placeholder="请输入协会(汉语)"></li>
                                 </ul>
                             </div>
                             <!-- 02-B 대표이미지 -->
@@ -228,7 +228,7 @@ $tab = 'portfolio';
                                 <h3 class="title">대표이미지(썸네일)</h3>
                                 <p class="text-caption">최소 280*360px의 jpg, jpeg, png파일(10MB 미만)</p>
                                 <label class="upload-file">
-                                    <input type="file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
+                                    <input type="file" name="brand_thumbnail_image" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
                                     <div class="file-button">파일선택</div>
                                     <p class="file-name">선택한 파일 없음</p>
                                 </label>
@@ -238,7 +238,7 @@ $tab = 'portfolio';
                                 <h3 class="title">브랜드 로고</h3>
                                 <p class="text-caption">최소 280*360px의 jpg, jpeg, png파일(10MB 미만)</p>
                                 <label class="upload-file">
-                                    <input type="file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
+                                    <input type="file" name="brand_logo_image" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
                                     <div class="file-button">파일선택</div>
                                     <p class="file-name">선택한 파일 없음</p>
                                 </label>
@@ -260,11 +260,10 @@ $tab = 'portfolio';
                                         <div class="shape">汉语</div>
                                     </label>
                                 </div>
-                                <div class="textarea-list brand-text-lis
-                                t">
-                                    <textarea lang="ko" class="textarea" placeholder="한국어"></textarea>
-                                    <textarea lang="en" class="textarea hide" placeholder="English"></textarea>
-                                    <textarea lang="ch" class="textarea hide" placeholder="汉语"></textarea>
+                                <div class="textarea-list brand-text-list">
+                                    <textarea lang="ko" name="brand_content_ko" class="textarea" placeholder="한국어"></textarea>
+                                    <textarea lang="en" name="brand_content_en" class="textarea hide" placeholder="English"></textarea>
+                                    <textarea lang="ch" name="brand_content_cn" class="textarea hide" placeholder="汉语"></textarea>
                                 </div>
                             </div>
                         </div>
