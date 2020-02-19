@@ -58,14 +58,31 @@ document.addEventListener('DOMContentLoaded',function () {
         var information_water = document.getElementsByClassName('information_water');              // 물세탁
         var information_bleach = document.getElementsByClassName('information_bleach');            // 표백
         var information_iron = document.getElementsByClassName('information_iron');                // 다림질
-        var information_drycleacing = document.getElementsByClassName('information_drycleacing');  // 드라이클리닝
+        var information_drycleaning = document.getElementsByClassName('information_drycleaning');  // 드라이클리닝
         var information_dry = document.getElementsByClassName('information_dry');                  // 건조
         var size = document.getElementById('size').value;                                           // 사이즈
         var fabric = document.getElementsByClassName('fabric');                                    // 원단/재질
+        var fabric_ratio = document.getElementsByClassName('fabric_ratio');                        // 원단/재질 비율
 
 
         // 1. 재질명은 있는데 비율이 없을 때
-        // 2. 비율은 있는데 재질명이 없을 때
+        // 2. 비율은 있는데 재질명이 없을 때c
+
+        for (var i = 0; i <fabric.length; i++) {
+            if (!fabric[i].value || !fabric_ratio[i].value) {
+                alert('재질명 또는 비율을 입력해주세요.');
+                valueCheck = false;
+                return false;
+            }
+        }
+
+        for (var i = 0; i <fabric_ratio.length; i++) {
+            if (!fabric[i].value || !fabric_ratio[i].value) {
+                alert('재질명 또는 비율을 입력해주세요.');
+                valueCheck = false;
+                return false;
+            }
+        }
 
         var num = 0;
         for (var i = 0; i < information_water.length; i++) {
@@ -86,8 +103,8 @@ document.addEventListener('DOMContentLoaded',function () {
             }
         }
 
-        for (var i = 0; i < information_drycleacing.length; i++) {
-            if (information_drycleacing[i].checked) {
+        for (var i = 0; i < information_drycleaning.length; i++) {
+            if (information_drycleaning[i].checked) {
                 num++;
             }
         }
@@ -139,7 +156,7 @@ document.addEventListener('DOMContentLoaded',function () {
             alert('사이즈는 필수 입력입니다.');
             valueCheck = false;
             return false;
-        } else if (!information_water || !information_bleach || !information_iron || !information_drycleacing || !information_dry) {
+        } else if (!information_water || !information_bleach || !information_iron || !information_drycleaning || !information_dry) {
             alert('취급정보를 선택해주세요.');
             valueCheck = false;
             return false;
@@ -438,12 +455,13 @@ function fnAddFabric(){
     var fabricList = document.getElementsByClassName('fabric-list')[0];
     var fabricItem = '<div class="fabric-item">' +
         '                <div class="fabric-name">' +
-        '                    <input type="text" class="input-field" name="fabric[]" id="material_name'+num+'" onclick="popup_material('+num+')" readonly>' +
+        '                    <input type="text" class="input-field fabric" name="fabric[]" id="material_name'+num+'" onclick="popup_material('+num+')" readonly>' +
         '                    <input type="hidden" name="material_id[]" id="material_id'+num+'">' +
         '                </div>' +
         '                <div class="fabric-ratio">' +
-        '                    <input type="number" max="100" min="0" class="input-field" name="fabric_ratio[]">' +
+        '                    <input type="number" max="100" min="0" class="input-field fabric_ratio" name="fabric_ratio[]">' +
         '                </div>' +
+        '                <input type="hidden" name="fabric_id[]" value="">' +
         '                <button class="btn-white" type="button" onclick="fnRemoveFabric(this)">삭제</button>' +
         '            </div>';
 

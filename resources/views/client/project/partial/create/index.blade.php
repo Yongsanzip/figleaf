@@ -6,7 +6,7 @@
 <script src="../js/project.js"></script>
 <script src="../js/projectAction.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script type="text/javascript" src="../se3/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="../se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 @section('content')
     <link rel="stylesheet" href="{{asset('/css/swiper.min.css')}}">
     <main class="container">
@@ -152,7 +152,7 @@
                                         <select class="select" name="size_category" id="size_category">
                                             <option value="0" selected disabled>- 1차 카테고리 -</option>
                                             @foreach($size_categories as $size_category)
-                                                <option value="{{ $size_category->id }}">{{ $size_category->category_name_ko }}</option>
+                                                <option value="{{ $size_category->id }}" {{ $data ? ($size_category->id === $data->size_category_id ? 'selected' : '') : '' }}>{{ $size_category->category_name_ko }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -391,13 +391,13 @@
                                             <div class="fabric-item">
                                                 <div class="fabric-name">
                                                     <input type="text" class="input-field fabric" name="fabric[]" id="material_name0" onclick="popup_material(0)" value="{{ $fabric->material->name }}" readonly>
-                                                    <input type="hidden" name="material_id[]" id="material_id0">
+                                                    <input type="hidden" name="material_id[]" id="material_id0" value="{{ $fabric->material_id }}">
                                                 </div>
                                                 <div class="fabric-ratio">
-                                                    <input type="number" max="100" min="0" class="input-field" name="fabric_ratio[]" value="{{ $fabric->rate }}">
+                                                    <input type="number" max="100" min="0" class="input-field fabric_ratio" name="fabric_ratio[]" value="{{ $fabric->rate }}">
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="fabric_id[]" value="{{ $fabric->id }}">
+                                            <input type="hidden" name="fabric_id[]" value="{{ $fabric ? $fabric->id : '' }}">
                                         </div>
                                         @empty
                                             <div class="fabric-list">
@@ -411,10 +411,10 @@
                                                         <input type="hidden" name="material_id[]" id="material_id0">
                                                     </div>
                                                     <div class="fabric-ratio">
-                                                        <input type="number" max="100" min="0" class="input-field" name="fabric_ratio[]">
+                                                        <input type="number" max="100" min="0" class="input-field fabric_ratio" name="fabric_ratio[]">
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="fabric_id[]" value="0">
+                                                <input type="hidden" name="fabric_id[]" value="">
                                             </div>
                                         @endforelse
                                             @else
@@ -429,7 +429,7 @@
                                                         <input type="hidden" name="material_id[]" id="material_id0">
                                                     </div>
                                                     <div class="fabric-ratio">
-                                                        <input type="number" max="100" min="0" class="input-field" name="fabric_ratio[]">
+                                                        <input type="number" max="100" min="0" class="input-field fabric_ratio" name="fabric_ratio[]">
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="fabric_id[]" value="0">
@@ -459,8 +459,12 @@
                                             @foreach($information_list_water as $key => $list)
                                             <label class="handling-item water-0{{$key+1}}">
                                                 <div class="item-image"></div>
-                                                <input type="radio" class="information_water" name="information_water">
-                                                <input type="hidden" name="information_water_id">
+                                                {{ $water = $data ? $data->informations->where('tab_id', $list->tab_id)->first() : '' }}
+                                                <input type="radio" class="information_water" name="information_water"
+                                                       value="{{ $list->id }}" {{ $water ? ($list->id === $water->detail_id ? 'checked' : '') : '' }}>
+                                                <input type="hidden" name="information_water_id"
+                                                       value="{{ $data ? ($water ? $water->id : '') : '' }}">
+                                                <input type="hidden" name="water_tab_id" value="{{ $list->tab_id }}">
                                                 <ul class="item-caption">
                                                     <li>{!! $list->description_ko !!}</li>
                                                 </ul>
@@ -473,7 +477,12 @@
                                             @foreach($information_list_bleach as $key => $list)
                                             <label class="handling-item bleach-0{{ $key+1 }}">
                                                 <div class="item-image"></div>
-                                                <input type="radio" class="information_bleach" name="information_bleach" id="information_bleach" value="{{ $list->id }}">
+                                                {{ $bleach = $data ? $data->informations->where('tab_id', $list->tab_id)->first() : '' }}
+                                                <input type="radio" class="information_bleach" name="information_bleach" id="information_bleach"
+                                                       value="{{ $list->id }}" {{ $bleach ? ($list->id === $bleach->detail_id ? 'checked' : '') : '' }}>
+                                                <input type="hidden" name="information_bleach_id"
+                                                       value="{{ $data ? ($bleach ? $bleach->id : '') : '' }}">
+                                                <input type="hidden" name="bleach_tab_id" value="{{ $list->tab_id }}">
                                                 <ul class="item-caption">
                                                     <li>{!! $list->description_ko !!}</li>
                                                 </ul>
@@ -486,7 +495,12 @@
                                             @foreach($information_list_iron as $key => $list)
                                             <label class="handling-item iron-0{{ $key+1 }}">
                                                 <div class="item-image"></div>
-                                                <input type="radio" class="information_iron" name="information_iron" id="information_iron" value="{{ $list->id }}">
+                                                {{ $iron = $data ? $data->informations->where('tab_id', $list->tab_id)->first() : '' }}
+                                                <input type="radio" class="information_iron" name="information_iron" id="information_iron"
+                                                       value="{{ $list->id }}" {{ $iron ? ($list->id === $iron->detail_id ? 'checked' : '') : '' }}>
+                                                <input type="hidden" name="information_iron_id"
+                                                       value="{{ $data ? ($iron ? $iron->id : '') : '' }}">
+                                                <input type="hidden" name="iron_tab_id" value="{{ $list->tab_id }}">
                                                 <ul class="item-caption">
                                                     <li>{!! $list->description_ko !!}</li>
                                                 </ul>
@@ -499,7 +513,12 @@
                                             @foreach($information_list_drycleaning as $key => $list)
                                             <label class="handling-item drycleaning-0{{ $key+1 }}">
                                                 <div class="item-image"></div>
-                                                <input type="radio" class="information_drycleacing" name="information_drycleacing" id="information_drycleacing" value="{{ $list->id }}">
+                                                {{ $drycleaning = $data ? $data->informations->where('tab_id', $list->tab_id)->first() : '' }}
+                                                <input type="radio" class="information_drycleaning" name="information_drycleaning" id="information_drycleaning"
+                                                       value="{{ $list->id }}" {{ $drycleaning ? ($list->id === $drycleaning->detail_id ? 'checked' : '') : '' }}>
+                                                <input type="hidden" name="information_drycleaning_id"
+                                                       value="{{ $data ? ($drycleaning ? $drycleaning->id : '') : '' }}">
+                                                <input type="hidden" name="drycleaning_tab_id" value="{{ $list->tab_id }}">
                                                 <ul class="item-caption">
                                                     <li>{!! $list->description_ko !!}</li>
                                                 </ul>
@@ -512,7 +531,11 @@
                                             @foreach($information_list_dry as $key => $list)
                                             <label class="handling-item dry-0{{ $key+1 }}">
                                                 <div class="item-image"></div>
-                                                <input type="radio" class="information_dry" name="information_dry" id="information_dry" value="{{ $list->id }}">
+                                                {{ $dry = $data ? $data->informations->where('tab_id', $list->tab_id)->first() : '' }}
+                                                <input type="radio" class="information_dry" name="information_dry" id="information_dry" value="{{ $list->id }}" {{ $dry ? ($list->id === $dry->detail_id ? 'checked' : '') : '' }}>
+                                                <input type="hidden" name="information_dry_id"
+                                                       value="{{ $data ? ($dry ? $dry->id : '') : '' }}">
+                                                <input type="hidden" name="dry_tab_id" value="{{ $list->tab_id }}">
                                                 <ul class="item-caption">
                                                     <li>{!! $list->description_ko !!}</li>
                                                 </ul>
@@ -534,7 +557,7 @@
                             <div class="storytelling-wrap">
                                 <div class="notice"><span id="popup_guide">가이드를 확인</span>하시고 작성해주세요</div>
                                 <div class="storytelling">
-                                    <textarea name="ir1" id="ir1" rows="10" cols="100" style="width: 100%; height: 500px"></textarea>
+                                    <textarea name="ir1" id="ir1" rows="10" cols="100" style="width: 100%; height: 500px">{!! $data ? $data->storytelling : '' !!}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -548,28 +571,28 @@
                             <div class="schedule-wrap">
                                 <div class="schedule">
                                     <span>프로젝트 마감일</span>은
-                                    <input type="text" class="input-field datepicker" name="deadline" id="deadline" onchange="dateChange()" readonly>
+                                    <input type="text" class="input-field datepicker" name="deadline" id="deadline" onchange="dateChange()" value="{{ $data ? $data->deadline : '' }}" readonly>
                                     이며,
 
                                 </div>
                                 <div class="schedule">
                                     이에 따라 <span>프로젝트 정산일</span>은 영업일 7일 뒤인
-                                    <input type="text" class="input-field" name="account_date" id="account_date" readonly>이고,
+                                    <input type="text" class="input-field" name="account_date" id="account_date" value="{{ $data ? $data->account_date : '' }}" readonly>이고,
                                 </div>
                                 <div class="schedule">
                                     프로젝트 마감일 후
-                                    <input type="text" class="input-field datepicker" name="delivery_date" id="delivery_date" readonly>
+                                    <input type="text" class="input-field datepicker" name="delivery_date" id="delivery_date" value="{{ $data ? $data->delivery_date : '' }}" readonly>
                                     에 배송을 진행하되,
                                 </div>
                                 <div class="schedule">
                                     제작 상황에 따라 최대
                                     <select class="select" name="delay_date">
                                         <option selected disabled>- 지연일자 -</option>
-                                        <option value="3">3일</option>
-                                        <option value="5">5일</option>
-                                        <option value="7">7일</option>
-                                        <option value="15">15일</option>
-                                        <option value="30">30일</option>
+                                        <option value="3" {{ $data ? ($data->delay_date == 3 ? 'selected' : '') : ''}}>3일</option>
+                                        <option value="5" {{ $data ? ($data->delay_date == 5 ? 'selected' : '') : ''}}>5일</option>
+                                        <option value="7" {{ $data ? ($data->delay_date == 7 ? 'selected' : '') : ''}}>7일</option>
+                                        <option value="15" {{ $data ? ($data->delay_date == 15 ? 'selected' : '') : ''}}>15일</option>
+                                        <option value="30" {{ $data ? ($data->delay_date == 30 ? 'selected' : '') : ''}}>30일</option>
                                     </select>
                                     까지 지연될 수 있고,
                                 </div>
@@ -579,7 +602,7 @@
                                     따라 전액 환불 될 수 있음에
                                     <label>
                                         <span>동의합니다.</span>
-                                        <input type="checkbox" id="agree">
+                                        <input type="checkbox" name="agree" id="agree" value="Y" {{ $data ? ($data->agree == 'Y' ? 'checked' : '') : '' }}>
                                     </label>
                                 </div>
                             </div>
@@ -602,7 +625,7 @@
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">이메일</span>
-                                    <input type="email" class="input-field" name="email" id="email" placeholder="이메일을 입력하세요">
+                                    <input type="email" class="input-field" name="email" id="email" value="{{ $portfolio ? $portfolio->email : '' }}" placeholder="이메일을 입력하세요">
                                     <label class="checkbox-wrap">
                                         <input type="checkbox" name="email_hidden" value="1">
                                         <p>숨기기</p>
@@ -610,7 +633,7 @@
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">전화번호</span>
-                                    <input type="tel" class="input-field" name="phone" id="phone" placeholder="전화번호를 입력하세요">
+                                    <input type="tel" class="input-field" name="phone" id="phone" value="{{ $portfolio ? $portfolio->home_phone : '' }}" placeholder="전화번호를 입력하세요">
                                     <label class="checkbox-wrap">
                                         <input type="checkbox" name="phone_hidden" value="1">
                                         <p>숨기기</p>
@@ -618,7 +641,7 @@
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">페이스북</span>
-                                    <input type="text" class="input-field" name="facebook" id="facebook" placeholder="페이스북 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="facebook" id="facebook" value="{{ $portfolio ? $portfolio->facebook : '' }}" placeholder="페이스북 계정을 입력하세요">
                                     <label class="checkbox-wrap">
                                         <input type="checkbox" name="facebook_hidden" value="1">
                                         <p>숨기기</p>
@@ -626,7 +649,7 @@
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">인스타그램</span>
-                                    <input type="text" class="input-field" name="instagram" id="instagram" placeholder="인스타그램 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="instagram" id="instagram" value="{{ $portfolio ? $portfolio->instagram : '' }}" placeholder="인스타그램 계정을 입력하세요">
                                     <label class="checkbox-wrap">
                                         <input type="checkbox" name="instagram_hidden" value="1">
                                         <p>숨기기</p>
@@ -634,7 +657,7 @@
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">트위터</span>
-                                    <input type="text" class="input-field" name="twitter" id="twitter" placeholder="트위터 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="twitter" id="twitter" value="{{ $portfolio ? $portfolio->twitter : '' }}" placeholder="트위터 계정을 입력하세요">
                                     <label class="checkbox-wrap">
                                         <input type="checkbox" name="twitter_hidden" value="1">
                                         <p>숨기기</p>
@@ -642,7 +665,7 @@
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">홈페이지</span>
-                                    <input type="text" class="input-field" name="homepage" id="homepage" placeholder="홈페이지 url을 입력하세요">
+                                    <input type="text" class="input-field" name="homepage" id="homepage" value="{{ $portfolio ? $portfolio->homepage : '' }}" placeholder="홈페이지 url을 입력하세요">
                                     <label class="checkbox-wrap">
                                         <input type="checkbox" name="homepage_hidden" value="1">
                                         <p>숨기기</p>

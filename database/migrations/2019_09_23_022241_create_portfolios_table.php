@@ -32,7 +32,7 @@ class CreatePortfoliosTable extends Migration
             $table->string('facebook', 50)->nullable()->comment('페이스북');
             $table->string('instagram', 50)->nullable()->comment('인스타그램');
             $table->string('twitter', 50)->nullable()->comment('트위터');
-            $table->string('hompage', 50)->nullable()->comment('홈페이지');
+            $table->string('homepage', 50)->nullable()->comment('홈페이지');
             $table->boolean('email_hidden')->default(0)->comment('이메일 히든여부(히든x:0, 히든:1)');
             $table->boolean('phone_hidden')->default(0)->comment('전화번호 히든여부(히든x:0, 히든:1)');
             $table->boolean('facebook_hidden')->default(0)->comment('페이스북 히든여부(히든x:0, 히든:1)');

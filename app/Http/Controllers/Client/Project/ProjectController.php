@@ -6,10 +6,8 @@ use App\Account;
 use App\Brand;
 use App\Category;
 use App\CategoryDetail;
-use App\Fabirc;
 use App\Fabric;
 use App\Group;
-use App\Information;
 use App\Informations;
 use App\InformationSelectList;
 use App\InformationTab;
@@ -44,8 +42,7 @@ class ProjectController extends Controller
         } else {
             // 브랜드 소개 default 값
             // $introduction = Portfolio::where('user_id', auth()->user()->id);
-            $portfolio = Portfolio::where('user_id', auth()->user()->id)->first();          // 포트폴리오 (연락처)
-            $brand = Brand::where('portfolio_id', $portfolio->id)->first();                 // 브랜드 (브랜드명)
+
 
 
             return view('client.project.index');
@@ -71,12 +68,15 @@ class ProjectController extends Controller
         $groups = Group::get();                                                                // 원단 그룹
         $materials = Material::get();                                                          // 원단 - 재질
 
+        $portfolio = Portfolio::where('user_id', auth()->user()->id)->first();                 // 포트폴리오 (연락처)
+        $brand = Brand::where('portfolio_id', $portfolio->id)->first();                        // 브랜드 (브랜드명)
+
 
         $data = Project::where('user_id', auth()->user()->id)->where('progress', '<', 100)->orderBy('created_at', 'desc')->first();
 
         return view('client.project.partial.create.index',
             compact('main_categories', 'second_categories', 'materials', 'size_categories', 'information_tab', 'groups',
-            'information_list_water', 'information_list_bleach', 'information_list_iron', 'information_list_drycleaning', 'information_list_dry', 'data'));
+            'information_list_water', 'information_list_bleach', 'information_list_iron', 'information_list_drycleaning', 'information_list_dry', 'data', 'portfolio'));
     }
 
     /**
@@ -147,10 +147,9 @@ class ProjectController extends Controller
                 ]);
             }
 
-            error_log(3);
-            // 원단-재질
             $fabric_count = count($request->fabric_ratio);
-            for ($i = 0; $i < $fabric_count; $i++){
+
+            for ($i = 0; $i < $fabric_count; $i++){                     // 원단-재질
                 Fabric::updateOrCreate([
                     'id'            => $request->fabric_id[$i],
                     'project_id'    => $request->project_id,
@@ -159,8 +158,6 @@ class ProjectController extends Controller
                     'rate'          => $request->fabric_ratio[$i]
                 ]);
             }
-
-            error_log(333);
 
             Project::where('id', $request->project_id)->update([         // 프로젝트
                 'size_category_id'   => $request->size_category,
@@ -174,6 +171,7 @@ class ProjectController extends Controller
                     'id'            => $request->information_water_id,
                     'project_id'    => $request->project_id,
                 ],[
+                    'tab_id'        => $request->water_tab_id,
                     'detail_id'     => $request->information_water,
                 ]);
             }
@@ -182,32 +180,40 @@ class ProjectController extends Controller
                 error_log('bleach');
                 error_log($request->information_bleach);
                 Informations::updateOrCreate([
+                    'id'            => $request->information_bleach_id,
                     'project_id'    => $request->project_id,
                 ],[
+                    'tab_id'        => $request->bleach_tab_id,
                     'detail_id'     => $request->information_bleach,
                 ]);
             }
 
             if ($request->information_iron) {                           // 다림질
                 Informations::updateOrCreate([
+                    'id'            => $request->information_iron_id,
                     'project_id'    => $request->project_id,
                 ],[
+                    'tab_id'        => $request->iron_tab_id,
                     'detail_id'     => $request->information_iron,
                 ]);
             }
 
-            if ($request->information_drycleacing) {                    // 드라이클리닝
+            if ($request->information_drycleaning) {                    // 드라이클리닝
                 Informations::updateOrCreate([
+                    'id'            => $request->information_drycleaning_id,
                     'project_id'    => $request->project_id,
                 ],[
-                    'detail_id'     => $request->information_drycleacing,
+                    'tab_id'        => $request->drycleaning_tab_id,
+                    'detail_id'     => $request->information_drycleaning,
                 ]);
             }
 
             if ($request->information_dry) {                            // 건조
                 Informations::updateOrCreate([
+                    'id'            => $request->information_dry_id,
                     'project_id'    => $request->project_id,
                 ],[
+                    'tab_id'        => $request->dry_tab_id,
                     'detail_id'     => $request->information_dry,
                 ]);
             }
@@ -229,6 +235,7 @@ class ProjectController extends Controller
                 'account_date'      => $request->account_date,
                 'delivery_date'     => $request->delivery_date,
                 'delay_date'        => $request->delay_date,
+                'agree'             => $request->agree,
                 'progress'          => 75,
             ]);
             return response()->json('success', 200,[],JSON_PRETTY_PRINT);

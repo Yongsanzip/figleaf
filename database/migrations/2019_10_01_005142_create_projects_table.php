@@ -38,6 +38,7 @@ class CreateProjectsTable extends Migration
             $table->date('deadline')->nullable()->comment('마감일');
             $table->date('account_date')->nullable()->comment('정산일');
             $table->date('delivery_date')->nullable()->comment('배송일');
+            $table->char('agree',1)->nullable()->comment('약관동의');
             $table->string('delay_date', 10)->nullable()->comment('지연일자');
             $table->text('storytelling')->nullable()->comment('스토리텔링');
             $table->tinyInteger('progress')->default(0)->comment('진행률');
