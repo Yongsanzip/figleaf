@@ -12,11 +12,23 @@ class Fabric extends Model
     // 컬럼중 노출하지않을것을 표기
     protected $guarded =[];
 
-    public function project() {
-        return $this->belongsTo('App\Project', 'project_id', 'id');
-    }
+    /*******************************************************************
+     * @return BelongsTo
+     *******************************************************************/
 
-    public function material() {
-        return $this->belongsTo('App\Material', 'material_id', 'id');
-    }
+        public function project() {
+            return $this->belongsTo('App\Project', 'project_id', 'id');
+        }
+
+        public function material() {
+            return $this->belongsTo('App\Material', 'material_id', 'id');
+        }
+    /*******************************************************************
+     * @return HasMany
+     *******************************************************************/
+
+    /*******************************************************************
+     * @return HasOne
+     *******************************************************************/
+
 }

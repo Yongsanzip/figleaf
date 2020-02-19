@@ -11,6 +11,13 @@ class Project extends Model {
     // 컬럼중 노출하지않을것을 표기
     protected $guarded =[];
 
+    /*******************************************************************
+     * @return BelongsTo
+     *******************************************************************/
+
+    /*******************************************************************
+     * @return HasMany
+     *******************************************************************/
     // 옵션
     public function options(){
         return $this->hasMany('App\Option','project_id','id');
@@ -30,4 +37,8 @@ class Project extends Model {
     public function informations() {
         return $this->hasMany('App\Informations', 'project_id', 'id');
     }
+    /*******************************************************************
+     * @return HasOne
+     *******************************************************************/
+
 }

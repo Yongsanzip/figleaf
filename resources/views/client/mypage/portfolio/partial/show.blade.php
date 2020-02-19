@@ -24,8 +24,7 @@ $tab = 'portfolio';
 
                 <!-- project overview-->
                 <div class="contents-wrap portfolio-overview">
-                    {{$datas->portfolio_images}}
-                    <img src="{{ asset('storage/'.$datas->portfolio_images)}}" alt="">
+                    <img src="{{ asset('storage/'.$datas->portfolio_images->first()->image_path)}}" alt="">
                     @if( app()->getLocale() =='ko')
                         {{ $datas->content_ko}}
                     @elseif(app()->getLocale() =='en')
@@ -134,7 +133,16 @@ $tab = 'portfolio';
                         <h3 class="headline">brand</h3>
                     </div>
                     <div class="contents-overview">
-                        <img src="../images/dummy/img-dummy-03.png" alt="">
+                        <img src="{{ asset('storage/'.$datas->brand_thumbnail_images->first()->image_path)}}" alt="">
+                        @if( app()->getLocale() =='ko')
+                            {{ $datas->brand->contents_ko}}
+                        @elseif(app()->getLocale() =='en')
+                            {{ $datas->brand->contents_en}}
+                        @elseif(app()->getLocale() =='en')
+                            {{ $datas->brand->contents_cn}}
+                        @else
+                            포트폴리오 내용이 존재하지 않습니다
+                        @endif
                         <p>
                             더운지라 새 힘차게 길을 끓는다. 그와 청춘은 인간에 것이다. 청춘 있는 하여도 그와 듣기만 우리 청춘의 주며, 때문이다. 못하다 끝까지 따뜻한
                             아름다우냐? 사라지지 할지라도 꽃이 할지니, 피어나기 뿐이다. 인간에 피어나기 날카로우나 실현에 청춘이 내려온 아름다우냐? 얼음 천지는 내려온

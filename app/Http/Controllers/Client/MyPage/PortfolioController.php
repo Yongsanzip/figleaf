@@ -16,7 +16,7 @@ class PortfolioController extends Controller {
      * @description : 포트폴리오 설정
      ************************************************************************/
     public function __construct() {
-
+        $this->middleware('auth');
     }
 
     /************************************************************************
@@ -39,7 +39,12 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function create(){
-        return view('client.mypage.portfolio.partial.create');
+        $check = Portfolio::whereUserId(auth()->user()->id)->first();
+        if(isset($check)){
+            return redirect(route('mypage_portfolio.index'));
+        } else {
+            return view('client.mypage.portfolio.partial.create');
+        }
     }
 
     /************************************************************************
@@ -93,12 +98,12 @@ class PortfolioController extends Controller {
             // 브랜드 등록
             $brand = Brand::create([
                 'portfolio_id'  =>$portfolio->id,
-                'name_ko'       =>$request->name_ko ? $request->name_ko : '',
-                'name_cn'       =>$request->name_cn ? $request->name_cn : '',
-                'name_en'       =>$request->name_en ? $request->name_en : '',
-                'contents_ko'   =>$request->contents_ko ? $request->contents_ko : '',
-                'contents_cn'   =>$request->contents_cn ? $request->contents_cn : '',
-                'contents_en'   =>$request->contents_en ? $request->contents_en : '',
+                'name_ko'       =>$request->brand_name_ko ? $request->brand_name_ko : '',
+                'name_cn'       =>$request->brand_name_cn ? $request->brand_name_cn : '',
+                'name_en'       =>$request->brand_name_en ? $request->brand_name_en : '',
+                'contents_ko'   =>$request->brand_content_ko ? $request->brand_content_ko : '',
+                'contents_cn'   =>$request->brand_content_cn ? $request->brand_content_cn : '',
+                'contents_en'   =>$request->brand_content_en ? $request->brand_content_en : '',
             ]);
 
 
