@@ -16,60 +16,60 @@ use App\Material;
 use App\Option;
 use App\Portfolio;
 use App\Project;
+use App\ProjectImage;
 use App\Size;
 use App\SizeCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @description 프로젝트 만들기/수정하기
+     * @description 프로젝트 만들기/수정하기 - 카테고리 ajax
      * @url /project
      * @return view
      */
     public function index(Request $request)
     {
-        if ($request->material_id > 0){      // 1차 -> 2차 카테고리
+        if ($request->material_id > 0){                                                                                 // 1차 -> 2차 카테고리
             $datas = Material::where('group_id', $request->material_id)->get();
             $name = 'material';
         }
 
-        if ($request->ajax()){              // 원단/재질 카테고리
+        if ($request->ajax()){                                                                                          // 원단/재질 카테고리
             $view = view('client.project.partial.render.material', compact('datas','name'))->render();
+
             return response()->json(['html'=>$view],200, [],JSON_PRETTY_PRINT);
         } else {
             // 브랜드 소개 default 값
             // $introduction = Portfolio::where('user_id', auth()->user()->id);
-
-
-
             return view('client.project.index');
         }
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @description 프로젝트 만들기/수정하기
+     * @url /project/create
+     * @return view
      */
     public function create()
     {
-        $main_categories = Category::where('id', 4)->orWhere('id', 5)->get();                  // 1차 카테고리
-        $second_categories = CategoryDetail::get();                                            // 2차 카테고리
-        $size_categories = SizeCategory::get();                                                // 사이즈 카테고리
-        $information_tab = InformationTab::get();                                              // 취급정보 탭
-        $information_list_water = InformationSelectList::where('tab_id', 1)->get();            // 취급정보 리스트 - 물세탁
-        $information_list_bleach = InformationSelectList::where('tab_id', 2)->get();           // 취급정보 리스트 - 표백
-        $information_list_iron = InformationSelectList::where('tab_id', 3)->get();             // 취급정보 리스트 - 다림질
-        $information_list_drycleaning = InformationSelectList::where('tab_id', 4)->get();      // 취급정보 리스트 - 드라이클리닝
-        $information_list_dry = InformationSelectList::where('tab_id', 5)->get();              // 취급정보 리스트 - 건조
-        $groups = Group::get();                                                                // 원단 그룹
-        $materials = Material::get();                                                          // 원단 - 재질
-
-        $portfolio = Portfolio::where('user_id', auth()->user()->id)->first();                 // 포트폴리오 (연락처)
-        $brand = Brand::where('portfolio_id', $portfolio->id)->first();                        // 브랜드 (브랜드명)
+        $main_categories              = Category::where('id', 4)->orWhere('id', 5)->get();                              // 1차 카테고리
+        $second_categories            = CategoryDetail::get();                                                          // 2차 카테고리
+        $size_categories              = SizeCategory::get();                                                            // 사이즈 카테고리
+        $information_tab              = InformationTab::get();                                                          // 취급정보 탭
+        $information_list_water       = InformationSelectList::where('tab_id', 1)->get();                               // 취급정보 리스트 - 물세탁
+        $information_list_bleach      = InformationSelectList::where('tab_id', 2)->get();                               // 취급정보 리스트 - 표백
+        $information_list_iron        = InformationSelectList::where('tab_id', 3)->get();                               // 취급정보 리스트 - 다림질
+        $information_list_drycleaning = InformationSelectList::where('tab_id', 4)->get();                               // 취급정보 리스트 - 드라이클리닝
+        $information_list_dry         = InformationSelectList::where('tab_id', 5)->get();                               // 취급정보 리스트 - 건조
+        $groups                       = Group::get();                                                                   // 원단 그룹
+        $materials                    = Material::get();                                                                // 원단 - 재질
+        $portfolio                    = Portfolio::where('user_id', auth()->user()->id)->first();                       // 포트폴리오 (연락처)
+        $brand                        = Brand::where('portfolio_id', $portfolio->id)->first();                          // 브랜드 (브랜드명)
 
 
         $data = Project::where('user_id', auth()->user()->id)->where('progress', '<', 100)->orderBy('created_at', 'desc')->first();
@@ -81,239 +81,233 @@ class ProjectController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @description 프로젝트 만들기/수정하기 저장 (이미지 1: 대표이미지 2: 사업자등록증 3: 통장사본)
+     * @url /project
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
         // table: projects, options, sizes, fabrics, introductions, accounts, informations
-        error_log($request->getContent());
-        //$datas = json_decode($request->getContent());
-
-        if ($request->project_1){                                        // 1. 프로젝트 개요
+        if ($request->project_1){                                                                                       // 1. 프로젝트 개요
             $project = Project::updateOrCreate([
-                'id'             => $request->project_id
+                'id'                    => $request->project_id
             ], [
-                'user_id'       => auth()->user()->id,
-                'category_id'   => $request->first_category,
-                'category2_id'  => $request->second_category,
-                'condition'     => 0,
-                'title'         => $request->project_title,
-                'summary'       => $request->project_summary,
-                'success_count' => $request->success_count,
-                'progress'       => 15,
+                'user_id'               => auth()->user()->id,
+                'category_id'           => $request->first_category,
+                'category2_id'          => $request->second_category,
+                'condition'             => 0,
+                'title'                 => $request->project_title,
+                'summary'               => $request->project_summary,
+                'success_count'         => $request->success_count,
+                'progress'              => 15,
             ]);
 
-            return response()->json($project->id, 200,[],JSON_PRETTY_PRINT);
-        } elseif ($request->project_2) {                                // 2. 상품정보
-            $options_name = $request->option_name;                      // 옵션, 사이즈, 원단, 취급정보
-            $options_price = $request->option_price;                    // 옵션 테이블
-            $option_count = $request->option_id;
-            for ($i = 0; $i < count($option_count); $i++) {
-                Option::updateOrCreate([
-                    'id'            => $request->option_id[$i],
-                    'project_id'    => $request->project_id,
+            $project_image = $request->file('main_file');                                                          // 대표이미지 (썸네일)
+            if($project_image){
+                $savePath = $project_image->store('images/project/'.date('Y-m-d').'/thumbnail', 'public');
+                ProjectImage::updateOrCreate([                                                                          // 프로젝트 이미지 등록
+                    'project_id'        => $request->project_id,
+                    'image_division'    => 1,
                 ],[
-                    'option_name'   => $options_name[$i],
-                    'price'         => $options_price[$i],
+                    'image_type'        => $project_image->getClientMimeType(),
+                    'image_path'        => $savePath,
+                    'origin_name'       => $project_image->getClientOriginalName(),
                 ]);
             }
 
-            $sizes_count = $request->size_id;                              // 사이즈 테이블 저장
+            return response()->json($project->id, 200,[],JSON_PRETTY_PRINT);
+        } elseif ($request->project_2) {                                                                                // 2. 상품정보
+            $options_name = $request->option_name;                                                                      // 옵션, 사이즈, 원단, 취급정보
+            $options_price = $request->option_price;                                                                    // 옵션 테이블
+            $option_count = $request->option_id;
+            for ($i = 0; $i < count($option_count); $i++) {
+                Option::updateOrCreate([
+                    'id'                => $request->option_id[$i],
+                    'project_id'        => $request->project_id,
+                ],[
+                    'option_name'       => $options_name[$i],
+                    'price'             => $options_price[$i],
+                ]);
+            }
+
+            $sizes_count = $request->size_id;                                                                           // 사이즈 테이블 저장
             for ($i = 0; $i < count($sizes_count); $i++){
                 Size::updateOrCreate([
-                    'id'            => $request->size_id[$i],
-                    'project_id'    => $request->project_id,
+                    'id'                => $request->size_id[$i],
+                    'project_id'        => $request->project_id,
                     ], [
-                    'size'          => $request->size[$i],
-                    'total_length'  => $request->total_length[$i],
-                    'shoulder'      => $request->shoulder[$i],
-                    'chest'         => $request->chest[$i],
-                    'arms_length'   => $request->arms_length[$i],
-                    'sleeve'        => $request->sleeve[$i],
-                    'armhole'       => $request->armhole[$i],
-                    'waist'         => $request->waist[$i],
-                    'hem'           => $request->hem[$i],
-                    'crotch'        => $request->crotch[$i],
-                    'hip'           => $request->hip[$i],
-                    'thigh'         => $request->thigh[$i],
-                    'string_length' => $request->string_length[$i],
-                    'horizontal'    => $request->horizontal[$i],
-                    'vertical'      => $request->vertical[$i],
-                    'forefoot'      => $request->forefoot[$i],
-                    'heels'         => $request->heels[$i],
+                    'size'              => $request->size[$i],
+                    'total_length'      => $request->total_length[$i],
+                    'shoulder'          => $request->shoulder[$i],
+                    'chest'             => $request->chest[$i],
+                    'arms_length'       => $request->arms_length[$i],
+                    'sleeve'            => $request->sleeve[$i],
+                    'armhole'           => $request->armhole[$i],
+                    'waist'             => $request->waist[$i],
+                    'hem'               => $request->hem[$i],
+                    'crotch'            => $request->crotch[$i],
+                    'hip'               => $request->hip[$i],
+                    'thigh'             => $request->thigh[$i],
+                    'string_length'     => $request->string_length[$i],
+                    'horizontal'        => $request->horizontal[$i],
+                    'vertical'          => $request->vertical[$i],
+                    'forefoot'          => $request->forefoot[$i],
+                    'heels'             => $request->heels[$i],
                 ]);
             }
 
             $fabric_count = count($request->fabric_ratio);
 
-            for ($i = 0; $i < $fabric_count; $i++){                     // 원단-재질
+            for ($i = 0; $i < $fabric_count; $i++){                                                                     // 원단-재질
                 Fabric::updateOrCreate([
-                    'id'            => $request->fabric_id[$i],
-                    'project_id'    => $request->project_id,
+                    'id'                => $request->fabric_id[$i],
+                    'project_id'        => $request->project_id,
                 ],[
-                    'material_id'   => $request->material_id[$i],
-                    'rate'          => $request->fabric_ratio[$i]
+                    'material_id'       => $request->material_id[$i],
+                    'rate'              => $request->fabric_ratio[$i]
                 ]);
             }
 
-            Project::where('id', $request->project_id)->update([         // 프로젝트
-                'size_category_id'   => $request->size_category,
-                'comment'            => $request->comment,
-                'progress'           => 30,
+            Project::where('id', $request->project_id)->update([                                                        // 프로젝트
+                'size_category_id'      => $request->size_category,
+                'comment'               => $request->comment,
+                'progress'              => 30,
             ]);
 
             // 취급정보 추가하기
-            if ($request->information_water) {                          // 물세탁
+            if ($request->information_water) {                                                                          // 물세탁
                 Informations::updateOrCreate([
-                    'id'            => $request->information_water_id,
-                    'project_id'    => $request->project_id,
+                    'id'                => $request->information_water_id,
+                    'project_id'        => $request->project_id,
                 ],[
-                    'tab_id'        => $request->water_tab_id,
-                    'detail_id'     => $request->information_water,
+                    'tab_id'            => $request->water_tab_id,
+                    'detail_id'         => $request->information_water,
                 ]);
             }
 
-            if ($request->information_bleach) {                         // 표백
+            if ($request->information_bleach) {                                                                         // 표백
                 error_log('bleach');
                 error_log($request->information_bleach);
                 Informations::updateOrCreate([
-                    'id'            => $request->information_bleach_id,
-                    'project_id'    => $request->project_id,
+                    'id'                => $request->information_bleach_id,
+                    'project_id'        => $request->project_id,
                 ],[
-                    'tab_id'        => $request->bleach_tab_id,
-                    'detail_id'     => $request->information_bleach,
+                    'tab_id'            => $request->bleach_tab_id,
+                    'detail_id'         => $request->information_bleach,
                 ]);
             }
 
-            if ($request->information_iron) {                           // 다림질
+            if ($request->information_iron) {                                                                           // 다림질
                 Informations::updateOrCreate([
-                    'id'            => $request->information_iron_id,
-                    'project_id'    => $request->project_id,
+                    'id'                => $request->information_iron_id,
+                    'project_id'        => $request->project_id,
                 ],[
-                    'tab_id'        => $request->iron_tab_id,
-                    'detail_id'     => $request->information_iron,
+                    'tab_id'            => $request->iron_tab_id,
+                    'detail_id'         => $request->information_iron,
                 ]);
             }
 
-            if ($request->information_drycleaning) {                    // 드라이클리닝
+            if ($request->information_drycleaning) {                                                                    // 드라이클리닝
                 Informations::updateOrCreate([
-                    'id'            => $request->information_drycleaning_id,
-                    'project_id'    => $request->project_id,
+                    'id'                => $request->information_drycleaning_id,
+                    'project_id'        => $request->project_id,
                 ],[
-                    'tab_id'        => $request->drycleaning_tab_id,
-                    'detail_id'     => $request->information_drycleaning,
+                    'tab_id'            => $request->drycleaning_tab_id,
+                    'detail_id'         => $request->information_drycleaning,
                 ]);
             }
 
-            if ($request->information_dry) {                            // 건조
+            if ($request->information_dry) {                                                                            // 건조
                 Informations::updateOrCreate([
-                    'id'            => $request->information_dry_id,
-                    'project_id'    => $request->project_id,
+                    'id'                => $request->information_dry_id,
+                    'project_id'        => $request->project_id,
                 ],[
-                    'tab_id'        => $request->dry_tab_id,
-                    'detail_id'     => $request->information_dry,
+                    'tab_id'            => $request->dry_tab_id,
+                    'detail_id'         => $request->information_dry,
                 ]);
             }
 
             return response()->json('success', 200,[],JSON_PRETTY_PRINT);
-        } elseif ($request->project_3) {                                              // 3. 스토리텔링
+        } elseif ($request->project_3) {                                                                                // 3. 스토리텔링
             if ($request->project_id) {
                 Project::where('id', $request->project_id)->update([
-                    'storytelling'  => $request->ir1,
-                    'progress'      => 50,
+                    'storytelling'      => $request->ir1,
+                    'progress'          => 50,
                 ]);
                 return response()->json('success', 200,[],JSON_PRETTY_PRINT);
             } else {
                 return response()->json('fail', 200,[],JSON_PRETTY_PRINT);
             }
-        } elseif ($request->project_4) {                                             // 4. 프로젝트 일정
+        } elseif ($request->project_4) {                                                                                // 4. 프로젝트 일정
             Project::where('id', $request->project_id)->update([
-                'deadline'          => $request->deadline,
-                'account_date'      => $request->account_date,
-                'delivery_date'     => $request->delivery_date,
-                'delay_date'        => $request->delay_date,
-                'agree'             => $request->agree,
-                'progress'          => 75,
+                'deadline'              => $request->deadline,
+                'account_date'          => $request->account_date,
+                'delivery_date'         => $request->delivery_date,
+                'delay_date'            => $request->delay_date,
+                'agree'                 => $request->agree,
+                'progress'              => 75,
             ]);
             return response()->json('success', 200,[],JSON_PRETTY_PRINT);
-        } elseif ($request->project_5) {                                             // 5. 디자이너/브랜드 소개
+        } elseif ($request->project_5) {                                                                                // 5. 디자이너/브랜드 소개
             Introduction::updateOrCreate([
-                'project_id'        => $request->project_id,
+                'project_id'            => $request->project_id,
             ],[
-                'brand_name'        => $request->brand_name,
-                'designer_name'     => $request->designer_name,
-                'email'             => $request->email,
-                'phone'             => $request->phone,
-                'facebook'          => $request->facebook,
-                'instagram'         => $request->instagram,
-                'twitter'           => $request->twitter,
-                'homepage'          => $request->hompage,
-                'email_hidden'      => $request->email_hidden ? $request->email_hidden : 0,
-                'phone_hidden'      => $request->phone_hidden ? $request->phone_hidden : 0,
-                'facebook_hidden'   => $request->facebook_hidden ? $request->facebook_hidden : 0,
-                'instagram_hidden'  => $request->instagram_hidden ? $request->instagram_hidden : 0,
-                'twitter_hidden'    => $request->twitter_hidden ? $request->twitter_hidden : 0,
-                'homepage_hidden'   => $request->homepage_hidden ? $request->homepage_hidden : 0
+                'brand_name'            => $request->brand_name,
+                'designer_name'         => $request->designer_name,
+                'email'                 => $request->email,
+                'phone'                 => $request->phone,
+                'facebook'              => $request->facebook,
+                'instagram'             => $request->instagram,
+                'twitter'               => $request->twitter,
+                'homepage'              => $request->homepage,
+                'email_hidden'          => $request->email_hidden ? $request->email_hidden : 0,
+                'phone_hidden'          => $request->phone_hidden ? $request->phone_hidden : 0,
+                'facebook_hidden'       => $request->facebook_hidden ? $request->facebook_hidden : 0,
+                'instagram_hidden'      => $request->instagram_hidden ? $request->instagram_hidden : 0,
+                'twitter_hidden'        => $request->twitter_hidden ? $request->twitter_hidden : 0,
+                'homepage_hidden'       => $request->homepage_hidden ? $request->homepage_hidden : 0
             ]);
             return response()->json('success', 200,[],JSON_PRETTY_PRINT);
-        } elseif ($request->project_6) {                                             // 6. 정산정보
-            // 정산정보
+        } elseif ($request->project_6) {                                                                                // 6. 정산정보
             Account::updateOrCreate([
-                'project_id'         => $request->project_id,
+                'project_id'            => $request->project_id,
             ],[
-                'condition'          => $request->condition,
-                'company_number'     => $request->company_number,
-                'email'              => $request->account_email,
-                'phone'              => $request->account_phone
+                'condition'             => $request->condition,
+                'company_number'        => $request->company_number,
+                'email'                 => $request->account_email,
+                'phone'                 => $request->account_phone
             ]);
-            // 파일추가하기
+
+            $company_image = $request->file('company_file');                                                       // 사업자등록증
+            if($company_image){
+                $savePath = $company_image->store('images/project/'.date('Y-m-d').'/company', 'public');
+                ProjectImage::updateOrCreate([                                                                          // 프로젝트 이미지 등록
+                    'project_id'        => $request->project_id,
+                    'image_division'    => 2,
+                ],[
+                    'image_type'        => $company_image->getClientMimeType(),
+                    'image_path'        => $savePath,
+                    'origin_name'       => $company_image->getClientOriginalName(),
+                ]);
+            }
+
+            $bank_image = $request->file('bank_file');                                                             // 통장사본
+            if($bank_image){
+                $savePath = $bank_image->store('images/project/'.date('Y-m-d').'/bank', 'public');
+                ProjectImage::updateOrCreate([                                                                          // 프로젝트 이미지 등록
+                    'project_id'        => $request->project_id,
+                    'image_division'    => 3,
+                ],[
+                    'image_type'        => $bank_image->getClientMimeType(),
+                    'image_path'        => $savePath,
+                    'origin_name'       => $bank_image->getClientOriginalName(),
+                ]);
+            }
+
             return response()->json('success', 200,[],JSON_PRETTY_PRINT);
         }
-
-        // 프로젝트 생성
-        $project = Project::create([
-            'user_id'       => '',
-            'category_id'   => $request->frist_category,
-            'category2_id'  => $request->second_category ? $request->second_category : '',
-            'condition'     => 0,
-            'title'         => $request->project_title,
-            'summary'       => $request->summary,
-            'success_count' => $request->success_count,
-            'comment'       => $request->comment,
-            'deadline'      => $request->deadline,
-            'account_date'  => $request->account_date,
-            'delivery_date' => $request->delivery_date,
-            'delay_date'    => $request->delay_date,
-            'storytelling'  => '',
-            'progress'       => 15,
-        ]);
-
-        // 디자이너/브랜드 소개
-        Introduction::updateOrCreate([
-            'project_id'            => $project->id,
-        ],[
-            'condition'             => '',                          // 포트폴리오
-            'contents'              => '',                          // 포트폴리오 직접입력
-            'brand_name'            => $request->brand_name,
-            'designer_name'         => $request->designer_name,
-            'email'                 => $request->email,
-            'phone'                 => $request->phone,
-            'facebook'              => $request->facebook,
-            'instagram'             => $request->instagram,
-            'twitter'               => $request->twitter,
-            'homepage'              => $request->homepage,
-            'email_hidden'          => $request->email_hidden,
-            'phone_hidden'          => $request->phone_hidden,
-            'facebook_hidden'       => $request->facebook_hidden,
-            'instagram_hidden'      => $request->instagram_hidden,
-            'twitter_hidden'        => $request->twitter_hidden,
-            'homepage_hidden'       => $request->hompage_hidden
-        ]);
-
-        // return
+        // try/catch 추가하기
     }
 
 

@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded',function () {
         var summary = document.getElementById('project_summary').value;             // 프로젝트 개요
         var main_file = document.getElementById('main_file').value;                 // 프로젝트 대표이미지
         var success_count = document.getElementById('success_count').value;         // 프로젝트 성공개수
+        var file_check = document.getElementById('file_check').value;
 
         if (title.length > 30) {
             alert('프로젝트 제목이 30자가 초과되었습니다');
@@ -18,7 +19,8 @@ document.addEventListener('DOMContentLoaded',function () {
         } else if (second_category === '0') {
             alert('2차 카테고리를 선택해주세요.');
             valueCheck = false;
-        } else if (!main_file) {
+        } else if (!main_file && !file_check) {
+            console.log(main_file);
             alert('대표이미지(썸네일)은 필수입니다.');
             valueCheck = false;
         } else if (summary.length < 10) {
@@ -235,28 +237,31 @@ document.addEventListener('DOMContentLoaded',function () {
         var bank_file = document.getElementById('bank_file').value;
         var account_email = document.getElementById('account_email').value;
         var account_phone = document.getElementById('account_phone').value;
+        var company_file_check = document.getElementById('company_file_check').value;
+        var bank_file_check = document.getElementById('bank_file_check').value;
 
         if (company_radio.checked === true) {
             if (!company_number) {
                 alert('사업자등록번호를 입력해주세요.');
                  return false;
-            } else if (!company_file) {
+            } else if (!company_file && !company_file_check) {
                 alert('사업자등록증을 등록해주세요.');
                 return false;
             }
         }
 
-        if (!bank_file) {
+        if (!bank_file && !bank_file_check) {
             alert('통장사본을 등록해주세요.');
         } else if (!account_email || !account_phone) {
-            alert('이메일과 전화번호는 필수 입력입니다.0')
+            alert('이메일과 전화번호는 필수 입력입니다.')
         } else {
-            var form = new FormData($('#projectForm5')[0]);
+            var form = new FormData($('#projectForm6')[0]);
             formAjax('POST', false, '/project', form, function(e) {
                 alert(error_msg);
                 location.href = '/project/create';
             }, function(data) {
                 alert('완료되었습니다.');
+                location.href = '/project/create';
                 valueCheck = true;
             });
         }

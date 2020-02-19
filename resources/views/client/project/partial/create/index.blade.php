@@ -84,8 +84,9 @@
                                 <p class="text-caption">최소 280*360px의 jpg, jpeg, png파일(10MB 미만)</p>
                                 <label class="upload-file">
                                     <input type="file" onchange="fnUploadFile(this)" name="main_file" id="main_file" accept="image/jpeg, image/jpg, image/png">
+                                    <input type="hidden" id="file_check" value="{{ $data ? ($data->main_image ? $data->main_image->first()->origin_name : '') : '' }}">
                                     <div class="file-button">파일선택</div>
-                                    <p class="file-name">선택한 파일 없음</p>
+                                    <p class="file-name">{{ $data ? ($data->main_image ? $data->main_image->first()->origin_name : '선택한 파일 없음') : '선택한 파일 없음' }}</p>
                                 </label>
                             </div>
                             <!-- 01-D 성공갯수 -->
@@ -617,57 +618,83 @@
                             <div class="introduction-wrap">
                                 <div class="introduction-item">
                                     <span class="item-name">디자이너명</span>
-                                    <input type="text" class="input-field" name="designer_name" id="designer_name" placeholder="디자이너명을 입력하세요">
+                                    <input type="text" class="input-field" name="designer_name" id="designer_name" placeholder="디자이너명을 입력하세요"
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->designer_name : auth()->user()->name) : auth()->user()->name }}">
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">브랜드명</span>
-                                    <input type="text" class="input-field" name="brand_name" id="brand_name" placeholder="브랜드명을 입력하세요">
+                                    <input type="text" class="input-field" name="brand_name" id="brand_name" placeholder="브랜드명을 입력하세요"
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->brand_name : $portfolio->brand->name_ko) : $portfolio->brand->name_ko }}">
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">이메일</span>
-                                    <input type="email" class="input-field" name="email" id="email" value="{{ $portfolio ? $portfolio->email : '' }}" placeholder="이메일을 입력하세요">
+                                    <input type="email" class="input-field" name="email" id="email" placeholder="이메일을 입력하세요"
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->email : $portfolio->email) : $portfolio->email }}">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox" name="email_hidden" value="1">
+                                        {{ $portfolio_email_hidden = $portfolio->email_hidden == 1 ? 'checked' : '' }}
+                                        <input type="checkbox" name="email_hidden"
+                                               value="{{ $data ? ($data->introduction ? $data->introduction->email_hidden : $portfolio->email_hidden) : $portfolio->email_hidden }}"
+                                            {{ $data ? ($data->introduction ? ($data->introduction->email_hidden == 1 ? 'checked' : '') : $portfolio_email_hidden) : ($portfolio_email_hidden) }}>
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">전화번호</span>
-                                    <input type="tel" class="input-field" name="phone" id="phone" value="{{ $portfolio ? $portfolio->home_phone : '' }}" placeholder="전화번호를 입력하세요">
+                                    <input type="tel" class="input-field" name="phone" id="phone" placeholder="전화번호를 입력하세요"
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->phone : $portfolio->home_phone) : $portfolio->home_phone }}">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox" name="phone_hidden" value="1">
+                                        {{ $portfolio_phone_hidden = $portfolio->phone_hidden == 1 ? 'checked' : '' }}
+                                        <input type="checkbox" name="phone_hidden"
+                                               value="{{ $data ? ($data->introduction ? $data->introduction->phone_hidden : $portfolio->phone_hidden) : $portfolio->phone_hidden }}"
+                                            {{ $data ? ($data->introduction ? ($data->introduction->phone_hidden == 1 ? 'checked' : '') : $portfolio_phone_hidden) : ($portfolio_phone_hidden) }}>
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">페이스북</span>
-                                    <input type="text" class="input-field" name="facebook" id="facebook" value="{{ $portfolio ? $portfolio->facebook : '' }}" placeholder="페이스북 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="facebook" id="facebook" placeholder="페이스북 계정을 입력하세요"
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->facebook : $portfolio->facebook) : $portfolio->facebook }}">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox" name="facebook_hidden" value="1">
+                                        {{ $portfolio_facebook_hidden = $portfolio->facebook_hidden == 1 ? 'checked' : '' }}
+                                        <input type="checkbox" name="facebook_hidden"
+                                               value="{{ $data ? ($data->introduction ? $data->introduction->facebook_hidden : $portfolio->facebook_hidden) : $portfolio->facebook_hidden }}"
+                                            {{ $data ? ($data->introduction ? ($data->introduction->phone_hidden == 1 ? 'checked' : '') : $portfolio_facebook_hidden) : ($portfolio_facebook_hidden) }}>
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">인스타그램</span>
-                                    <input type="text" class="input-field" name="instagram" id="instagram" value="{{ $portfolio ? $portfolio->instagram : '' }}" placeholder="인스타그램 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="instagram" id="instagram" placeholder="인스타그램 계정을 입력하세요"
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->instagram : $portfolio->instagram) : $portfolio->instagram }}">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox" name="instagram_hidden" value="1">
+                                        {{ $portfolio_instagram_hidden = $portfolio->instagram_hidden == 1 ? 'checked' : '' }}
+                                        <input type="checkbox" name="instagram_hidden"
+                                               value="{{ $data ? ($data->introduction ? $data->introduction->instagram_hidden : $portfolio->instagram_hidden) : $portfolio->instagram_hidden }}"
+                                            {{ $data ? ($data->introduction ? ($data->introduction->phone_hidden == 1 ? 'checked' : '') : $portfolio_instagram_hidden) : ($portfolio_instagram_hidden) }}>
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">트위터</span>
-                                    <input type="text" class="input-field" name="twitter" id="twitter" value="{{ $portfolio ? $portfolio->twitter : '' }}" placeholder="트위터 계정을 입력하세요">
+                                    <input type="text" class="input-field" name="twitter" id="twitter" placeholder="트위터 계정을 입력하세요"
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->twitter : $portfolio->twitter) : $portfolio->twitter }}">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox" name="twitter_hidden" value="1">
+                                        {{ $portfolio_twitter_hidden = $portfolio->twitter_hidden == 1 ? 'checked' : '' }}
+                                        <input type="checkbox" name="twitter_hidden"
+                                               value="{{ $data ? ($data->introduction ? $data->introduction->twitter_hidden : $portfolio->twitter_hidden) : $portfolio->twitter_hidden }}"
+                                            {{ $data ? ($data->introduction ? ($data->introduction->phone_hidden == 1 ? 'checked' : '') : $portfolio_twitter_hidden) : ($portfolio_twitter_hidden) }}>
                                         <p>숨기기</p>
                                     </label>
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">홈페이지</span>
-                                    <input type="text" class="input-field" name="homepage" id="homepage" value="{{ $portfolio ? $portfolio->homepage : '' }}" placeholder="홈페이지 url을 입력하세요">
+                                    <input type="text" class="input-field" name="homepage" id="homepage" placeholder="홈페이지 url을 입력하세요"
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->homepage : $portfolio->homepage) : $portfolio->homepage }}">
                                     <label class="checkbox-wrap">
-                                        <input type="checkbox" name="homepage_hidden" value="1">
+                                        {{ $portfolio_homepage_hidden = $portfolio->homepage_hidden == 1 ? 'checked' : '' }}
+                                        <input type="checkbox" name="homepage_hidden"
+                                               value="{{ $data ? ($data->introduction ? $data->introduction->homepage_hidden : $portfolio->homepage_hidden) : $portfolio->homepage_hidden }}"
+                                            {{ $data ? ($data->introduction ? ($data->introduction->phone_hidden == 1 ? 'checked' : '') : $portfolio_homepage_hidden) : ($portfolio_homepage_hidden) }}>
                                         <p>숨기기</p>
                                     </label>
                                 </div>
@@ -678,32 +705,36 @@
                     <form action="{{route('project.store')}}" id="projectForm6" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" class="projectId" name="project_id" value="{{ $data ? $data->id : '' }}">
-                        <input type="hidden" name="6" value="project6">
+                        <input type="hidden" name="project_6" value="project_6">
                         <div class="tab-contents-box">
                             <div class="notice"><span id="popup_fee">수수료정책</span>을 먼저 확인해주세요</div>
                             <div class="pay-info-item">
                                 <h3 class="title">사업자/개인구분</h3>
                                 <div>
                                     <label class="checkbox-wrap">
-                                        <input type="radio" name="condition" id="company_radio" value="1">
+                                        <input type="radio" name="condition" id="company_radio" value="1"
+                                            {{ $data ? ($data->account ? ($data->account->condition == 1 ? 'checked': '') : '') : '' }}>
                                         <p>사업자</p>
                                     </label>
                                     <label class="checkbox-wrap">
-                                        <input type="radio" name="condition" id="personal_radio" value="0" checked>
+                                        <input type="radio" name="condition" id="personal_radio" value="0"
+                                            {{ $data ? ($data->account ? ($data->account->condition == 0 ? 'checked': '') : 'checked') : 'checked' }}>
                                         <p>개인</p>
                                     </label>
                                 </div>
-                                <div id="company_number" style="display: none">
+                                <div id="company_number_display" style="{{ $data ? ($data->account ? ($data->account->condition == 1 ? '': 'display:none') : 'display:none') : 'display:none' }}">
                                     <p class="overline">사업자등록번호</p>
-                                    <input type="tel" name="company_number" id="company_number">
+                                    <input type="tel" name="company_number" id="company_number"
+                                           value="{{ $data ? ($data->account ? $data->account->company_number : '') : '' }}">
                                 </div>
-                                <div id="company_file" style="display: none">
+                                <div id="company_file_display" style="{{ $data ? ($data->account ? ($data->account->condition == 1 ? '': 'display:none') : 'display:none') : 'display:none' }}">
                                     <p class="overline">사업자등록증</p>
                                     <p class="caption">jpg,jpeg,png 파일(10mb 미만)</p>
                                     <label class="upload-file">
                                         <input type="file" name="company_file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png" id="company_file">
+                                        <input type="hidden" id="company_file_check" value="{{ $data ? ($data->company_image ? $data->company_image->first()->origin_name : '') : '' }}">
                                         <div class="file-button">파일선택</div>
-                                        <p class="file-name">선택한 파일 없음</p>
+                                        <p class="file-name">{{ $data ? ($data->company_image ? $data->company_image->first()->origin_name : '선택한 파일 없음') : '선택한 파일 없음' }}</p>
                                     </label>
                                 </div>
                             </div>
@@ -712,19 +743,22 @@
                                 <p class="caption">jpg,jpeg,png 파일(10mb 미만)</p>
                                 <label class="upload-file">
                                     <input type="file" name="bank_file" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png" id="bank_file">
+                                    <input type="hidden" id="bank_file_check" value="{{ $data ? ($data->bank_image ? $data->bank_image->first()->origin_name : '') : '' }}">
                                     <div class="file-button">파일선택</div>
-                                    <p class="file-name">선택한 파일 없음</p>
+                                    <p class="file-name">{{ $data ? ($data->bank_image ? $data->bank_image->first()->origin_name : '선택한 파일 없음') : '선택한 파일 없음' }}</p>
                                 </label>
                             </div>
                             <div class="pay-info-item">
                                 <div class="method-item">
                                     <h3 class="subtitle">이메일</h3>
-                                    <input type="email" class="input-field" name="account_email" placeholder="이메일 주소를 입력해주세요" id="account_email">
+                                    <input type="email" class="input-field" name="account_email" placeholder="이메일 주소를 입력해주세요" id="account_email"
+                                           value="{{ $data ? ($data->account ? $data->account->email : '') : '' }}">
                                     <p class="caption">약정서 발송에 필요한 정보입니다.</p>
                                 </div>
                                 <div class="method-item">
                                     <h3 class="subtitle">전화번호</h3>
-                                    <input type="tel" class="input-field" name="account_phone" placeholder="하이픈('-')없이 입력해주세요" id="account_phone">
+                                    <input type="tel" class="input-field" name="account_phone" placeholder="하이픈('-')없이 입력해주세요" id="account_phone"
+                                    value="{{ $data ? ($data->account ? $data->account->phone : '') : '' }}">
                                     <p class="caption">약정서 발송에 필요한 정보입니다.</p>
                                 </div>
                             </div>

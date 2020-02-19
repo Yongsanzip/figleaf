@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Introduction extends Model {
+class ProjectImage extends Model
+{
     // 소프트 삭제
     use SoftDeletes;
     // 컬럼중 노출하지않을것을 표기
@@ -19,7 +21,6 @@ class Introduction extends Model {
         return $this->belongsTo('App\Project', 'project_id', 'id');
     }
 
-
     /*******************************************************************
      * @return HasMany
      *******************************************************************/
@@ -27,6 +28,4 @@ class Introduction extends Model {
     /*******************************************************************
      * @return HasOne
      *******************************************************************/
-
-
 }

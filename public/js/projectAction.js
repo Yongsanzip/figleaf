@@ -8,13 +8,13 @@ document.addEventListener('DOMContentLoaded',function () {
     });
 
     document.getElementById('company_radio').addEventListener('click', function () {
-        document.getElementById('company_number').style.display = "";
-        document.getElementById('company_file').style.display = "";
+        document.getElementById('company_number_display').style.display = "";
+        document.getElementById('company_file_display').style.display = "";
     });
 
     document.getElementById('personal_radio').addEventListener('click', function () {
-        document.getElementById('company_number').style.display = "none";
-        document.getElementById('company_file').style.display = "none";
+        document.getElementById('company_number_display').style.display = "none";
+        document.getElementById('company_file_display').style.display = "none";
     });
 
     // 개요 - 프토젝트 카테고리
