@@ -65,16 +65,16 @@ class PortfolioController extends Controller {
 
             $portfolio = Portfolio::firstOrCreate([
                 'user_id'           =>auth()->user()->id,                                                                // 사용자 ID
-                'content_ko'        =>$request->content_ko,                                                              // 한글내용
-                'content_cn'        =>$request->content_cn,                                                              // 중문내용
-                'content_en'        =>$request->content_en,                                                              // 영문내용
+                'content_ko'        =>$request->context_ko,                                                              // 한글내용
+                'content_cn'        =>$request->context_cn,                                                              // 중문내용
+                'content_en'        =>$request->context_en,                                                              // 영문내용
                 'hidden_yn'         =>$request->hidden_yn ? 1 : 0,                                                       // 포트폴리오 숨김처리
                 'email'             =>$request->email,                                                                   // 이메일
                 'home_phone'        =>$request->home_phone,                                                              // 전화번호
                 'facebook'          =>$request->facebook,                                                                // 페이스북
                 'instagram'         =>$request->instagram,                                                               // 인스타그램
                 'twitter'           =>$request->twitter,                                                                 // 트위터
-                'hompage'           =>$request->hompage,                                                                 // 홈페이지
+                'homepage'          =>$request->homepage,                                                                // 홈페이지
                 'email_hidden'      =>$request->email_hidden ? 1 : 0,                                                    // 이메일 숨김처리
                 'phone_hidden'      =>$request->phone_hidden ? 1 : 0,                                                    // 전화번호 숨김처리
                 'facebook_hidden'   =>$request->facebook_hidden ? 1 : 0,                                                 // 페이스북 숨김처리

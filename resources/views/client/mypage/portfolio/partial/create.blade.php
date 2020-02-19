@@ -74,8 +74,8 @@ $tab = 'portfolio';
                                 </div>
                                 <div class="textarea-list profile-text-list">
                                     <textarea class="textarea" id="context_ko" name="context_ko" lang="ko" placeholder="한국어"></textarea>
-                                    <textarea class="textarea hide" id="context_en" name="context_ko" lang="en" placeholder="English"></textarea>
-                                    <textarea class="textarea hide" id="context_ch" name="context_ko" lang="ch" placeholder="汉语"></textarea>
+                                    <textarea class="textarea hide" id="context_en" name="context_en" lang="en" placeholder="English"></textarea>
+                                    <textarea class="textarea hide" id="context_cn" name="context_cn" lang="ch" placeholder="汉语"></textarea>
                                 </div>
                             </div>
                             <!-- 01-C 히스토리 -->
