@@ -337,26 +337,26 @@ function fnAddSociety(){
     var societyList = document.getElementsByClassName('society-list')[0];
     var societyItem =' <div class="year-item">' +
         '                 <div class="year-row">' +
-        '                     <input type="text" class="input-field" placeholder="가입연도">' +
+        '                     <input type="text" class="input-field" data-key="start_year" placeholder="가입연도">' +
         '                     <span class="waves">~</span>' +
-        '                     <input type="text" class="input-field" placeholder="가입연도">' +
+        '                     <input type="text" class="input-field" data-key="end_year" placeholder="가입연도">' +
         '                 </div>' +
         '                 <div class="active-item">' +
         '                     <ul class="active-list">' +
-        '                         <li><input type="text" lang="ko" class="input-field society-active-item" placeholder="협회명(한국어)"></li>';
+        '                         <li><input type="text" lang="ko" data-key="association_ko" class="input-field society-active-item" placeholder="협회명(한국어)"></li>';
 
     //english check
     if(fnCheckSocietyLang('en')){
-        societyItem += '<li><input type="text" lang="en" class="input-field society-active-item" placeholder="Name of Association(English)"></li>'
+        societyItem += '<li><input type="text" lang="en" data-key="association_en" class="input-field society-active-item" placeholder="Name of Association(English)"></li>'
     }else{
-        societyItem += '<li><input type="text" lang="en" class="input-field society-active-item hide" placeholder="Name of Association(English)"></li>'
+        societyItem += '<li><input type="text" lang="en" data-key="association_en" class="input-field society-active-item hide" placeholder="Name of Association(English)"></li>'
     }
 
     //chinese check
     if(fnCheckSocietyLang('ch')){
-        societyItem += '<li><input type="text" lang="ch" class="input-field society-active-item" placeholder="请输入协会(汉语)"></li>'
+        societyItem += '<li><input type="text" lang="ch" data-key="association_cn" class="input-field society-active-item" placeholder="请输入协会(汉语)"></li>'
     }else{
-        societyItem += '<li><input type="text" lang="ch" class="input-field society-active-item hide" placeholder="请输入协会(汉语)"></li>'
+        societyItem += '<li><input type="text" lang="ch" data-key="association_cn" class="input-field society-active-item hide" placeholder="请输入协会(汉语)"></li>'
     }
 
 

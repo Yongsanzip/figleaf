@@ -17,7 +17,7 @@ $tab = 'portfolio';
                     <h2 class="headline">포트폴리오 만들기/수정하기</h2>
                 </div>
                 <div class="portfolio-btn-wrap">
-                    <a href="" class="btn-white">미리보기</a>
+                    <a onclick="test(); return false;" class="btn-white">미리보기</a>
                     <button type="submit" class="btn-black">저장하기</button>
                     <div class="portfolio-options">
                         <label class="checkbox-wrap">
@@ -95,7 +95,7 @@ $tab = 'portfolio';
                                         <div class="shape">汉语</div>
                                     </label>
                                 </div>
-                                <div class="history-list">
+                                <div class="history-list" id="history" data-key="history">
                                     <div class="year-item">
                                         <div class="year-row">
                                             <input type="text" class="input-field" placeholder="ex)2019/연도를 입력하세요.">
@@ -135,7 +135,7 @@ $tab = 'portfolio';
                                         <div class="shape">汉语</div>
                                     </label>
                                 </div>
-                                <div class="history-list award-list">
+                                <div class="history-list award-list" id="award_list" data-key="awards">
                                     <div class="year-item">
                                         <div class="year-row">
                                             <input type="text" class="input-field" placeholder="ex)2019/연도를 입력하세요.">
@@ -175,18 +175,18 @@ $tab = 'portfolio';
                                         <div class="shape">汉语</div>
                                     </label>
                                 </div>
-                                <div class="society-list">
+                                <div class="society-list" id="society_list" data-key="society">
                                     <div class="year-item">
                                         <div class="year-row">
-                                            <input type="text" class="input-field" placeholder="가입연도">
+                                            <input type="text" class="input-field"  data-key="start_year" placeholder="가입연도">
                                             <span class="waves">~</span>
-                                            <input type="text" class="input-field" placeholder="가입연도">
+                                            <input type="text" class="input-field"  data-key="end_year" placeholder="가입연도">
                                         </div>
                                         <div class="active-item">
                                             <ul class="active-list">
-                                                <li><input type="text" lang="ko" class="input-field society-active-item" placeholder="협회명(한국어)"></li>
-                                                <li><input type="text" lang="en" class="input-field society-active-item hide" placeholder="Name of Association(English)"></li>
-                                                <li><input type="text" lang="ch" class="input-field society-active-item hide" placeholder="请输入协会(汉语)"></li>
+                                                <li><input type="text" lang="ko" data-key="association_ko" class="input-field society-active-item" placeholder="협회명(한국어)"></li>
+                                                <li><input type="text" lang="en" data-key="association_en" class="input-field society-active-item hide" placeholder="Name of Association(English)"></li>
+                                                <li><input type="text" lang="ch" data-key="association_cn" class="input-field society-active-item hide" placeholder="请输入协会(汉语)"></li>
                                             </ul>
                                             <div class="btn-box">
                                             </div>
@@ -218,9 +218,9 @@ $tab = 'portfolio';
                                     </label>
                                 </div>
                                 <ul class="brand-name-list">
-                                    <li><input type="text" lang="ko" name="brand_name_ko" class="input-field" placeholder="협회명(한국어)"></li>
-                                    <li><input type="text" lang="en" name="brand_name_en" class="input-field hide" placeholder="Name of Association(English)"></li>
-                                    <li><input type="text" lang="ch" name="brand_name_cn" class="input-field hide" placeholder="请输入协会(汉语)"></li>
+                                    <li><input type="text" lang="ko" name="brand_name_ko" class="input-field" placeholder="브랜드(한국어)"></li>
+                                    <li><input type="text" lang="en" name="brand_name_en" class="input-field hide" placeholder="Brand name(English)"></li>
+                                    <li><input type="text" lang="ch" name="brand_name_cn" class="input-field hide" placeholder="品牌名称(汉语)"></li>
                                 </ul>
                             </div>
                             <!-- 02-B 대표이미지 -->
@@ -488,6 +488,9 @@ $tab = 'portfolio';
                         </div>
                 </div>
                 <!--// tab contents -->
+                    <input type="hidden" id="history_array" name="history_array">
+                    <input type="hidden" id="awards_array" name="awards_array">
+                    <input type="hidden" id="association_array" name="association_array">
                 </form>
             </div>
         </div>
@@ -497,7 +500,21 @@ $tab = 'portfolio';
     <script type="text/javascript">
         var fn_portfolio_submit = function(f){
 
-            return true;
+            return false;
+        }
+
+        var test = function(){
+            var society_obj = new Object();
+            var society_array = new Array();
+            var scoiety = document.getElementById('society_list');
+            for(var i =0; i < scoiety.children.length; i++){
+                var json_string ='';
+                for(var j = 0; j< scoiety.getElementsByTagName('input').length; j++){
+                    scoiety.getElementsByTagName('input')[j].getAttribute('data-key');
+                    scoiety.getElementsByTagName('input')[j].value;
+                    json_string += scoiety.getElementsByTagName('input')[j].getAttribute('data-key') + ':' + scoiety.getElementsByTagName('input')[j].value;
+                }
+            }
         }
     </script>
 
