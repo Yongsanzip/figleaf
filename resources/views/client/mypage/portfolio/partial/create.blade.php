@@ -513,6 +513,7 @@ $tab = 'portfolio';
                     scoiety.getElementsByTagName('input')[j].getAttribute('data-key');
                     scoiety.getElementsByTagName('input')[j].value;
                     json_string += scoiety.getElementsByTagName('input')[j].getAttribute('data-key') + ':' + scoiety.getElementsByTagName('input')[j].value;
+                     society_obj = {start_year:1,end_year:2,content_ko:3,content_ko:4,content_ko:5};
                 }
             }
         }
