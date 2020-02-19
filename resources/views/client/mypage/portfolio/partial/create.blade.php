@@ -94,17 +94,17 @@ $tab = 'portfolio';
                                         <div class="shape">汉语</div>
                                     </label>
                                 </div>
-                                <div class="history-list" id="history" data-key="history">
+                                <div class="history-list" id="history_list" data-key="history">
                                     <div class="year-item">
                                         <div class="year-row">
-                                            <input type="text" class="input-field" placeholder="ex)2019/연도를 입력하세요.">
+                                            <input type="text" class="input-field" data-key="year" placeholder="ex)2019/연도를 입력하세요.">
                                         </div>
                                         <div class="history-active-list">
                                             <div class="active-item">
                                                 <ul class="active-list">
-                                                    <li><input type="text" lang="ko" class="input-field history-active-item" placeholder="활동(한국어)"></li>
-                                                    <li><input type="text" lang="en" class="input-field history-active-item hide" placeholder="Activities(English)"></li>
-                                                    <li><input type="text" lang="ch" class="input-field history-active-item hide" placeholder="活动(汉语)"></li>
+                                                    <li><input type="text" lang="ko" data-key="history_ko" class="input-field history-active-item" placeholder="활동(한국어)"></li>
+                                                    <li><input type="text" lang="en" data-key="history_en" class="input-field history-active-item hide" placeholder="Activities(English)"></li>
+                                                    <li><input type="text" lang="ch" data-key="history_cn" class="input-field history-active-item hide" placeholder="活动(汉语)"></li>
                                                 </ul>
                                                 <div class="btn-box">
                                                     <button class="btn-black" type="button" onclick="fnAddHistoryActive(this)">추가</button>
@@ -137,14 +137,14 @@ $tab = 'portfolio';
                                 <div class="history-list award-list" id="award_list" data-key="awards">
                                     <div class="year-item">
                                         <div class="year-row">
-                                            <input type="text" class="input-field" placeholder="ex)2019/연도를 입력하세요.">
+                                            <input type="text" class="input-field" data-key="year" placeholder="ex)2019/연도를 입력하세요.">
                                         </div>
                                         <div class="award-active-list">
                                             <div class="active-item">
                                                 <ul class="active-list">
-                                                    <li><input type="text" lang="ko" class="input-field award-active-item" placeholder="수상내역(한국어)"></li>
-                                                    <li><input type="text" lang="en" class="input-field award-active-item hide" placeholder="Awards(English)"></li>
-                                                    <li><input type="text" lang="ch" class="input-field award-active-item hide" placeholder="获奖经历(汉语)"></li>
+                                                    <li><input type="text" lang="ko" data-key="history_ko" class="input-field award-active-item" placeholder="수상내역(한국어)"></li>
+                                                    <li><input type="text" lang="en" data-key="history_en" class="input-field award-active-item hide" placeholder="Awards(English)"></li>
+                                                    <li><input type="text" lang="ch" data-key="history_cn" class="input-field award-active-item hide" placeholder="获奖经历(汉语)"></li>
                                                 </ul>
                                                 <div class="btn-box">
                                                     <button class="btn-black" type="button" onclick="fnAddAwardActive(this)">추가</button>
@@ -378,7 +378,7 @@ $tab = 'portfolio';
                 <!--// tab contents -->
                     <input type="hidden" id="history_array" name="history_array">
                     <input type="hidden" id="awards_array" name="awards_array">
-                    <input type="hidden" id="association_array" name="association_array">
+                    <input type="hidden" id="society_array" name="society_array">
                 </form>
             </div>
         </div>
@@ -387,23 +387,13 @@ $tab = 'portfolio';
     <script type="text/javascript" src="{{asset('js/portfolioCreate.js')}}"></script>
     <script type="text/javascript">
         var fn_portfolio_submit = function(f){
-
-            return false;
-        }
-
-        var test = function(){
-            var society_obj = new Object();
-            var society_array = new Array();
-            var scoiety = document.getElementById('society_list');
-            for(var i =0; i < scoiety.children.length; i++){
-                var json_string ='';
-                for(var j = 0; j< scoiety.getElementsByTagName('input').length; j++){
-                    scoiety.getElementsByTagName('input')[j].getAttribute('data-key');
-                    scoiety.getElementsByTagName('input')[j].value;
-                    json_string += scoiety.getElementsByTagName('input')[j].getAttribute('data-key') + ':' + scoiety.getElementsByTagName('input')[j].value;
-                     society_obj = {start_year:1,end_year:2,content_ko:3,content_ko:4,content_ko:5};
-                }
-            }
+            // 히스토리
+            gn_make_input_json('history_list' ,'input' , 'history_array');
+            // 수상내역
+            gn_make_input_json('award_list' ,'input' , 'awards_array');
+            // 협회
+            gn_make_input_json('society_list' ,'input' , 'society_array');
+            return true;
         }
     </script>
 

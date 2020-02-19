@@ -106,3 +106,17 @@ var callAjax = function(methodType,asyncType,urlPath,dataReceiveType,sendContent
     }
 };
 
+var gn_make_input_json = function(div_id ,type , json_input){
+    var send_array = new Array();
+    var divElement = document.getElementById(div_id);
+    for(var i =0; i < divElement.children.length; i++){
+
+        var obj =new Object();
+        for(var j = 0; j< divElement.getElementsByTagName('input').length; j++){
+            obj[divElement.getElementsByTagName('input')[j].getAttribute('data-key')] =divElement.getElementsByTagName('input')[j].value;
+        }
+        send_array.push(obj);
+    }
+    document.getElementById(json_input).value = JSON.stringify(send_array);
+};
+

@@ -55,7 +55,10 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function store(Request $request){
-        try {
+        var_dump(json_decode($request->history_array,true));
+        var_dump(json_decode($request->awards_array,true));
+        var_dump(json_decode($request->society_array,true));
+        /*try {
             $check = Portfolio::whereUserId(auth()->user()->id)->first();
             if(isset($check)) {flash('포트폴리오가 존재합니다.')->warning(); return back();}
 
@@ -140,7 +143,7 @@ class PortfolioController extends Controller {
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->important();
             return back();
-        }
+        }*/
     }
 
     /************************************************************************
