@@ -2777,6 +2777,7 @@ button {
   letter-spacing: 4px;
   font-weight: 400;
   vertical-align: middle;
+  text-transform: capitalize;
 }
 .con-project-view .project-overview-wrap .designer-headline .designer-type {
   background: #eeeeee;
@@ -3933,7 +3934,7 @@ button {
 .con-portfolio-create .tab-list > li {
   display: inline-block;
   font-size: 15px;
-  width: 16.6%;
+  width: 20%;
   text-align: center;
   cursor: pointer;
   border-top: 1px solid #cccccc;
@@ -5178,6 +5179,13 @@ button {
 }
 .pop-news-wrap .news-image-list .news-image-wrap .news-image input:checked ~ .checkbox-shape {
   border: 4px solid #d1e65d;
+}
+
+.btn-edit-wrap {
+  text-align: right;
+}
+.btn-edit-wrap .btn-black, .btn-edit-wrap .btn-white {
+  width: 200px;
 }
 
 /*# sourceMappingURL=client.css.map */

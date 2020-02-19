@@ -3379,6 +3379,7 @@ button{
                     letter-spacing: 4px;
                     font-weight: 400;
                     vertical-align: middle;
+                    text-transform: capitalize;
                 }
             }
 
@@ -4786,7 +4787,7 @@ button{
         > li {
             display: inline-block;
             font-size: 15px;
-            width: 16.6%;
+            width: 20%;
             text-align: center;
             cursor: pointer;
             border-top: 1px solid #cccccc;
@@ -6269,5 +6270,12 @@ button{
                 }
             }
         }
+    }
+}
+
+.btn-edit-wrap{
+    text-align: right;
+    .btn-black, .btn-white{
+        width:200px;
     }
 }
