@@ -913,6 +913,7 @@ button{
                     letter-spacing: 0.4px;
                     padding-left: 32px;
                     border-right: 1px solid #cccccc;
+                    width: 160px;
 
                     &::after {
                         content: '';
@@ -1194,7 +1195,13 @@ button{
 
         .community-table {
             border-top: 2px solid black;
-
+            tr{
+                th,td{
+                    &:nth-child(-n+2){
+                        width: 200px;
+                    }
+                }
+            }
             thead {
                 tr {
                     height: 48px;
@@ -1505,7 +1512,20 @@ button{
                     padding: 8px 12px;
                     font-size: 12px;
                 }
-
+                th,td{
+                    &:nth-child(1){
+                        width:60px;
+                    }
+                    &:nth-child(2){
+                        width:300px;
+                    }
+                    &:nth-child(4){
+                        width:150px;
+                    }
+                    &:nth-child(5){
+                        width:150px;
+                    }
+                }
                 .question-title {
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -3359,6 +3379,7 @@ button{
                     letter-spacing: 4px;
                     font-weight: 400;
                     vertical-align: middle;
+                    text-transform: capitalize;
                 }
             }
 
@@ -4766,7 +4787,7 @@ button{
         > li {
             display: inline-block;
             font-size: 15px;
-            width: 16.6%;
+            width: 20%;
             text-align: center;
             cursor: pointer;
             border-top: 1px solid #cccccc;
@@ -6249,5 +6270,12 @@ button{
                 }
             }
         }
+    }
+}
+
+.btn-edit-wrap{
+    text-align: right;
+    .btn-black, .btn-white{
+        width:200px;
     }
 }

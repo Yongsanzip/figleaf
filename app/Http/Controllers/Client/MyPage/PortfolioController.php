@@ -55,9 +55,25 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function store(Request $request){
-        error_log($request->society_array);
-        var_dump(json_decode($request->society_array,true));
-        try {
+        if(isset($request->history_array)){
+            foreach (json_decode($request->history_array,true) as $history){
+                var_dump($history);
+            }
+        }
+
+        if(isset($request->awards_array)){
+
+            foreach (json_decode($request->awards_array, true) as $awards){
+                var_dump($awards);
+            }
+        }
+
+        if(isset($request->society_array)){
+            foreach (json_decode($request->society_array, true) as $society){
+                var_dump($society);
+            }
+        }
+        /*try {
             $check = Portfolio::whereUserId(auth()->user()->id)->first();
             if(isset($check)) {flash('포트폴리오가 존재합니다.')->warning(); return back();}
 
@@ -71,9 +87,6 @@ class PortfolioController extends Controller {
                 'content_cn'        =>$request->context_cn,                                                             // 중문내용
                 'content_en'        =>$request->context_en,                                                             // 영문내용
                 'hidden_yn'         =>$request->hidden_yn ? 1 : 0,                                                      // 포트폴리오 숨김처리
-                'history'           =>$request->history_array,                                                          // 히스토리
-                'awards'            =>$request->awards_array,                                                           // 수상내역
-                'association'       =>$request->society_array,                                                          // 협회활동
                 'email'             =>$request->email,                                                                  // 이메일
                 'home_phone'        =>$request->home_phone,                                                             // 전화번호
                 'facebook'          =>$request->facebook,                                                               // 페이스북
@@ -136,6 +149,23 @@ class PortfolioController extends Controller {
                 ]);
             }
 
+            if(isset($request->history_array)){
+                foreach (json_decode($request->history_array,true) as $hisory){
+                    error_log($hisory->year);
+                }
+            }
+
+            if(isset($request->awards_array)){
+                foreach (json_decode($request->awards_array, true) as $awards){
+                    error_log($hisory->year);
+                }
+            }
+
+            if(isset($request->society_array)){
+                foreach (json_decode($request->society_array, true) as $society){
+                    error_log($hisory->start_year);
+                }
+            }
 
 
 
@@ -145,7 +175,7 @@ class PortfolioController extends Controller {
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->important();
             return back();
-        }
+        }*/
     }
 
     /************************************************************************

@@ -763,6 +763,7 @@ button {
   letter-spacing: 0.4px;
   padding-left: 32px;
   border-right: 1px solid #cccccc;
+  width: 160px;
 }
 .con-mypage .mypage-contents .user-table tr th::after {
   content: "";
@@ -980,6 +981,9 @@ button {
 }
 .con-mypage .mypage-contents .community-table {
   border-top: 2px solid black;
+}
+.con-mypage .mypage-contents .community-table tr th:nth-child(-n+2), .con-mypage .mypage-contents .community-table tr td:nth-child(-n+2) {
+  width: 200px;
 }
 .con-mypage .mypage-contents .community-table thead tr {
   height: 48px;
@@ -1237,6 +1241,18 @@ button {
   vertical-align: middle;
   padding: 8px 12px;
   font-size: 12px;
+}
+.con-mypage .mypage-contents .question-table tr th:nth-child(1), .con-mypage .mypage-contents .question-table tr td:nth-child(1) {
+  width: 60px;
+}
+.con-mypage .mypage-contents .question-table tr th:nth-child(2), .con-mypage .mypage-contents .question-table tr td:nth-child(2) {
+  width: 300px;
+}
+.con-mypage .mypage-contents .question-table tr th:nth-child(4), .con-mypage .mypage-contents .question-table tr td:nth-child(4) {
+  width: 150px;
+}
+.con-mypage .mypage-contents .question-table tr th:nth-child(5), .con-mypage .mypage-contents .question-table tr td:nth-child(5) {
+  width: 150px;
 }
 .con-mypage .mypage-contents .question-table tr .question-title {
   overflow: hidden;
@@ -2761,6 +2777,7 @@ button {
   letter-spacing: 4px;
   font-weight: 400;
   vertical-align: middle;
+  text-transform: capitalize;
 }
 .con-project-view .project-overview-wrap .designer-headline .designer-type {
   background: #eeeeee;
@@ -3917,7 +3934,7 @@ button {
 .con-portfolio-create .tab-list > li {
   display: inline-block;
   font-size: 15px;
-  width: 16.6%;
+  width: 20%;
   text-align: center;
   cursor: pointer;
   border-top: 1px solid #cccccc;
@@ -5162,6 +5179,13 @@ button {
 }
 .pop-news-wrap .news-image-list .news-image-wrap .news-image input:checked ~ .checkbox-shape {
   border: 4px solid #d1e65d;
+}
+
+.btn-edit-wrap {
+  text-align: right;
+}
+.btn-edit-wrap .btn-black, .btn-edit-wrap .btn-white {
+  width: 200px;
 }
 
 /*# sourceMappingURL=client.css.map */

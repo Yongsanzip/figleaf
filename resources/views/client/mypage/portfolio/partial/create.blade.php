@@ -394,6 +394,9 @@ $tab = 'portfolio';
             gn_make_input_json('society_list' ,'input' , 'society_array');
             return true;
         }
+        var test = function(){
+            gn_make_input_json('history_list' ,'input' , 'history_array');
+        }
     </script>
 
 @endsection
