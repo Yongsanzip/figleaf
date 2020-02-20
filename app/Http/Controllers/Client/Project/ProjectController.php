@@ -105,9 +105,14 @@ class ProjectController extends Controller
 
             $project_image = $request->file('main_file');                                                          // 대표이미지 (썸네일)
             if($project_image){
+                $image = ProjectImage::where('project_id', $project->id)->where('image_division', 1)->first();
+                if ($image) {                                                                                           // 업데이트라면 업로드 된 파일 삭제 후 재업로드
+                    Storage::delete($image->image_path);
+                }
+
                 $savePath = $project_image->store('images/project/'.date('Y-m-d').'/thumbnail', 'public');
                 ProjectImage::updateOrCreate([                                                                          // 프로젝트 이미지 등록
-                    'project_id'        => $request->project_id,
+                    'project_id'        => $project->id,
                     'image_division'    => 1,
                 ],[
                     'image_type'        => $project_image->getClientMimeType(),
@@ -118,55 +123,65 @@ class ProjectController extends Controller
 
             return response()->json($project->id, 200,[],JSON_PRETTY_PRINT);
         } elseif ($request->project_2) {                                                                                // 2. 상품정보
+            dd($request);;
             $options_name = $request->option_name;                                                                      // 옵션, 사이즈, 원단, 취급정보
             $options_price = $request->option_price;                                                                    // 옵션 테이블
-            $option_count = $request->option_id;
+            $option_count = $request->option_name;
+
+
             for ($i = 0; $i < count($option_count); $i++) {
-                Option::updateOrCreate([
-                    'id'                => $request->option_id[$i],
-                    'project_id'        => $request->project_id,
-                ],[
-                    'option_name'       => $options_name[$i],
-                    'price'             => $options_price[$i],
-                ]);
+                if ($request->options_name != null) {
+                    Option::updateOrCreate([
+                        'id'                => $request->option_id[$i],
+                        'project_id'        => $request->project_id,
+                    ],[
+                        'option_name'       => $options_name[$i],
+                        'price'             => $options_price[$i],
+                    ]);
+                }
             }
 
-            $sizes_count = $request->size_id;                                                                           // 사이즈 테이블 저장
+            $sizes_count = $request->size;                                                                              // 사이즈 테이블 저장
+
             for ($i = 0; $i < count($sizes_count); $i++){
-                Size::updateOrCreate([
-                    'id'                => $request->size_id[$i],
-                    'project_id'        => $request->project_id,
+                if ($request->size[$i] != null) {
+                    Size::updateOrCreate([
+                        'id'                => $request->size_id[$i],
+                        'project_id'        => $request->project_id,
                     ], [
-                    'size'              => $request->size[$i],
-                    'total_length'      => $request->total_length[$i],
-                    'shoulder'          => $request->shoulder[$i],
-                    'chest'             => $request->chest[$i],
-                    'arms_length'       => $request->arms_length[$i],
-                    'sleeve'            => $request->sleeve[$i],
-                    'armhole'           => $request->armhole[$i],
-                    'waist'             => $request->waist[$i],
-                    'hem'               => $request->hem[$i],
-                    'crotch'            => $request->crotch[$i],
-                    'hip'               => $request->hip[$i],
-                    'thigh'             => $request->thigh[$i],
-                    'string_length'     => $request->string_length[$i],
-                    'horizontal'        => $request->horizontal[$i],
-                    'vertical'          => $request->vertical[$i],
-                    'forefoot'          => $request->forefoot[$i],
-                    'heels'             => $request->heels[$i],
-                ]);
+                        'size'              => $request->size[$i],
+                        'total_length'      => $request->total_length[$i],
+                        'shoulder'          => $request->shoulder[$i],
+                        'chest'             => $request->chest[$i],
+                        'arms_length'       => $request->arms_length[$i],
+                        'sleeve'            => $request->sleeve[$i],
+                        'armhole'           => $request->armhole[$i],
+                        'waist'             => $request->waist[$i],
+                        'hem'               => $request->hem[$i],
+                        'crotch'            => $request->crotch[$i],
+                        'hip'               => $request->hip[$i],
+                        'thigh'             => $request->thigh[$i],
+                        'string_length'     => $request->string_length[$i],
+                        'horizontal'        => $request->horizontal[$i],
+                        'vertical'          => $request->vertical[$i],
+                        'forefoot'          => $request->forefoot[$i],
+                        'heels'             => $request->heels[$i],
+                    ]);
+                }
             }
 
             $fabric_count = count($request->fabric_ratio);
 
             for ($i = 0; $i < $fabric_count; $i++){                                                                     // 원단-재질
-                Fabric::updateOrCreate([
-                    'id'                => $request->fabric_id[$i],
-                    'project_id'        => $request->project_id,
-                ],[
-                    'material_id'       => $request->material_id[$i],
-                    'rate'              => $request->fabric_ratio[$i]
-                ]);
+                if ($request->fabric_ratio[$i] != null) {
+                    Fabric::updateOrCreate([
+                        'id'                => $request->fabric_id[$i],
+                        'project_id'        => $request->project_id,
+                    ],[
+                        'material_id'       => $request->material_id[$i],
+                        'rate'              => $request->fabric_ratio[$i]
+                    ]);
+                }
             }
 
             Project::where('id', $request->project_id)->update([                                                        // 프로젝트
@@ -233,7 +248,7 @@ class ProjectController extends Controller
             if ($request->project_id) {
                 Project::where('id', $request->project_id)->update([
                     'storytelling'      => $request->ir1,
-                    'progress'          => 50,
+                    'progress'          => 45,
                 ]);
                 return response()->json('success', 200,[],JSON_PRETTY_PRINT);
             } else {
@@ -246,7 +261,7 @@ class ProjectController extends Controller
                 'delivery_date'         => $request->delivery_date,
                 'delay_date'            => $request->delay_date,
                 'agree'                 => $request->agree,
-                'progress'              => 75,
+                'progress'              => 60,
             ]);
             return response()->json('success', 200,[],JSON_PRETTY_PRINT);
         } elseif ($request->project_5) {                                                                                // 5. 디자이너/브랜드 소개
@@ -268,8 +283,10 @@ class ProjectController extends Controller
                 'twitter_hidden'        => $request->twitter_hidden ? $request->twitter_hidden : 0,
                 'homepage_hidden'       => $request->homepage_hidden ? $request->homepage_hidden : 0
             ]);
+            // project 75
             return response()->json('success', 200,[],JSON_PRETTY_PRINT);
         } elseif ($request->project_6) {                                                                                // 6. 정산정보
+            // project 100
             Account::updateOrCreate([
                 'project_id'            => $request->project_id,
             ],[
@@ -281,6 +298,12 @@ class ProjectController extends Controller
 
             $company_image = $request->file('company_file');                                                       // 사업자등록증
             if($company_image){
+
+                $company_image_exist = ProjectImage::where('project_id', $request->project_id)->where('image_division', 2)->first();
+                if ($company_image_exist) {                                                                             // 존재할 경우 업로드 된 파일 삭제
+                    Storage::delete($company_image_exist->image_path);
+                }
+
                 $savePath = $company_image->store('images/project/'.date('Y-m-d').'/company', 'public');
                 ProjectImage::updateOrCreate([                                                                          // 프로젝트 이미지 등록
                     'project_id'        => $request->project_id,
@@ -294,6 +317,11 @@ class ProjectController extends Controller
 
             $bank_image = $request->file('bank_file');                                                             // 통장사본
             if($bank_image){
+                $bank_image_exist = ProjectImage::where('project_id', $request->project_id)->where('image_division', 3)->first();
+                if ($bank_image_exist) {                                                                                // 존재할 경우 업로드 된 파일 삭제
+                    Storage::delete($bank_image_exist->image_path);
+                }
+
                 $savePath = $bank_image->store('images/project/'.date('Y-m-d').'/bank', 'public');
                 ProjectImage::updateOrCreate([                                                                          // 프로젝트 이미지 등록
                     'project_id'        => $request->project_id,
@@ -304,6 +332,10 @@ class ProjectController extends Controller
                     'origin_name'       => $bank_image->getClientOriginalName(),
                 ]);
             }
+
+            Project::where('id', $request->project_id)->update([
+                'progress'              => 100
+            ]);
 
             return response()->json('success', 200,[],JSON_PRETTY_PRINT);
         }

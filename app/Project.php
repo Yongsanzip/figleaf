@@ -23,14 +23,29 @@ class Project extends Model {
         return $this->hasMany('App\Option','project_id','id');
     }
 
+    // 옵션 데이터가 한 개라도 존재하는지 project/create.blade 에서 사용
+    public function option_exist($id) {
+        return $this->hasMany('App\Option','project_id','id')->where('project_id', $id)->first();
+    }
+
     // 사이즈
     public function sizes() {
         return $this->hasMany('App\Size','project_id','id');
     }
 
+    // 사이즈 데이터가 한 개라도 존재하는지 project/create.blade 에서 사용
+    public function size_exist($id) {
+        return $this->hasMany('App\Size','project_id','id')->where('project_id', $id)->first();
+    }
+
     // 원단-재질
     public function fabrics() {
         return $this->hasMany('App\Fabric', 'project_id', 'id');
+    }
+
+    // 원단-재질
+    public function fabric_exist($id) {
+        return $this->hasMany('App\Fabric', 'project_id', 'id')->where('project_id', $id)->first();
     }
 
     // 취급정보

@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded',function () {
             valueCheck = false;
         } else { // submit
             var form = new FormData($('#projectForm1')[0]);
+            var summary_tab = document.getElementById('summary');
             formAjax('POST', false, '/project', form, function(e) {
                 alert(error_msg);
                 location.href = '/project/create';
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded',function () {
                 for (var i = 0; i < project_id.length; i++) {
                     project_id[i].value = data;
                 }
+                summary_tab.classList.add('fill');
             });
             valueCheck = true;
         }
@@ -129,7 +131,7 @@ document.addEventListener('DOMContentLoaded',function () {
                 valueCheck = false;
                 return false;
             }
-            if (!option_price[i].value){
+            if (option_name[i].value.length > 0 && !option_price[i].value){
                 alert('옵션명 또는 가격을 입력해주세요.');
                 valueCheck = false;
                 return false;
@@ -142,7 +144,7 @@ document.addEventListener('DOMContentLoaded',function () {
                 valueCheck = false;
                 return false;
             }
-            if (!option_name[j].value) {
+            if (option_price[j].value > 0 && !option_name[j].value) {
                 alert('옵션명 또는 가격을 입력해주세요.');
                 valueCheck = false;
                 return false;
@@ -165,12 +167,14 @@ document.addEventListener('DOMContentLoaded',function () {
         }
 
         // projectForm2
+        // document.getElementById('projectForm2').submit();
         var form = new FormData($('#projectForm2')[0]);
+        var product_information = document.getElementById('product_information');
         formAjax('POST', false, '/project', form, function(e) {
             alert(error_msg);
             location.href = '/project/create';
         }, function(data) {
-
+            product_information.classList.add('fill');
         });
         valueCheck = true;
 
@@ -194,11 +198,13 @@ document.addEventListener('DOMContentLoaded',function () {
             valueCheck = false;
         } else {
             // projectForm4
+            var project_date = document.getElementById('project_date');
             var form = new FormData($('#projectForm4')[0]);
             formAjax('POST', false, '/project', form, function(e) {
                 alert(error_msg);
                 location.href = '/project/create';
             }, function(data) {
+                project_date.classList.add('fill');
                 valueCheck = true;
             });
         }
@@ -219,11 +225,13 @@ document.addEventListener('DOMContentLoaded',function () {
             alert('디자이너/브랜드 소개는 필수 입력입니다.');
             valueCheck = false;
         } else {
+            var introduction = document.getElementById('introduction');
             var form = new FormData($('#projectForm5')[0]);
             formAjax('POST', false, '/project', form, function(e) {
                 alert(error_msg);
                 location.href = '/project/create';
             }, function(data) {
+                introduction.classList.add('fill');
                 valueCheck = true;
             });
         }
@@ -255,15 +263,19 @@ document.addEventListener('DOMContentLoaded',function () {
         } else if (!account_email || !account_phone) {
             alert('이메일과 전화번호는 필수 입력입니다.')
         } else {
-            var form = new FormData($('#projectForm6')[0]);
-            formAjax('POST', false, '/project', form, function(e) {
-                alert(error_msg);
-                location.href = '/project/create';
-            }, function(data) {
-                alert('완료되었습니다.');
-                location.href = '/project/create';
-                valueCheck = true;
-            });
+            if (confirm('관리자에게 검토를 요청하시겠습니까?')) {
+                var account = document.getElementById('account');
+                var form = new FormData($('#projectForm6')[0]);
+                formAjax('POST', false, '/project', form, function(e) {
+                    alert(error_msg);
+                    location.href = '/project/create';
+                }, function(data) {
+                    account.setAttribute("class", "fill");
+                    alert('완료되었습니다.');
+                    location.href = '/project/create';
+                    valueCheck = true;
+                });
+            }
         }
 
     });
@@ -346,18 +358,25 @@ document.addEventListener('DOMContentLoaded',function () {
 function fnAddOption(){
     var optionList = document.getElementsByClassName('option-list')[0];
     var optionNum = document.getElementsByClassName('option-item').length+1;
+
+    if (optionNum > 10) {
+        alert('최대 개수를 초과하였습니다.');
+        return false;
+    }
+
     var optionItem = '<div class="option-item">' +
         '               <div class="option-num">'+optionNum+'</div>' +
         '               <label class="option-field">' +
         '                   <p>옵션명</p>' +
-        '                   <input type="text" class="input-field" name="option_name[]" placeholder="30자 이내">' +
+        '                   <input type="text" class="input-field option_name" name="option_name[]" value="" placeholder="30자 이내">' +
         '               </label>' +
         '               <label class="option-field price">' +
         '                   <p>가격</p>' +
-        '                   <input type="text" class="input-field" name="option_price[]" placeholder="30자 이내">' +
+        '                   <input type="text" class="input-field option_price" name="option_price[]" placeholder="30자 이내">' +
         '               </label>' +
         '               <button type="button" class="btn-white" onclick="fnRemoveOption(this)">삭제</button>' +
-        '             </div>';
+        '             </div>' +
+        '               <input type="hidden" name="option_id[]" value="">';
 
     //add option item
     optionList.insertAdjacentHTML('beforeend',optionItem);
@@ -388,9 +407,17 @@ function fnRemoveOption(e) {
  ***********************************************************/
 function fnAddSize(){
     var sizeList = document.getElementsByClassName('size-list')[0];
-    var sizeItem = '<tr>' +
+    var sizeCount = document.getElementsByClassName('sizeCount').length+1;
+
+    if (sizeCount > 10) {
+        alert('최대 개수를 초과하였습니다.');
+        return false;
+    }
+
+    var sizeItem = '<input type="hidden" name="size_id[]" value="">' +
+        '        <tr>' +
         '            <!-- 사이즈 -->' +
-        '            <td><input type="text" name="size[]"></td>' +
+        '            <td><input type="text" class="sizeCount" name="size[]"></td>' +
         '            <!-- 총기장 -->' +
         '            <td><input type="text" name="total_length[]"></td>' +
         '            <!-- 어깨 -->' +
@@ -457,7 +484,17 @@ function fnRemoveSize(e) {
 var num = 0;
 function fnAddFabric(){
     num++;
-    var fabricList = document.getElementsByClassName('fabric-list')[0];
+    var fabricCount = document.getElementsByClassName('fabric-list');
+    var i = fabricCount.length-1;
+    var fabricLimit = document.getElementsByClassName('fabric-name');
+
+    if (fabricLimit.length > 6) {
+        alert('최대 개수를 초과하였습니다.');
+        return false;
+    }
+
+    var fabricList = document.getElementsByClassName('fabric-list')[i];
+
     var fabricItem = '<div class="fabric-item">' +
         '                <div class="fabric-name">' +
         '                    <input type="text" class="input-field fabric" name="fabric[]" id="material_name'+num+'" onclick="popup_material('+num+')" readonly>' +

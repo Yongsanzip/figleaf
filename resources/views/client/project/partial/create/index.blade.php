@@ -34,7 +34,7 @@
                 <!-- //headline -->
 
                 <ul class="tab-list">
-                    <li class="tab-on fill"><span>개요</span></li>
+                    <li class="tab-on" id="summary"><span>개요</span></li>
                     <li id="product_information"><span>상품정보</span></li>
                     <li id="story_telling"><span>스토리텔링</span></li>
                     <li id="project_date"><span>프로젝트 일정</span></li>
@@ -107,21 +107,25 @@
                                 <div class="drop-header">옵션</div>
                                 <div class="drop-item">
                                     <div class="option-list">
-                                        @if(isset($data))
-                                        @forelse($data->options as $key=>$option)
-                                        <div class="option-item">
-                                            <div class="option-num">{{ $key+1 }}</div>
-                                            <label class="option-field">
-                                                <p>옵션명</p>
-                                                <input type="text" class="input-field option_name" name="option_name[]" value="{{ $option->option_name }}" placeholder="30자 이내">
-                                            </label>
-                                            <label class="option-field price">
-                                                <p>가격</p>
-                                                <input type="text" class="input-field option_price" name="option_price[]" value="{{ $option->price }}" placeholder="30자 이내">
-                                            </label>
-                                        </div>
-                                            <input type="hidden" name="option_id[]" value="{{ $option->id }}">
-                                        @empty
+                                        @if(isset($data) && $data->option_exist($data->id))
+                                            @foreach($data->options as $key=>$option)
+                                            <div class="option-item">
+                                                <div class="option-num">{{ $key+1 }}</div>
+                                                <label class="option-field">
+                                                    <p>옵션명</p>
+                                                    <input type="text" class="input-field option_name" name="option_name[]" value="{{ $option->option_name }}" placeholder="30자 이내">
+                                                </label>
+                                                <label class="option-field price">
+                                                    <p>가격</p>
+                                                    <input type="text" class="input-field option_price" name="option_price[]" value="{{ $option->price }}" placeholder="30자 이내">
+                                                </label>
+                                                @if($key > 0)
+                                                <button type="button" class="btn-white" onclick="fnRemoveOption(this)">삭제</button>
+                                                @endif
+                                            </div>
+                                                <input type="hidden" name="option_id[]" value="{{ $option->id }}">
+                                            @endforeach
+                                        @else
                                             <div class="option-item">
                                                 <div class="option-num">1</div>
                                                 <label class="option-field">
@@ -133,8 +137,7 @@
                                                     <input type="text" class="input-field option_price" name="option_price[]" placeholder="30자 이내">
                                                 </label>
                                             </div>
-                                                <input type="hidden" name="option_id[]" value="">
-                                        @endforelse
+                                            <input type="hidden" name="option_id[]" value="">
                                         @endif
                                         <!-- script add items -->
                                     </div>
@@ -206,92 +209,94 @@
                                             </tr>
                                             </thead>
                                             <tbody class="size-list">
-                                            @if(isset($data))
-                                            @forelse($data->sizes as $size)
-                                                <input type="hidden" name="size_id[]" value="{{ $size->id }}">
-                                            <tr>
-                                                <!-- 사이즈 -->
-                                                <td>
-                                                    <input type="text" name="size[]" id="size" value="{{ $size->size }}">
-                                                </td>
-                                                <!-- 총기장 -->
-                                                <td>
-                                                    <input type="text" name="total_length[]" value="{{ $size->total_length }}">
-                                                </td>
-                                                <!-- 어깨 -->
-                                                <td>
-                                                    <input type="text" name="shoulder[]" value="{{ $size->shoulder }}">
-                                                </td>
-                                                <!-- 가슴 -->
-                                                <td>
-                                                    <input type="text" name="chest[]" value="{{ $size->chest }}">
-                                                </td>
-                                                <!-- 팔길이 -->
-                                                <td>
-                                                    <input type="text" name="arms_length[]" value="{{ $size->arms_length }}">
-                                                </td>
+                                            @if(isset($data) && $data->size_exist($data->id))
+                                                @foreach($data->sizes as $size)
+                                                    <input type="hidden" name="size_id[]" value="{{ $size->id }}">
+                                                <tr>
+                                                    <!-- 사이즈 -->
+                                                    <td>
+                                                        <input type="text" class="sizeCount" name="size[]" id="size" value="{{ $size->size }}">
+                                                    </td>
+                                                    <!-- 총기장 -->
+                                                    <td>
+                                                        <input type="text" name="total_length[]" value="{{ $size->total_length }}">
+                                                    </td>
+                                                    <!-- 어깨 -->
+                                                    <td>
+                                                        <input type="text" name="shoulder[]" value="{{ $size->shoulder }}">
+                                                    </td>
+                                                    <!-- 가슴 -->
+                                                    <td>
+                                                        <input type="text" name="chest[]" value="{{ $size->chest }}">
+                                                    </td>
+                                                    <!-- 팔길이 -->
+                                                    <td>
+                                                        <input type="text" name="arms_length[]" value="{{ $size->arms_length }}">
+                                                    </td>
 
-                                                <!-- 소매단면 -->
-                                                <td>
-                                                    <input type="text" name="sleeve[]" value="{{ $size->sleeve }}">
-                                                </td>
-                                                <!-- 암홀 -->
-                                                <td>
-                                                    <input type="text" name="armhole[]" value="{{ $size->armhole }}">
-                                                </td>
-                                                <!-- 허리 -->
-                                                <td>
-                                                    <input type="text" name="waist[]" value="{{ $size->waist }}">
-                                                </td>
-                                                <!-- 밑단 -->
-                                                <td>
-                                                    <input type="text" name="hem[]" value="{{ $size->hem }}">
-                                                </td>
-                                                <!-- 밑위 -->
-                                                <td>
-                                                    <input type="text" name="crotch[]" value="{{ $size->crotch }}">
-                                                </td>
+                                                    <!-- 소매단면 -->
+                                                    <td>
+                                                        <input type="text" name="sleeve[]" value="{{ $size->sleeve }}">
+                                                    </td>
+                                                    <!-- 암홀 -->
+                                                    <td>
+                                                        <input type="text" name="armhole[]" value="{{ $size->armhole }}">
+                                                    </td>
+                                                    <!-- 허리 -->
+                                                    <td>
+                                                        <input type="text" name="waist[]" value="{{ $size->waist }}">
+                                                    </td>
+                                                    <!-- 밑단 -->
+                                                    <td>
+                                                        <input type="text" name="hem[]" value="{{ $size->hem }}">
+                                                    </td>
+                                                    <!-- 밑위 -->
+                                                    <td>
+                                                        <input type="text" name="crotch[]" value="{{ $size->crotch }}">
+                                                    </td>
 
-                                                <!-- 엉덩이단면 -->
-                                                <td>
-                                                    <input type="text" name="hip[]" value="{{ $size->hip }}">
-                                                </td>
-                                                <!-- 허벅지단면 -->
-                                                <td>
-                                                    <input type="text" name="thigh[]" value="{{ $size->thigh }}">
-                                                </td>
-                                                <!-- 끈길이 -->
-                                                <td>
-                                                    <input type="text" name="string_length[]" value="{{ $size->string_length }}">
-                                                </td>
-                                                <!-- 가로 -->
-                                                <td>
-                                                    <input type="text" name="horizontal[]" value="{{ $size->horizontal }}">
-                                                </td>
-                                                <!-- 세로 -->
-                                                <td>
-                                                    <input type="text" name="vertical[]" value="{{ $size->vertical }}">
-                                                </td>
+                                                    <!-- 엉덩이단면 -->
+                                                    <td>
+                                                        <input type="text" name="hip[]" value="{{ $size->hip }}">
+                                                    </td>
+                                                    <!-- 허벅지단면 -->
+                                                    <td>
+                                                        <input type="text" name="thigh[]" value="{{ $size->thigh }}">
+                                                    </td>
+                                                    <!-- 끈길이 -->
+                                                    <td>
+                                                        <input type="text" name="string_length[]" value="{{ $size->string_length }}">
+                                                    </td>
+                                                    <!-- 가로 -->
+                                                    <td>
+                                                        <input type="text" name="horizontal[]" value="{{ $size->horizontal }}">
+                                                    </td>
+                                                    <!-- 세로 -->
+                                                    <td>
+                                                        <input type="text" name="vertical[]" value="{{ $size->vertical }}">
+                                                    </td>
 
-                                                <!-- 앞굽 -->
-                                                <td>
-                                                    <input type="text" name="forefoot[]" value="{{ $size->forefoot }}">
-                                                </td>
-                                                <!-- 뒷굽 -->
-                                                <td>
-                                                    <input type="text" name="heels[]" value="{{ $size->heels }}">
-                                                </td>
-                                                <!-- 버튼 -->
-                                                <!-- <td class="row-btn"> -->
-                                                <!-- 123 -->
-                                                <!-- </td> -->
-                                            </tr>
-                                            @empty
+                                                    <!-- 앞굽 -->
+                                                    <td>
+                                                        <input type="text" name="forefoot[]" value="{{ $size->forefoot }}">
+                                                    </td>
+                                                    <!-- 뒷굽 -->
+                                                    <td>
+                                                        <input type="text" name="heels[]" value="{{ $size->heels }}">
+                                                    </td>
+                                                    <!-- 버튼 -->
+                                                    <!-- <td class="row-btn"> -->
+                                                    <!-- 123 -->
+                                                    <!-- </td> -->
+                                                </tr>
+                                                @endforeach
+                                            @else
+
                                                 <input type="hidden" name="size_id[]" value="">
                                                 <tr>
                                                     <!-- 사이즈 -->
                                                     <td>
-                                                        <input type="text" name="size[]" id="size">
+                                                        <input type="text" class="sizeCount" name="size[]" id="size">
                                                     </td>
                                                     <!-- 총기장 -->
                                                     <td>
@@ -365,7 +370,6 @@
                                                     <!-- 123 -->
                                                     <!-- </td> -->
                                                 </tr>
-                                            @endforelse
                                             @endif
                                             <!-- script add item -->
                                             </tbody>
@@ -382,25 +386,28 @@
                                 <div class="drop-header">원단</div>
                                 <div class="drop-item">
                                     <div class="fabric-list-wrap">
-                                        @if(isset($data))
-                                        @forelse($data->fabrics as $fabric)
-                                        <div class="fabric-list">
-                                            <div class="fabric-title">
-                                                <div>재질명</div>
-                                                <div>비율</div>
-                                            </div>
-                                            <div class="fabric-item">
-                                                <div class="fabric-name">
-                                                    <input type="text" class="input-field fabric" name="fabric[]" id="material_name0" onclick="popup_material(0)" value="{{ $fabric->material->name }}" readonly>
-                                                    <input type="hidden" name="material_id[]" id="material_id0" value="{{ $fabric->material_id }}">
+                                        @if(isset($data) && $data->fabric_exist($data->id))
+                                            @foreach($data->fabrics as $key=>$fabric)
+                                            <div class="fabric-list">
+                                                @if($key == 0)
+                                                <div class="fabric-title">
+                                                    <div>재질명</div>
+                                                    <div>비율</div>
                                                 </div>
-                                                <div class="fabric-ratio">
-                                                    <input type="number" max="100" min="0" class="input-field fabric_ratio" name="fabric_ratio[]" value="{{ $fabric->rate }}">
+                                                @endif
+                                                <div class="fabric-item">
+                                                    <div class="fabric-name">
+                                                        <input type="text" class="input-field fabric" name="fabric[]" id="material_name0" onclick="popup_material(0)" value="{{ $fabric->material->name }}" readonly>
+                                                        <input type="hidden" name="material_id[]" id="material_id0" value="{{ $fabric->material_id }}">
+                                                    </div>
+                                                    <div class="fabric-ratio">
+                                                        <input type="number" max="100" min="0" class="input-field fabric_ratio" name="fabric_ratio[]" value="{{ $fabric->rate }}">
+                                                    </div>
+                                                    <input type="hidden" name="fabric_id[]" value="{{ $fabric ? $fabric->id : '' }}">
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="fabric_id[]" value="{{ $fabric ? $fabric->id : '' }}">
-                                        </div>
-                                        @empty
+                                            @endforeach
+                                        @else
                                             <div class="fabric-list">
                                                 <div class="fabric-title">
                                                     <div>재질명</div>
@@ -414,26 +421,8 @@
                                                     <div class="fabric-ratio">
                                                         <input type="number" max="100" min="0" class="input-field fabric_ratio" name="fabric_ratio[]">
                                                     </div>
+                                                    <input type="hidden" name="fabric_id[]" value="0">
                                                 </div>
-                                                <input type="hidden" name="fabric_id[]" value="">
-                                            </div>
-                                        @endforelse
-                                            @else
-                                            <div class="fabric-list">
-                                                <div class="fabric-title">
-                                                    <div>재질명</div>
-                                                    <div>비율</div>
-                                                </div>
-                                                <div class="fabric-item">
-                                                    <div class="fabric-name">
-                                                        <input type="text" class="input-field fabric" name="fabric[]" id="material_name0" onclick="popup_material(0)" readonly>
-                                                        <input type="hidden" name="material_id[]" id="material_id0">
-                                                    </div>
-                                                    <div class="fabric-ratio">
-                                                        <input type="number" max="100" min="0" class="input-field fabric_ratio" name="fabric_ratio[]">
-                                                    </div>
-                                                </div>
-                                                <input type="hidden" name="fabric_id[]" value="0">
                                             </div>
                                         @endif
                                             <!-- script add item -->
@@ -790,7 +779,7 @@
             // 스토리텔링
             document.getElementById('project_date').addEventListener('click', function () {
                 oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
-                console.log(document.getElementById('ir1'));
+                var story_telling = document.getElementById('story_telling');
                 var form = new FormData($('#projectForm3')[0]);
                 formAjax('POST', false, '/project', form, function (e) {
                     alert('오류입니다. 처음부터 다시 시작해주세요.');
@@ -799,6 +788,7 @@
                     if (data === 'fail') {
                         alert('이전 단계를 진행해주세요.')
                     } else {
+                        story_telling.setAttribute("class", "fill");
                         valueCheck = true;
                     }
                 });
