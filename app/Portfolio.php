@@ -11,6 +11,12 @@ class Portfolio extends Model {
     // 컬럼중 노출하지않을것을 표기
     protected $guarded =[];
 
+    protected $casts = [
+      'history' => "array",
+      'awards' => "array",
+      'association' => "array",
+
+    ];
     /*******************************************************************
      * @return BelongsTo
      *******************************************************************/

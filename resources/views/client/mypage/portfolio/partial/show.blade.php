@@ -24,7 +24,7 @@ $tab = 'portfolio';
 
                 <!-- project overview-->
                 <div class="contents-wrap portfolio-overview">
-                    <img src="{{ asset('storage/'.$datas->portfolio_images->first()->image_path)}}" alt="">
+                    <img src="{{ asset('storage/'.$datas->portfolio_images ? $datas->portfolio_images->first()->image_path : '#')}}" alt="">
                     <p>
                     @if( app()->getLocale() =='ko')
                         {{ $datas->content_ko}}
@@ -44,32 +44,24 @@ $tab = 'portfolio';
                     <div class="headline-wrap">
                         <h3 class="headline">history</h3>
                     </div>
-                    <!-- history item -->
-                    <div class="history-item">
-                        <h4 class="year">2019</h4>
-                        <ul class="history">
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                        </ul>
-                    </div>
-                    <!-- //history item -->
-                    <div class="history-item">
-                        <h4 class="year">2018</h4>
-                        <ul class="history">
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                        </ul>
-                    </div>
-                    <div class="history-item">
-                        <h4 class="year">2017</h4>
-                        <ul class="history">
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                        </ul>
-                    </div>
+                    @foreach($datas->history as $history)
+                        <!-- history item -->
+                            <div class="history-item">
+                                <h4 class="year">{{ $history['year'] }}</h4>
+                                <ul class="history">
+                                    @if( app()->getLocale() =='ko')
+                                        <li>{{ $history['history_ko'] }}</li>
+                                    @elseif(app()->getLocale() =='en')
+                                        <li>{{ $history['history_en'] }}</li>
+                                    @elseif(app()->getLocale() =='cn')
+                                        <li>{{ $history['history_cn'] }}</li>
+                                    @else
+                                        히스토리 내용이 존재하지 않습니다
+                                    @endif
+                                </ul>
+                            </div>
+                            <!-- //history item -->
+                    @endforeach
                 </div>
                 <!--//designer history -->
 
@@ -78,32 +70,24 @@ $tab = 'portfolio';
                     <div class="headline-wrap">
                         <h3 class="headline">award history</h3>
                     </div>
+                @foreach($datas->awards as $awards)
                     <!-- history item -->
-                    <div class="history-item">
-                        <h4 class="year">2019</h4>
-                        <ul class="history">
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                        </ul>
-                    </div>
-                    <!-- //history item -->
-                    <div class="history-item">
-                        <h4 class="year">2018</h4>
-                        <ul class="history">
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                        </ul>
-                    </div>
-                    <div class="history-item">
-                        <h4 class="year">2018</h4>
-                        <ul class="history">
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                            <li>공무원의 직무상 불법행위로 손해를 받은 국민은 법률이 정하는 바에 의하여 국가 또는 공공단체에 정당한 배상을 청구할 수 있다.</li>
-                        </ul>
-                    </div>
+                        <div class="history-item">
+                            <h4 class="year">{{ $awards['year'] }}</h4>
+                            <ul class="history">
+                                @if( app()->getLocale() =='ko')
+                                    <li>{{ $awards['history_ko'] }}</li>
+                                @elseif(app()->getLocale() =='en')
+                                    <li>{{ $awards['history_en'] }}</li>
+                                @elseif(app()->getLocale() =='cn')
+                                    <li>{{ $awards['history_cn'] }}</li>
+                                @else
+                                    히스토리 내용이 존재하지 않습니다
+                                @endif
+                            </ul>
+                        </div>
+                        <!-- //history item -->
+                @endforeach
                 </div>
                 <!--//award history -->
 
@@ -113,18 +97,22 @@ $tab = 'portfolio';
                         <h3 class="headline">association</h3>
                     </div>
                     <ul class="association-list">
-                        <li>
-                            <p class="year">2016~ 2017</p>
-                            <p class="text">한국공인중개사협회 회장</p>
-                        </li>
-                        <li>
-                            <p class="year">2016~ 2017</p>
-                            <p class="text">한국공인중개사협회 회장</p>
-                        </li>
-                        <li>
-                            <p class="year">2016~ 2017</p>
-                            <p class="text">한국공인중개사협회 회장</p>
-                        </li>
+                    @foreach($datas->association as $association)
+                        <!-- history item -->
+                            <li>
+                                <p class="year">{{$association['start_year']}}~{{$association['end_year']}}</p>
+                            @if( app()->getLocale() =='ko')
+                                <p>{{ $association['association_ko'] }}</p>
+                            @elseif(app()->getLocale() =='en')
+                                <p>{{ $association['association_en'] }}</p>
+                            @elseif(app()->getLocale() =='cn')
+                                <p>{{ $association['association_cn'] }}</p>
+                            @else
+                                협회활동이 내용이 존재하지 않습니다
+                            @endif
+                            </li>
+
+                        @endforeach
                     </ul>
                 </div>
                 <!--//association -->
@@ -135,7 +123,7 @@ $tab = 'portfolio';
                         <h3 class="headline">brand</h3>
                     </div>
                     <div class="contents-overview">
-                        <img src="{{ asset('storage/'.$datas->brand_thumbnail_images->first()->image_path)}}" alt="">
+                        <img src="{{ asset('storage/'.count($datas->brand_thumbnail_images) > 0  ? $datas->brand_thumbnail_images->first()->image_path : '#')}}" alt="">
                         @if( app()->getLocale() =='ko')
                             {{ $datas->brand->contents_ko}}
                         @elseif(app()->getLocale() =='en')

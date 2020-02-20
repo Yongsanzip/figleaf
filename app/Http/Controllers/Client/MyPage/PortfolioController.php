@@ -55,10 +55,9 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function store(Request $request){
-        var_dump(json_decode($request->history_array,true));
-        var_dump(json_decode($request->awards_array,true));
+        error_log($request->society_array);
         var_dump(json_decode($request->society_array,true));
-        /*try {
+        try {
             $check = Portfolio::whereUserId(auth()->user()->id)->first();
             if(isset($check)) {flash('포트폴리오가 존재합니다.')->warning(); return back();}
 
@@ -67,23 +66,26 @@ class PortfolioController extends Controller {
             ]);
 
             $portfolio = Portfolio::firstOrCreate([
-                'user_id'           =>auth()->user()->id,                                                                // 사용자 ID
-                'content_ko'        =>$request->context_ko,                                                              // 한글내용
-                'content_cn'        =>$request->context_cn,                                                              // 중문내용
-                'content_en'        =>$request->context_en,                                                              // 영문내용
-                'hidden_yn'         =>$request->hidden_yn ? 1 : 0,                                                       // 포트폴리오 숨김처리
-                'email'             =>$request->email,                                                                   // 이메일
-                'home_phone'        =>$request->home_phone,                                                              // 전화번호
-                'facebook'          =>$request->facebook,                                                                // 페이스북
-                'instagram'         =>$request->instagram,                                                               // 인스타그램
-                'twitter'           =>$request->twitter,                                                                 // 트위터
-                'homepage'          =>$request->homepage,                                                                // 홈페이지
-                'email_hidden'      =>$request->email_hidden ? 1 : 0,                                                    // 이메일 숨김처리
-                'phone_hidden'      =>$request->phone_hidden ? 1 : 0,                                                    // 전화번호 숨김처리
-                'facebook_hidden'   =>$request->facebook_hidden ? 1 : 0,                                                 // 페이스북 숨김처리
-                'instagram_hidden'  =>$request->instagram_hidden ? 1 : 0,                                                // 인스타그램 숨김처리
-                'twitter_hidden'    =>$request->twitter_hidden ? 1 : 0,                                                  // 트위터 숨김처리
-                'homepage_hidden'   =>$request->homepage_hidden ? 1 : 0,                                                 // 홈페이지 숨김처리
+                'user_id'           =>auth()->user()->id,                                                               // 사용자 ID
+                'content_ko'        =>$request->context_ko,                                                             // 한글내용
+                'content_cn'        =>$request->context_cn,                                                             // 중문내용
+                'content_en'        =>$request->context_en,                                                             // 영문내용
+                'hidden_yn'         =>$request->hidden_yn ? 1 : 0,                                                      // 포트폴리오 숨김처리
+                'history'           =>$request->history_array,                                                          // 히스토리
+                'awards'            =>$request->awards_array,                                                           // 수상내역
+                'association'       =>$request->society_array,                                                          // 협회활동
+                'email'             =>$request->email,                                                                  // 이메일
+                'home_phone'        =>$request->home_phone,                                                             // 전화번호
+                'facebook'          =>$request->facebook,                                                               // 페이스북
+                'instagram'         =>$request->instagram,                                                              // 인스타그램
+                'twitter'           =>$request->twitter,                                                                // 트위터
+                'homepage'          =>$request->homepage,                                                               // 홈페이지
+                'email_hidden'      =>$request->email_hidden ? 1 : 0,                                                   // 이메일 숨김처리
+                'phone_hidden'      =>$request->phone_hidden ? 1 : 0,                                                   // 전화번호 숨김처리
+                'facebook_hidden'   =>$request->facebook_hidden ? 1 : 0,                                                // 페이스북 숨김처리
+                'instagram_hidden'  =>$request->instagram_hidden ? 1 : 0,                                               // 인스타그램 숨김처리
+                'twitter_hidden'    =>$request->twitter_hidden ? 1 : 0,                                                 // 트위터 숨김처리
+                'homepage_hidden'   =>$request->homepage_hidden ? 1 : 0,                                                // 홈페이지 숨김처리
             ]);
 
             $portfolio_image = $request->file('portfolio_image');
@@ -143,7 +145,7 @@ class PortfolioController extends Controller {
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->important();
             return back();
-        }*/
+        }
     }
 
     /************************************************************************

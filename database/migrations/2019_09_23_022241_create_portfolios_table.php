@@ -24,6 +24,9 @@ class CreatePortfoliosTable extends Migration
             $table->text('content_ko')->nullable()->comment('프로필설명(한)');
             $table->text('content_cn')->nullable()->comment('프로필설명(중)');
             $table->text('content_en')->nullable()->comment('프로필설명(영)');
+            $table->string('history')->nullable()->comment('히스토리');
+            $table->string('awards')->nullable()->comment('수상내역');
+            $table->string('association')->nullable()->comment('협회활동');
             $table->boolean('hidden_yn')->default(0)->comment('숨김여부(미숨김:0, 숨김:1)');
             $table->boolean('open_yn')->default(0)->comment('열람여부(미열람:0, 열람:1)');
             $table->string('email')->nullable()->comment('이메일');

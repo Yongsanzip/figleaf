@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="complate-box">
-                    <img src="../images/common/logo.png" alt="logo">
+                    <img src="{{asset('../images/common/logo-horizontal-black.png')}}" alt="logo">
                     <p class="text">
                         회원가입이 완료되었습니다.<br>
                         피그리프의 서비스를 즐겨보세요!

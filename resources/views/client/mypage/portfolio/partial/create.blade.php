@@ -34,7 +34,6 @@ $tab = 'portfolio';
                     <li class="tab-on fill"><span>디자이너 프로필</span></li>
                     <li><span>브랜드</span></li>
                     <li><span>룩북</span></li>
-                    <li><span>뉴스&블로그</span></li>
                     <li><span>연락처</span></li>
                 </ul>
 
