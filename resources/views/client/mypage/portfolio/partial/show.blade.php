@@ -24,7 +24,7 @@ $tab = 'portfolio';
 
                 <!-- project overview-->
                 <div class="contents-wrap portfolio-overview">
-                    <img src="{{ asset('storage/'.$datas->portfolio_images ? $datas->portfolio_images->first()->image_path : '#')}}" alt="">
+                    <img src="{{ asset('storage/'.count($datas->portfolio_images) > 0 ? $datas->portfolio_images->first()->image_path : '#')}}" alt="">
                     <p>
                     @if( app()->getLocale() =='ko')
                         {{ $datas->content_ko}}
@@ -44,17 +44,17 @@ $tab = 'portfolio';
                     <div class="headline-wrap">
                         <h3 class="headline">history</h3>
                     </div>
-                    @foreach($datas->history as $history)
+                    @foreach( $datas->histories() as $history)
                         <!-- history item -->
                             <div class="history-item">
-                                <h4 class="year">{{ $history['year'] }}</h4>
+                                <h4 class="year">{{ $history->year }}</h4>
                                 <ul class="history">
                                     @if( app()->getLocale() =='ko')
-                                        <li>{{ $history['history_ko'] }}</li>
+                                        <li>{{ $history->history_cn }}</li>
                                     @elseif(app()->getLocale() =='en')
-                                        <li>{{ $history['history_en'] }}</li>
+                                        <li>{{ $history->history_cn }}</li>
                                     @elseif(app()->getLocale() =='cn')
-                                        <li>{{ $history['history_cn'] }}</li>
+                                        <li>{{ $history->history_cn }}</li>
                                     @else
                                         히스토리 내용이 존재하지 않습니다
                                     @endif
@@ -70,17 +70,17 @@ $tab = 'portfolio';
                     <div class="headline-wrap">
                         <h3 class="headline">award history</h3>
                     </div>
-                @foreach($datas->awards as $awards)
+                @foreach($datas->awards() as $awards)
                     <!-- history item -->
                         <div class="history-item">
-                            <h4 class="year">{{ $awards['year'] }}</h4>
+                            <h4 class="year">{{ $awards->year }}</h4>
                             <ul class="history">
                                 @if( app()->getLocale() =='ko')
-                                    <li>{{ $awards['history_ko'] }}</li>
+                                    <li>{{ $awards->history_ko }}</li>
                                 @elseif(app()->getLocale() =='en')
-                                    <li>{{ $awards['history_en'] }}</li>
+                                    <li>{{ $awards->history_en }}</li>
                                 @elseif(app()->getLocale() =='cn')
-                                    <li>{{ $awards['history_cn'] }}</li>
+                                    <li>{{ $awards->history_cn }}</li>
                                 @else
                                     히스토리 내용이 존재하지 않습니다
                                 @endif
@@ -97,21 +97,20 @@ $tab = 'portfolio';
                         <h3 class="headline">association</h3>
                     </div>
                     <ul class="association-list">
-                    @foreach($datas->association as $association)
+                    @foreach($datas->association_activties() as $association)
                         <!-- history item -->
                             <li>
-                                <p class="year">{{$association['start_year']}}~{{$association['end_year']}}</p>
+                                <p class="year">{{$association->start_year}}~{{$association->end_year}}</p>
                             @if( app()->getLocale() =='ko')
-                                <p>{{ $association['association_ko'] }}</p>
+                                <p>{{ $association->association_ko }}</p>
                             @elseif(app()->getLocale() =='en')
-                                <p>{{ $association['association_en'] }}</p>
+                                <p>{{ $association->association_en }}</p>
                             @elseif(app()->getLocale() =='cn')
-                                <p>{{ $association['association_cn'] }}</p>
+                                <p>{{ $association->association_cn }}</p>
                             @else
                                 협회활동이 내용이 존재하지 않습니다
                             @endif
                             </li>
-
                         @endforeach
                     </ul>
                 </div>
@@ -211,279 +210,6 @@ $tab = 'portfolio';
                 </div>
                 <!-- //lookbook -->
 
-                <!-- project -->
-                <div class="contents-wrap project">
-                    <div class="headline-wrap">
-                        <h3 class="headline">project</h3>
-                    </div>
-                    <div class="project-show-option">
-                        <label class="checkbox-wrap">
-                            <input type="checkbox">
-                            <p>진행중인 프로젝트만 보기</p>
-                        </label>
-                    </div>
-                    <div class="card-list">
-                        <!-- card -->
-                        <div class="card project-card">
-                            <div class="card-image">
-                                <img src="../images/dummy/img-dummy-01.png" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <!-- 진행중인 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-green">진행중</div> -->
-                            <!-- 실패한 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-grey">실패</div> -->
-
-                            <a href="" class="link"></a>
-                        </div>
-                        <!-- //card -->
-                        <div class="card project-card">
-                            <div class="card-image">
-                                <img src="../images/dummy/img-dummy-01.png" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <!-- 진행중인 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-green">진행중</div> -->
-                            <!-- 실패한 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-grey">실패</div> -->
-
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="card project-card">
-                            <div class="card-image">
-                                <img src="../images/dummy/img-dummy-01.png" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <!-- 진행중인 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-green">진행중</div> -->
-                            <!-- 실패한 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-grey">실패</div> -->
-
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="card project-card">
-                            <div class="card-image">
-                                <img src="../images/dummy/img-dummy-01.png" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <!-- 진행중인 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-green">진행중</div> -->
-                            <!-- 실패한 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-grey">실패</div> -->
-
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="card project-card">
-                            <div class="card-image">
-                                <img src="../images/dummy/img-dummy-01.png" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <!-- 진행중인 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-green">진행중</div> -->
-                            <!-- 실패한 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-grey">실패</div> -->
-
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="card project-card">
-                            <div class="card-image">
-                                <img src="../images/dummy/img-dummy-01.png" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <!-- 진행중인 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-green">진행중</div> -->
-                            <!-- 실패한 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-grey">실패</div> -->
-
-                            <a href="" class="link"></a>
-                        </div>
-                    </div>
-                </div>
-                <!--//project -->
-
-                <!-- news&blog -->
-                <div class="contents-wrap news">
-                    <div class="headline-wrap">
-                        <h3 class="headline">news&blog</h3>
-                    </div>
-                    <div class="news-list">
-                        <!-- card -->
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="../images/dummy/img-dummy-01.png" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">
-                                    천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서 이성은 밝은 그들의 따뜻한.
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <p class="card-name">프레시안</p>
-                                <p class="card-date">2019.08.22</p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <!-- //card -->
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="../images/dummy/img-dummy-01.png" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">
-                                    천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서 이성은 밝은 그들의 따뜻한.
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <p class="card-name">프레시안</p>
-                                <p class="card-date">2019.08.22</p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="../images/dummy/img-dummy-01.png" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">
-                                    천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서 이성은 밝은 그들의 따뜻한.
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <p class="card-name">프레시안</p>
-                                <p class="card-date">2019.08.22</p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- //news&blog-->
 
                 <!-- contact -->
                 <div class="contents-wrap contact">

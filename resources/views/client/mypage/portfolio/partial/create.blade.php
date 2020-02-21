@@ -271,7 +271,7 @@ $tab = 'portfolio';
                                 <div class="lookbook-list">
                                     <div class="lookbook-item">
                                         <div class="lookbook-name">
-                                            <input type="text" placeholder="시즌명(EX/2019)" class="input-field">
+                                            <input type="text" placeholder="시즌명(EX/2019)" class="input-field year_datepicker" readonly>
                                             <select class="select">
                                                 <option selected disabled>전체</option>
                                                 <option>SS</option>
@@ -283,7 +283,7 @@ $tab = 'portfolio';
                                                 <!-- script add item-->
                                             </div>
                                             <label class="upload-image">
-                                                <input type="file" accept="image/jpeg, image/jpg, image/png" onchange="fnAddLookbookItemInit(this)">
+                                                <input type="file" title="0" name="images[0][]" accept="image/jpeg, image/jpg, image/png" onchange="fnAddLookbookItemInit(this)">
                                                 <span class="shape">클릭하여 사진을 추가하세요</span>
                                             </label>
                                         </div>
@@ -291,33 +291,6 @@ $tab = 'portfolio';
                                     <!-- script add item -->
                                 </div>
                                 <button class="btn-black" type="button" onclick="fnAddLookbook()">시즌추가</button>
-                            </div>
-                        </div>
-                        <!-- 05 뉴스블로그 -->
-                        <div class="tab-contents-box">
-                            <div class="news-wrap">
-                                <div class="news-list">
-                                    <!-- card -->
-                                    <div class="card">
-                                        <div class="card-image">
-                                            <img src="../images/dummy/img-dummy-01.png" alt="">
-                                        </div>
-                                        <div class="card-contents">
-                                            <p class="card-title">
-                                                천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서 이성은 밝은 그들의 따뜻한.
-                                            </p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <p class="card-name">프레시안</p>
-                                            <p class="card-date">2019.08.22</p>
-                                        </div>
-                                        <button class="btn-remove" type="button" onclick="fnRemoveNews(this)"></button>
-                                    </div>
-                                    <!-- //card -->
-                                </div>
-                                <div class="btn-wrap">
-                                    <button class="btn-black" type="button">뉴스&블로그 추가</button>
-                                </div>
                             </div>
                         </div>
                         <!-- 06 연락처 -->

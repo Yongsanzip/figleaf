@@ -61,26 +61,26 @@ function fnAddHistoryYear(){
     var historyList = document.getElementsByClassName('history-list')[0];
     var historyYearItem = '<div class="year-item">' +
         '               <div class="year-row">' +
-        '                   <input type="text" class="input-field" placeholder="ex)2019/연도를 입력하세요.">' +
+        '                   <input type="text" data-key="year" class="input-field" placeholder="ex)2019/연도를 입력하세요.">' +
         '                   <button class="btn-white" type="button" onclick="fnRemoveHistoryYear(this)">삭제</button>' +
         '               </div>' +
         '              <div class="history-active-list">'+
         '               <div class="active-item">' +
         '                   <ul class="active-list">' +
-        '                       <li><input type="text" lang="ko" class="input-field history-active-item" placeholder="활동(한국어)"></li>';
+        '                       <li><input type="text" data-key="history_ko" lang="ko" class="input-field history-active-item" placeholder="활동(한국어)"></li>';
 
     //english check
     if(fnCheckHistoryLang('en')){
-        historyYearItem += '<li><input type="text" lang="en" class="input-field history-active-item" placeholder="Activities(English)"></li>'
+        historyYearItem += '<li><input type="text" data-key="history_en" lang="en" class="input-field history-active-item" placeholder="Activities(English)"></li>'
     }else{
-        historyYearItem += '<li><input type="text" lang="en" class="input-field history-active-item hide" placeholder="Activities(English)"></li>'
+        historyYearItem += '<li><input type="text" data-key="history_en" lang="en" class="input-field history-active-item hide" placeholder="Activities(English)"></li>'
     }
 
     //chinese check
     if(fnCheckHistoryLang('ch')){
-        historyYearItem += '<li><input type="text" lang="ch" class="input-field history-active-item" placeholder="活动(汉语)"></li>'
+        historyYearItem += '<li><input type="text" lang="ch" data-key="history_cn" class="input-field history-active-item" placeholder="活动(汉语)"></li>'
     }else{
-        historyYearItem += '<li><input type="text" lang="ch" class="input-field history-active-item hide" placeholder="活动(汉语)"></li>'
+        historyYearItem += '<li><input type="text" lang="ch" data-key="history_cn" class="input-field history-active-item hide" placeholder="活动(汉语)"></li>'
     }
 
 
@@ -118,20 +118,20 @@ function fnAddHistoryActive(e){
     var historyActiveItem =
         '                       <div class="active-item">' +
         '                         <ul class="active-list">' +
-        '                            <li><input type="text" lang="ko" class="input-field history-active-item" placeholder="활동(한국어)"></li>';
+        '                            <li><input type="text" lang="ko" data-key="history_ko" class="input-field history-active-item" placeholder="활동(한국어)"></li>';
 
     //english check
     if(fnCheckHistoryLang('en')){
-        historyActiveItem += '<li><input type="text" lang="en" class="input-field history-active-item" placeholder="Activities(English)"></li>'
+        historyActiveItem += '<li><input type="text" lang="en" data-key="history_en" class="input-field history-active-item" placeholder="Activities(English)"></li>'
     }else{
-        historyActiveItem += '<li><input type="text" lang="en" class="input-field history-active-item hide" placeholder="Activities(English)"></li>'
+        historyActiveItem += '<li><input type="text" lang="en" data-key="history_en" class="input-field history-active-item hide" placeholder="Activities(English)"></li>'
     }
 
     //chinese check
     if(fnCheckHistoryLang('ch')){
-        historyActiveItem += '<li><input type="text" lang="ch" class="input-field history-active-item" placeholder="活动(汉语)"></li>'
+        historyActiveItem += '<li><input type="text" lang="ch" data-key="history_cn" class="input-field history-active-item" placeholder="活动(汉语)"></li>'
     }else{
-        historyActiveItem += '<li><input type="text" lang="ch" class="input-field history-active-item hide" placeholder="活动(汉语)"></li>'
+        historyActiveItem += '<li><input type="text" lang="ch" data-key="history_cn" class="input-field history-active-item hide" placeholder="活动(汉语)"></li>'
     }
 
     historyActiveItem+=    '                        </ul>' +
@@ -202,26 +202,26 @@ function fnAddAwardYear(){
     var awardList = document.getElementsByClassName('award-list')[0];
     var awardYearItem = '<div class="year-item">' +
         '                   <div class="year-row">' +
-        '                       <input type="text" class="input-field" placeholder="ex)2019/연도를 입력하세요.">' +
+        '                       <input type="text" data-key="year" class="input-field" placeholder="ex)2019/연도를 입력하세요.">' +
         '                       <button class="btn-white" type="button" onclick="fnRemoveAwardYear(this)">삭제</button>' +
         '                   </div>' +
         '                   <div class="award-active-list">' +
         '                       <div class="active-item">' +
         '                           <ul class="active-list">' +
-        '                               <li><input type="text" lang="ko" class="input-field award-active-item" placeholder="수상내역(한국어)"></li>';
+        '                               <li><input type="text" lang="ko" data-key="history_ko" class="input-field award-active-item" placeholder="수상내역(한국어)"></li>';
 
     //english check
     if(fnCheckAwardLang('en')){
-        awardYearItem += '<li><input type="text" lang="en" class="input-field award-active-item" placeholder="Awards(English)"></li>'
+        awardYearItem += '<li><input type="text" lang="en" data-key="history_en" class="input-field award-active-item" placeholder="Awards(English)"></li>'
     }else{
-        awardYearItem += '<li><input type="text" lang="en" class="input-field award-active-item hide" placeholder="Awards(English)"></li>'
+        awardYearItem += '<li><input type="text" lang="en" data-key="history_en" class="input-field award-active-item hide" placeholder="Awards(English)"></li>'
     }
 
     //chinese check
     if(fnCheckAwardLang('ch')){
-        awardYearItem += '<li><input type="text" lang="ch" class="input-field award-active-item" placeholder="获奖经历(汉语)"></li>'
+        awardYearItem += '<li><input type="text" lang="ch" data-key="history_cn" class="input-field award-active-item" placeholder="获奖经历(汉语)"></li>'
     }else{
-        awardYearItem += '<li><input type="text" lang="ch" class="input-field award-active-item hide" placeholder="获奖经历(汉语)"></li>'
+        awardYearItem += '<li><input type="text" lang="ch" data-key="history_cn" class="input-field award-active-item hide" placeholder="获奖经历(汉语)"></li>'
     }
 
 
@@ -256,20 +256,20 @@ function fnAddAwardActive(e){
     var awardActiveList = e.parentNode.parentNode.parentNode;
     var awardActiveItem ='   <div class="active-item">' +
         '                       <ul class="active-list">' +
-        '                           <li><input type="text" lang="ko" class="input-field award-active-item" placeholder="수상내역(한국어)"></li>';
+        '                           <li><input type="text" lang="ko" data-key="history_ko" class="input-field award-active-item" placeholder="수상내역(한국어)"></li>';
 
     //english check
     if(fnCheckAwardLang('en')){
-        awardActiveItem += '<li><input type="text" lang="en" class="input-field award-active-item" placeholder="Awards(English)"></li>';
+        awardActiveItem += '<li><input type="text" lang="en" data-key="history_en" class="input-field award-active-item" placeholder="Awards(English)"></li>';
     }else{
-        awardActiveItem += '<li><input type="text" lang="en" class="input-field award-active-item hide" placeholder="Awards(English)"></li>';
+        awardActiveItem += '<li><input type="text" lang="en" data-key="history_en" class="input-field award-active-item hide" placeholder="Awards(English)"></li>';
     }
 
     //chinese check
     if(fnCheckAwardLang('ch')){
-        awardActiveItem += '<li><input type="text" lang="ch" class="input-field award-active-item" placeholder="获奖经历(汉语)"></li>';
+        awardActiveItem += '<li><input type="text" lang="ch" data-key="history_cn" class="input-field award-active-item" placeholder="获奖经历(汉语)"></li>';
     }else{
-        awardActiveItem += '<li><input type="text" lang="ch" class="input-field award-active-item hide" placeholder="获奖经历(汉语)"></li>';
+        awardActiveItem += '<li><input type="text" lang="ch" data-key="history_cn" class="input-field award-active-item hide" placeholder="获奖经历(汉语)"></li>';
     }
 
     awardActiveItem+=    '                        </ul>' +
@@ -494,7 +494,7 @@ function fnAddLookbookItem(reader, file, e){
 
         var input = document.createElement('input');
         input.setAttribute('type','file');
-        input.setAttribute('name','images');
+        input.setAttribute('name',"images["+e.title+"][]");
         input.files = e.files; //problem
         input.classList.add('hide');
 
@@ -541,9 +541,10 @@ function fnRemoveLookbookItem(e){
  ***********************************************************/
 function fnAddLookbook(){
     var lookbookList = document.getElementsByClassName('lookbook-list')[0];
+    var item = document.getElementsByClassName('lookbook-item');
     var lookbookItem = '<div class="lookbook-item">' +
         '                  <div class="lookbook-name">' +
-        '                      <input type="text" placeholder="시즌명(EX/2019)" class="input-field">' +
+        '                      <input type="text"  placeholder="시즌명(EX/2019)" class="input-field">' +
         '                      <select class="select">' +
         '                          <option selected disabled>전체</option>' +
         '                          <option>SS</option>' +
@@ -555,7 +556,7 @@ function fnAddLookbook(){
         '                      <div class="lookbook-contents">' +
         '                      </div>' +
         '                      <label class="upload-image">' +
-        '                          <input type="file" accept="image/jpeg, image/jpg, image/png" onchange="fnAddLookbookItemInit(this)">' +
+        '                          <input type="file" title="'+item.length+'" accept="image/jpeg, image/jpg, image/png" onchange="fnAddLookbookItemInit(this)">' +
         '                          <span class="shape">클릭하여 사진을 추가하세요</span>' +
         '                      </label>' +
         '                  </div>' +

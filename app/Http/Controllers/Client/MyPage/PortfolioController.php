@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Client\MyPage;
 
+use App\AssociationActivity;
 use App\Brand;
+use App\HistoryAward;
+use App\LookBook;
+use App\LookBookImage;
 use App\Portfolio;
 use App\PortfolioImage;
 use File;
@@ -39,12 +43,13 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function create(){
-        $check = Portfolio::whereUserId(auth()->user()->id)->first();
+        /*$check = Portfolio::whereUserId(auth()->user()->id)->first();
         if(isset($check)){
             return redirect(route('mypage_portfolio.index'));
         } else {
             return view('client.mypage.portfolio.partial.create');
-        }
+        }*/
+        return view('client.mypage.portfolio.partial.create');
     }
 
     /************************************************************************
@@ -55,24 +60,19 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function store(Request $request){
-        if(isset($request->history_array)){
-            foreach (json_decode($request->history_array,true) as $history){
-                var_dump($history);
-            }
-        }
+        var_dump($request->images[0][1]);
+        /*$look_book = LookBook::create([
+            'portfolio_id' =>1,
+            'season_id'=>$request->seasion_id,
+            'year'=>$request->year
+        ]);
 
-        if(isset($request->awards_array)){
-
-            foreach (json_decode($request->awards_array, true) as $awards){
-                var_dump($awards);
-            }
-        }
-
-        if(isset($request->society_array)){
-            foreach (json_decode($request->society_array, true) as $society){
-                var_dump($society);
-            }
-        }
+        LookBookImage::create([
+            'look_book_id' =>$look_book,
+            'image_type'        =>$look_book_images->getClientMimeType(),
+            'image_path'        =>$savePath,
+            'origin_name'       =>$look_book_images->getClientOriginalName(),
+        ]);*/
         /*try {
             $check = Portfolio::whereUserId(auth()->user()->id)->first();
             if(isset($check)) {flash('포트폴리오가 존재합니다.')->warning(); return back();}
@@ -88,6 +88,9 @@ class PortfolioController extends Controller {
                 'content_en'        =>$request->context_en,                                                             // 영문내용
                 'hidden_yn'         =>$request->hidden_yn ? 1 : 0,                                                      // 포트폴리오 숨김처리
                 'email'             =>$request->email,                                                                  // 이메일
+                'history'           =>$request->history_array,                                                          // 히스토리
+                'awards'            =>$request->awards_array,                                                           // 수상내역
+                'association'       =>$request->society_array,                                                          // 협회활동
                 'home_phone'        =>$request->home_phone,                                                             // 전화번호
                 'facebook'          =>$request->facebook,                                                               // 페이스북
                 'instagram'         =>$request->instagram,                                                              // 인스타그램
@@ -149,21 +152,32 @@ class PortfolioController extends Controller {
                 ]);
             }
 
+            // 히스토리
             if(isset($request->history_array)){
-                foreach (json_decode($request->history_array,true) as $hisory){
-                    error_log($hisory->year);
+            error_log("히스토리 있다 씨벌러마");
+                foreach (json_decode($request->history_array,true) as $history){
+                    $history['portfolio_id'] = $portfolio->id;
+                    $history['type'] = '0';
+                    HistoryAward::create($history);
                 }
             }
 
+            // 수상내역
             if(isset($request->awards_array)){
+                error_log("어워즈 있다 씨벌러마");
                 foreach (json_decode($request->awards_array, true) as $awards){
-                    error_log($hisory->year);
+                    $awards['portfolio_id'] = $portfolio->id;
+                    $awards['type'] = '1';
+                    HistoryAward::create($awards);
                 }
             }
 
+            // 협회활동동
             if(isset($request->society_array)){
+                error_log("협회활동 있다 씨벌러마");
                 foreach (json_decode($request->society_array, true) as $society){
-                    error_log($hisory->start_year);
+                    $society['portfolio_id'] = $portfolio->id;
+                    AssociationActivity::create($society);
                 }
             }
 

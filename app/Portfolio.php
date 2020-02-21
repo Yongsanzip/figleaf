@@ -15,7 +15,6 @@ class Portfolio extends Model {
       'history' => "array",
       'awards' => "array",
       'association' => "array",
-
     ];
     /*******************************************************************
      * @return BelongsTo
@@ -44,7 +43,19 @@ class Portfolio extends Model {
 
     // 뉴스 이미지
     public function news_images(){
-        return $this->hasMany('App\PortfolioImage','portfolio_id','id')->whereImageDivision(4);
+        return $this->hasMany('App\PortfolioImage','portfolio_id','id')->whereImageDivision(4)->orderBy('created_at','DESC');
+    }
+    // 히스토리
+    public function histories(){
+        return $this->hasMany('App\HistoryAward','portfolio_id','id')->whereType('0')->orderBy('year','DESC')->get();
+    }
+    // 히스토리
+    public function awards(){
+        return $this->hasMany('App\HistoryAward','portfolio_id','id')->whereType(1)->orderBy('year','DESC')->get();
+    }
+    // 히스토리
+    public function association_activties(){
+        return $this->hasMany('App\AssociationActivity','portfolio_id','id')->get();
     }
     /*******************************************************************
      * @return HasOne

@@ -110,12 +110,17 @@ var gn_make_input_json = function(div_id ,type , json_input){
     var send_array = new Array();
     var divElement = document.getElementById(div_id);
     for(var i =0; i < divElement.children.length; i++){
-
-        var obj =new Object();
-        for(var j = 0; j< divElement.getElementsByTagName('input').length; j++){
-            obj[divElement.getElementsByTagName('input')[j].getAttribute('data-key')] =divElement.getElementsByTagName('input')[j].value;
+        var obj = new Object();
+        var flag =0;
+        for(var j = 0; j< divElement.children[i].getElementsByTagName('input').length; j++){
+            if(!gn_nullCheck(divElement.children[i].getElementsByTagName('input')[j].value)){
+                flag++;
+            }
+            obj[divElement.children[i].getElementsByTagName('input')[j].getAttribute('data-key')] = divElement.children[i].getElementsByTagName('input')[j].value;
         }
-        send_array.push(obj);
+        if(!(flag == divElement.children[i].getElementsByTagName('input').length)) {
+            send_array.push(obj);
+        }
     }
     document.getElementById(json_input).value = JSON.stringify(send_array);
 };
