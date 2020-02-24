@@ -15,14 +15,14 @@ class CreateSeasonNamesTable extends Migration
     public function up()
     {
         //컬럼 명세
-        Schema::create('season_names', function (Blueprint $table) {
+        /*Schema::create('season_names', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('year')->unsigned()->comment('년도');
             $table->string('season', 10)->comment('시즌명 ex.S/S, F/W');
             $table->timestamps();
-        });
+        });*/
         //테이블 명세
-        DB::statement('ALTER TABLE `season_names` COMMENT = "시즌명 테이블"');
+        /*DB::statement('ALTER TABLE `season_names` COMMENT = "시즌명 테이블"');*/
     }
 
     /**
@@ -32,6 +32,6 @@ class CreateSeasonNamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('season_names');
+        /*Schema::dropIfExists('season_names');*/
     }
 }

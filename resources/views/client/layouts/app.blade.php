@@ -28,7 +28,7 @@
     @yield('content')
     @include('client.layouts.partial.footer')
 </div>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
     $('#flash-overlay-modal').modal();
     $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
@@ -37,21 +37,40 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $(document).ready(function () {
 
-        $('.year_datepicker').datepicker({
-            format: "yyyy",
-            viewMode: "years",
-            minViewMode: "years"
+    $(document).ready(function () {
+        $('.datepickers').datepicker({
+            changeMonth: true,
+            changeYear : true,
+            yearRange: 'c-50:c+0',
+            dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+            dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+            monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            dateFormat: "yy-mm-dd",
+            showMonthAfterYear: true,
         });
+
+        $('.today_datepicker').datepicker({
+            minDate: 0,
+            changeMonth: true,
+            changeYear : true,
+            yearRange: 'c-0:c+50',
+            dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+            dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+            monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            dateFormat: "yy-mm-dd",
+            showMonthAfterYear: true,
+        });
+
+            $('.year_datepicker').datepicker({
+                format: " yyyy", // Notice the Extra space at the beginning
+                viewMode: "years",
+                minViewMode: "years"
+            });
     });
 </script>
-// jQuery UI CSS파일
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-// jQuery 기본 js파일
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-// jQuery UI 라이브러리 js파일
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 @yield('script')
 </body>
 </html>

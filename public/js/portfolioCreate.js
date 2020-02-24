@@ -522,18 +522,6 @@ function fnRemoveLookbookItem(e){
     e.parentNode.remove();
 }
 
-
-/***/
-// function test(e) {
-//     var item = e.getElementsByTagName('input')[0];
-//     console.log('check');
-//     console.log(item);
-//     console.log(item.files[0]);
-// }
-
-
-
-
 /**********************************************************
  *  name        : fnAddLookbook
  *  description : add lookbook
@@ -544,8 +532,8 @@ function fnAddLookbook(){
     var item = document.getElementsByClassName('lookbook-item');
     var lookbookItem = '<div class="lookbook-item">' +
         '                  <div class="lookbook-name">' +
-        '                      <input type="text"  placeholder="시즌명(EX/2019)" class="input-field">' +
-        '                      <select class="select">' +
+        '                      <input type="text"  placeholder="시즌명(EX/2019)" class="input-field lookbook-season yearpicker" readonly>' +
+        '                      <select class="select"  name="season_type'+item.length+'">' +
         '                          <option selected disabled>전체</option>' +
         '                          <option>SS</option>' +
         '                          <option>FW</option>' +
@@ -564,6 +552,7 @@ function fnAddLookbook(){
 
     //add lookbook item
     lookbookList.insertAdjacentHTML('beforeend',lookbookItem);
+    $( ".yearpicker" ).yearpicker("refresh");
 }
 
 
@@ -612,4 +601,9 @@ function fnAddNews(){
  ***********************************************************/
 function fnRemoveNews(e){
     e.parentNode.remove();
+}
+
+
+var fn_look_book_setting_season = function(e){
+    console.log(e.parentElement);
 }

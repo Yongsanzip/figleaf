@@ -27,11 +27,11 @@ $tab = 'portfolio';
                     <img src="{{ asset('storage/'.count($datas->portfolio_images) > 0 ? $datas->portfolio_images->first()->image_path : '#')}}" alt="">
                     <p>
                     @if( app()->getLocale() =='ko')
-                        {{ $datas->content_ko}}
+                        {{ $datas->content_ko ? $datas->content_ko : ''}}
                     @elseif(app()->getLocale() =='en')
-                        {{ $datas->content_en}}
+                        {{ $datas->content_en ? $datas->content_en : ''}}
                     @elseif(app()->getLocale() =='cn')
-                        {{ $datas->content_cn}}
+                        {{ $datas->content_cn ? $datas->content_cn : ''}}
                     @else
                         포트폴리오 내용이 존재하지 않습니다
                     @endif
@@ -44,6 +44,7 @@ $tab = 'portfolio';
                     <div class="headline-wrap">
                         <h3 class="headline">history</h3>
                     </div>
+                    @if($datas->histories())
                     @foreach( $datas->histories() as $history)
                         <!-- history item -->
                             <div class="history-item">
@@ -62,6 +63,7 @@ $tab = 'portfolio';
                             </div>
                             <!-- //history item -->
                     @endforeach
+                    @endif
                 </div>
                 <!--//designer history -->
 
@@ -70,6 +72,7 @@ $tab = 'portfolio';
                     <div class="headline-wrap">
                         <h3 class="headline">award history</h3>
                     </div>
+                @if($datas->awards())
                 @foreach($datas->awards() as $awards)
                     <!-- history item -->
                         <div class="history-item">
@@ -88,6 +91,7 @@ $tab = 'portfolio';
                         </div>
                         <!-- //history item -->
                 @endforeach
+                @endif
                 </div>
                 <!--//award history -->
 
@@ -97,7 +101,8 @@ $tab = 'portfolio';
                         <h3 class="headline">association</h3>
                     </div>
                     <ul class="association-list">
-                    @foreach($datas->association_activties() as $association)
+                    @if($datas->association_activties())
+                        @foreach($datas->association_activties() as $association)
                         <!-- history item -->
                             <li>
                                 <p class="year">{{$association->start_year}}~{{$association->end_year}}</p>
@@ -112,6 +117,7 @@ $tab = 'portfolio';
                             @endif
                             </li>
                         @endforeach
+                    @endif
                     </ul>
                 </div>
                 <!--//association -->
@@ -143,68 +149,23 @@ $tab = 'portfolio';
                         <h3 class="headline">lookbook</h3>
                     </div>
                     <div class="lookbook-wrap">
-                        <!-- lookbook item -->
-                        <div class="lookbook-item">
-                            <h4 class="lookbook-title">2019 F/W</h4>
-                            <div class="lookbook-list">
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
+                        @if( $datas->look_books() )
+                            @foreach($datas->look_books as $look_book)
+                            <!-- lookbook item -->
+                            <div class="lookbook-item">
+                                <h4 class="lookbook-title">{{$look_book->year}} {{$look_book->season}}</h4>
+                                <div class="lookbook-list">
+                                    @if($look_book->look_book_images())
+                                        @foreach($look_book->look_book_images as $image)
+                                            <div class="image">
+                                                <img src="{{ asset('storage/'.$image->image_path) }}" alt="">
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
-                        </div>
-                        <!-- //lookbook item-->
-                        <div class="lookbook-item">
-                            <h4 class="lookbook-title">2019 F/W</h4>
-                            <div class="lookbook-list">
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="lookbook-item">
-                            <h4 class="lookbook-title">2019 F/W</h4>
-                            <div class="lookbook-list">
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                                <div class="image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
-                                </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
                     </div>
 
                 </div>
@@ -222,7 +183,7 @@ $tab = 'portfolio';
                                 <li class="contact-item">
                                     <p class="contact-name">이메일</p>
                                     <p class="contact-value">
-                                        {{$datas->email}}
+                                        <a href="mailto:{{$datas->email}}">{{$datas->email}}</a>
                                     </p>
                                 </li>
                             @endif
@@ -238,7 +199,7 @@ $tab = 'portfolio';
                                 <li class="contact-item">
                                         <p class="contact-name">홈페이지</p>
                                         <p class="contact-value">
-                                            <a href="{{$datas->homepage}}">{{$datas->homepage}}</a>
+                                            <a href="{{$datas->homepage}}" target="_blank">{{$datas->homepage}}</a>
                                         </p>
                                     </li>
                             @endif
@@ -247,17 +208,17 @@ $tab = 'portfolio';
                         <ul class="sns-list">
                             @if($datas->facebook_hidden == 0)
                                 <li class="sns-item">
-                                    <a href="{{$datas->facebook}}">페이스북</a>
+                                    <a href="{{$datas->facebook}}" target="_blank">페이스북</a>
                                 </li>
                             @endif
                             @if($datas->twitter_hidden == 0)
                                 <li class="sns-item">
-                                    <a href="{{$datas->twitter}}">트위터</a>
+                                    <a href="{{$datas->twitter}}" target="_blank">트위터</a>
                                 </li>
                             @endif
                             @if($datas->instagram_hidden == 0)
                                 <li class="sns-item">
-                                    <a href="{{$datas->instgram}}">인스타그램</a>
+                                    <a href="{{$datas->instgram}}" target="_blank">인스타그램</a>
                                 </li>
                             @endif
                         </ul>

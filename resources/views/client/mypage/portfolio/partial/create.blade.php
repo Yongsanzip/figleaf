@@ -4,7 +4,7 @@ $tab = 'portfolio';
 @extends('client.layouts.app')
 @section('content')
     <link rel="stylesheet" href="{{asset('/css/swiper.min.css')}}">
-
+    <link rel="stylesheet" href="{{asset('/css/yearpicker.css')}}">
     <main class="container">
         <div class="inner">
             <div class="con-portfolio-create">
@@ -271,8 +271,8 @@ $tab = 'portfolio';
                                 <div class="lookbook-list">
                                     <div class="lookbook-item">
                                         <div class="lookbook-name">
-                                            <input type="text" placeholder="시즌명(EX/2019)" class="input-field year_datepicker" readonly>
-                                            <select class="select">
+                                            <input type="text" name="season0" placeholder="시즌명(EX/2019)" class="input-field lookbook-season yearpicker" readonly>
+                                            <select class="select" name="season_type0">
                                                 <option selected disabled>전체</option>
                                                 <option>SS</option>
                                                 <option>FW</option>
@@ -292,6 +292,7 @@ $tab = 'portfolio';
                                 </div>
                                 <button class="btn-black" type="button" onclick="fnAddLookbook()">시즌추가</button>
                             </div>
+                            <input type="hidden" name="season_count" id="season_count">
                         </div>
                         <!-- 06 연락처 -->
                         <div class="tab-contents-box">
@@ -357,7 +358,17 @@ $tab = 'portfolio';
 
     </main>
     <script type="text/javascript" src="{{asset('js/portfolioCreate.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/yearpicker.js')}}"></script>
     <script type="text/javascript">
+
+        $(document).ready(function() {
+            $(".yearpicker").yearpicker({
+                year: 2020,
+                startYear: 1900,
+                endYear: 2200,
+            });
+        });
+
         var fn_portfolio_submit = function(f){
             // 히스토리
             gn_make_input_json('history_list' ,'input' , 'history_array');
@@ -365,6 +376,8 @@ $tab = 'portfolio';
             gn_make_input_json('award_list' ,'input' , 'awards_array');
             // 협회
             gn_make_input_json('society_list' ,'input' , 'society_array');
+
+            document.getElementById('season_count').value =  document.getElementsByClassName('lookbook-season').length;
             return true;
         }
         var test = function(){

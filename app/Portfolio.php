@@ -49,13 +49,17 @@ class Portfolio extends Model {
     public function histories(){
         return $this->hasMany('App\HistoryAward','portfolio_id','id')->whereType('0')->orderBy('year','DESC')->get();
     }
-    // 히스토리
+    // 수상내역
     public function awards(){
         return $this->hasMany('App\HistoryAward','portfolio_id','id')->whereType(1)->orderBy('year','DESC')->get();
     }
-    // 히스토리
+    // 협회활동
     public function association_activties(){
         return $this->hasMany('App\AssociationActivity','portfolio_id','id')->get();
+    }
+
+    public function look_books(){
+        return $this->hasMany('App\LookBook','portfolio_id','id');
     }
     /*******************************************************************
      * @return HasOne

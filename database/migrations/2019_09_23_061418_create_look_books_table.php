@@ -18,7 +18,7 @@ class CreateLookBooksTable extends Migration
         Schema::create('look_books', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('portfolio_id')->unsigned()->comment('포트폴리오 id');
-            $table->bigInteger('season_id')->unsigned()->comment('시즌id');
+            $table->string('season',60)->nullable()->comment('시즌');
             $table->string('year', 10)->nullable()->comment('연도 ex.2019, 2018');
             $table->timestamps();
             $table->softDeletes();

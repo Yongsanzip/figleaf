@@ -60,20 +60,7 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function store(Request $request){
-        var_dump($request->images[0][1]);
-        /*$look_book = LookBook::create([
-            'portfolio_id' =>1,
-            'season_id'=>$request->seasion_id,
-            'year'=>$request->year
-        ]);
-
-        LookBookImage::create([
-            'look_book_id' =>$look_book,
-            'image_type'        =>$look_book_images->getClientMimeType(),
-            'image_path'        =>$savePath,
-            'origin_name'       =>$look_book_images->getClientOriginalName(),
-        ]);*/
-        /*try {
+        try {
             $check = Portfolio::whereUserId(auth()->user()->id)->first();
             if(isset($check)) {flash('포트폴리오가 존재합니다.')->warning(); return back();}
 
@@ -88,9 +75,6 @@ class PortfolioController extends Controller {
                 'content_en'        =>$request->context_en,                                                             // 영문내용
                 'hidden_yn'         =>$request->hidden_yn ? 1 : 0,                                                      // 포트폴리오 숨김처리
                 'email'             =>$request->email,                                                                  // 이메일
-                'history'           =>$request->history_array,                                                          // 히스토리
-                'awards'            =>$request->awards_array,                                                           // 수상내역
-                'association'       =>$request->society_array,                                                          // 협회활동
                 'home_phone'        =>$request->home_phone,                                                             // 전화번호
                 'facebook'          =>$request->facebook,                                                               // 페이스북
                 'instagram'         =>$request->instagram,                                                              // 인스타그램
@@ -181,15 +165,33 @@ class PortfolioController extends Controller {
                 }
             }
 
+            for($i = 0; $i< $request->season_count; $i++){
+                $look_book = LookBook::firstOrCreate([
+                    'portfolio_id' =>$portfolio->id,
+                    'season'=>$request->seasion.$i,
+                    'year'=>$request->year
+                ]);
 
-
+                $look_book_images = $request->file('images');
+                if($look_book_images) {
+                    foreach ($look_book_images[$i] as $image) {
+                        $savePath = $image->store('images/lookbook/1', 'public');
+                        LookBookImage::updateOrCreate([                                                                                // 포트폴리오 이미지 등록
+                            'look_book_id'      =>$look_book->id,
+                            'image_type'        =>$image->getClientMimeType(),
+                            'image_path'        =>$savePath,
+                            'origin_name'       =>$image->getClientOriginalName(),
+                        ]);
+                    }
+                }
+            }
 
             return redirect(route('mypage_portfolio.index'));
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->important();
             return back();
-        }*/
+        }
     }
 
     /************************************************************************

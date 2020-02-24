@@ -13,9 +13,9 @@ class AddSeasonNamesToLookBooksTable extends Migration
      */
     public function up()
     {
-        Schema::table('look_books', function (Blueprint $table) {
+        /*Schema::table('look_books', function (Blueprint $table) {
             $table->foreign('season_id')->references('id')->on('season_names')->onUpdate('cascade')->onDelete('cascade');
-        });
+        });*/
     }
 
     /**
@@ -25,8 +25,8 @@ class AddSeasonNamesToLookBooksTable extends Migration
      */
     public function down()
     {
-        Schema::table('look_books', function (Blueprint $table) {
+        /*Schema::table('look_books', function (Blueprint $table) {
             $table->dropForeign('look_books_season_id_foreign');
-        });
+        });*/
     }
 }
