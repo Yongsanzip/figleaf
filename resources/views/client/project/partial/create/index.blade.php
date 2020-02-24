@@ -120,7 +120,7 @@
                                                     <input type="text" class="input-field option_price" name="option_price[]" value="{{ $option->price }}" placeholder="30자 이내">
                                                 </label>
                                                 @if($key > 0)
-                                                <button type="button" class="btn-white" onclick="fnRemoveOption(this)">삭제</button>
+                                                <button type="button" class="btn-white" value="{{ $option->id }}" onclick="fnRemoveOption(this)">삭제</button>
                                                 @endif
                                             </div>
                                                 <input type="hidden" name="option_id[]" value="{{ $option->id }}">
@@ -141,6 +141,7 @@
                                         @endif
                                         <!-- script add items -->
                                     </div>
+                                    <input type="hidden" name="delete_option_id" id="delete_option_id">
                                     <div class="btn-wrap">
                                         <button type="button" class="btn-black" onclick="fnAddOption()">옵션 추가하기</button>
                                     </div>
@@ -210,7 +211,7 @@
                                             </thead>
                                             <tbody class="size-list">
                                             @if(isset($data) && $data->size_exist($data->id))
-                                                @foreach($data->sizes as $size)
+                                                @foreach($data->sizes as $key=>$size)
                                                     <input type="hidden" name="size_id[]" value="{{ $size->id }}">
                                                 <tr>
                                                     <!-- 사이즈 -->
@@ -284,6 +285,12 @@
                                                     <td>
                                                         <input type="text" name="heels[]" value="{{ $size->heels }}">
                                                     </td>
+
+                                                    @if($key > 0)
+                                                    <td class="row-btn">
+                                                        <button type="button" class="btn-black" value="{{ $size->id }}" onclick="fnRemoveSize(this)"></button>
+                                                    </td>
+                                                    @endif
                                                     <!-- 버튼 -->
                                                     <!-- <td class="row-btn"> -->
                                                     <!-- 123 -->
@@ -374,6 +381,7 @@
                                             <!-- script add item -->
                                             </tbody>
                                         </table>
+                                        <input type="hidden" name="delete_size_id" id="delete_size_id">
                                         <div class="btn-wrap">
                                             <button type="button" class="btn-black" onclick="fnAddSize()">사이즈 추가하기</button>
                                         </div>
@@ -404,6 +412,9 @@
                                                         <input type="number" max="100" min="0" class="input-field fabric_ratio" name="fabric_ratio[]" value="{{ $fabric->rate }}">
                                                     </div>
                                                     <input type="hidden" name="fabric_id[]" value="{{ $fabric ? $fabric->id : '' }}">
+                                                    @if($key > 0)
+                                                    <button class="btn-white" type="button" value="{{ $fabric->id }}" onclick="fnRemoveFabric(this)">삭제</button>
+                                                    @endif
                                                 </div>
                                             </div>
                                             @endforeach
@@ -426,6 +437,7 @@
                                             </div>
                                         @endif
                                             <!-- script add item -->
+                                            <input type="hidden" name="delete_fabric_id" id="delete_fabric_id">
                                         <button class="btn-black" type="button" onclick="fnAddFabric()">재질추가</button>
                                     </div>
                                     <div class="designer-comment-wrap">

@@ -38,26 +38,38 @@ $tab = 'project';
                     </div>
                     <div class="project-list">
                         <!-- card -->
+                        @foreach($datas as $data)
                         <div class="project-card my-card">
                             <div class="card">
-                                <div class="card-image">
-                                    <img src="../images/dummy/img-dummy-02.png" alt="">
+                                @if($data->condition == 1 || $data->condition == 3)
+                                <div class="card-image" onclick="location.href='/project/create?id={{ $data->id }}'" style="cursor: pointer">
+                                @else
+                                <div class="card-image" onclick="location.href='/'" style="cursor: pointer">
+                                @endif
+                                    <img src="{{ asset('storage/'.$data->main_image->image_path) }}" alt="">
                                 </div>
                                 <div class="card-contents">
                                     <div class="project-info">
-                                        <p class="project-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리 주얼리</p>
+                                        <p class="project-title">{{ $data->title }}</p>
                                     </div>
                                     <div class="project-date">
-                                        2019.09.17 ~ 2019.10.17
+                                        {{ $data->start_date }} ~ {{ $data->deadline }}
                                     </div>
                                 </div>
                                 <!-- 프로젝트 상태에 따른 뱃지 -->
-                                <div class="badge badge-green">진행중</div>
-                                <!-- <div class="badge badge-grey">실패</div> -->
-                                <!-- <div class="badge badge-orange">성공</div> -->
+                                @if($data->condition == 1)
+                                    <div class="badge badge-green">진행중</div>
+                                @elseif($data->condition == 4)
+                                    <div class="badge badge-grey">실패</div>
+                                @elseif($data->condition == 5)
+                                    <div class="badge badge-orange">성공</div>
+                                @endif
                             </div>
+                            @if($data->condition == 3)
                             <a href="" class="btn-white">반려사유 확인하기</a>
+                            @endif
                         </div>
+                        @endforeach
                         <!--// card -->
                         <div class="project-card my-card">
                             <div class="card">
@@ -99,10 +111,30 @@ $tab = 'project';
                             </div>
                             <a href="" class="btn-white">반려사유 확인하기</a>
                         </div>
+
+                        <div class="project-card my-card">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="../images/dummy/img-dummy-02.png" alt="">
+                                </div>
+                                <div class="card-contents">
+                                    <div class="project-info">
+                                        <p class="project-title">서울패션위크 참가 패션브랜드에서 선보이는 가나다라 마바사 아자차 럭셔리 주얼리</p>
+                                    </div>
+                                    <div class="project-date">
+                                        2019.09.17 ~ 2019.10.17
+                                    </div>
+                                </div>
+                                <!-- 프로젝트 상태에 따른 뱃지 -->
+                                <!-- <div class="badge badge-green">진행중</div> -->
+                                <div class="badge badge-grey">실패</div>
+                                <!-- <div class="badge badge-orange">성공</div> -->
+                            </div>
+                            <a href="" class="btn-white">반려사유 확인하기</a>
+                        </div>
                     </div>
-                    <div class="btn-wrap">
-                        <button class="btn-black">더보기</button>
-                    </div>
+
+
                 </div>
                 <!--// mypage contents -->
 

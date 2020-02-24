@@ -28,13 +28,14 @@ class CreateProjectsTable extends Migration
             $table->integer('supporter')->default(0)->comment('후원자수');
             $table->integer('count')->default(0)->comment('판매수량');
 
-            $table->tinyInteger('condition')->unsigned()->default(0)->comment('여부상태(0입력중1진행2실패3성공)');
+            $table->tinyInteger('condition')->unsigned()->default(0)->comment('여부상태(0:입력중 1:대기중 2:진행중 3:반려 4:실패 5:성공)');
 
             $table->string('title', 100)->nullable()->comment('제목');
             $table->string('summary')->nullable()->comment('개요');
             $table->integer('success_count')->unsigned()->nullable()->comment('성공개수');
             $table->text('comment')->nullable()->comment('디자이너 코멘트');
 //            $table->integer('information')->unsigned()->nullable()->comment('취급정보');
+            $table->date('start_date')->nullable()->comment('시작일');
             $table->date('deadline')->nullable()->comment('마감일');
             $table->date('account_date')->nullable()->comment('정산일');
             $table->date('delivery_date')->nullable()->comment('배송일');

@@ -55,7 +55,7 @@ class ProjectController extends Controller
      * @url /project/create
      * @return view
      */
-    public function create()
+    public function create(Request $request)
     {
         $main_categories              = Category::where('id', 4)->orWhere('id', 5)->get();                              // 1차 카테고리
         $second_categories            = CategoryDetail::get();                                                          // 2차 카테고리
@@ -72,7 +72,14 @@ class ProjectController extends Controller
         $brand                        = Brand::where('portfolio_id', $portfolio->id)->first();                          // 브랜드 (브랜드명)
 
 
-        $data = Project::where('user_id', auth()->user()->id)->where('progress', '<', 100)->orderBy('created_at', 'desc')->first();
+        if ($request->id) {
+            $data = Project::where('user_id', auth()->user()->id)->where('id', $request->id)->first();
+            if (!$data) {
+                return redirect('/project/create');
+            }
+        } else {
+            $data = Project::where('user_id', auth()->user()->id)->where('progress', '!=', 100)->orderBy('created_at', 'desc')->first();
+        }
 
         return view('client.project.partial.create.index',
             compact('main_categories', 'second_categories', 'materials', 'size_categories', 'information_tab', 'groups',
@@ -103,6 +110,11 @@ class ProjectController extends Controller
                 'progress'              => 15,
             ]);
 
+            if ($project->progress != 100) {
+                $project->progress = 15;
+                $project->save();
+            }
+
             $project_image = $request->file('main_file');                                                          // 대표이미지 (썸네일)
             if($project_image){
                 $image = ProjectImage::where('project_id', $project->id)->where('image_division', 1)->first();
@@ -123,13 +135,11 @@ class ProjectController extends Controller
 
             return response()->json($project->id, 200,[],JSON_PRETTY_PRINT);
         } elseif ($request->project_2) {                                                                                // 2. 상품정보
-            dd($request);;
             $options_name = $request->option_name;                                                                      // 옵션, 사이즈, 원단, 취급정보
             $options_price = $request->option_price;                                                                    // 옵션 테이블
             $option_count = $request->option_name;
 
-
-            for ($i = 0; $i < count($option_count); $i++) {
+            for ($i = 0; $i < count($option_count); $i++) {                                                             // 옵션 저장
                 if ($request->options_name != null) {
                     Option::updateOrCreate([
                         'id'                => $request->option_id[$i],
@@ -138,6 +148,13 @@ class ProjectController extends Controller
                         'option_name'       => $options_name[$i],
                         'price'             => $options_price[$i],
                     ]);
+                }
+            }
+
+            if ($request->delete_option_id) {                                                                           // 옵션 삭제
+                $delete_option_arr = explode(",", $request->delete_option_id);
+                foreach ($delete_option_arr as $delete_option){
+                    Option::where('id', $delete_option)->delete();
                 }
             }
 
@@ -170,6 +187,13 @@ class ProjectController extends Controller
                 }
             }
 
+            if ($request->delete_size_id) {                                                                             // 사이즈 삭제
+                $delete_size_arr = explode(",", $request->delete_size_id);
+                foreach ($delete_size_arr as $delete_size) {
+                    Size::where('id', $delete_size)->delete();
+                }
+            }
+
             $fabric_count = count($request->fabric_ratio);
 
             for ($i = 0; $i < $fabric_count; $i++){                                                                     // 원단-재질
@@ -184,11 +208,22 @@ class ProjectController extends Controller
                 }
             }
 
-            Project::where('id', $request->project_id)->update([                                                        // 프로젝트
+            if ($request->delete_fabric_id) {                                                                           // 원단-재질 삭제
+                $delete_fabric_arr = explode(",", $request->delete_fabric_id);
+                foreach ($delete_fabric_arr as $delete_fabric) {
+                    Fabric::where('id', $delete_fabric)->delete();
+                }
+            }
+
+            $project = Project::where('id', $request->project_id)->update([                                             // 프로젝트
                 'size_category_id'      => $request->size_category,
                 'comment'               => $request->comment,
-                'progress'              => 30,
             ]);
+
+            if ($project->progress != 100) {
+                $project->progress = 30;
+                $project->save();
+            }
 
             // 취급정보 추가하기
             if ($request->information_water) {                                                                          // 물세탁
@@ -246,16 +281,22 @@ class ProjectController extends Controller
             return response()->json('success', 200,[],JSON_PRETTY_PRINT);
         } elseif ($request->project_3) {                                                                                // 3. 스토리텔링
             if ($request->project_id) {
-                Project::where('id', $request->project_id)->update([
+                $project = Project::where('id', $request->project_id)->update([
                     'storytelling'      => $request->ir1,
                     'progress'          => 45,
                 ]);
+
+                if ($project->progress != 100) {
+                    $project->progress = 45;
+                    $project->save();
+                }
+
                 return response()->json('success', 200,[],JSON_PRETTY_PRINT);
             } else {
                 return response()->json('fail', 200,[],JSON_PRETTY_PRINT);
             }
         } elseif ($request->project_4) {                                                                                // 4. 프로젝트 일정
-            Project::where('id', $request->project_id)->update([
+            $project = Project::where('id', $request->project_id)->update([
                 'deadline'              => $request->deadline,
                 'account_date'          => $request->account_date,
                 'delivery_date'         => $request->delivery_date,
@@ -263,6 +304,12 @@ class ProjectController extends Controller
                 'agree'                 => $request->agree,
                 'progress'              => 60,
             ]);
+
+            if ($project->progress != 100) {
+                $project->progress = 60;
+                $project->save();
+            }
+
             return response()->json('success', 200,[],JSON_PRETTY_PRINT);
         } elseif ($request->project_5) {                                                                                // 5. 디자이너/브랜드 소개
             Introduction::updateOrCreate([
@@ -283,7 +330,13 @@ class ProjectController extends Controller
                 'twitter_hidden'        => $request->twitter_hidden ? $request->twitter_hidden : 0,
                 'homepage_hidden'       => $request->homepage_hidden ? $request->homepage_hidden : 0
             ]);
-            // project 75
+
+            $project = Project::where('id', $request->project_id)->first();
+            if ($project->progress != 100) {
+                $project->progress = 75;
+                $project->save();
+            }
+
             return response()->json('success', 200,[],JSON_PRETTY_PRINT);
         } elseif ($request->project_6) {                                                                                // 6. 정산정보
             // project 100
@@ -333,9 +386,14 @@ class ProjectController extends Controller
                 ]);
             }
 
-            Project::where('id', $request->project_id)->update([
-                'progress'              => 100
+            $project = Project::where('id', $request->project_id)->update([
+                'condition'             => 1,
             ]);
+
+            if ($project->progress != 100) {
+                $project->progress = 100;
+                $project->save();
+            }
 
             return response()->json('success', 200,[],JSON_PRETTY_PRINT);
         }
@@ -351,9 +409,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        error_log($id);
         $select_category = CategoryDetail::where('category_id', $id)->get();
-        error_log($select_category);
         return response()->json($select_category, 200, [], JSON_PRETTY_PRINT);
     }
 

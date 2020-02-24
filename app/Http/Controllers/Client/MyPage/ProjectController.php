@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\MyPage;
 
+use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -9,12 +10,15 @@ class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @description 마이페이지 - 내가 만든 프로젝트
+     * @url /mypage_project
+     * @return view
      */
     public function index()
     {
-        //
+        $datas = Project::where('user_id', auth()->user()->id)->where('progress', 100)->get();
+
+        return view('client.mypage.project.index', compact('datas'));
     }
 
     /**

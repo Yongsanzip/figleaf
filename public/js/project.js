@@ -387,7 +387,11 @@ function fnAddOption(){
  *  description : remove option item
  *  author      : minyeong kim
  ***********************************************************/
+var option_arr = [];
 function fnRemoveOption(e) {
+    // 삭제 된 id 담기
+    option_arr.push(e.value);
+    document.getElementById('delete_option_id').value = option_arr;
 
     //remove option item
     e.parentNode.remove();
@@ -467,7 +471,11 @@ function fnAddSize(){
  *  description : remove size item
  *  author      : minyeong kim
  ***********************************************************/
+var size_arr = [];
 function fnRemoveSize(e) {
+    // 사이즈 삭제 id 담기
+    size_arr.push(e.value);
+    document.getElementById('delete_size_id').value = size_arr;
 
     //remove option item
     e.parentNode.parentNode.remove();
@@ -516,7 +524,11 @@ function fnAddFabric(){
  *  description : remove fabric item
  *  author      : minyeong kim
  ***********************************************************/
+var fabric_arr = [];
 function fnRemoveFabric(e) {
+    // 원단 삭제 id 담기
+    fabric_arr.push(e.value);
+    document.getElementById('delete_fabric_id').value = fabric_arr;
 
     //remove option item
     e.parentNode.remove();
