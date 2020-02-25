@@ -41,7 +41,7 @@ function popup(url, name) {
 function category(e){
     var id = e.value;
     $.ajax({
-        url: '/project/'+id,
+        url: '/project/'+id+'/edit',
         dataType: 'json',
         type: 'GET',
         success: function (result) {

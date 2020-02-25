@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Project;
 
+use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +16,19 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('admin.project.index');
+        // 1: 대기중 2: 진행중 3: 반려 4: 실패 5: 성공
+         $datas = Project::where('progress', 100)->paginate(20);
+     /*   if ($request->menu) {  // 대기중
+            $datas = Project::where('condition',1)->get();
+        } elseif ($request->menu) { // 진행중
+            $datas = Project::where('condition',2)->get();
+        } else {  // 완료
+            $datas = Project::where('condition',4)->get();
+            //$datas = Project::where('condition',5)->get();
+        }*/
+
+
+        return view('admin.project.index', compact('datas'));
     }
 
     /**

@@ -46,18 +46,20 @@
                 </tr>
                 </thead>
                 <tbody>
+                @foreach($datas as $data)
                 <tr>
                     <td>41</td>
                     <td>대기중</td>
-                    <td>Women > Dress</td>
-                    <td>빈티지느낌 물씬나는 여름용 롱원피스</td>
-                    <td>함초롱박이</td>
-                    <td>30</td>
+                    <td>{{ $data->category->category_name }} > {{ $data->category_detail->category_name }}</td>
+                    <td>{{ $data->title }}</td>
+                    <td>{{ $data->introduction->designer_name }}</td>
+                    <td>{{ $data->success_count }}</td>
                     <td>30(100%)</td>
                     <td>12,000,000원</td>
                     <td>2019-00-00</td>
                     <td>2019-00-00</td>
                 </tr>
+                @endforeach
                 <tr>
                     <td>40</td>
                     <td>진행중</td>
@@ -185,17 +187,11 @@
             <!-- paginiation -->
             <nav class="pagination-wrap">
                 <ul class="pagination">
-                    <li><a> preview </a></li>
-                    <li class="active"><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>4</a></li>
-                    <li><a>5</a></li>
-                    <li><a>6</a></li>
-                    <li><a>7</a></li>
-                    <li><a>8</a></li>
-                    <li><a>9</a></li>
-                    <li><a> next </a></li>
+                     @if($datas->count())
+                        <div class="text-center">
+                            {!! $datas->appends(request()->except('page'))->render() !!}
+                        </div>
+                    @endif
                 </ul>
             </nav>
             <!-- //pagination -->

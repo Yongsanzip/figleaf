@@ -13,7 +13,7 @@
         <div class="header-sub">
             <div class="inner">
                 <div class="prev">
-                    <a href="">마이페이지</a>
+                    <a href="/mypage_project">마이페이지</a>
                 </div>
                 <h1 class="logo"><a href="/">피그리프</a></h1>
             </div>
@@ -34,12 +34,12 @@
                 <!-- //headline -->
 
                 <ul class="tab-list">
-                    <li class="tab-on" id="summary"><span>개요</span></li>
-                    <li id="product_information"><span>상품정보</span></li>
-                    <li id="story_telling"><span>스토리텔링</span></li>
-                    <li id="project_date"><span>프로젝트 일정</span></li>
-                    <li id="introduction"><span>디자이너/브랜드 소개</span></li>
-                    <li id="account"><span>정산정보</span></li>
+                    <li class="{{ $data ? ($data->progress == 100 ? 'fill' : '') : '' }} tab-on" id="summary"><span>개요</span></li>
+                    <li class="{{ $data ? ($data->progress == 100 ? 'fill' : '') : '' }}" id="product_information"><span>상품정보</span></li>
+                    <li class="{{ $data ? ($data->progress == 100 ? 'fill' : '') : '' }}" id="story_telling"><span>스토리텔링</span></li>
+                    <li class="{{ $data ? ($data->progress == 100 ? 'fill' : '') : '' }}" id="project_date"><span>프로젝트 일정</span></li>
+                    <li class="{{ $data ? ($data->progress == 100 ? 'fill' : '') : '' }}" id="introduction"><span>디자이너/브랜드 소개</span></li>
+                    <li class="{{ $data ? ($data->progress == 100 ? 'fill' : '') : '' }}" id="account"><span>정산정보</span></li>
                 </ul>
 
                 <!-- tab contents -->

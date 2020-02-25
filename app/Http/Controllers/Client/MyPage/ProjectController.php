@@ -16,7 +16,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $datas = Project::where('user_id', auth()->user()->id)->where('progress', 100)->get();
+        $datas = Project::where('user_id', auth()->user()->id)->where('progress', 100)->orderBy('created_at', 'desc')->get();
 
         return view('client.mypage.project.index', compact('datas'));
     }

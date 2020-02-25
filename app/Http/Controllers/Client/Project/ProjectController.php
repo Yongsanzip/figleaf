@@ -103,11 +103,9 @@ class ProjectController extends Controller
                 'user_id'               => auth()->user()->id,
                 'category_id'           => $request->first_category,
                 'category2_id'          => $request->second_category,
-                'condition'             => 0,
                 'title'                 => $request->project_title,
                 'summary'               => $request->project_summary,
                 'success_count'         => $request->success_count,
-                'progress'              => 15,
             ]);
 
             if ($project->progress != 100) {
@@ -140,7 +138,7 @@ class ProjectController extends Controller
             $option_count = $request->option_name;
 
             for ($i = 0; $i < count($option_count); $i++) {                                                             // 옵션 저장
-                if ($request->options_name != null) {
+                if ($options_name[$i] != null) {
                     Option::updateOrCreate([
                         'id'                => $request->option_id[$i],
                         'project_id'        => $request->project_id,
@@ -215,10 +213,12 @@ class ProjectController extends Controller
                 }
             }
 
-            $project = Project::where('id', $request->project_id)->update([                                             // 프로젝트
+            Project::where('id', $request->project_id)->update([                                        // 프로젝트
                 'size_category_id'      => $request->size_category,
                 'comment'               => $request->comment,
             ]);
+
+            $project = Project::where('id', $request->project_id)->first();
 
             if ($project->progress != 100) {
                 $project->progress = 30;
@@ -237,8 +237,6 @@ class ProjectController extends Controller
             }
 
             if ($request->information_bleach) {                                                                         // 표백
-                error_log('bleach');
-                error_log($request->information_bleach);
                 Informations::updateOrCreate([
                     'id'                => $request->information_bleach_id,
                     'project_id'        => $request->project_id,
@@ -281,10 +279,11 @@ class ProjectController extends Controller
             return response()->json('success', 200,[],JSON_PRETTY_PRINT);
         } elseif ($request->project_3) {                                                                                // 3. 스토리텔링
             if ($request->project_id) {
-                $project = Project::where('id', $request->project_id)->update([
+                Project::where('id', $request->project_id)->update([
                     'storytelling'      => $request->ir1,
-                    'progress'          => 45,
                 ]);
+
+                $project = Project::where('id', $request->project_id)->first();
 
                 if ($project->progress != 100) {
                     $project->progress = 45;
@@ -296,14 +295,15 @@ class ProjectController extends Controller
                 return response()->json('fail', 200,[],JSON_PRETTY_PRINT);
             }
         } elseif ($request->project_4) {                                                                                // 4. 프로젝트 일정
-            $project = Project::where('id', $request->project_id)->update([
+            Project::where('id', $request->project_id)->update([
                 'deadline'              => $request->deadline,
                 'account_date'          => $request->account_date,
                 'delivery_date'         => $request->delivery_date,
                 'delay_date'            => $request->delay_date,
                 'agree'                 => $request->agree,
-                'progress'              => 60,
             ]);
+
+            $project = Project::where('id', $request->project_id)->first();
 
             if ($project->progress != 100) {
                 $project->progress = 60;
@@ -386,9 +386,11 @@ class ProjectController extends Controller
                 ]);
             }
 
-            $project = Project::where('id', $request->project_id)->update([
+            Project::where('id', $request->project_id)->update([
                 'condition'             => 1,
             ]);
+
+            $project = Project::where('id', $request->project_id)->first();
 
             if ($project->progress != 100) {
                 $project->progress = 100;
@@ -409,8 +411,9 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $select_category = CategoryDetail::where('category_id', $id)->get();
-        return response()->json($select_category, 200, [], JSON_PRETTY_PRINT);
+        $data = Project::where('id',$id)->first();
+        $portfolio = Portfolio::where('user_id', $data->user_id)->first();
+        return view('client.project.partial.show.index', compact('data', 'portfolio'));
     }
 
     /**
@@ -421,7 +424,8 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $select_category = CategoryDetail::where('category_id', $id)->get();
+        return response()->json($select_category, 200, [], JSON_PRETTY_PRINT);
     }
 
     /**

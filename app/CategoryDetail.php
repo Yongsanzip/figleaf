@@ -12,6 +12,9 @@ class CategoryDetail extends Model {
     /*******************************************************************
      * @return BelongsTo
      *******************************************************************/
+    public function category() {
+        return $this->belongsTo('App\Category','category_id','id');
+    }
 
     /*******************************************************************
      * @return HasMany

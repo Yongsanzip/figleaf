@@ -52,13 +52,17 @@ function fnCancelCm(e){
  *  description : add option item when select product list
  *  author      : minyeong kim
  ***********************************************************/
-function fnAddOption(){
+function fnAddOption(e){
+    //console.log(e.value);
+    var option_name = e.options[document.getElementById("selete_option").selectedIndex].text;
+    var option_price = $(e).find(':selected').data("value");
+
     var optionList = document.getElementsByClassName('option-list')[0];
     var optionItem = '<li class="option-item">' +
         '                <div class="option-value">' +
-        '                    <span class="option-name">활동하기에 정말 좋은 면슬립 (Color : Blue / Size : M)</span>' +
+        '                    <span class="option-name">'+option_name+'</span>' +
         '                    <input class="option-amount" min="1" type="number" value="1">' +
-        '                    <span class="option-price">5,552,500원</span>' +
+        '                    <span class="option-price">'+option_price.toLocaleString()+'원'+'</span>' +
         '                </div>' +
         '                <button class="btn-black" type="button" onclick="fnRemoveOption(this)">삭제</button>' +
         '            </li>';

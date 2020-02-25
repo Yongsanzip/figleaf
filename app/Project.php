@@ -14,6 +14,14 @@ class Project extends Model {
     /*******************************************************************
      * @return BelongsTo
      *******************************************************************/
+    // 1차 카테고리
+    public function category() {
+        return $this->belongsTo('App\Category','category_id','id');
+    }
+    // 2차 카테고리
+    public function category_detail() {
+        return $this->belongsTo('App\CategoryDetail','category2_id','id');
+    }
 
     /*******************************************************************
      * @return HasMany

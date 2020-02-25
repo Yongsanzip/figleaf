@@ -19,7 +19,7 @@ $tab = 'project';
                 <!-- mypage contents -->
                 <div class="mypage-contents">
                     <div class="project-btn-wrap">
-                        <a href="" class="btn-black">새 프로젝트 등록</a>
+                        <a href="/project/create" class="btn-black">새 프로젝트 등록</a>
                     </div>
                     <div class="project-notice">
                         <h2 class="notice-title">project</h2>
@@ -44,7 +44,7 @@ $tab = 'project';
                                 @if($data->condition == 1 || $data->condition == 3)
                                 <div class="card-image" onclick="location.href='/project/create?id={{ $data->id }}'" style="cursor: pointer">
                                 @else
-                                <div class="card-image" onclick="location.href='/'" style="cursor: pointer">
+                                <div class="card-image" onclick="location.href='/project/{{ $data->id }}'" style="cursor: pointer">
                                 @endif
                                     <img src="{{ asset('storage/'.$data->main_image->image_path) }}" alt="">
                                 </div>
@@ -57,7 +57,7 @@ $tab = 'project';
                                     </div>
                                 </div>
                                 <!-- 프로젝트 상태에 따른 뱃지 -->
-                                @if($data->condition == 1)
+                                @if($data->condition == 2)
                                     <div class="badge badge-green">진행중</div>
                                 @elseif($data->condition == 4)
                                     <div class="badge badge-grey">실패</div>
