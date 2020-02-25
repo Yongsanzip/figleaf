@@ -182,6 +182,11 @@ $color-input:#ecedef;
 	.show {
 		max-height: 500px;
 	}
+    .active{
+        .lnb-child li a{
+            color:#181818;
+        }
+    }
 }
 
 /* main */
@@ -1276,7 +1281,7 @@ $color-input:#ecedef;
 			color:#8A954C;
 			text-decoration: underline;
 			a{
-				text-decoration: underline;	
+				text-decoration: underline;
 			}
 		}
 	}
@@ -1308,7 +1313,7 @@ $color-input:#ecedef;
 			margin-right:20px;
 			box-shadow: 2px 2px 5px 0 rgba(0,0,0,0.2);
 			margin-bottom:20px;
-			&:nth-child(4n) { 
+			&:nth-child(4n) {
 				margin-right: 0;
 			}
 			&:hover{
