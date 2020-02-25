@@ -270,10 +270,8 @@ $color-input:#ecedef;
 	border-bottom:2px solid $color-gray-02;
 	font-size:0;
 	padding:10px 8px;
-	>div{
-		display: inline-block;
-	}
 	.search-select{
+        display: inline-block;
 		width:100px;
 		select{
 			width:100%;
@@ -293,6 +291,7 @@ $color-input:#ecedef;
 		}
 	}
 	.search-keyword{
+        display: inline-block;
 		width:calc(100% - 101px);
 		input[type="text"]{
 			width: calc(100% - 32px);
