@@ -61,6 +61,11 @@ class Project extends Model {
         return $this->hasMany('App\Informations', 'project_id', 'id');
     }
 
+    // 취급정보 - 물세탁
+    public function water_information() {
+        return $this->hasMany('App\Informations', 'project_id', 'id')->where('tab_id', 1)->first();
+    }
+
 
     /*******************************************************************
      * @return HasOne

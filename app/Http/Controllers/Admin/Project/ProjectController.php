@@ -16,8 +16,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        $page_num = 17;
         // 1: 대기중 2: 진행중 3: 반려 4: 실패 5: 성공
-         $datas = Project::where('progress', 100)->paginate(20);
+         $datas = Project::where('progress', 100)->orderBy('created_at', 'desc')->paginate($page_num);
      /*   if ($request->menu) {  // 대기중
             $datas = Project::where('condition',1)->get();
         } elseif ($request->menu) { // 진행중
@@ -49,7 +50,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Project::where('id', $request->project_id)->update([
+            'condition'             => $request->condition
+        ]);
+
+        return response()->json('success', 200, [], JSON_PRETTY_PRINT);
     }
 
     /**
@@ -61,7 +67,10 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        return view('admin.project.partial.show.index');
+        $conditions = config('projectStatus.condition');
+
+        $data = Project::where('id', $id)->first();
+        return view('admin.project.partial.show.index', compact('data', 'conditions'));
     }
 
     /**

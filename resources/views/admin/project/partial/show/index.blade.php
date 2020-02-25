@@ -3,7 +3,7 @@
 ?>
 @extends('admin.layouts.app')
 @section('content')
-
+<script src="{{ asset('/js/adminProject.js') }}"></script>
     <div class="contents-wrap">
         <!-- contesnts-inner -->
         <div class="contents-inner">
@@ -15,29 +15,33 @@
             </div>
             <!-- //headline -->
 
-            @if(1)
+            <form action="{{ route('admin_project.store') }}" method="POST" id="adminProjectForm">
+                @csrf
+            @if($data->condition == 1)
             <div class="project-status">
                 <div class="col-status">
-                    <select class="status-select">
-                        <option>대기중</option>
-                        <option>진행중</option>
-                        <option>반려</option>
+                    <select class="status-select" name="condition" id="select_status">
+                        <option value="1">대기중</option>
+                        <option value="2">진행중</option>
+                        <option value="3">반려</option>
                     </select>
                 </div>
                 <div class="col-textarea">
-                    <textarea class="textarea w-100 mh-120px" spellcheck="false" placeholder="사유를 입력하세요"></textarea>
+                    <textarea class="textarea w-100 mh-120px" spellcheck="false" name="reason" id="reason" placeholder="사유를 입력하세요"></textarea>
                 </div>
+                <input type="hidden" name="project_id" value="{{ $data->id }}">
                 <div class="row text-right mt-20">
-                    <button class="btn-black btn-m">수정하기</button>
+                    <button type="button" class="btn-black btn-m" onclick="conditionUpdate()">수정하기</button>
                 </div>
             </div>
+            </form>
 
-            @elseif(2)
+            @elseif($data->condition == 2)
                 <div class="portfolio-status">
                     <p class="portfolio-result">프로젝트가 진행중입니다.</p>
                     <p class="portfolio-data">30개 중 12개 펀딩 (30%)</p>
                 </div>
-            @else
+            @elseif($data->condition == 4)
                 <div class="portfolio-status">
                     <p class="portfolio-result">프로젝트가 실패했습니다.</p>
                     <p class="portfolio-data">30개 중 12개 펀딩 (30%)</p>
@@ -61,50 +65,49 @@
                         <tbody>
                         <tr>
                             <th class="text-right">카테고리</th>
-                            <td>카테고리 > 카테고리</td>
+                            <td>{{ $data->category->category_name }} > {{ $data->category_detail->category_name }}</td>
                         </tr>
                         <tr>
                             <th class="text-right">제목</th>
                             <td>
-                                한여름 싱긋 피크닉 원피스
+                                {{ $data->title }}
                                 <button class="btn-white btn-s">바로가기</button>
                             </td>
                         </tr>
                         <tr>
                             <th class="text-right">디자이너명</th>
-                            <td>김그림</td>
+                            <td>{{ $data->introduction->designer_name }}</td>
                         </tr>
                         <tr>
                             <th class="text-right">프로젝트 시작일</th>
-                            <td>-</td>
+                            <td>{{ $data->start_date }}</td>
                         </tr>
                         <tr>
                             <th class="text-right">프로젝트 마감일</th>
-                            <td>2019-00-00</td>
+                            <td>{{ $data->deadline }}</td>
                         </tr>
                         <tr>
                             <th class="text-right">상품배송 예상일</th>
-                            <td>2019-00-00</td>
+                            <td>{{ $data->delivery_date }}</td>
                         </tr>
                         <tr>
                             <th class="text-right">지연예상기간</th>
-                            <td>15일</td>
+                            <td>{{ $data->delay_date }}</td>
                         </tr>
                         <tr>
                             <th class="text-right">수량</th>
-                            <td>30</td>
+                            <td>{{ $data->success_count }}</td>
                         </tr>
                         <tr>
                             <th class="text-right">요약</th>
-                            <td>여름감성을 담은 원피스</td>
+                            <td>{{ $data->summary }}</td>
                         </tr>
                         <tr>
                             <th class="text-right">옵션</th>
                             <td>
-                                블루 - 30,000원<br>
-                                레드 - 30,000원<br>
-                                체크 - 50,000원<br>
-                                스프라이트 - 40,000원
+                                @foreach($data->options as $option)
+                                    {{ $option->option_name }} - {{ number_format($option->price) }}원 <br>
+                                @endforeach
                             </td>
                         </tr>
                         </tbody>
@@ -114,7 +117,7 @@
                     <div class="box">
                         <p class="text-center">대표이미지</p>
                         <div class="box-image">
-                            <img src="../assets/image/img-dummy-02.png" alt="">
+                            <img src="{{ asset('storage/'.$data->main_image->image_path) }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -128,12 +131,7 @@
             <!-- //headline -->
 
             <div class="project-story">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dapibus et erat sed maximus. Nunc lacinia malesuada
-                posuere. Fusce a metus pretium, fringilla diam nec, pellentesque augue. Sed aliquam quis sem eu molestie. Cras luctus
-                lorem ut aliquam sollicitudin. Praesent tempor mollis neque id tincidunt. Sed at orci imperdiet, egestas mauris eget,
-                varius mi. Aliquam efficitur purus accumsan consequat porta. Mauris ac ante at lectus semper facilisis at id erat.
-                <img src="../assets/image/img-dummy-03.png" alt="">
-                <img src="../assets/image/img-dummy-01.png" alt="">
+                {!! $data->storytelling !!}
             </div>
 
             <!-- headline -->
@@ -154,45 +152,63 @@
                         </colgroup>
                         <thead></thead>
                         <tbody>
+                        @foreach($data->sizes as $size)
                         <tr>
-                            <th class="text-center">S(90)</th>
+                            <th class="text-center">{{ $size->size }}</th>
                             <td>
                                 <ul class="list-size">
-                                    <li>총기장 10cm</li>
-                                    <li>어깨 10cm</li>
-                                    <li>가슴 10cm</li>
-                                    <li>팔길이 10cm</li>
-                                    <li>소매단면 10cm</li>
-                                    <li>암홀 10cm</li>
+                                    @if($size->total_length)
+                                        <li>총기장 {{ $size->total_length }}cm</li>
+                                    @endif
+                                    @if($size->shoulder)
+                                        <li>어깨 {{ $size->shoulder }}cm</li>
+                                    @endif
+                                    @if($size->chest)
+                                        <li>가슴 {{ $size->chest }}cm</li>
+                                    @endif
+                                    @if($size->arms_length)
+                                        <li>팔길이 {{ $size->arms_length }}cm</li>
+                                    @endif
+                                    @if($size->sleeve)
+                                        <li>소매단면 {{ $size->sleeve }}cm</li>
+                                    @endif
+                                    @if($size->armhole)
+                                        <li>암홀 {{ $size->armhole }}cm</li>
+                                    @endif
+                                    @if($size->waist)
+                                        <li>허리 {{ $size->waist }}cm</li>
+                                    @endif
+                                    @if($size->hem)
+                                        <li>밑단 {{ $size->hem }}cm</li>
+                                    @endif
+                                    @if($size->crotch)
+                                        <li>밑위 {{ $size->crotch }}cm</li>
+                                    @endif
+                                    @if($size->thigh)
+                                        <li>허벅지단면 {{ $size->thigh }}cm</li>
+                                    @endif
+                                    @if($size->hip)
+                                        <li>엉덩이단면 {{ $size->hip }}cm</li>
+                                    @endif
+                                    @if($size->string_length)
+                                        <li>끈길이 {{ $size->string_length }}cm</li>
+                                    @endif
+                                    @if($size->horizontal)
+                                        <li>가로 {{ $size->horizontal }}cm</li>
+                                    @endif
+                                    @if($size->vertical)
+                                        <li>세로 {{ $size->vertical }}cm</li>
+                                    @endif
+                                    @if($size->forefoot)
+                                        <li>앞굽 {{ $size->forefoot }}cm</li>
+                                    @endif
+                                    @if($size->heels)
+                                        <li>뒷굽 {{ $size->heels }}cm</li>
+                                    @endif
                                 </ul>
                             </td>
                         </tr>
-                        <tr>
-                            <th class="text-center">M(95)</th>
-                            <td>
-                                <ul class="list-size">
-                                    <li>총기장 10cm</li>
-                                    <li>어깨 10cm</li>
-                                    <li>가슴 10cm</li>
-                                    <li>팔길이 10cm</li>
-                                    <li>소매단면 10cm</li>
-                                    <li>암홀 10cm</li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="text-center">L(100)</th>
-                            <td>
-                                <ul class="list-size">
-                                    <li>총기장 10cm</li>
-                                    <li>어깨 10cm</li>
-                                    <li>가슴 10cm</li>
-                                    <li>팔길이 10cm</li>
-                                    <li>소매단면 10cm</li>
-                                    <li>암홀 10cm</li>
-                                </ul>
-                            </td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -249,8 +265,7 @@
                         <tbody>
                         <tr>
                             <th class="th-gray">디자이너 코멘트</th>
-                            <td>바이며, 천고에 이상은 힘차게 있다. 얼마나 우리 방황하였으며, 커다란 실로 아름다우냐? 있을 튼튼하며, 그들은 온갖 가진 영원히 아름다우냐? 든 피는 청춘의 꽃이 어디 운다. 천자만홍이 굳세게 곳으로 사랑의 사랑의
-                                소담스러운 몸이 청춘에서만 것이다. 광야에서 피가 인간에 가치를 피에 칼이다.</td>
+                            <td>{{ $data->comment }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -268,6 +283,7 @@
                                 세탁기/손세탁 가능<br>
                                 세제종류 제한 없음<br>
                                 삶을 수 있음
+                                {{ $data->information-> }}
                             </div>
                         </li>
                         <li>

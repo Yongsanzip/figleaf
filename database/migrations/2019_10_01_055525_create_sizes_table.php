@@ -28,8 +28,8 @@ class CreateSizesTable extends Migration
             $table->double('waist')->unsigned()->nullable()->comment('허리');
             $table->double('hem')->unsigned()->nullable()->comment('밑단');
             $table->double('crotch')->unsigned()->nullable()->comment('밑위');
-            $table->double('hip')->unsigned()->nullable()->comment('허벅지단면');
-            $table->double('thigh')->unsigned()->nullable()->comment('엉덩이단면');
+            $table->double('thigh')->unsigned()->nullable()->comment('허벅지단면');
+            $table->double('hip')->unsigned()->nullable()->comment('엉덩이단면');
             $table->double('string_length')->unsigned()->nullable()->comment('끈길이');
             $table->double('horizontal')->unsigned()->nullable()->comment('가로');
             $table->double('vertical')->unsigned()->nullable()->comment('세로');

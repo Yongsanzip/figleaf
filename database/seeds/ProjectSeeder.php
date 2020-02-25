@@ -20,7 +20,7 @@ class ProjectSeeder extends Seeder
             }
             $project = \App\Project::create([
                 'user_id'               => $k,
-                'category_id'           => 1,
+                'category_id'           => 4,
                 'category2_id'          => 3,
                 'size_category_id'      => 2,
                 'total_cost'            => 0,

@@ -46,9 +46,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($datas as $data)
-                <tr>
-                    <td>41</td>
+                @foreach($datas as $key=>$data)
+                <tr onclick="location.href='{{ route('admin_project.show', $data->id) }}'" style="cursor: pointer">
+                    <td>{{ $datas->total() - ($datas->perPage()* ($datas->currentPage()-1)) - $key }}</td>
                     <td>대기중</td>
                     <td>{{ $data->category->category_name }} > {{ $data->category_detail->category_name }}</td>
                     <td>{{ $data->title }}</td>
@@ -56,130 +56,10 @@
                     <td>{{ $data->success_count }}</td>
                     <td>30(100%)</td>
                     <td>12,000,000원</td>
-                    <td>2019-00-00</td>
-                    <td>2019-00-00</td>
+                    <td>{{ $data->start_date }}</td>
+                    <td>{{ $data->deadline }}</td>
                 </tr>
                 @endforeach
-                <tr>
-                    <td>40</td>
-                    <td>진행중</td>
-                    <td>Women > Dress</td>
-                    <td>빈티지느낌 물씬나는 여름용 롱원피스</td>
-                    <td>함초롱박이</td>
-                    <td>30</td>
-                    <td>30(100%)</td>
-                    <td>12,000,000원</td>
-                    <td>2019-00-00</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>39</td>
-                    <td>완료</td>
-                    <td>Women > Dress</td>
-                    <td>빈티지느낌 물씬나는 여름용 롱원피스</td>
-                    <td>함초롱박이</td>
-                    <td>30</td>
-                    <td>30(100%)</td>
-                    <td>12,000,000원</td>
-                    <td>2019-00-00</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>38</td>
-                    <td>대기중</td>
-                    <td>Women > Dress</td>
-                    <td>빈티지느낌 물씬나는 여름용 롱원피스</td>
-                    <td>함초롱박이</td>
-                    <td>30</td>
-                    <td>30(100%)</td>
-                    <td>12,000,000원</td>
-                    <td>2019-00-00</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>37</td>
-                    <td>대기중</td>
-                    <td>Women > Dress</td>
-                    <td>빈티지느낌 물씬나는 여름용 롱원피스</td>
-                    <td>함초롱박이</td>
-                    <td>30</td>
-                    <td>30(100%)</td>
-                    <td>12,000,000원</td>
-                    <td>2019-00-00</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>36</td>
-                    <td>대기중</td>
-                    <td>Women > Dress</td>
-                    <td>빈티지느낌 물씬나는 여름용 롱원피스</td>
-                    <td>함초롱박이</td>
-                    <td>30</td>
-                    <td>30(100%)</td>
-                    <td>12,000,000원</td>
-                    <td>2019-00-00</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>35</td>
-                    <td>대기중</td>
-                    <td>Women > Dress</td>
-                    <td>빈티지느낌 물씬나는 여름용 롱원피스</td>
-                    <td>함초롱박이</td>
-                    <td>30</td>
-                    <td>30(100%)</td>
-                    <td>12,000,000원</td>
-                    <td>2019-00-00</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>34</td>
-                    <td>대기중</td>
-                    <td>Women > Dress</td>
-                    <td>빈티지느낌 물씬나는 여름용 롱원피스</td>
-                    <td>함초롱박이</td>
-                    <td>30</td>
-                    <td>30(100%)</td>
-                    <td>12,000,000원</td>
-                    <td>2019-00-00</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>33</td>
-                    <td>대기중</td>
-                    <td>Women > Dress</td>
-                    <td>빈티지느낌 물씬나는 여름용 롱원피스</td>
-                    <td>함초롱박이</td>
-                    <td>30</td>
-                    <td>30(100%)</td>
-                    <td>12,000,000원</td>
-                    <td>2019-00-00</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>32</td>
-                    <td>대기중</td>
-                    <td>Women > Dress</td>
-                    <td>빈티지느낌 물씬나는 여름용 롱원피스</td>
-                    <td>함초롱박이</td>
-                    <td>30</td>
-                    <td>30(100%)</td>
-                    <td>12,000,000원</td>
-                    <td>2019-00-00</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>31</td>
-                    <td>대기중</td>
-                    <td>Women > Dress</td>
-                    <td>빈티지느낌 물씬나는 여름용 롱원피스</td>
-                    <td>함초롱박이</td>
-                    <td>30</td>
-                    <td>30(100%)</td>
-                    <td>12,000,000원</td>
-                    <td>2019-00-00</td>
-                    <td>2019-00-00</td>
-                </tr>
                 </tbody>
             </table>
             <!-- //table type1 -->
