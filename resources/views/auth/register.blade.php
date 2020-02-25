@@ -8,8 +8,7 @@
         <div class="inner">
 
             <div class="con-join">
-                <form class="surface-wrap" id="registerForm" method="POST" action="{{ route('register') }}"
-                      aria-label="가입하기">
+                <form class="surface-wrap" id="registerForm" method="POST" action="{{ route('register') }}" aria-label="가입하기" onsubmit="return fn_register_submit(this);">
                     @csrf
                     <div class="join-header">
                         <h2 class="join-title">create acount</h2>
@@ -26,7 +25,7 @@
                         </div>
                         <div class="input-item">
                             <p class="input-name">이메일*</p>
-                            <input type="email" class="input-field" name="email" placeholder="이메일" autofocus>
+                            <input type="email" class="input-field required" data-title="이메일" name="email" placeholder="이메일" autofocus>
                             <!-- error -->
                             <!-- <p class="text-error">필수항목입니다. 입력해주세요</p> -->
                             <!-- <p class="text-error">형식이 올바르지 않습니다.</p> -->
@@ -47,13 +46,13 @@
                         </div>
                         <div class="input-item">
                             <p class="input-name">이름*</p>
-                            <input type="text" class="input-field" name="name" placeholder="이름">
+                            <input type="text" class="input-field required" data-title="이름" name="name" placeholder="이름">
                             <!-- error -->
                             <!-- <p class="text-error">필수항목입니다. 입력해주세요</p> -->
                         </div>
                         <div class="input-item">
                             <p class="input-name">전화번호*</p>
-                            <input type="tel" class="input-field" name="home_phone" placeholder="(-)없이 입력해주세요">
+                            <input type="tel" class="input-field" name="home_phone required" data-title="전화번호" placeholder="(-)없이 입력해주세요">
                             <!-- error -->
                             <!-- <p class="text-error">필수항목입니다. 입력해주세요</p> -->
                             <!-- <p class="text-error">형식이 올바르지 않습니다.</p> -->
@@ -119,6 +118,32 @@
                 }
             }).open();
         });
+
+        var fn_register_submit = function(f){
+            if(!gn_validation(f)) return false;
+
+            if(!gn_nullCheck(f.password.value)){
+                alert('새 비밀번호를 입력해주세요');
+                f.password.focus();
+                return false;
+            }
+            if(!gn_nullCheck(f.password_check.value)){
+                alert('새 비밀번호를 한번더 입력해주세요');
+                f.password_check.focus();
+                return false;
+            }
+
+            if(f.password.value != f.password_check.value){
+                alert('새 비밀번호와 새 비밀번호 확인이 일치하지 않습니다.');
+                return false;
+            }
+
+            if(!checkPasswordPattern(f.password.value)){
+                alert("비밀번호는 8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다.");
+                return false;
+            }
+            return false;
+        }
     </script>
 
 @endsection

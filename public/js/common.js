@@ -131,6 +131,23 @@ var gn_make_input_json = function(div_id ,type , json_input){
 };
 
 /***********************************************************************
+ * function Name : gn_validation
+ * description : class 명으로 value 요소 체크
+ ***********************************************************************/
+var gn_validation = function(e){
+    var check_list = e.querySelectorAll('.required');
+    for(var i=0; i<check_list.length; i++){
+        if(!gn_nullCheck(check_list[i].value)){
+            alert(check_list[i].getAttribute('data-title') +"는 입력 필수사항입니다.");
+            check_list[i].focus();
+            return false;
+        }
+
+    }
+};
+
+
+/***********************************************************************
  * function Name : gn_make_input_json
  * description : input 데이터 JSON 으로 만들기
  *

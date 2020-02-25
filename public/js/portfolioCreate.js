@@ -604,18 +604,6 @@ function fnRemoveNews(e){
 };
 
 
-var fn_portfolio_validation = function(e){
-    var check_list = e.querySelectorAll('.required');
-    for(var i=0; i<check_list.length; i++){
-        if(!gn_nullCheck(check_list[i].value)){
-            alert(check_list[i].getAttribute('data-title') +"는 입력 필수사항입니다.");
-            check_list[i].focus();
-            return false;
-        }
-
-    }
-};
-
 var fn_portfolio_submit = function(f){
     // 히스토리
     gn_make_input_json('history_list' ,'input' , 'history_array');
@@ -626,7 +614,7 @@ var fn_portfolio_submit = function(f){
     // 시즌 카운트
     document.getElementById('season_count').value =  document.getElementsByClassName('lookbook-season').length;
 
-    fn_portfolio_validation(f);
+    gn_validation(f);
 
     return false;
 };
