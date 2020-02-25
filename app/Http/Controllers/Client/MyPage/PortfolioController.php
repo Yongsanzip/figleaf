@@ -169,7 +169,7 @@ class PortfolioController extends Controller {
                 $look_book = LookBook::firstOrCreate([
                     'portfolio_id' =>$portfolio->id,
                     'season'=>$request->seasion.$i,
-                    'year'=>$request->year
+                    'year'=>$request->year.$i
                 ]);
 
                 $look_book_images = $request->file('images');

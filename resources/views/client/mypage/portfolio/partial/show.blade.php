@@ -24,7 +24,7 @@ $tab = 'portfolio';
 
                 <!-- project overview-->
                 <div class="contents-wrap portfolio-overview">
-                    <img src="{{ asset('storage/'.count($datas->portfolio_images) > 0 ? $datas->portfolio_images->first()->image_path : '#')}}" alt="">
+                    <img src="{{ asset('storage/'.(count($datas->portfolio_images) > 0 ? $datas->portfolio_images->first()->image_path : '#'))}}" alt="">
                     <p>
                     @if( app()->getLocale() =='ko')
                         {{ $datas->content_ko ? $datas->content_ko : ''}}
@@ -128,7 +128,7 @@ $tab = 'portfolio';
                         <h3 class="headline">brand</h3>
                     </div>
                     <div class="contents-overview">
-                        <img src="{{ asset('storage/'.count($datas->brand_thumbnail_images) > 0  ? $datas->brand_thumbnail_images->first()->image_path : '#')}}" alt="">
+                        <img src="{{ asset('storage/'.(count($datas->brand_thumbnail_images) > 0  ? $datas->brand_thumbnail_images->first()->image_path : '#'))}}" alt="">
                         @if( app()->getLocale() =='ko')
                             {{ $datas->brand->contents_ko}}
                         @elseif(app()->getLocale() =='en')

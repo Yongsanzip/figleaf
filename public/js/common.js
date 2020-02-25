@@ -106,6 +106,11 @@ var callAjax = function(methodType,asyncType,urlPath,dataReceiveType,sendContent
     }
 };
 
+/***********************************************************************
+ * function Name : gn_make_input_json
+ * description : input 데이터 JSON 으로 만들기
+ *
+ ***********************************************************************/
 var gn_make_input_json = function(div_id ,type , json_input){
     var send_array = new Array();
     var divElement = document.getElementById(div_id);
@@ -125,3 +130,14 @@ var gn_make_input_json = function(div_id ,type , json_input){
     document.getElementById(json_input).value = JSON.stringify(send_array);
 };
 
+/***********************************************************************
+ * function Name : gn_make_input_json
+ * description : input 데이터 JSON 으로 만들기
+ *
+ ***********************************************************************/
+var gn_getNumberOnly = function(obj){
+    var val = new String(obj);
+    var regex = /[^0-9]/g;
+    console.log(val.replace(regex,''));
+    return val.replace(regex,'');
+};

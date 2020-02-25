@@ -17,7 +17,7 @@ $tab = 'portfolio';
                     <h2 class="headline">포트폴리오 만들기/수정하기</h2>
                 </div>
                 <div class="portfolio-btn-wrap">
-                    <a onclick="test(); return false;" class="btn-white">미리보기</a>
+                    <a onclick="fn_portfolio_submit(this.parentElement.parentElement); return false;" class="btn-white">미리보기</a>
                     <button type="submit" class="btn-black">저장하기</button>
                     <div class="portfolio-options">
                         <label class="checkbox-wrap">
@@ -71,7 +71,7 @@ $tab = 'portfolio';
                                     </label>
                                 </div>
                                 <div class="textarea-list profile-text-list">
-                                    <textarea class="textarea" id="context_ko" name="context_ko" lang="ko" placeholder="한국어"></textarea>
+                                    <textarea class="textarea required " id="context_ko" name="context_ko" data-title="프로필 설명(한국어)" lang="ko" placeholder="한국어"></textarea>
                                     <textarea class="textarea hide" id="context_en" name="context_en" lang="en" placeholder="English"></textarea>
                                     <textarea class="textarea hide" id="context_cn" name="context_cn" lang="ch" placeholder="汉语"></textarea>
                                 </div>
@@ -96,12 +96,12 @@ $tab = 'portfolio';
                                 <div class="history-list" id="history_list" data-key="history">
                                     <div class="year-item">
                                         <div class="year-row">
-                                            <input type="text" class="input-field" data-key="year" placeholder="ex)2019/연도를 입력하세요.">
+                                            <input type="text" class="input-field required" data-title="히스토리 연도" data-key="year" placeholder="ex)2019/연도를 입력하세요.">
                                         </div>
                                         <div class="history-active-list">
                                             <div class="active-item">
                                                 <ul class="active-list">
-                                                    <li><input type="text" lang="ko" data-key="history_ko" class="input-field history-active-item" placeholder="활동(한국어)"></li>
+                                                    <li><input type="text" lang="ko" data-key="history_ko" class="input-field history-active-item required " data-title="히스토리(한국어)" placeholder="활동(한국어)"></li>
                                                     <li><input type="text" lang="en" data-key="history_en" class="input-field history-active-item hide" placeholder="Activities(English)"></li>
                                                     <li><input type="text" lang="ch" data-key="history_cn" class="input-field history-active-item hide" placeholder="活动(汉语)"></li>
                                                 </ul>
@@ -136,12 +136,12 @@ $tab = 'portfolio';
                                 <div class="history-list award-list" id="award_list" data-key="awards">
                                     <div class="year-item">
                                         <div class="year-row">
-                                            <input type="text" class="input-field" data-key="year" placeholder="ex)2019/연도를 입력하세요.">
+                                            <input type="text" onkeypress="gn_getNumberOnly();" class="input-field required" data-title="수상내역 연도" data-key="year" placeholder="ex)2019/연도를 입력하세요.">
                                         </div>
                                         <div class="award-active-list">
                                             <div class="active-item">
                                                 <ul class="active-list">
-                                                    <li><input type="text" lang="ko" data-key="history_ko" class="input-field award-active-item" placeholder="수상내역(한국어)"></li>
+                                                    <li><input type="text" lang="ko" data-key="history_ko" class="input-field award-active-item required" data-title="수상내역(한국어)" placeholder="수상내역(한국어)"></li>
                                                     <li><input type="text" lang="en" data-key="history_en" class="input-field award-active-item hide" placeholder="Awards(English)"></li>
                                                     <li><input type="text" lang="ch" data-key="history_cn" class="input-field award-active-item hide" placeholder="获奖经历(汉语)"></li>
                                                 </ul>
@@ -182,7 +182,7 @@ $tab = 'portfolio';
                                         </div>
                                         <div class="active-item">
                                             <ul class="active-list">
-                                                <li><input type="text" lang="ko" data-key="association_ko" class="input-field society-active-item" placeholder="협회명(한국어)"></li>
+                                                <li><input type="text" lang="ko" data-key="association_ko" class="input-field society-active-item required" data-title="협회(한국어)" placeholder="협회명(한국어)"></li>
                                                 <li><input type="text" lang="en" data-key="association_en" class="input-field society-active-item hide" placeholder="Name of Association(English)"></li>
                                                 <li><input type="text" lang="ch" data-key="association_cn" class="input-field society-active-item hide" placeholder="请输入协会(汉语)"></li>
                                             </ul>
@@ -216,7 +216,7 @@ $tab = 'portfolio';
                                     </label>
                                 </div>
                                 <ul class="brand-name-list">
-                                    <li><input type="text" lang="ko" name="brand_name_ko" class="input-field" placeholder="브랜드(한국어)"></li>
+                                    <li><input type="text" lang="ko" name="brand_name_ko" class="input-field" data-title="브랜드명(한국어)" placeholder="브랜드(한국어)"></li>
                                     <li><input type="text" lang="en" name="brand_name_en" class="input-field hide" placeholder="Brand name(English)"></li>
                                     <li><input type="text" lang="ch" name="brand_name_cn" class="input-field hide" placeholder="品牌名称(汉语)"></li>
                                 </ul>
@@ -259,7 +259,7 @@ $tab = 'portfolio';
                                     </label>
                                 </div>
                                 <div class="textarea-list brand-text-list">
-                                    <textarea lang="ko" name="brand_content_ko" class="textarea" placeholder="한국어"></textarea>
+                                    <textarea lang="ko" name="brand_content_ko" class="textarea required" data-title="브랜드설명(한국어)" placeholder="한국어"></textarea>
                                     <textarea lang="en" name="brand_content_en" class="textarea hide" placeholder="English"></textarea>
                                     <textarea lang="ch" name="brand_content_cn" class="textarea hide" placeholder="汉语"></textarea>
                                 </div>
@@ -274,8 +274,8 @@ $tab = 'portfolio';
                                             <input type="text" name="season0" placeholder="시즌명(EX/2019)" class="input-field lookbook-season yearpicker" readonly>
                                             <select class="select" name="season_type0">
                                                 <option selected disabled>전체</option>
-                                                <option>SS</option>
-                                                <option>FW</option>
+                                                <option value="S/S">SS</option>
+                                                <option value="F/W">FW</option>
                                             </select>
                                         </div>
                                         <div class="lookbook-contents-wrap">
@@ -369,17 +369,6 @@ $tab = 'portfolio';
             });
         });
 
-        var fn_portfolio_submit = function(f){
-            // 히스토리
-            gn_make_input_json('history_list' ,'input' , 'history_array');
-            // 수상내역
-            gn_make_input_json('award_list' ,'input' , 'awards_array');
-            // 협회
-            gn_make_input_json('society_list' ,'input' , 'society_array');
-
-            document.getElementById('season_count').value =  document.getElementsByClassName('lookbook-season').length;
-            return true;
-        }
         var test = function(){
             gn_make_input_json('history_list' ,'input' , 'history_array');
         }

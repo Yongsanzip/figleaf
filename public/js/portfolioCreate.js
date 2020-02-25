@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded',function () {
 function fnUploadFile(fileInput){
     var fileName = fileInput.parentNode.getElementsByClassName('file-name')[0];
     fileName.innerHTML = fileInput.files[0].name;
-}
+};
 
 
 /**********************************************************
@@ -48,7 +48,7 @@ function fnProfileLang(e){
     }
 
     textarea.classList.toggle('hide');
-}
+};
 
 
 
@@ -94,7 +94,7 @@ function fnAddHistoryYear(){
 
     //add year item
     historyList.insertAdjacentHTML('beforeend',historyYearItem);
-}
+};
 
 
 
@@ -105,7 +105,7 @@ function fnAddHistoryYear(){
  ***********************************************************/
 function fnRemoveHistoryYear(e){
     e.parentNode.parentNode.remove();
-}
+};
 
 
 /**********************************************************
@@ -144,7 +144,7 @@ function fnAddHistoryActive(e){
 
     //add year item
     historyActiveList.insertAdjacentHTML('beforeend',historyActiveItem);
-}
+};
 
 /**********************************************************
  *  name        : fnRemoveHistoryActive
@@ -153,7 +153,7 @@ function fnAddHistoryActive(e){
  ***********************************************************/
 function fnRemoveHistoryActive(e){
     e.parentNode.parentNode.remove();
-}
+};
 
 
 /**********************************************************
@@ -171,7 +171,7 @@ function fnHistoryLang(e){
         }
     }
 
-}
+};
 
 /**********************************************************
  *  name        : fnCheckHistoryLang
@@ -187,7 +187,7 @@ function fnCheckHistoryLang(lang){
         }
     }
     return haveLang;
-}
+};
 
 
 
@@ -208,7 +208,7 @@ function fnAddAwardYear(){
         '                   <div class="award-active-list">' +
         '                       <div class="active-item">' +
         '                           <ul class="active-list">' +
-        '                               <li><input type="text" lang="ko" data-key="history_ko" class="input-field award-active-item" placeholder="수상내역(한국어)"></li>';
+        '                               <li><input type="text" lang="ko" data-key="history_ko" class="input-field award-active-item requried" data-title="수상내역(한국어)" placeholder="수상내역(한국어)"></li>';
 
     //english check
     if(fnCheckAwardLang('en')){
@@ -235,7 +235,7 @@ function fnAddAwardYear(){
 
     //add year item
     awardList.insertAdjacentHTML('beforeend',awardYearItem);
-}
+};
 
 
 /**********************************************************
@@ -245,7 +245,7 @@ function fnAddAwardYear(){
  ***********************************************************/
 function fnRemoveAwardYear(e){
     e.parentNode.parentNode.remove();
-}
+};
 
 /**********************************************************
  *  name        : fnAddAwardActive
@@ -256,7 +256,7 @@ function fnAddAwardActive(e){
     var awardActiveList = e.parentNode.parentNode.parentNode;
     var awardActiveItem ='   <div class="active-item">' +
         '                       <ul class="active-list">' +
-        '                           <li><input type="text" lang="ko" data-key="history_ko" class="input-field award-active-item" placeholder="수상내역(한국어)"></li>';
+        '                           <li><input type="text" lang="ko" data-key="history_ko" class="input-field award-active-item required" data-title="수상내역(한국어)" placeholder="수상내역(한국어)"></li>';
 
     //english check
     if(fnCheckAwardLang('en')){
@@ -282,7 +282,7 @@ function fnAddAwardActive(e){
 
     //add year item
     awardActiveList.insertAdjacentHTML('beforeend',awardActiveItem);
-}
+};
 
 
 /**********************************************************
@@ -292,7 +292,7 @@ function fnAddAwardActive(e){
  ***********************************************************/
 function fnRemoveAwardActive(e){
     e.parentNode.parentNode.remove();
-}
+};
 
 /**********************************************************
  *  name        : fnAwardLang
@@ -308,7 +308,7 @@ function fnAwardLang(e){
             awardActiveItem[i].classList.toggle('hide');
         }
     }
-}
+};
 
 
 /**********************************************************
@@ -325,7 +325,7 @@ function fnCheckAwardLang(lang){
         }
     }
     return haveLang;
-}
+};
 
 
 /**********************************************************
@@ -343,7 +343,7 @@ function fnAddSociety(){
         '                 </div>' +
         '                 <div class="active-item">' +
         '                     <ul class="active-list">' +
-        '                         <li><input type="text" lang="ko" data-key="association_ko" class="input-field society-active-item" placeholder="협회명(한국어)"></li>';
+        '                         <li><input type="text" lang="ko" data-key="association_ko" class="input-field society-active-item required" data-title="협회명(한국어)" placeholder="협회명(한국어)"></li>';
 
     //english check
     if(fnCheckSocietyLang('en')){
@@ -369,7 +369,7 @@ function fnAddSociety(){
 
     //add year item
     societyList.insertAdjacentHTML('beforeend',societyItem);
-}
+};
 
 
 /**********************************************************
@@ -379,7 +379,7 @@ function fnAddSociety(){
  ***********************************************************/
 function fnRemoveSociety(e){
     e.parentNode.parentNode.parentNode.remove();
-}
+};
 
 /**********************************************************
  *  name        : fnSocietyLang
@@ -395,7 +395,7 @@ function fnSocietyLang(e){
             societyItem[i].classList.toggle('hide');
         }
     }
-}
+};
 
 
 /**********************************************************
@@ -412,7 +412,7 @@ function fnCheckSocietyLang(lang){
         }
     }
     return haveLang;
-}
+};
 
 
 /**********************************************************
@@ -430,7 +430,7 @@ function fnBrandNameLang(e){
     }
 
     brandName.classList.toggle('hide');
-}
+};
 
 /**********************************************************
  *  name        : fnBrandTextLang
@@ -446,7 +446,7 @@ function fnBrandTextLang(e){
         }
     }
     brandText.classList.toggle('hide');
-}
+};
 
 
 /**********************************************************
@@ -464,7 +464,7 @@ function fnAddLookbookItemInit(e){
 
     // fnAddLookbookItem 메서드에 파일과 파일리더를 매개변수에 담아 호출
     fnAddLookbookItem(reader,file, e);
-}
+};
 
 /**********************************************************
  *  name        : fnAddLookbookItem
@@ -511,7 +511,7 @@ function fnAddLookbookItem(reader, file, e){
         //add lookbook item
         lookbookList.appendChild(lookbookItem);
     };
-}
+};
 
 /**********************************************************
  *  name        : fnRemoveLookbookItem
@@ -520,7 +520,7 @@ function fnAddLookbookItem(reader, file, e){
  ***********************************************************/
 function fnRemoveLookbookItem(e){
     e.parentNode.remove();
-}
+};
 
 /**********************************************************
  *  name        : fnAddLookbook
@@ -532,11 +532,11 @@ function fnAddLookbook(){
     var item = document.getElementsByClassName('lookbook-item');
     var lookbookItem = '<div class="lookbook-item">' +
         '                  <div class="lookbook-name">' +
-        '                      <input type="text"  placeholder="시즌명(EX/2019)" class="input-field lookbook-season yearpicker" readonly>' +
+        '                      <input type="text"  placeholder="시즌명(EX/2019)" name="year'+item.length+'" class="input-field lookbook-season yearpicker" readonly>' +
         '                      <select class="select"  name="season_type'+item.length+'">' +
         '                          <option selected disabled>전체</option>' +
-        '                          <option>SS</option>' +
-        '                          <option>FW</option>' +
+        '                          <option value="S/S">SS</option>' +
+        '                          <option value="F/W">FW</option>' +
         '                      </select>' +
         '                      <button class="btn-white" type="button" onclick="fnRemoveLookbook(this)">삭제</button>' +
         '                  </div>' +
@@ -553,7 +553,7 @@ function fnAddLookbook(){
     //add lookbook item
     lookbookList.insertAdjacentHTML('beforeend',lookbookItem);
     $( ".yearpicker" ).yearpicker("refresh");
-}
+};
 
 
 /**********************************************************
@@ -563,7 +563,7 @@ function fnAddLookbook(){
  ***********************************************************/
 function fnRemoveLookbook(e){
     e.parentNode.parentNode.remove();
-}
+};
 
 
 
@@ -592,7 +592,7 @@ function fnAddNews(){
 
     //add lookbook item
     NewsList.insertAdjacentHTML('beforeend',newsItem);
-}
+};
 
 /**********************************************************
  *  name        : fnRemoveNews
@@ -601,9 +601,32 @@ function fnAddNews(){
  ***********************************************************/
 function fnRemoveNews(e){
     e.parentNode.remove();
-}
+};
 
 
-var fn_look_book_setting_season = function(e){
-    console.log(e.parentElement);
-}
+var fn_portfolio_validation = function(e){
+    var check_list = e.querySelectorAll('.required');
+    for(var i=0; i<check_list.length; i++){
+        if(!gn_nullCheck(check_list[i].value)){
+            alert(check_list[i].getAttribute('data-title') +"는 입력 필수사항입니다.");
+            check_list[i].focus();
+            return false;
+        }
+
+    }
+};
+
+var fn_portfolio_submit = function(f){
+    // 히스토리
+    gn_make_input_json('history_list' ,'input' , 'history_array');
+    // 수상내역
+    gn_make_input_json('award_list' ,'input' , 'awards_array');
+    // 협회
+    gn_make_input_json('society_list' ,'input' , 'society_array');
+    // 시즌 카운트
+    document.getElementById('season_count').value =  document.getElementsByClassName('lookbook-season').length;
+
+    fn_portfolio_validation(f);
+
+    return false;
+};

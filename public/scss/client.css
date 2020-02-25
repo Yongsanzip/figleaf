@@ -3934,7 +3934,7 @@ button {
 .con-portfolio-create .tab-list > li {
   display: inline-block;
   font-size: 15px;
-  width: 20%;
+  width: 25%;
   text-align: center;
   cursor: pointer;
   border-top: 1px solid #cccccc;
@@ -4605,6 +4605,7 @@ button {
   letter-spacing: 4px;
   font-weight: 400;
   vertical-align: middle;
+  text-transform: capitalize;
 }
 .con-portfolio-view .designer-headline .designer-type {
   background: #eeeeee;
