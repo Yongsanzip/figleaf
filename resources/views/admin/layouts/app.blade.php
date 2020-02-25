@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{asset('html/admin/assets/css/reset.css')}}">
     <link rel="stylesheet" href="{{asset('html/admin/assets/css/style.css')}}">
     <script src="{{asset('html/admin/assets/js/style.js')}}"></script>
+    <script src="{{ asset('/js/common.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 
 </head>
 <body>
