@@ -9,9 +9,7 @@ $tab = 'portfolio';
         <div class="inner">
             <div class="con-portfolio-create">
                 <form action="{{route('mypage_portfolio.store')}}" method="POST" enctype="multipart/form-data" onsubmit="return fn_portfolio_submit(this);">
-                <h2 class="portfolio-headline">
-                    portfolio
-                </h2>
+                <h2 class="portfolio-headline">portfolio</h2>
                 <!-- headline -->
                 <div class="headline-wrap">
                     <h2 class="headline">포트폴리오 만들기/수정하기</h2>
@@ -136,7 +134,7 @@ $tab = 'portfolio';
                                 <div class="history-list award-list" id="award_list" data-key="awards">
                                     <div class="year-item">
                                         <div class="year-row">
-                                            <input type="text" onkeypress="gn_getNumberOnly();" class="input-field required" data-title="수상내역 연도" data-key="year" placeholder="ex)2019/연도를 입력하세요.">
+                                            <input type="text" class="input-field required" data-title="수상내역 연도" data-key="year" placeholder="ex)2019/연도를 입력하세요.">
                                         </div>
                                         <div class="award-active-list">
                                             <div class="active-item">

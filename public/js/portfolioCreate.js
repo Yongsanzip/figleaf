@@ -603,6 +603,21 @@ function fnRemoveNews(e){
     e.parentNode.remove();
 };
 
+/***********************************************************
+ *  name        : fnRemoveNews
+ *  description : before portfolio submit
+ ***********************************************************/
+var fn_only_number = function(e){
+    if(gn_getNumberOnly(e.value) ==''){
+        e.value = gn_getNumberOnly(e.value);
+        e.focus();
+    }
+};
+
+/***********************************************************
+ *  name        : fnRemoveNews
+ *  description : before portfolio submit
+ ***********************************************************/
 
 var fn_portfolio_submit = function(f){
     // 히스토리

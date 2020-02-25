@@ -155,6 +155,5 @@ var gn_validation = function(e){
 var gn_getNumberOnly = function(obj){
     var val = new String(obj);
     var regex = /[^0-9]/g;
-    console.log(val.replace(regex,''));
     return val.replace(regex,'');
 };
