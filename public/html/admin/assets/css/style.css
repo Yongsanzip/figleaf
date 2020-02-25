@@ -250,10 +250,8 @@
     font-size: 0;
     padding: 10px 8px;
 }
-.search > div {
-    display: inline-block;
-}
 .search .search-select {
+    display: inline-block;
     width: 100px;
 }
 .search .search-select select {
@@ -273,6 +271,7 @@
     display: none;
 }
 .search .search-keyword {
+    display: inline-block;
     width: calc(100% - 101px);
 }
 .search .search-keyword input[type=text] {
