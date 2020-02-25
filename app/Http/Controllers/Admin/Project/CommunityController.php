@@ -15,7 +15,7 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        return view('admin.community.index');
+        return view('admin.project.community.index');
     }
 
     /**

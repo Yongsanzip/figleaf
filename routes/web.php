@@ -105,7 +105,9 @@ Route::group(['middleware'=>'locale'],function(){
 
 /************************************** Admin **************************************/
 // 관리자 메인
-Route::get('/admin', 'Admin\HomeController@index');
+Route::get('/admin', 'Admin\HomeController@index')->name('admin');
+// 관리자 회원관리
+Route::resource('admin_user','Admin\User\UserController');
 // 관리자 공지사항
 Route::resource('admin_notice', 'Admin\Notice\NoticeController');
 // 관리자 페이지 - 배너 관리
