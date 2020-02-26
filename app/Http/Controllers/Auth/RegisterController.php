@@ -84,19 +84,20 @@ class RegisterController extends Controller
      ************************************************************************/
     protected function create(Request $request) {
         $user = User::firstOrCreate([
-            'role_id'       => 1,
-            'email'         => $request->email,
-            'password'      => bcrypt($request->password),
-            'name'          => $request->name,
-            'home_phone'    => $request->home_phone,
-            'cellphone'     => $request->cellphone,
-            'zip_code'      => $request->zip_code,
-            'address'       => $request->address,
-            'address_detail'=> $request->address_detail,
-            'gender'        => $request->gender,
-            'grade'         => 0,
-            'email_yn'      => $request->email_check ? $request->email_check : 0,
-            'sms_yn'        => $request->sms_check ? $request->sms_check : 0,
+            'role_id'       => 1,                                                                                        //
+            'email'         => $request->email,                                                                          //
+            'password'      => bcrypt($request->password),                                                               //
+            'user_code'     => encrypt(date('YmdHmi').\Illuminate\Support\Str::random(10)),          //
+            'name'          => $request->name,                                                                           //
+            'home_phone'    => $request->home_phone,                                                                     //
+            'cellphone'     => $request->cellphone,                                                                      //
+            'zip_code'      => $request->zip_code,                                                                       //
+            'address'       => $request->address,                                                                        //
+            'address_detail'=> $request->address_detail,                                                                 //
+            'gender'        => $request->gender,                                                                         //
+            'grade'         => 0,                                                                                        //
+            'email_yn'      => $request->email_check ? $request->email_check : 0,                                        //
+            'sms_yn'        => $request->sms_check ? $request->sms_check : 0,                                            //
         ]);
         $user->verified_token = Str::random(60);
         $user->save();

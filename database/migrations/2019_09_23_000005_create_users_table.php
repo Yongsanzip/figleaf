@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             //컬럼 명세
             $table->bigIncrements('id');
             $table->bigInteger('role_id')->unsigned()->default(1)->comment('유저 role');
+            $table->string('user_code',255)->unique()->comment('유저코드');
             $table->string('email',60)->unique();
             $table->string('password')->comment('비밀번호');
             $table->string('name',30)->comment('이름');
