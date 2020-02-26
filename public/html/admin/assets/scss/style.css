@@ -300,6 +300,9 @@
   right: 0;
   top: 0;
 }
+.search .search-keyword .search-select {
+  width: 100%;
+}
 
 /* table */
 .table-data {
