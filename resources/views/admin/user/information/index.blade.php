@@ -49,7 +49,7 @@
                 <tbody>
                 @if($datas)
                     @foreach($datas as $data)
-                        <tr>
+                        <tr onclick="javascript: fn_detail_link(this);" data-key="{{$data->user_code}}">
                             <td>{{$data->role->role_name}}</td>
                             <td>{{$data->name}}</td>
                             <td>{{$data->email}}</td>
@@ -79,5 +79,9 @@
         var fn_admin_information = function(f){
             gn_validation(f);
         }
+        var fn_detail_link = function(e){
+            window.location.href='/admin_information/'+e.getAttribute('data-key') ;
+        }
+
     </script>
 @endsection

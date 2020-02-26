@@ -47,7 +47,9 @@ class User extends Authenticatable {
     /*******************************************************************
      * @return HasOne
      *******************************************************************/
-
+    public function portfolio(){
+        return $this->hasOne('App\Portfolio','user_id','id');
+    }
 
 
 

@@ -25,9 +25,12 @@
                     <th>회원구분</th>
                     <td>
                         <select class="text-field w-120px">
-                            <option disabled selected>-회원구분-</option>
-                            <option>회원구분</option>
-                            <option>회원구분</option>
+                            <option disabled selected>회원구분{{$datas->role_id}}</option>
+                            @if($roles)
+                                @foreach($roles as $role)
+                                    <option value="{{$role->id}}" {{$datas->role_id == $role->id ? 'selected' : ''}}>{{$role->role_name}}</option>
+                                @endforeach
+                            @endif
                         </select>
                         <label class="checkbox-group">
                             <input type="checkbox">
@@ -38,29 +41,23 @@
                 <tr>
                     <th>이름</th>
                     <td>
-                        <input type="text" class="text-field" placeholder="이름">
-                    </td>
-                </tr>
-                <tr>
-                    <th>아이디</th>
-                    <td>
-                        doulove
+                        <input type="text" class="text-field" placeholder="이름" value="{{$datas->name}}">
                     </td>
                 </tr>
                 <tr>
                     <th>성별</th>
                     <td>
-                        <select class="text-field w-120px">
+                        <select class="text-field w-120px" name="gender">
                             <option disabled selected>- 성별 -</option>
-                            <option>남성</option>
-                            <option>여성</option>
+                            <option {{$datas->gender == 0 ? 'selected' : ''}}>남성</option>
+                            <option {{$datas->gender == 1 ? 'selected' : ''}}>여성</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <th>이메일</th>
                     <td>
-                        <input type="text" class="text-field" placeholder="이메일">
+                        {{$datas->email}}
                     </td>
                 </tr>
                 <tr>

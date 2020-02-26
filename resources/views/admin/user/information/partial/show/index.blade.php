@@ -35,74 +35,87 @@
                 <tr>
                     <th>이름</th>
                     <td>
-                        김칠득
-                        <button class="btn-s btn-white">1:1 문의 바로가기</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th>아이디</th>
-                    <td>
-                        doulove
+                        {{$datas->name}}
+                        <button class="btn-s btn-white" onclick="fn_link('inquiry')" data-title="{{$datas->user_code}}">1:1 문의 바로가기</button>
                     </td>
                 </tr>
                 <tr>
                     <th>성별</th>
-                    <td>남성</td>
+                    <td>{{$datas->gender == 0 ? '남자' :'여자'}}</td>
                 </tr>
                 <tr>
                     <th>이메일</th>
                     <td>
-                        doulove@gmail.com
+                        {{$datas->email}}
                         <label class="checkbox-group">
-                            <input type="checkbox">
+                            <input type="checkbox" {{$datas->email_yn == 1 ? 'checked' : ''}} value="{{$datas->email_yn == 1 ? $datas->email_yn : ''}}">
                             <p>이메일 수신여부</p>
                         </label>
                     </td>
                 </tr>
                 <tr>
                     <th>전화번호</th>
-                    <td>010-0000-0000</td>
+                    <td>{{$datas->home_phone}}</td>
                 </tr>
                 <tr>
                     <th>휴대폰번호</th>
                     <td>
-                        010-0000-0000
+                        {{$datas->cellphone}}
                         <label class="checkbox-group">
-                            <input type="checkbox">
+                            <input type="checkbox" {{$datas->sms_yn == 1 ? 'checked' : ''}} value="{{$datas->sms_yn == 1 ? $datas->sms_yn : ''}}">
                             <p>SMS 수신여부</p>
                         </label>
                     </td>
                 </tr>
                 <tr>
                     <th>주소</th>
-                    <td>(12345)서울특별시 용산구 문배동 3-3 용산이안프리미어 105호</td>
+                    <td>({{$datas->zip_code}}){{$datas->address}} {{$datas->address_detail}}</td>
                 </tr>
                 <tr>
                     <th>가입일</th>
-                    <td>2019-00-00</td>
+                    <td>{{$datas->created_at->format('Y-m-d')}}</td>
                 </tr>
-                <tr>
-                    <th>적립금</th>
-                    <td>
-                        3000원
-                        <button class="btn-s btn-white">적립금 내역보기</button>
-                    </td>
-                </tr>
+                <?
+//                <tr>
+//                    <th>적립금</th>
+//                    <td>
+//                        3000원
+//                        <button class="btn-s btn-white">적립금 내역보기</button>
+//                    </td>
+//                </tr>
+                ?>
                 <tr>
                     <th>포트폴리오</th>
                     <td>
-                        {포트폴리오 생성여부}-{포트폴리오 노출여부}/{포트폴리오 열람여부}
-                        <button class="btn-s btn-white">바로가기</button>
+                        @if($datas->portfolio)
+                            {{$datas->portfolio->onpen_yn == 0 ? '미열람' : '열람'}} / {{$datas->portfolio->hidden_yn == 0 ? '오픈' : '숨김'}}
+                            <button class="btn-s btn-white" onclick="fn_link('portfolio')" data-title="{{$datas->portfolio->id}}">바로가기</button>
+                            @else
+                            <p>등록된 포폴리오가 없습니다.</p>
+                        @endif
+
                     </td>
                 </tr>
                 </tbody>
             </table>
 
             <div class="row text-right mt-20">
-                <button class="btn-black btn-m">수정하기</button>
+                <button type="button" class="btn-black btn-m" onclick="fn_link('edit',this)" data-title="{{$datas->user_code}}">수정하기</button>
             </div>
         </div>
         <!-- //contesnts-inner -->
     </div>
-
+    <script type="text/javascript">
+        var fn_link = function(type,e){
+            var value = e.getAttribute('data-title');
+            if(type == 'inquiry'){
+                document.location.herf='/admin_question?user='+ value;
+            } else if(type =='portfolio'){
+                document.location.herf='/admin_portfolio/'+ value;
+            } else if(type =='edit'){
+                window.location.href='/admin_information/'+ value +'/edit';
+            }
+            return false;
+        }
+    </script>
 @endsection

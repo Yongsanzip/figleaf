@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -79,7 +80,8 @@ class InformationController extends Controller {
      ************************************************************************/
     public function show($id) {
         try {
-
+            $datas = User::whereUserCode($id)->first();
+            return view('admin.user.information.partial.show.index',compact('datas'));
         } catch (\Exception $e) {
             $msg = '잘못된 접근입니다. <br>' . $e->getMessage();
             flash($msg)->error();
@@ -97,7 +99,15 @@ class InformationController extends Controller {
      ************************************************************************/
     public function edit($id) {
         try {
+            if(auth()->user()->role->id ==4){
+//                $roles = Role::where('id','!=',4)->get();
+                $roles = Role::all();
+            } else {
+                $roles = Role::whereIn('id',[1,2])->get();
+            }
 
+            $datas = User::whereUserCode($id)->first();
+            return view('admin.user.information.partial.edit.index',compact('datas','roles'));
         } catch (\Exception $e) {
             $msg = '잘못된 접근입니다. <br>' . $e->getMessage();
             flash($msg)->error();
@@ -133,7 +143,7 @@ class InformationController extends Controller {
      ************************************************************************/
     public function destroy($id) {
         try {
-
+            User::destroy($id);
         } catch (\Exception $e) {
             $msg = '잘못된 접근입니다. <br>' . $e->getMessage();
             flash($msg)->error();

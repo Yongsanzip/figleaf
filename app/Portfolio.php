@@ -64,7 +64,10 @@ class Portfolio extends Model {
     /*******************************************************************
      * @return HasOne
      *******************************************************************/
-
+    // 유저
+    public function users(){
+        return $this->hasOne('App\User','user_id','id');
+    }
     //포트폴리오
     public function brand(){
         return $this->hasOne('App\Brand','portfolio_id','id');
