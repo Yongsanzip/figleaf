@@ -3,7 +3,7 @@
 
 <header class="header">
     <a href="" class="logo">
-        <img src="{{asset('image/logo.png')}}" alt="">
+        <img src="{{asset('images/logo.png')}}" alt="">
     </a>
     <h1 class="gnb-title">Figleaf Admin Page</h1>
     <div class="menu-login">

@@ -18,6 +18,10 @@ class Informations extends Model
     public function project() {
         return $this->belongsTo('App\Project', 'project_id', 'id');
     }
+
+    public function information_detail(){
+        return $this->belongsTo('App\InformationSelectList', 'detail_id', 'id');
+    }
     /*******************************************************************
      * @return HasMany
      *******************************************************************/

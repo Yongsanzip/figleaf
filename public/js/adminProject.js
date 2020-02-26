@@ -27,5 +27,35 @@ function conditionUpdate() {
         location.reload();
     });
 
+}
 
+// 팝업
+function popup(url, name) {
+    var option = "width = 700, height = 500, top = 100, left = 200, location = no";
+    var windObj = window.open(url, name, option);
+    // windObj.document.getElementById('num').value = 123;
+}
+
+// 비고 작성
+function note(e) {
+    var validation = gn_validation(e);
+    if (validation == false) {
+        return false;
+    } else {
+        document.getElementById('adminNoteForm').submit();
+        opener.parent.location.reload();
+        window.close();
+    }
+}
+
+
+// select - readonly
+function selectStatus(e) {
+    console.log(e.value);
+    if (e.value === '3') {
+        document.getElementById('reason').disabled = false;
+    } else {
+        document.getElementById('reason').value = '';
+        document.getElementById('reason').disabled = true;
+    }
 }

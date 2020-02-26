@@ -43,6 +43,7 @@ class CreateProjectsTable extends Migration
             $table->string('delay_date', 10)->nullable()->comment('지연일자');
             $table->text('storytelling')->nullable()->comment('스토리텔링');
             $table->tinyInteger('progress')->default(0)->comment('진행률');
+            $table->text('reason')->nullable()->comment('반려사유');
             $table->timestamps();
             $table->softDeletes();
         });

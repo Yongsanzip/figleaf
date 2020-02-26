@@ -23,6 +23,7 @@ class Fabric extends Model
         public function material() {
             return $this->belongsTo('App\Material', 'material_id', 'id');
         }
+
     /*******************************************************************
      * @return HasMany
      *******************************************************************/

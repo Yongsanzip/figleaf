@@ -17,14 +17,15 @@
             <!-- search -->
             <div class="search">
                 <div class="search-select">
-                    <select>
+                    <select name="option">
                         <option disabled selected>- 검색기준 -</option>
-                        <option>검색기준</option>
-                        <option>검색기준</option>
+                        <option value="title">제목</option>
+                        <option value="designer">디자이너</option>
+                        <option value="category">카테고리</option>
                     </select>
                 </div>
                 <div class="search-keyword">
-                    <input type="text" placeholder="검색어를 입력하세요" spellcheck="false">
+                    <input type="text" name="keyword" placeholder="검색어를 입력하세요" spellcheck="false">
                     <button>검색</button>
                 </div>
             </div>
@@ -49,7 +50,9 @@
                 @foreach($datas as $key=>$data)
                 <tr onclick="location.href='{{ route('admin_project.show', $data->id) }}'" style="cursor: pointer">
                     <td>{{ $datas->total() - ($datas->perPage()* ($datas->currentPage()-1)) - $key }}</td>
-                    <td>대기중</td>
+                    <td>
+                        {{ $data->condition($data->condition) }}
+                    </td>
                     <td>{{ $data->category->category_name }} > {{ $data->category_detail->category_name }}</td>
                     <td>{{ $data->title }}</td>
                     <td>{{ $data->introduction->designer_name }}</td>

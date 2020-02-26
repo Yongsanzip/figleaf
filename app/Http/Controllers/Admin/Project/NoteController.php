@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Project;
 
+use App\Note;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,12 +32,17 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @description Admin 프로젝트 - 비고 내용 저장 (팝업)
+     * @url : /admin_note
+     * @return
      */
     public function store(Request $request)
     {
-        //
+        Note::create([
+            'project_id'            => $request->project_id,
+            'user_id'               => auth()->user()->id,
+            'contents'              => $request->contents
+        ]);
     }
 
     /**

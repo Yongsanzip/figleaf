@@ -20,6 +20,7 @@ class CreateGroupsTable extends Migration
             $table->string('name_ko', 50)->comment('그룹명(한)');
             $table->string('name_cn', 50)->comment('그룹명(중)');
             $table->string('name_en', 50)->comment('그룹명(영)');
+            $table->text('contents')->comment('설명');
             $table->timestamps();
         });
         //테이블 명세

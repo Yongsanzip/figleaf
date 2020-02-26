@@ -123,7 +123,7 @@ class InformationSelectListsTableSeeder extends Seeder
             "원단 위에 천을 얹고<br>80~120℃로 다림질",
             "다림질 안됨",
         ];
-        $img_3 = ["iron_01.png", "iron_02.png", "iron_03.png", "iron_04.png", "iron_05.png", "iron_06.png", "iron_07.png"];
+        $img_3 = ["iron-01.png", "iron-02.png", "iron-03.png", "iron-04.png", "iron-05.png", "iron-06.png", "iron-07.png"];
         $tab = DB::table('information_tabs')->where('name_ko', "다림질")->first();
         for($i = 0; $i < count($selects_part3_ko); $i++) {
             DB::table('information_select_lists')->insert([

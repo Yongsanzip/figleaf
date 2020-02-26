@@ -61,9 +61,9 @@ class Project extends Model {
         return $this->hasMany('App\Informations', 'project_id', 'id');
     }
 
-    // 취급정보 - 물세탁
-    public function water_information() {
-        return $this->hasMany('App\Informations', 'project_id', 'id')->where('tab_id', 1)->first();
+    // 비고
+    public function notes() {
+        return $this->hasMany('App\Note', 'project_id', 'id');
     }
 
 
@@ -94,6 +94,32 @@ class Project extends Model {
     // 이미지 파일 - 통장 사본
     public function bank_image() {
         return $this->hasOne('App\ProjectImage', 'project_id', 'id')->where('image_division', 3);
+    }
+
+
+    /*******************************************************************
+     * @return 사용자정의
+     *******************************************************************/
+    public function condition($data) {
+        switch ($data) {
+            case 1:
+                $result = '대기중';
+                break;
+            case 2:
+                $result= '진행중';
+                break;
+            case 3:
+                $result = '반려';
+                break;
+            case 4:
+                $result = '실패';
+                break;
+            case 5:
+                $result = '성공';
+                break;
+        }
+
+        return $result;
     }
 
 }

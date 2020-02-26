@@ -38,7 +38,11 @@ class DatabaseSeeder extends Seeder
             //배너 테이블 데이터 세팅
             BannersTableSeeder::class,
 
+            /******************** 테스트 데이터 ********************/
             //부가 요소
+            PortfolioSeeder::class,
+            ProjectSeeder::class,
+            SupportSeeder::class
         ]);
 
     }

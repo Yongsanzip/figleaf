@@ -17,6 +17,10 @@ class InformationSelectList extends Model {
      * @return HasMany
      *******************************************************************/
 
+    public function informations() {
+        return $this->hasMany('App\Informations', 'detail_id', 'id');
+    }
+
     /*******************************************************************
      * @return HasOne
      *******************************************************************/

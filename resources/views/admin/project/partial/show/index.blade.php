@@ -20,16 +20,16 @@
             @if($data->condition == 1)
             <div class="project-status">
                 <div class="col-status">
-                    <select class="status-select" name="condition" id="select_status">
+                    <select class="status-select" name="condition" id="select_status" onchange="selectStatus(this)">
                         <option value="1">대기중</option>
                         <option value="2">진행중</option>
                         <option value="3">반려</option>
                     </select>
                 </div>
                 <div class="col-textarea">
-                    <textarea class="textarea w-100 mh-120px" spellcheck="false" name="reason" id="reason" placeholder="사유를 입력하세요"></textarea>
+                    <textarea class="textarea w-100 mh-120px" spellcheck="false" name="reason" id="reason" placeholder="사유를 입력하세요" disabled></textarea>
                 </div>
-                <input type="hidden" name="project_id" value="{{ $data->id }}">
+                <input type="hidden" name="project_id" id="project_id" value="{{ $data->id }}">
                 <div class="row text-right mt-20">
                     <button type="button" class="btn-black btn-m" onclick="conditionUpdate()">수정하기</button>
                 </div>
@@ -41,6 +41,8 @@
                     <p class="portfolio-result">프로젝트가 진행중입니다.</p>
                     <p class="portfolio-data">30개 중 12개 펀딩 (30%)</p>
                 </div>
+            @elseif($data->condition == 3)
+                <p>반려</p>
             @elseif($data->condition == 4)
                 <div class="portfolio-status">
                     <p class="portfolio-result">프로젝트가 실패했습니다.</p>
@@ -71,7 +73,9 @@
                             <th class="text-right">제목</th>
                             <td>
                                 {{ $data->title }}
-                                <button class="btn-white btn-s">바로가기</button>
+                                @if($data->condition == 2 || $data->condition == 4 || $data->condition == 5)
+                                <button class="btn-white btn-s" onclick="window.open('/project/{{ $data->id }}')">바로가기</button>
+                                @endif
                             </td>
                         </tr>
                         <tr>
@@ -215,46 +219,16 @@
                 <div class="row">
                     <h3 class="project-subtitle">원단</h3>
                     <ul class="list-fabric font-size-0">
+                        @foreach($data->fabrics as $fabric)
                         <li>
                             <div class="fabric-name">
-                                면(100%)
+                                {{ $fabric->material->name }}({{ $fabric->rate }}%)
                             </div>
                             <div class="fabric-text">
-                                대표적인 천연 섬유로 내구성과 흡수성이 좋고 세탁이 편리하여 모든 옷의 재료 섬유로 사용 가능하나 구김이 잘 생기고 형태 안정성이 부족한 단점을 지니고 있어 합성섬유와 혼방하는 경우가 많다.
+                                {{ $fabric->material->group->contents }}
                             </div>
                         </li>
-                        <li>
-                            <div class="fabric-name">
-                                면(100%)
-                            </div>
-                            <div class="fabric-text">
-                                대표적인 천연 섬유로 내구성과 흡수성이 좋고 세탁이 편리하여 모든 옷의 재료 섬유로 사용 가능하나 구김이 잘 생기고 형태 안정성이 부족한 단점을 지니고 있어 합성섬유와 혼방하는 경우가 많다.
-                            </div>
-                        </li>
-                        <li>
-                            <div class="fabric-name">
-                                면(100%)
-                            </div>
-                            <div class="fabric-text">
-                                대표적인 천연 섬유로 내구성과 흡수성이 좋고 세탁이 편리하여 모든 옷의 재료 섬유로 사용 가능하나 구김이 잘 생기고 형태 안정성이 부족한 단점을 지니고 있어 합성섬유와 혼방하는 경우가 많다.
-                            </div>
-                        </li>
-                        <li>
-                            <div class="fabric-name">
-                                면(100%)
-                            </div>
-                            <div class="fabric-text">
-                                대표적인 천연 섬유로 내구성과 흡수성이 좋고 세탁이 편리하여 모든 옷의 재료 섬유로 사용 가능하나 구김이 잘 생기고 형태 안정성이 부족한 단점을 지니고 있어 합성섬유와 혼방하는 경우가 많다.
-                            </div>
-                        </li>
-                        <li>
-                            <div class="fabric-name">
-                                면(100%)
-                            </div>
-                            <div class="fabric-text">
-                                대표적인 천연 섬유로 내구성과 흡수성이 좋고 세탁이 편리하여 모든 옷의 재료 섬유로 사용 가능하나 구김이 잘 생기고 형태 안정성이 부족한 단점을 지니고 있어 합성섬유와 혼방하는 경우가 많다.
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
                     <table class="table-info mt-48">
                         <colgroup>
@@ -273,58 +247,28 @@
                 <div class="row">
                     <h3 class="project-subtitle">취급정보</h3>
                     <ul class="list-treat font-size-0">
+                        @foreach($data->informations as $information)
                         <li>
                             <div class="treat-name">
-                                물세탁
+                                @switch($information->tab_id)
+                                    @case (1) 물세탁
+                                    @break
+                                    @case (2) 표백
+                                    @break
+                                    @case (3) 다림질
+                                    @break
+                                    @case (4) 드라이클리닝
+                                    @break
+                                    @case (5) 건조
+                                    @break
+                                @endswitch
                             </div>
                             <div class="treat-text text-center">
-                                <img src="../assets/image/img-iron-01.png" alt="">
-                                물온도 95℃로 세탁<br>
-                                세탁기/손세탁 가능<br>
-                                세제종류 제한 없음<br>
-                                삶을 수 있음
-                                {{ $data->information-> }}
+                                <img src="{{ asset($information->information_detail->img_path) }}">
+                                {!! $information->information_detail->description_ko !!}
                             </div>
                         </li>
-                        <li>
-                            <div class="treat-name">
-                                표백
-                            </div>
-                            <div class="treat-text text-center">
-                                <img src="../assets/image/img-iron-01.png" alt="">
-                                염소계 표백제로 표백
-                            </div>
-                        </li>
-                        <li>
-                            <div class="treat-name">
-                                다림질
-                            </div>
-                            <div class="treat-text text-center">
-                                <img src="../assets/image/img-iron-01.png" alt="">
-                                180~210℃로 다림질
-                            </div>
-                        </li>
-                        <li>
-                            <div class="treat-name">
-                                드라이클리닝
-                            </div>
-                            <div class="treat-text text-center">
-                                <img src="../assets/image/img-iron-01.png" alt="">
-                                드라이클리닝 가능<br>
-                                클로로에틸렌,<br>
-                                혹은 석유계 사용
-                            </div>
-                        </li>
-                        <li>
-                            <div class="treat-name">
-                                건조
-                            </div>
-                            <div class="treat-text text-center">
-                                <img src="../assets/image/img-iron-01.png" alt="">
-                                햇빛에 건조<br>
-                                옷걸이에 걸어 건조
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -346,27 +290,29 @@
                     <tbody>
                     <tr>
                         <th class="text-right">사업자/개인구분</th>
-                        <td>사업자</td>
+                        <td>{{ $data->account->condition == 1 ? '사업자' : '개인' }}</td>
                     </tr>
+                    @if($data->account->condition == 1)
                     <tr>
                         <th class="text-right">사업자등록번호</th>
-                        <td>000-00-000000</td>
+                        <td>{{ $data->account->company_number }}</td>
                     </tr>
                     <tr>
                         <th class="text-right">사업자등록증</th>
-                        <td><a class="link-download">다운로드</a></td>
+                        <td><a class="link-download" href="/admin_project/{{ $data->company_image->id }}/edit">다운로드</a></td>
                     </tr>
+                    @endif
                     <tr>
                         <th class="text-right">통장사본</th>
-                        <td><a class="link-download">다운로드</a></td>
+                        <td><a class="link-download" href="/admin_project/{{ $data->bank_image->id }}/edit">다운로드</a></td>
                     </tr>
                     <tr>
                         <th class="text-right">이메일</th>
-                        <td>vuejs@naver.com</td>
+                        <td>{{ $data->account->email }}</td>
                     </tr>
                     <tr>
                         <th class="text-right">전화번호</th>
-                        <td>01012345678</td>
+                        <td>{{ $data->account->phone }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -394,30 +340,17 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($data->notes as $note)
                     <tr>
-                        <td>2019-00-00 00:00</td>
-                        <td>김칠득</td>
-                        <td class="text-left">비고비고</td>
+                        <td>{{ $note->created_at }}</td>
+                        <td>{{ $note->user->name }}</td>
+                        <td class="text-left">{{ $note->contents }}</td>
                     </tr>
-                    <tr>
-                        <td>2019-00-00 00:00</td>
-                        <td>김칠득</td>
-                        <td class="text-left">비고비고</td>
-                    </tr>
-                    <tr>
-                        <td>2019-00-00 00:00</td>
-                        <td>김칠득</td>
-                        <td class="text-left">비고비고</td>
-                    </tr>
-                    <tr>
-                        <td>2019-00-00 00:00</td>
-                        <td>김칠득</td>
-                        <td class="text-left">비고비고</td>
-                    </tr>
+                    @endforeach
                     </tbody>
                 </table>
                 <div class="row text-right mt-20">
-                    <button class="btn-black btn-m w-120px">비고 작성하기</button>
+                    <button class="btn-black btn-m w-120px" onclick="popup('/admin_note', '비고')">비고 작성하기</button>
                 </div>
             </div>
         </div>

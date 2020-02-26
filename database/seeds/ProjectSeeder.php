@@ -12,7 +12,7 @@ class ProjectSeeder extends Seeder
     public function run()
     {
         $k = 2;
-        for($i=1;$i<100;$i++) {
+        for($i = 1; $i < 100; $i++) {
             if ($k == 2){
                 $k = 3;
             } else {
@@ -86,6 +86,7 @@ class ProjectSeeder extends Seeder
                 ]);
             }
 
+
             for ($j = 1; $j < 4; $j++) {
                 \Illuminate\Support\Facades\DB::table('project_images')->insert([
                     'project_id'            => $project->id,
@@ -96,6 +97,31 @@ class ProjectSeeder extends Seeder
                     'created_at' => date('Y-m-d H:i:s', time()),
                     'updated_at' => date('Y-m-d H:i:s', time()),
                 ]);
+            }
+
+            for ($j = 0; $j < 2; $j++){
+                \Illuminate\Support\Facades\DB::table('fabrics')->insert([
+                    'project_id'            => $project->id,
+                    'material_id'           => mt_rand(1,308),
+                    'rate'                  => 50,
+                    'created_at'            => date('Y-m-d H:i:s', time()),
+                    'updated_at'            => date('Y-m-d H:i:s', time()),
+                ]);
+            }
+
+
+            $account = \App\Account::create([
+                'project_id'            => $project->id,
+                'condition'             => mt_rand(0,1),
+                'email'                 => 'test@test.com',
+                'phone'                 => '01012341234',
+                'created_at'            => date('Y-m-d H:i:s', time()),
+                'updated_at'            => date('Y-m-d H:i:s', time()),
+            ]);
+
+            if ($account->condition == 1) { // 사업자
+                $account->company_number = '1234123412';
+                $account->save();
             }
 
         }
