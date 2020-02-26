@@ -13,7 +13,7 @@ class CreateViewProjectsTable extends Migration
      */
     public function up()
     {
-        \Illuminate\Support\Facades\DB::statement('DROP VIEW view_projects');
+        //\Illuminate\Support\Facades\DB::statement('DROP VIEW view_projects');
         \Illuminate\Support\Facades\DB::statement("
                     CREATE VIEW view_projects AS
                         SELECT pr.id                     AS `id`,
