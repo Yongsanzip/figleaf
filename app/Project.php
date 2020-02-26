@@ -97,29 +97,6 @@ class Project extends Model {
     }
 
 
-    /*******************************************************************
-     * @return 사용자정의
-     *******************************************************************/
-    public function condition($data) {
-        switch ($data) {
-            case 1:
-                $result = '대기중';
-                break;
-            case 2:
-                $result= '진행중';
-                break;
-            case 3:
-                $result = '반려';
-                break;
-            case 4:
-                $result = '실패';
-                break;
-            case 5:
-                $result = '성공';
-                break;
-        }
 
-        return $result;
-    }
 
 }

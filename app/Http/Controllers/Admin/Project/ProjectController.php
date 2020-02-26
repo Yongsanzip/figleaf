@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Project;
 
+use App\CategoryDetail;
 use App\Project;
 use App\ProjectImage;
+use App\ViewProject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -22,21 +24,27 @@ class ProjectController extends Controller
         $page_num = 17;
         $keyword = $request->keyword;
         $option = $request->option;
+        $status = $request->status;
+        $categories = CategoryDetail::get();
         // 검색
-        if ($option = 'title')
-        $datas = Project::where('title', 'like', '%' . $keyword . '%')->first();
-
-
-        if ($request->status == 1) {                                                                                    // 대기중
-            $datas = Project::where('condition', 1)->orWhere('condition', 3)->orderBy('created_at', 'desc')->paginate($page_num);
-        } elseif ($request->status == 2) {                                                                              // 진행중
-            $datas = Project::where('condition', 2)->orderBy('created_at', 'desc')->paginate($page_num);
-        } else {                                                                                                        // 완료
-            $datas = Project::where('condition', 4)->orWhere('condition', 5)->orderBy('created_at', 'desc')->paginate($page_num);
+        $datas = new ViewProject();
+        if ($option == 'title'){
+            $datas = $datas->where('title', 'like', '%' . $keyword . '%');
+        } else if ($option == 'designer_name') {
+            $datas = $datas->where('designer_name', 'like', '%' . $keyword . '%');
         }
 
 
-        return view('admin.project.index', compact('datas'));
+        if ($status == 1) {                                                                                    // 대기중
+            $datas = $datas->where('condition', 1)->orWhere('condition', 3)->paginate($page_num);
+        } elseif ($request->status == 2) {                                                                              // 진행중
+            $datas = $datas->where('condition', 2)->paginate($page_num);
+        } else {                                                                                                        // 완료
+            $datas = $datas->where('condition', 4)->orWhere('condition', 5)->paginate($page_num);
+        }
+
+
+        return view('admin.project.index', compact('datas', 'option', 'keyword', 'status', 'categories'));
     }
 
     /**
