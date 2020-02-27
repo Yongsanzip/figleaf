@@ -54,135 +54,37 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>송칠득</td>
-                    <td>ilovedog@gmail.com</td>
-                    <td>-</td>
-                    <td> - </td>
-                </tr>
+                @if(count($datas)>0)
+                        @foreach($datas as $key=> $data)
+                            <tr onclick="fn_link({{$data->id}})" style="cursor: pointer;">
+                                <td>{{$datas->lastItem() - $key}}</td>
+                                <td>{{$data->user->name}}</td>
+                                <td>{{$data->user->email}}</td>
+                                <td>{{$data->open_yn == 1 ? '열람' : '미열람'}}</td>
+                                <td>{{$data->hidden_yn == 1 ? '노출' : '미노출'}}</td>
+                            </tr>
+                        @endforeach
+                    @else
+                    <tr>
+                        <td colspan="7">등록된 포폴리오가 없습니다.</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
             <!-- //table type1 -->
 
             <!-- paginiation -->
             <nav class="pagination-wrap">
-                <ul class="pagination">
-                    <li><a> preview </a></li>
-                    <li class="active"><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>4</a></li>
-                    <li><a>5</a></li>
-                    <li><a>6</a></li>
-                    <li><a>7</a></li>
-                    <li><a>8</a></li>
-                    <li><a>9</a></li>
-                    <li><a> next </a></li>
-                </ul>
+                {{$datas->links()}}
             </nav>
             <!-- //pagination -->
 
         </div>
         <!-- //contesnts-inner -->
     </div>
-
+<script>
+    var fn_link = function(e) {
+        location.href='/admin_portfolio/'+e;
+    }
+</script>
 @endsection
