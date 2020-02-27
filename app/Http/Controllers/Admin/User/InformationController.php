@@ -126,6 +126,19 @@ class InformationController extends Controller {
     public function update(Request $request, $id) {
         try {
 
+                $user = User::find($id);
+                $user->name=$request->name;                                                                             // 이름
+                $user->gender=$request->gender;                                                                         // 성별
+                $user->email_yn=$request->email_yn ? 1 : 0;                                                             // 이메일 수신
+                $user->sms_yn=$request->sms_yn ? 1 : 0;                                                                 // 문자 수신
+                $user->home_phone=$request->home_phone;                                                                 // 전화번호
+                $user->cellphone=$request->cellphone;                                                                   // 휴대폰번호
+                $user->zip_code=$request->zip_code;                                                                     // 우편번호
+                $user->address=$request->address;                                                                       // 주소
+                $user->address_detail=$request->address_detail;                                                         // 상세주소
+                $user->save();
+
+                return redirect(route('admin_information.show',['id'=>$user->user_code]));
         } catch (\Exception $e) {
             $msg = '잘못된 접근입니다. <br>' . $e->getMessage();
             flash($msg)->error();
