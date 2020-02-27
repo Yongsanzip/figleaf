@@ -74,6 +74,8 @@ Route::group(['middleware'=>'locale'],function(){
 
     // 프로젝트
     Route::resource('project', 'Client\Project\ProjectController');
+    // 프로젝트 - 커뮤니티
+    Route::resource('project_community', 'Client\Project\CommunityController');
     // 포트폴리오
 
 
@@ -119,9 +121,13 @@ Route::resource('admin_support', 'Admin\PaymentDelivery\SupportController');
 // 관리자 결제/배송 - 배송내역
 Route::resource('admin_delivery', 'Admin\PaymentDelivery\DeliveryController');
 // 관리자 프로젝트
-Route::resource('admin_project', 'Admin\Project\ProjectController');
+Route::resource('admin_project', 'Admin\Project\ProjectController')->except([
+    'create', 'update', 'destroy'
+]);
 // 관리자 프로젝트 - 비고
-Route::resource('admin_note', 'Admin\Project\NoteController');
+Route::resource('admin_note', 'Admin\Project\NoteController')->only([
+    'index', 'store'
+]);
 // 관리자 커뮤니티
 Route::resource('admin_community', 'Admin\Project\CommunityController');
 // 관리자 회원 - 회원정보

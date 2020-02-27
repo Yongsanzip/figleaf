@@ -6,6 +6,7 @@ use App\Account;
 use App\Brand;
 use App\Category;
 use App\CategoryDetail;
+use App\Community;
 use App\Fabric;
 use App\Group;
 use App\Informations;
@@ -413,7 +414,8 @@ class ProjectController extends Controller
     {
         $data = Project::where('id',$id)->first();
         $portfolio = Portfolio::where('user_id', $data->user_id)->first();
-        return view('client.project.partial.show.index', compact('data', 'portfolio'));
+        $communities = Community::where('project_id', $id)->get();
+        return view('client.project.partial.show.index', compact('data', 'portfolio', 'communities'));
     }
 
     /**

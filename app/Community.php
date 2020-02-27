@@ -14,6 +14,9 @@ class Community extends Model {
     /*******************************************************************
      * @return BelongsTo
      *******************************************************************/
+    public function user() {
+        return $this->belongsTo('App\User', 'user_id', 'id');
+    }
 
     /*******************************************************************
      * @return HasMany

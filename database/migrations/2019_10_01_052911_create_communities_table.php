@@ -20,7 +20,7 @@ class CreateCommunitiesTable extends Migration
             $table->bigInteger('project_id')->unsigned()->comment('프로젝트 id');
             $table->bigInteger('user_id')->unsigned()->comment('유저 id');
             $table->text('contents')->comment('내용');
-            $table->tinyInteger('hidden_yn')->unsigned()->comment('히든여부');
+            $table->tinyInteger('hidden_yn')->unsigned()->default(0)->comment('히든여부(0: 보임 1:숨김)');
             $table->timestamps();
             $table->softDeletes();
         });

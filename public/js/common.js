@@ -138,7 +138,7 @@ var gn_validation = function(e){
     var check_list = e.querySelectorAll('.required');
     for(var i=0; i<check_list.length; i++){
         if(!gn_nullCheck(check_list[i].value)){
-            alert(check_list[i].getAttribute('data-title') +"은(는) 입력 필수사항입니다.");
+            alert(check_list[i].getAttribute('data-title') +"(은)는 입력 필수사항입니다.");
             check_list[i].focus();
             return false;
         }
@@ -156,4 +156,21 @@ var gn_getNumberOnly = function(obj){
     var val = new String(obj);
     var regex = /[^0-9]/g;
     return val.replace(regex,'');
+};
+
+
+/***********************************************************************
+ * function Name : getParam
+ * description :  URL 파라미터 추출
+ *
+ ***********************************************************************/
+var getParam = function (sname) {
+    var params = location.search.substr(location.search.indexOf("?") + 1);
+    var sval = "";
+    params = params.split("&");
+    for (var i = 0; i < params.length; i++) {
+        temp = params[i].split("=");
+        if ([temp[0]] == sname) { sval = temp[1]; }
+    }
+    return sval;
 };

@@ -21,6 +21,14 @@ document.addEventListener('DOMContentLoaded',function () {
         });
     }
 
+    // 커뮤니티 작성 후 redirect
+    var params = location.search.substr(location.search.indexOf("?") + 1);
+
+    if (params === 'community') {
+        $("#community_tab").trigger('click');
+        document.getElementById('community_tab').scrollIntoView();
+    }
+
 });
 
 /**********************************************************
@@ -29,9 +37,19 @@ document.addEventListener('DOMContentLoaded',function () {
  *  author      : minyeong kim
  ***********************************************************/
 function fnEditCm(e){
+    var textarea = e.parentNode.parentNode.parentNode.querySelector('.textarea');
+    var str = textarea.value;
+    str = replaceAll(str,"<br/>", "\r\n");
+    textarea.value = str;
+
+    var store_btn = e.parentNode.querySelector('.storeBtn');
+    e.style.display = 'none';
+    store_btn.style.display = '';
+
     var cmItem = e.parentNode.parentNode.parentNode;
     cmItem.classList.add('edit-on');
 }
+
 /**********************************************************
  *  name        : fnCancleCommunity
  *  description : cancel edit mode
@@ -99,3 +117,60 @@ function fnOpenModal(){
 function fnCloseModal(){
     document.getElementsByClassName('modal-overlay')[0].classList.remove('on');
 }
+
+
+/* 커뮤니티 작성 */
+var communitySubmit = function(e){
+    var validation = gn_validation(e);
+    var form = document.getElementById('projectCommunityForm');
+    if (validation == false) {
+        return false;
+    } else {
+        var str = document.getElementById("contents").value;
+        str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+        document.getElementById("contents").value = str;
+
+        form.submit();
+    }
+};
+
+
+/* 문자 replaceAll */
+var replaceAll = function (str, searchStr, replaceStr) {
+    return str.split(searchStr).join(replaceStr);
+};
+
+
+/* 커뮤니티 수정 */
+var communityUpdate = function (e) {
+    var validation = gn_validation(e);
+
+    if (validation == false) {
+        return false;
+    } else {
+        var textarea = e.parentNode.querySelector('.textarea');
+
+        var str = textarea.value;
+        str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+        textarea.value = str;
+
+        var community_id = e.parentNode.querySelector('.communityId').value;
+
+        $.ajax({
+            type: "PUT",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/project_community/"+community_id,
+            dataType: 'JSON',
+            data: {
+                "contents" : textarea.value,
+            },
+            success: function () {
+                location.reload();
+            }, error: function () {
+                alert('오류');
+            }
+        });
+    }
+};

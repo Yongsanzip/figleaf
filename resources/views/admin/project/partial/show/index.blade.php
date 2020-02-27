@@ -356,7 +356,7 @@
                     </tbody>
                 </table>
                 <div class="row text-right mt-20">
-                    <button class="btn-black btn-m w-120px" onclick="popup('/admin_note', '비고')">비고 작성하기</button>
+                    <button type="button" class="btn-black btn-m w-120px" onclick="popup('/admin_note', '비고')">비고 작성하기</button>
                 </div>
             </div>
         </div>

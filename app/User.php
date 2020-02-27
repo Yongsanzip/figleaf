@@ -43,6 +43,9 @@ class User extends Authenticatable {
     /*******************************************************************
      * @return HasMany
      *******************************************************************/
+    public function communities() {
+        return $this->hasMany('App\Community', 'user_id', 'id');
+    }
 
     /*******************************************************************
      * @return HasOne

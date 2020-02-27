@@ -123,7 +123,7 @@
                 <div class="project-overview-wrap">
                     <ul class="overview-tab">
                         <li class="tab-on">project</li>
-                        <li>community</li>
+                        <li id="community_tab">community</li>
                     </ul>
                     <div class="overview-box overview-box-on">
                         <!-- designer profile -->
@@ -588,137 +588,42 @@
                         <!--//product info -->
                     </div>
                     <div class="overview-box">
+                        <form action="{{ route('project_community.store') }}" method="POST" id="projectCommunityForm">
                         <div class="community-create">
-                            <form>
-                                <textarea class="textarea" placeholder="내용을 입력해주세요"></textarea>
+                                @csrf
+                                <textarea class="textarea required" name="contents" id="contents" placeholder="내용을 입력해주세요"></textarea>
+                            <input type="hidden" name="project_id" value="{{ $data->id }}">
                                 <div class="btn-wrap">
-                                    <button class="btn-black">작성하기</button>
+                                    <button type="button" class="btn-black" data-title="내용" onclick="communitySubmit(this.parentElement.parentElement);">작성하기</button>
                                 </div>
-                            </form>
                         </div>
+                    </form>
                         <div class="community-list">
                             <!-- community item -->
+                            @foreach($communities as $community)
                             <div class="community-item">
                                 <div class="cm-header">
-                                    <p class="name">김해우</p>
-                                    <span class="date">2019.00.00</span>
+                                    <p class="name">{{ $community->user->name }}</p>
+                                    <span class="date">{{ substr($community->created_at,0,10) }}</span>
                                     <div class="btn-wrap">
-                                        <button class="btn-white" type="button" onclick="fnEditCm(this);">수정하기
-                                        </button>
-                                        <button class="btn-black delete">삭제하기</button>
-                                        <button class="btn-black cancel" onclick="fnCancelCm(this)">취소하기</button>
+                                        <button class="btn-white" type="button" onclick="fnEditCm(this);">수정하기</button>
+                                        <button class="btn-white storeBtn" type="button" onclick="communityUpdate(this.parentElement.parentElement)" style="display: none">저장하기</button>
+                                        <button class="btn-black delete" type="button">삭제하기</button>
+                                        <button class="btn-black cancel" type="button" onclick="fnCancelCm(this)">취소하기</button>
                                     </div>
                                 </div>
+                                <input type="hidden" class="communityId" value="{{ $community->id }}">
                                 <div class="cm-contents">
                                     <p class="text">
-                                        부패를 넣는 대고, 노년에게서 같은 약동하다. 평화스러운 앞이 있는 있는 피어나기 같이, 인간은 사막이다. 눈이 위하여서, 목숨이 실현에
-                                        교향악이다. 끓는 얼마나 부패를 있다. 어디 오직 같으며, 하여도 타오르고 보라. 웅대한 사랑의 위하여 끓는다. 곧 그들의 거선의
-                                        할지라도 가는 같이, 만물은 행복스럽고 약동하다.
-                                        위하여 위하여서, 이 역사를 있는 이상은 들어 끓는다. 우리는 유소년에게서 이상은 철환하였는가? 천고에 눈에 대고, 청춘을 것이다. 같은
-                                        별과 모래뿐일 그들에게 바이며, 이것이다. 피에 그들은 인생에 같으며, 광야에서 그리하였는가? 바이며, 피고 쓸쓸한 가치를 품으며,
-                                        무엇을 몸이 피어나기 아름다우냐? 인간은 충분히 그와 청춘이 영락과 뜨거운지라, 교향악이다. 대한 것은 가슴이 용감하고 가는 끝까지
-                                        커다란 긴지라 끓는다. 아니더면, 피어나는 공자는 가는 인간의 아름답고 위하여서 얼마나 아니다. 보이는 인간에 피에 거선의 우리의 열락의
-                                        것이다. 두손을 간에 같은 같은 교향악이다. 열락의 우는 싶이 교향악이다. 청춘의 그것은 얼마나 우리는 못할 품고 뭇 이상, 것이다.
-                                        곳으로 것은 그와 불어 새 이상의 있으랴? 방황하여도, 우리는 듣기만 노래하며 하는 유소년에게서 아니다. 이것을 같은 장식하는 못하다
-                                        만물은 그것은 관현악이며, 속잎나고, 있다. 때까지 이상은 앞이 역사를 얼음과 칼이다. 끓는 타오르고 인간이 사랑의 눈이 풀밭에 같으며,
-                                        위하여서. 이상 되는 뜨거운지라, 같이, 피부가 앞이 위하여서, 천지는 것이다. 힘차게 낙원을 갑 풀이 풍부하게 운다. 이상은 물방아
-                                        가지에 청춘은 미묘한 주는 힘있다. 얼마나 미묘한 용감하고 그들의 석가는 철환하였는가?…
+                                        {!! $community->contents !!}
                                     </p>
-                                    <textarea class="textarea" spellcheck="false"></textarea>
+                                    <textarea class="textarea required" spellcheck="false">{{ $community->contents }}</textarea>
                                 </div>
+                            @endforeach
                             </div>
                             <!--// community item -->
                             <div class="community-item">
-                                <div class="cm-header">
-                                    <p class="name">김해우</p>
-                                    <span class="date">2019.00.00</span>
-                                    <div class="btn-wrap">
-                                        <button class="btn-white" type="button" onclick="fnEditCm(this);">수정하기
-                                        </button>
-                                        <button class="btn-black delete">삭제하기</button>
-                                        <button class="btn-black cancel" onclick="fnCancelCm(this)">취소하기</button>
-                                    </div>
-                                </div>
-                                <div class="cm-contents">
-                                    <p class="text">
-                                        부패를 넣는 대고, 노년에게서 같은 약동하다. 평화스러운 앞이 있는 있는 피어나기 같이, 인간은 사막이다. 눈이 위하여서, 목숨이 실현에
-                                        교향악이다. 끓는 얼마나 부패를 있다. 어디 오직 같으며, 하여도 타오르고 보라. 웅대한 사랑의 위하여 끓는다. 곧 그들의 거선의
-                                        할지라도 가는 같이, 만물은 행복스럽고 약동하다.
-                                        위하여 위하여서, 이 역사를 있는 이상은 들어 끓는다. 우리는 유소년에게서 이상은 철환하였는가? 천고에 눈에 대고, 청춘을 것이다. 같은
-                                        별과 모래뿐일 그들에게 바이며, 이것이다. 피에 그들은 인생에 같으며, 광야에서 그리하였는가? 바이며, 피고 쓸쓸한 가치를 품으며,
-                                        무엇을 몸이 피어나기 아름다우냐? 인간은 충분히 그와 청춘이 영락과 뜨거운지라, 교향악이다. 대한 것은 가슴이 용감하고 가는 끝까지
-                                        커다란 긴지라 끓는다. 아니더면, 피어나는 공자는 가는 인간의 아름답고 위하여서 얼마나 아니다. 보이는 인간에 피에 거선의 우리의 열락의
-                                        것이다. 두손을 간에 같은 같은 교향악이다. 열락의 우는 싶이 교향악이다. 청춘의 그것은 얼마나 우리는 못할 품고 뭇 이상, 것이다.
-                                        곳으로 것은 그와 불어 새 이상의 있으랴? 방황하여도, 우리는 듣기만 노래하며 하는 유소년에게서 아니다. 이것을 같은 장식하는 못하다
-                                        만물은 그것은 관현악이며, 속잎나고, 있다. 때까지 이상은 앞이 역사를 얼음과 칼이다. 끓는 타오르고 인간이 사랑의 눈이 풀밭에 같으며,
-                                        위하여서. 이상 되는 뜨거운지라, 같이, 피부가 앞이 위하여서, 천지는 것이다. 힘차게 낙원을 갑 풀이 풍부하게 운다. 이상은 물방아
-                                        가지에 청춘은 미묘한 주는 힘있다. 얼마나 미묘한 용감하고 그들의 석가는 철환하였는가?…
-                                    </p>
-                                    <textarea class="textarea" spellcheck="false"></textarea>
-                                </div>
-                                <div class="community-item">
-                                    <div class="cm-header">
-                                        <p class="name">김해우</p>
-                                        <span class="date">2019.00.00</span>
-                                        <div class="btn-wrap">
-                                            <button class="btn-white" type="button" onclick="fnEditCm(this);">수정하기
-                                            </button>
-                                            <button class="btn-black delete">삭제하기</button>
-                                            <button class="btn-black cancel" onclick="fnCancelCm(this)">취소하기
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="cm-contents">
-                                        <p class="text">
-                                            부패를 넣는 대고, 노년에게서 같은 약동하다. 평화스러운 앞이 있는 있는 피어나기 같이, 인간은 사막이다. 눈이 위하여서, 목숨이
-                                            실현에 교향악이다. 끓는 얼마나 부패를 있다. 어디 오직 같으며, 하여도 타오르고 보라. 웅대한 사랑의 위하여 끓는다. 곧 그들의
-                                            거선의 할지라도 가는 같이, 만물은 행복스럽고 약동하다.
-                                            위하여 위하여서, 이 역사를 있는 이상은 들어 끓는다. 우리는 유소년에게서 이상은 철환하였는가? 천고에 눈에 대고, 청춘을
-                                            것이다. 같은 별과 모래뿐일 그들에게 바이며, 이것이다. 피에 그들은 인생에 같으며, 광야에서 그리하였는가? 바이며, 피고 쓸쓸한
-                                            가치를 품으며, 무엇을 몸이 피어나기 아름다우냐? 인간은 충분히 그와 청춘이 영락과 뜨거운지라, 교향악이다. 대한 것은 가슴이
-                                            용감하고 가는 끝까지 커다란 긴지라 끓는다. 아니더면, 피어나는 공자는 가는 인간의 아름답고 위하여서 얼마나 아니다. 보이는
-                                            인간에 피에 거선의 우리의 열락의 것이다. 두손을 간에 같은 같은 교향악이다. 열락의 우는 싶이 교향악이다. 청춘의 그것은 얼마나
-                                            우리는 못할 품고 뭇 이상, 것이다.
-                                            곳으로 것은 그와 불어 새 이상의 있으랴? 방황하여도, 우리는 듣기만 노래하며 하는 유소년에게서 아니다. 이것을 같은 장식하는
-                                            못하다 만물은 그것은 관현악이며, 속잎나고, 있다. 때까지 이상은 앞이 역사를 얼음과 칼이다. 끓는 타오르고 인간이 사랑의 눈이
-                                            풀밭에 같으며, 위하여서. 이상 되는 뜨거운지라, 같이, 피부가 앞이 위하여서, 천지는 것이다. 힘차게 낙원을 갑 풀이 풍부하게
-                                            운다. 이상은 물방아 가지에 청춘은 미묘한 주는 힘있다. 얼마나 미묘한 용감하고 그들의 석가는 철환하였는가?…
-                                        </p>
-                                        <textarea class="textarea" spellcheck="false"></textarea>
-                                    </div>
-                                    <div class="community-item">
-                                        <div class="cm-header">
-                                            <p class="name">김해우</p>
-                                            <span class="date">2019.00.00</span>
-                                            <div class="btn-wrap">
-                                                <button class="btn-white" type="button" onclick="fnEditCm(this);">
-                                                    수정하기
-                                                </button>
-                                                <button class="btn-black delete">삭제하기</button>
-                                                <button class="btn-black cancel" onclick="fnCancelCm(this)">취소하기
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="cm-contents">
-                                            <p class="text">
-                                                부패를 넣는 대고, 노년에게서 같은 약동하다. 평화스러운 앞이 있는 있는 피어나기 같이, 인간은 사막이다. 눈이 위하여서,
-                                                목숨이 실현에 교향악이다. 끓는 얼마나 부패를 있다. 어디 오직 같으며, 하여도 타오르고 보라. 웅대한 사랑의 위하여
-                                                끓는다. 곧 그들의 거선의 할지라도 가는 같이, 만물은 행복스럽고 약동하다.
-                                                위하여 위하여서, 이 역사를 있는 이상은 들어 끓는다. 우리는 유소년에게서 이상은 철환하였는가? 천고에 눈에 대고, 청춘을
-                                                것이다. 같은 별과 모래뿐일 그들에게 바이며, 이것이다. 피에 그들은 인생에 같으며, 광야에서 그리하였는가? 바이며, 피고
-                                                쓸쓸한 가치를 품으며, 무엇을 몸이 피어나기 아름다우냐? 인간은 충분히 그와 청춘이 영락과 뜨거운지라, 교향악이다. 대한
-                                                것은 가슴이 용감하고 가는 끝까지 커다란 긴지라 끓는다. 아니더면, 피어나는 공자는 가는 인간의 아름답고 위하여서 얼마나
-                                                아니다. 보이는 인간에 피에 거선의 우리의 열락의 것이다. 두손을 간에 같은 같은 교향악이다. 열락의 우는 싶이
-                                                교향악이다. 청춘의 그것은 얼마나 우리는 못할 품고 뭇 이상, 것이다.
-                                                곳으로 것은 그와 불어 새 이상의 있으랴? 방황하여도, 우리는 듣기만 노래하며 하는 유소년에게서 아니다. 이것을 같은
-                                                장식하는 못하다 만물은 그것은 관현악이며, 속잎나고, 있다. 때까지 이상은 앞이 역사를 얼음과 칼이다. 끓는 타오르고
-                                                인간이 사랑의 눈이 풀밭에 같으며, 위하여서. 이상 되는 뜨거운지라, 같이, 피부가 앞이 위하여서, 천지는 것이다. 힘차게
-                                                낙원을 갑 풀이 풍부하게 운다. 이상은 물방아 가지에 청춘은 미묘한 주는 힘있다. 얼마나 미묘한 용감하고 그들의 석가는
-                                                철환하였는가?…
-                                            </p>
-                                            <textarea class="textarea" spellcheck="false"></textarea>
-                                        </div>
-                                    </div>
+
                                     <div class="btn-wrap">
                                         <button class="btn-white">더보기</button>
                                     </div>

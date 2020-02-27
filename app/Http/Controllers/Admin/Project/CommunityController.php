@@ -15,7 +15,14 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        return view('admin.project.community.index');
+        try {
+            return view('admin.project.community.index');
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
     /**
@@ -25,7 +32,14 @@ class CommunityController extends Controller
      */
     public function create()
     {
-        //
+        try {
+
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
     /**
@@ -36,7 +50,14 @@ class CommunityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
     /**
@@ -48,7 +69,14 @@ class CommunityController extends Controller
      */
     public function show($id)
     {
-        return view('admin.project.community.show.index');
+        try {
+            return view('admin.project.community.show.index');
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
     /**
@@ -59,7 +87,14 @@ class CommunityController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
     /**
@@ -71,7 +106,14 @@ class CommunityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
     /**
@@ -82,6 +124,13 @@ class CommunityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 }
