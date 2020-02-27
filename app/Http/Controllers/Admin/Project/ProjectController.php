@@ -25,26 +25,42 @@ class ProjectController extends Controller
         $keyword = $request->keyword;
         $option = $request->option;
         $status = $request->status;
+        $search_category = $request->search_category;
         $categories = CategoryDetail::get();
-        // 검색
         $datas = new ViewProject();
-        if ($option == 'title'){
+
+        // 검색
+        if ($option == 'title'){                                                                                        // 제목
+            $search_category = '';
             $datas = $datas->where('title', 'like', '%' . $keyword . '%');
-        } else if ($option == 'designer_name') {
-            $datas = $datas->where('designer_name', 'like', '%' . $keyword . '%');
+        } else if ($option == 'designer_name') {                                                                        // 디자이너
+            $search_category = '';
+            $datas = $datas->whereHas('introduction', function ($q) use ($keyword) {
+                $q->where('designer_name', 'like', '%' . $keyword . '%');
+            });
+        } else if ($option == 'category') {                                                                             // 카테고리 (category_detail)
+            $keyword = '';
+            $datas = $datas->where('category2_id', $search_category);
         }
 
 
-        if ($status == 1) {                                                                                    // 대기중
-            $datas = $datas->where('condition', 1)->orWhere('condition', 3)->paginate($page_num);
+        if ($status == 1) {                                                                                             // 대기중
+            $datas = $datas->where(function ($q) {
+                $q->where('condition', 1);
+                $q->orWhere('condition', 3);
+            })->orderBy('id', 'desc')->paginate($page_num);
         } elseif ($request->status == 2) {                                                                              // 진행중
-            $datas = $datas->where('condition', 2)->paginate($page_num);
+            $datas = $datas->where('condition', 2)->orderBy('id', 'desc')->paginate($page_num);
         } else {                                                                                                        // 완료
-            $datas = $datas->where('condition', 4)->orWhere('condition', 5)->paginate($page_num);
+            $datas = $datas->where(function ($q) {
+                $q->where('condition', 4);
+                $q->orWhere('condition', 5);
+            })->orderBy('id', 'desc')->paginate($page_num);
+
         }
 
 
-        return view('admin.project.index', compact('datas', 'option', 'keyword', 'status', 'categories'));
+        return view('admin.project.index', compact('datas', 'option', 'keyword', 'status', 'categories', 'search_category'));
     }
 
     /**
@@ -95,10 +111,10 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $conditions = config('projectStatus.condition');
-
         $data = Project::where('id', $id)->first();
-        return view('admin.project.partial.show.index', compact('data', 'conditions'));
+        $supporter_count = ViewProject::find($id)->supporter_count;                                                     // 후원자수
+
+        return view('admin.project.partial.show.index', compact('data', 'supporter_count'));
     }
 
     /**

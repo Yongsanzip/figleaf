@@ -20,19 +20,21 @@
                 <form action="{{ route('admin_project.index') }}" method="GET">
                     <input type="hidden" name="status" value="{{ $status }}">
                 <div class="search-select">
-                    <select name="option">
+                    <select name="option" onchange="searchCategory(this)">
                         <option disabled selected>- 검색기준 -</option>
                         <option value="title" {{ $option ? ($option == 'title' ? 'selected' : '') : '' }}>제목</option>
                         <option value="designer_name" {{ $option ? ($option == 'designer_name' ? 'selected' : '') : '' }}>디자이너</option>
-                        <option value="category_name">카테고리</option>
+                        <option value="category" {{ $option ? ($option == 'category' ? 'selected' : '') : '' }}>카테고리</option>
                     </select>
                 </div>
                 <div class="search-keyword">
-                    <input type="text" name="keyword" placeholder="검색어를 입력하세요" value="{{ $keyword ? $keyword : '' }}" spellcheck="false">
-                    <div class="search-select" style="display: none">
-                        <select>
+                    <input type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요" value="{{ $keyword ? $keyword : '' }}" style="{{ $option ? ($option == 'category' ? 'display:none' : '') : '' }}" spellcheck="false">
+                    <div class="search-select" id="search_category" style="{{ $option ? ($option == 'category' ? '' : 'display:none') : 'display:none' }}">
+                        <select name="search_category">
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->category_id == 4 ? "Women's apparel > " : "Men's apparel > "  }} {{ $category->category_name }}</option>
+                                <option value="{{ $category->id }}" {{ $search_category ? ($search_category == $category->id ? 'selected' : '') : '' }}>
+                                    {{ $category->category_id == 4 ? "Women's apparel > " : "Men's apparel > "  }} {{ $category->category_name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -68,7 +70,7 @@
                     <td>{{ $data->title }}</td>
                     <td>{{ $data->introduction->designer_name }}</td>
                     <td>{{ $data->success_count }}</td>
-                    <td>{{ $data->supporter_count }}({{ $data->supporter_count/$data->success_count*100 }}%)</td>
+                    <td>{{ $data->supporter_count }}({{ ceil($data->supporter_count/$data->success_count*100) }}%)</td>
                     <td>{{ number_format($data->total_cost) }}원</td>
                     <td>{{ $data->start_date }}</td>
                     <td>{{ $data->deadline }}</td>

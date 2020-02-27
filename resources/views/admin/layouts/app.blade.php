@@ -13,7 +13,7 @@
     <script src="{{asset('html/admin/assets/js/style.js')}}"></script>
     <script src="{{ asset('/js/common.js') }}"></script>
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-
+    <script src="{{ asset('/js/adminProject.js') }}"></script>
 </head>
 <body>
 <section id="wrap">

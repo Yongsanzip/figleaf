@@ -13,10 +13,12 @@ class CreateViewProjectsTable extends Migration
      */
     public function up()
     {
-        //\Illuminate\Support\Facades\DB::statement('DROP VIEW view_projects');
+
+        \Illuminate\Support\Facades\DB::statement('DROP VIEW IF EXISTS view_projects');
         \Illuminate\Support\Facades\DB::statement("
                     CREATE VIEW view_projects AS
                         SELECT pr.id                     AS `id`,
+                                cd.id                    AS `category2_id`,
                                 cc.category_name         AS `category_name`,
                                 cd.category_name         AS `category_detail_name`,
                                 pr.title                 AS `title`,

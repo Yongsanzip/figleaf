@@ -59,3 +59,14 @@ function selectStatus(e) {
         document.getElementById('reason').disabled = true;
     }
 }
+
+// admin_project - 검색 카테고리
+function searchCategory(e) {
+    if (e.value === 'category') {
+        document.getElementById('keyword').style.display = 'none';
+        document.getElementById('search_category').style.display = '';
+    } else {
+        document.getElementById('keyword').style.display = '';
+        document.getElementById('search_category').style.display = 'none';
+    }
+}

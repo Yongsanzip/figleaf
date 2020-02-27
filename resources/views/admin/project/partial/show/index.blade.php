@@ -3,7 +3,6 @@
 ?>
 @extends('admin.layouts.app')
 @section('content')
-<script src="{{ asset('/js/adminProject.js') }}"></script>
     <div class="contents-wrap">
         <!-- contesnts-inner -->
         <div class="contents-inner">
@@ -39,14 +38,21 @@
             @elseif($data->condition == 2)
                 <div class="portfolio-status">
                     <p class="portfolio-result">프로젝트가 진행중입니다.</p>
-                    <p class="portfolio-data">30개 중 12개 펀딩 (30%)</p>
+                    <p class="portfolio-data">{{ $data->success_count }}개 중 {{ $supporter_count }}개 펀딩 ({{ ceil($supporter_count/$data->success_count*100) }}%)</p>
                 </div>
             @elseif($data->condition == 3)
-                <p>반려</p>
+                <div class="portfolio-status">
+                    <p>반려사유: {{ $data->reason }}</p>
+                </div>
             @elseif($data->condition == 4)
                 <div class="portfolio-status">
                     <p class="portfolio-result">프로젝트가 실패했습니다.</p>
-                    <p class="portfolio-data">30개 중 12개 펀딩 (30%)</p>
+                    <p class="portfolio-data">{{ $data->success_count }}개 중 {{ $supporter_count }}개 펀딩 ({{ ceil($supporter_count/$data->success_count*100) }}%)</p>
+                </div>
+            @elseif($data->condition == 5)
+                <div class="portfolio-status">
+                    <p class="portfolio-result">프로젝트가 성공했습니다.</p>
+                    <p class="portfolio-data">{{ $data->success_count }}개 중 {{ $supporter_count }}개 펀딩 ({{ ceil($supporter_count/$data->success_count*100) }}%)</p>
                 </div>
             @endif
             <!-- headline -->
@@ -74,7 +80,7 @@
                             <td>
                                 {{ $data->title }}
                                 @if($data->condition == 2 || $data->condition == 4 || $data->condition == 5)
-                                <button class="btn-white btn-s" onclick="window.open('/project/{{ $data->id }}')">바로가기</button>
+                                <button type="button" class="btn-white btn-s" onclick="window.open('/project/{{ $data->id }}')">바로가기</button>
                                 @endif
                             </td>
                         </tr>
