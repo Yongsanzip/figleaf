@@ -504,6 +504,8 @@
   display: inline-block;
   font-size: 13px;
   vertical-align: bottom;
+  position: relative;
+  bottom: auto;
 }
 
 /* textarea */
