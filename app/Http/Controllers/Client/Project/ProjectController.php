@@ -20,6 +20,9 @@ use App\Project;
 use App\ProjectImage;
 use App\Size;
 use App\SizeCategory;
+use App\ViewProject;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -406,16 +409,33 @@ class ProjectController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @description : 프로젝트 상세보기
+     * @url         : /project/{id}
+     * @method      : GET
+     * @param       : int  $id
+     * @return      : view
      */
     public function show($id)
     {
-        $data = Project::where('id',$id)->first();
-        $portfolio = Portfolio::where('user_id', $data->user_id)->first();
-        $communities = Community::where('project_id', $id)->get();
-        return view('client.project.partial.show.index', compact('data', 'portfolio', 'communities'));
+        try {
+            $support = ViewProject::where('id', $id)->first();                                                          // 뷰프로젝트 데이터
+            $supporter_count = $support->supporter_count;                                                               // 후원자 수
+            $total_cost = $support->total_cost;                                                                         // 모인금액
+
+            $data = Project::where('id',$id)->first();                                                                  // 프로젝트 데이터
+            $portfolio = Portfolio::where('user_id', $data->user_id)->first();                                          // 포트폴리오 데이터
+            $communities = Community::where('project_id', $id)->orderBy('created_at', 'desc')->paginate(20);            // 커뮤니티 데이터
+            $datas = Portfolio::where('user_id', $data->user_id)->first();                                              // 포트폴리오 데이터
+
+            $date_diff = ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24));                 // 남은시간 (남은 일자)
+
+            return view('client.project.partial.show.index', compact('data', 'portfolio', 'communities', 'supporter_count', 'total_cost', 'date_diff', 'datas'));
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
     /**

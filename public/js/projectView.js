@@ -58,6 +58,11 @@ function fnEditCm(e){
 function fnCancelCm(e){
     var cmItem = e.parentNode.parentNode.parentNode;
     cmItem.classList.remove('edit-on');
+
+    var store_btn = e.parentNode.querySelector('.storeBtn');
+    var update_btn = e.parentNode.querySelector('.updateBtn');
+    store_btn.style.display = 'none';
+    update_btn.style.display = '';
 }
 
 
@@ -122,16 +127,18 @@ function fnCloseModal(){
 /* 커뮤니티 작성 */
 var communitySubmit = function(e){
     var validation = gn_validation(e);
-    var form = document.getElementById('projectCommunityForm');
     if (validation == false) {
         return false;
-    } else {
+    }
+
+    if (confirm('작성하시겠습니까?')) {
+        var form = document.getElementById('projectCommunityForm');
         var str = document.getElementById("contents").value;
         str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
         document.getElementById("contents").value = str;
-
         form.submit();
     }
+
 };
 
 
@@ -149,6 +156,7 @@ var communityUpdate = function (e) {
         return false;
     } else {
         var textarea = e.parentNode.querySelector('.textarea');
+        var text = e.parentNode.querySelector('.text');
 
         var str = textarea.value;
         str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
@@ -167,10 +175,39 @@ var communityUpdate = function (e) {
                 "contents" : textarea.value,
             },
             success: function () {
-                location.reload();
+                var cmItem = e.parentNode;
+                cmItem.classList.remove('edit-on');
+
+                var update_btn = e.parentNode.querySelector('.updateBtn');
+                var store_btn = e.parentNode.querySelector('.storeBtn');
+
+                store_btn.style.display = 'none';
+                update_btn.style.display = '';
+
+                text.innerHTML = textarea.value;
             }, error: function () {
                 alert('오류');
             }
         });
+    }
+};
+
+
+/* 커뮤니티 삭제 */
+var communityDelete = function (e) {
+    if (confirm('삭제하시겠습니까?')) {
+        var community_id = e.parentNode.parentNode.parentNode.querySelector('.communityId').value;
+        var project_id = document.getElementById('project_id').value;
+
+        var error = function () {
+            alert('오류');
+        };
+
+        var success = function (data) {
+            alert('삭제되었습니다.');
+            location.href = '/project/'+data+'?community';
+        };
+
+        callAjax('DELETE',true,'/project_community/'+community_id,"JSON",'JSON',null,error,success);
     }
 };
