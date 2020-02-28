@@ -7,7 +7,8 @@
     <main class="container">
         <div class="inner">
             <div class="con-project-view">
-                <h2 class="project-headline">
+                @include('client.project.partial.show.header')
+                {{--<h2 class="project-headline">
                     project
                 </h2>
                 <!-- project info-->
@@ -118,7 +119,7 @@
                         </div>
                         <!-- //product -->
                     </div>
-                </div>
+                </div>--}}
                 <!--// project detail -->
 
                 <!-- sponsor form -->
