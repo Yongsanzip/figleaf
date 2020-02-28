@@ -148,6 +148,11 @@ class CommunityController extends Controller
      ************************************************************************/
     public function destroy($id) {
         try {
+            $community = Community::where('id', $id)->first();                                                          // 선택된 커뮤니티
+            $project_id = $community->project_id;                                                                       // 프로젝트 id
+            $community->delete();                                                                                       // 선택된 커뮤니티 삭제
+
+            return response()->json($project_id, 200, [], JSON_PRETTY_PRINT);
 
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();

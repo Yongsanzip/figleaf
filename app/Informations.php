@@ -30,5 +30,25 @@ class Informations extends Model
      * @return HasOne
      *******************************************************************/
 
+    public function information_name($data) {
+        switch ($data) {
+            case 1:
+                $result = '물세탁';
+                break;
+            case 2:
+                $result = '표백';
+                break;
+            case 3:
+                $result = '다림질';
+                break;
+            case 4:
+                $result = '드라이클리닝';
+                break;
+            case 5:
+                $result = '드라이';
+                break;
+        }
+        return $result;
+    }
 
 }
