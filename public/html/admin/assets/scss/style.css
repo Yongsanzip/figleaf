@@ -198,7 +198,7 @@
 .headline {
   margin-bottom: 24px;
 }
-.headline > h2, .headline h3 {
+.headline h2, .headline h3 {
   font-size: 32px;
   letter-spacing: 6px;
   display: inline-block;
@@ -206,7 +206,7 @@
   font-weight: 300;
   text-transform: uppercase;
 }
-.headline > p {
+.headline p {
   display: inline-block;
   font-size: 14px;
   color: #474747;

@@ -220,7 +220,7 @@ $color-input:#ecedef;
 /* headline */
 .headline{
 	margin-bottom:24px;
-	>h2,h3{
+	h2,h3{
 		font-size:32px;
 		letter-spacing: 6px;
 		display: inline-block;
@@ -228,7 +228,7 @@ $color-input:#ecedef;
 		font-weight: 300;
 		text-transform: uppercase;
 	}
-	>p{
+	p{
 		display: inline-block;
 		font-size:14px;
 		color:$color-gray-02;
