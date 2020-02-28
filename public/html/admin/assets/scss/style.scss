@@ -1576,3 +1576,15 @@ $color-input:#ecedef;
 .edit-box{
 	display: none;
 }
+
+
+.btn-wrap{
+    margin-top:40px;
+    text-align: right;
+    .btn-black, .btn-white{
+        width:200px;
+        margin-left: 10px;
+        height:40px;
+        line-height: 40px;
+    }
+}

@@ -162,6 +162,10 @@
             </nav>
             <!-- //pagination -->
 
+            <div class="btn-wrap">
+                <a href="" class="btn-black">작성하기</a>
+            </div>
+
         </div>
         <!-- //contesnts-inner -->
     </div>

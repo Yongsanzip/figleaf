@@ -1546,4 +1546,15 @@
     display: none;
 }
 
+.btn-wrap {
+    margin-top: 40px;
+    text-align: right;
+}
+.btn-wrap .btn-black, .btn-wrap .btn-white {
+    width: 200px;
+    margin-left: 10px;
+    height: 40px;
+    line-height: 40px;
+}
+
 /*# sourceMappingURL=style.css.map */
