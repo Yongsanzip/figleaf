@@ -9,20 +9,24 @@
         <div class="contents-inner">
 
             <div class="headline">
+                <form action="{{route('admin_portfolio.update',['id'=>$datas->id])}}" onsubmit="return fn_admin_portfolio_submit(this);" method="POST">
                 <h2>{{$datas->user->name}} 포트폴리오</h2>
                 <label class="checkbox-group mt-16">
-                    <input type="checkbox">
+                    <input type="checkbox" name="open_yn" {{$datas->open_yn ==1 ? 'checked' : ''}}>
                     <p>열람여부</p>
                 </label>
                 <div class="portfolio-show-box">
-                    <select class="text-field">
-                        <option disabled selected>- 노출여부 - </option>
-                        <option>노출</option>
-                        <option>미노출</option>
-                    </select>
-                    <button class="btn-black btn-s">업데이트</button>
+                        @csrf
+                        {!! method_field('PUT') !!}
+                        <select class="text-field" name="hidden_yn">
+                            <option value="" disabled selected>- 노출여부 - </option>
+                            <option value="1">노출</option>
+                            <option value="0">미노출</option>
+                        </select>
+                        <button type="submit" class="btn-black btn-s">업데이트</button>
                 </div>
                 <div class="devider mt-4"></div>
+                </form>
             </div>
 
             <!-- 포트폴리오 컨텐츠  -->
@@ -478,5 +482,13 @@
         </div>
         <!-- //contesnts-inner -->
     </div>
-
+<script type="text/javascript">
+    var fn_admin_portfolio_submit = function(f){
+        console.log(f.hidden_yn.value);
+        if(f.hidden_yn.value==""){
+            alert('노출 여부를 선택해주세요');
+            return false;
+        }
+    }
+</script>
 @endsection

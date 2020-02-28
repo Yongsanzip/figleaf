@@ -117,7 +117,12 @@ class PortfolioController  extends Controller {
      ************************************************************************/
     public function update(Request $request, $id){
         try {
-
+            error_log($request->open_yn);
+            Portfolio::find($id)->update([
+                'hidden_yn' => $request->hidden_yn,
+                'open_yn'   => $request->open_yn ? 1: 0,
+            ]);
+            return redirect(route('admin_portfolio.show' ,['id'=>$id]));
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->error();

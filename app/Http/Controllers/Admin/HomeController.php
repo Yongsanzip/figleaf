@@ -24,7 +24,7 @@ class HomeController extends Controller {
      ************************************************************************/
     public function index(){
         try {
-
+            return view('admin.index');
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->error();
