@@ -92,7 +92,7 @@
             <div class="info-item">
                 @if(empty($option_id))
                 <p class="info-name">옵션</p>
-                <select class="select" id="select_option" onchange="fnAddOption(this)">
+                <select class="select" id="select_option" onclick="fnAddOption(this)">
                     <option selected disabled>- 옵션을 선택해주세요 -</option>
                     @foreach($data->options as $option)
                         {{ $price =  $option->price - $data->options->first()->price }}
@@ -103,17 +103,16 @@
                 <ul class="option-list">
                     <!-- script add item -->
                     @if(isset($option_id))
-                            @for($i = 0; $i < count($option_id); $i++)
-                    <li class="option-item">
-                        <div class="option-value">
-                            <span class="option-name"></span>
-                            <input class="option-amount amount" name="option_amount[]" min="1" type="number" value="{{ $option_arr['option_amount'][$i] }}" readonly>
-                            <input class="optionId" min="1" name="option_id[]" type="hidden" value="{{ $option_arr['option_id'][$i] }}">
-                            <span class="option-price"></span>
-                        </div>
-                        <button class="btn-black" type="button" onclick="fnRemoveOption(this)">삭제</button>
-                    </li>
-                            @endfor
+                        @for($i = 0; $i < count($option_id); $i++)
+                            <li class="option-item">
+                                <div class="option-value">
+                                    <span class="option-name">{{ $option_arr['option_name'][$i] }}</span>
+                                    <input class="option-amount amount" name="option_amount[]" min="1" type="number" value="{{ $option_arr['option_amount'][$i] }}" readonly>
+                                    <input class="optionId" min="1" name="option_id[]" type="hidden" value="{{ $option_arr['option_id'][$i] }}">
+                                    <span class="option-price">{{ number_format($option_arr['option_price'][$i]) }}원</span>
+                                </div>
+                            </li>
+                        @endfor
                     @endif
                 </ul>
                 <div class="btn-wrap">

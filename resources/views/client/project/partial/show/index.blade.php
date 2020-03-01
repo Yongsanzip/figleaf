@@ -9,7 +9,7 @@
     <main class="container">
         <div class="inner">
             <div class="con-project-view">
-                @include('client.project.partial.show.header')
+                @include('client.project.partial.layouts.header')
                 <!--// project detail -->
 
                 <!-- project overview -->
@@ -299,7 +299,7 @@
                                                     <img src="../images/common/img-project-start.png" alt="">
                                                 </div>
                                                 <div class="delivery-info">
-                                                    <p class="date">{{ $data->start_date->format('Y.m.d') }}</p>
+                                                    <p class="date">{{ $data->start_date ? $data->start_date->format('Y.m.d') : '' }}</p>
                                                     <p class="text">프로젝트 시작</p>
                                                 </div>
                                             </li>

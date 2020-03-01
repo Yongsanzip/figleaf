@@ -53,7 +53,7 @@ $tab = 'project';
                                         <p class="project-title">{{ $data->title }}</p>
                                     </div>
                                     <div class="project-date">
-                                        {{ $data->start_date }} ~ {{ $data->deadline }}
+                                        {{ $data->start_date ? $data->start_date->format('Y-m-d') : '' }} ~ {{ $data->deadline->format('Y-m-d') }}
                                     </div>
                                 </div>
                                 <!-- 프로젝트 상태에 따른 뱃지 -->
@@ -66,7 +66,7 @@ $tab = 'project';
                                 @endif
                             </div>
                             @if($data->condition == 3)
-                            <a href="" class="btn-white">반려사유 확인하기</a>
+                            <button type="button" onclick="window.open('/mypage_project/{{ $data->id }}', '반려사유', 'width = 500, height = 500, top = 100, left = 200, location = no')" class="btn-white">반려사유 확인하기</button>
                             @endif
                         </div>
                         @endforeach

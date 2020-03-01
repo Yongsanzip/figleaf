@@ -34,7 +34,7 @@
                 <!-- //headline -->
 
                 <ul class="tab-list">
-                    <li class="{{ $data ? ($data->progress == 100 ? 'fill' : '') : '' }} tab-on" id="summary"><span>개요</span></li>
+                    <li class="tab-on {{ $data ? ($data->progress == 100 ? 'fill' : '') : '' }}" id="summary"><span>개요</span></li>
                     <li class="{{ $data ? ($data->progress == 100 ? 'fill' : '') : '' }}" id="product_information"><span>상품정보</span></li>
                     <li class="{{ $data ? ($data->progress == 100 ? 'fill' : '') : '' }}" id="story_telling"><span>스토리텔링</span></li>
                     <li class="{{ $data ? ($data->progress == 100 ? 'fill' : '') : '' }}" id="project_date"><span>프로젝트 일정</span></li>
@@ -573,17 +573,17 @@
                             <div class="schedule-wrap">
                                 <div class="schedule">
                                     <span>프로젝트 마감일</span>은
-                                    <input type="text" class="input-field datepicker" name="deadline" id="deadline" onchange="dateChange()" value="{{ $data ? $data->deadline : '' }}" readonly>
+                                    <input type="text" class="input-field datepicker" name="deadline" id="deadline" onchange="dateChange()" value="{{ $data ? $data->deadline->format('Y-m-d') : '' }}" readonly>
                                     이며,
 
                                 </div>
                                 <div class="schedule">
                                     이에 따라 <span>프로젝트 정산일</span>은 영업일 7일 뒤인
-                                    <input type="text" class="input-field" name="account_date" id="account_date" value="{{ $data ? $data->account_date : '' }}" readonly>이고,
+                                    <input type="text" class="input-field" name="account_date" id="account_date" value="{{ $data ? $data->account_date->format('Y-m-d') : '' }}" readonly>이고,
                                 </div>
                                 <div class="schedule">
                                     프로젝트 마감일 후
-                                    <input type="text" class="input-field datepicker" name="delivery_date" id="delivery_date" value="{{ $data ? $data->delivery_date : '' }}" readonly>
+                                    <input type="text" class="input-field datepicker" name="delivery_date" id="delivery_date" value="{{ $data ? $data->delivery_date->format('Y-m-d') : '' }}" readonly>
                                     에 배송을 진행하되,
                                 </div>
                                 <div class="schedule">
@@ -775,36 +775,7 @@
     <script src="../js/datepicker.js"></script>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded',function () {
-            var oEditors = [];
-            nhn.husky.EZCreator.createInIFrame({
-                oAppRef: oEditors,
-                elPlaceHolder: "ir1",
-                sSkinURI: "../se2/SmartEditor2Skin.html",
-                fCreator: "createSEditor2",
-                fOnAppLoad: function () {
-                    // document.getElementById("editor").setAttribute('style','display:none;')
-                    $("iframe").css("width", "100%").css("height", "100%");
-                }
 
-            });
-
-            // 스토리텔링
-            document.getElementById('project_date').addEventListener('click', function () {
-                oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
-                var story_telling = document.getElementById('story_telling');
-                var form = new FormData($('#projectForm3')[0]);
-                formAjax('POST', false, '/project', form, function (e) {
-                    alert('오류입니다. 처음부터 다시 시작해주세요.');
-                    location.href = '/project/create';
-                }, function (data) {
-                    if (data === 'fail') {
-                        alert('이전 단계를 진행해주세요.')
-                    } else {
-                        story_telling.setAttribute("class", "fill");
-                        valueCheck = true;
-                    }
-                });
-            });
         });
 
 

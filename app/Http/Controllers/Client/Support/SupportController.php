@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\Support;
 
+use App\Option;
 use App\Portfolio;
 use App\Project;
 use App\ViewProject;
@@ -27,11 +28,9 @@ class SupportController extends Controller
      ************************************************************************/
     public function index(Request $request){
         try {
-            error_log($request->getContent());
-            // error_log($request->project_id);
-            error_log($request->option_id[0]);
-            // error_log($request->option_amount);
             $option_id = $request->option_id;
+            $option_amount = $request->option_amount;
+            $option_total_cost = 0;
 
             $support = ViewProject::where('id', $request->project_id)->first();                                         // 뷰프로젝트 데이터
             $supporter_count = $support->supporter_count;                                                               // 후원자 수
@@ -43,12 +42,16 @@ class SupportController extends Controller
             $data = Project::where('id',$request->project_id)->first();                                                 // 프로젝트 데이터
             $option_arr = array();
             for ($i = 0; $i < count($option_id); $i++) {
-                $option_arr['option_id'][$i] = $option_id[$i];
-                $option_arr['option_amount'][$i] = $request->option_amount[$i];
+                $option_arr['option_id'][$i] = $option_id[$i];                                                          // 옵션 주문 id
+                $option_arr['option_amount'][$i] = $request->option_amount[$i];                                         // 옵션 주문 수량
+                $option = Option::find($option_id[$i]);
+                $option_arr['option_name'][$i] = $option->option_name;                                                  // 옵션명
+                $option_arr['option_price'][$i] = $option->price;                                                       // 옵션 가격
+                $option_total_cost += $option_arr['option_amount'][$i] * $option_arr['option_price'][$i];
             }
 
 
-            return view('client.support.index', compact('data', 'supporter_count', 'total_cost', 'date_diff', 'portfolio', 'option_id', 'option_arr'));
+            return view('client.support.index', compact('data', 'supporter_count', 'total_cost', 'date_diff', 'portfolio', 'option_id', 'option_arr', 'option_total_cost'));
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->error();

@@ -50,7 +50,8 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Project::find($id);
+        return view('client.mypage.project.partial.popup.reason',compact('data'));
     }
 
     /**

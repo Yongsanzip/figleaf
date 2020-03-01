@@ -1,281 +1,228 @@
 document.addEventListener('DOMContentLoaded',function () {
-    var error_msg = "오류입니다. 다시 입력해주세요.";
-    // 개요 -> 상품정보
-    document.getElementById('product_information').addEventListener('click', function () {
-        var title = document.getElementById('project_title').value;                 // 프로젝트 제목
-        var first_category = document.getElementById('first_category').value;       // 프로젝트 1차카테고리
-        var second_category = document.getElementById('second_category').value;     // 프로젝트 2차 카테고리
-        var summary = document.getElementById('project_summary').value;             // 프로젝트 개요
-        var main_file = document.getElementById('main_file').value;                 // 프로젝트 대표이미지
-        var success_count = document.getElementById('success_count').value;         // 프로젝트 성공개수
-        var file_check = document.getElementById('file_check').value;
+    // 텍스트에디터
+    var oEditors = [];
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors,
+        elPlaceHolder: "ir1",
+        sSkinURI: "../se2/SmartEditor2Skin.html",
+        fCreator: "createSEditor2",
+        fOnAppLoad: function () {
+            // document.getElementById("editor").setAttribute('style','display:none;')
+            $("iframe").css("width", "100%").css("height", "100%");
+        }
 
-        if (title.length > 30) {
-            alert('프로젝트 제목이 30자가 초과되었습니다');
-            valueCheck = false;
-        } else if (first_category === '0') {
-            alert('1차 카테고리를 선택해주세요.');
-            valueCheck = false;
-        } else if (second_category === '0') {
-            alert('2차 카테고리를 선택해주세요.');
-            valueCheck = false;
-        } else if (!main_file && !file_check) {
-            console.log(main_file);
-            alert('대표이미지(썸네일)은 필수입니다.');
-            valueCheck = false;
-        } else if (summary.length < 10) {
-            alert('프로젝트 개요는 최소 10자 이상입니다.');
-            valueCheck = false;
-        } else if (summary.length > 50) {
-            alert('프로젝트 개요가 50자가 초과되었습니다');
-            valueCheck = false;
-        } else if (success_count < 10) {
-            alert('프로젝트 성공 개수는 최소 10개 이상입니다.');
-            valueCheck = false;
+    });
+
+    var error_msg = "오류입니다. 다시 입력해주세요.";
+
+    // 개요
+    document.getElementById('summary').addEventListener('click', function () {
+        var tab_list = document.getElementsByClassName('tab-list');
+        for (var i = 0; i < tab_list.length; i++) {
+            var tab_on = tab_list[i].querySelector('.tab-on').id;
         }
-        else if (success_count > 30) {
-            alert('프로젝트 성공 개수는 최대 30개 까지만 설정 가능합니다');
+        console.log(tab_on)
+        var form_name = formName(tab_on);                                                           // 이전의 선택된 폼 id
+
+        var validation = projectValidation(form_name);
+        if (validation === false) {
             valueCheck = false;
-        } else { // submit
-            var form = new FormData($('#projectForm1')[0]);
-            var summary_tab = document.getElementById('summary');
-            formAjax('POST', false, '/project', form, function(e) {
-                alert(error_msg);
-                location.href = '/project/create';
-            }, function(data) {
-                var project_id = document.getElementsByClassName('projectId');
-                for (var i = 0; i < project_id.length; i++) {
-                    project_id[i].value = data;
-                }
-                summary_tab.classList.add('fill');
-            });
-            valueCheck = true;
+            return false;
         }
+
+        if (form_name == '#projectForm3') {
+            oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+        }
+        var form = new FormData($(form_name)[0]);
+        var summary_tab = document.getElementById(tab_on);
+        formAjax('POST', false, '/project', form, function(e) {
+            alert(error_msg);
+            location.href = '/project/create';}, function(data) {
+            var project_id = document.getElementsByClassName('projectId');
+            for (var i = 0; i < project_id.length; i++) {
+                project_id[i].value = data;
+            }
+            summary_tab.classList.add('fill');
+        });
+        valueCheck = true;
+    });
+
+    // 상품정보
+    document.getElementById('product_information').addEventListener('click', function () {
+        var tab_list = document.getElementsByClassName('tab-list');
+        for (var i = 0; i < tab_list.length; i++) {
+            var tab_on = tab_list[i].querySelector('.tab-on').id;
+        }
+        var form_name = formName(tab_on);                                                           // 이전의 선택된 폼 id
+
+        var validation = projectValidation(form_name);
+        if (validation === false) {
+            valueCheck = false;
+            return false;
+        }
+
+        if (form_name == '#projectForm3') {
+            oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+        }
+        var form = new FormData($(form_name)[0]);
+        var product_information = document.getElementById(tab_on);
+        formAjax('POST', false, '/project', form, function(e) {
+            alert(error_msg);
+            location.href = '/project/create';}, function(data) {
+            var project_id = document.getElementsByClassName('projectId');
+            for (var i = 0; i < project_id.length; i++) {
+                project_id[i].value = data;
+            }
+            product_information.classList.add('fill');
+        });
+        valueCheck = true;
     });
 
 
-    // 상품정보 -> 스토리텔링
+    // 스토리텔링
     document.getElementById('story_telling').addEventListener('click', function () {
-        var option_name = document.getElementsByClassName('option_name');                          // 옵션명
-        var option_price = document.getElementsByClassName('option_price');                        // 옵션가격
-        var size_category = document.getElementById('size_category').value;                         // 사이즈 카테고리
-        var information_water = document.getElementsByClassName('information_water');              // 물세탁
-        var information_bleach = document.getElementsByClassName('information_bleach');            // 표백
-        var information_iron = document.getElementsByClassName('information_iron');                // 다림질
-        var information_drycleaning = document.getElementsByClassName('information_drycleaning');  // 드라이클리닝
-        var information_dry = document.getElementsByClassName('information_dry');                  // 건조
-        var size = document.getElementById('size').value;                                           // 사이즈
-        var fabric = document.getElementsByClassName('fabric');                                    // 원단/재질
-        var fabric_ratio = document.getElementsByClassName('fabric_ratio');                        // 원단/재질 비율
-
-
-        // 1. 재질명은 있는데 비율이 없을 때
-        // 2. 비율은 있는데 재질명이 없을 때c
-
-        for (var i = 0; i <fabric.length; i++) {
-            if (!fabric[i].value || !fabric_ratio[i].value) {
-                alert('재질명 또는 비율을 입력해주세요.');
-                valueCheck = false;
-                return false;
-            }
+        var tab_list = document.getElementsByClassName('tab-list');
+        for (var i = 0; i < tab_list.length; i++) {
+            var tab_on = tab_list[i].querySelector('.tab-on').id;
         }
+        var form_name = formName(tab_on);                                                           // 이전의 선택된 폼 id
+        var validation = projectValidation(form_name);
 
-        for (var i = 0; i <fabric_ratio.length; i++) {
-            if (!fabric[i].value || !fabric_ratio[i].value) {
-                alert('재질명 또는 비율을 입력해주세요.');
-                valueCheck = false;
-                return false;
-            }
-        }
-
-        var num = 0;
-        for (var i = 0; i < information_water.length; i++) {
-            if (information_water[i].checked) {
-                num++;
-            }
-        }
-
-        for (var i = 0; i < information_bleach.length; i++) {
-            if (information_bleach[i].checked) {
-                num++;
-            }
-        }
-
-        for (var i = 0; i < information_iron.length; i++) {
-            if (information_iron[i].checked) {
-                num++;
-            }
-        }
-
-        for (var i = 0; i < information_drycleaning.length; i++) {
-            if (information_drycleaning[i].checked) {
-                num++;
-            }
-        }
-        for (var i = 0; i < information_dry.length; i++) {
-            if (information_dry[i].checked) {
-                num++;
-            }
-        }
-
-        if (num != 5) {
-            num = 0;
-            alert('취급정보는 필수 선택입니다.');
+        if (validation === false) {
             valueCheck = false;
             return false;
         }
 
-        for (var i = 0; i < option_name.length; i++) {
-            if (option_name[i].value.length > 30) {
-                alert('옵션명: 30자가 초과 되었습니다.');
-                valueCheck = false;
-                return false;
-            }
-            if (option_name[i].value.length > 0 && !option_price[i].value){
-                alert('옵션명 또는 가격을 입력해주세요.');
-                valueCheck = false;
-                return false;
-            }
-        }
-
-        for (var j = 0; j < option_price.length; j++){
-            if (option_price[j].value.length > 30) {
-                alert('옵션가격: 30자가 초과 되었습니다.');
-                valueCheck = false;
-                return false;
-            }
-            if (option_price[j].value > 0 && !option_name[j].value) {
-                alert('옵션명 또는 가격을 입력해주세요.');
-                valueCheck = false;
-                return false;
-            }
-        }
-
-
-        if (size_category === '0') {
-            alert('사이즈 카테고리를 선택해주세요.');
-            valueCheck = false;
-            return false;
-        } else if (!size) {
-            alert('사이즈는 필수 입력입니다.');
-            valueCheck = false;
-            return false;
-        } else if (!information_water || !information_bleach || !information_iron || !information_drycleaning || !information_dry) {
-            alert('취급정보를 선택해주세요.');
-            valueCheck = false;
-            return false;
-        }
-
-        // projectForm2
-        // document.getElementById('projectForm2').submit();
-        var form = new FormData($('#projectForm2')[0]);
-        var product_information = document.getElementById('product_information');
+        var form = new FormData($(form_name)[0]);
+        var story_telling = document.getElementById(tab_on);
         formAjax('POST', false, '/project', form, function(e) {
             alert(error_msg);
             location.href = '/project/create';
         }, function(data) {
-            product_information.classList.add('fill');
+            story_telling.classList.add('fill');
         });
         valueCheck = true;
 
     });
 
-    // 3. 스토리텔링
+    // 프로젝트 일정
+    document.getElementById('project_date').addEventListener('click', function () {
+        var tab_list = document.getElementsByClassName('tab-list');
+        for (var i = 0; i < tab_list.length; i++) {
+            var tab_on = tab_list[i].querySelector('.tab-on').id;
+        }
+        var form_name = formName(tab_on);                                                           // 이전의 선택된 폼 id
+        var validation = projectValidation(form_name);
 
-
-    // 프로젝트 일정 -> 디자이너/브랜드 소개
-    document.getElementById('introduction').addEventListener('click', function () {
-        var agree = document.getElementById('agree');
-        var deadline = document.getElementById('deadline').value;
-        var account_date = document.getElementById('account_date').value;
-        var delivery_date = document.getElementById('delivery_date').value;
-
-        if (!deadline || !account_date || !delivery_date) {
-            alert('프로젝트 일정은 필수 입력입니다.');
+        if (validation === false) {
             valueCheck = false;
-        } else if (agree.checked == false) {
-            alert('약관을 동의해주세요.');
-            valueCheck = false;
-        } else {
-            // projectForm4
-            var project_date = document.getElementById('project_date');
-            var form = new FormData($('#projectForm4')[0]);
-            formAjax('POST', false, '/project', form, function(e) {
-                alert(error_msg);
-                location.href = '/project/create';
-            }, function(data) {
+            return false;
+        }
+
+        var project_date = document.getElementById(tab_on);
+        if (form_name == '#projectForm3') {
+            oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+        }
+        var form = new FormData($(form_name)[0]);
+        formAjax('POST', false, '/project', form, function (e) {
+            alert('오류입니다. 처음부터 다시 시작해주세요.');
+            location.href = '/project/create';
+        }, function (data) {
+            if (data === 'fail') {
+                alert('이전 단계를 진행해주세요.')
+            } else {
                 project_date.classList.add('fill');
                 valueCheck = true;
-            });
-        }
+            }
+        });
     });
 
-    // 디자이너/브랜드 소래 -> 정산정보
-    document.getElementById('account').addEventListener('click', function () {
-        var designer_name = document.getElementById('designer_name').value;
-        var brand_name = document.getElementById('brand_name').value;
-        var email = document.getElementById('email').value;
-        var phone = document.getElementById('phone').value;
-        var homepage = document.getElementById('homepage').value;
-        var facebook = document.getElementById('facebook').value;
-        var instagram = document.getElementById('instagram').value;
-        var twitter = document.getElementById('twitter').value;
-
-        if (!designer_name || !brand_name  || !email || !phone || !homepage || !facebook || !instagram || !twitter) {
-            alert('디자이너/브랜드 소개는 필수 입력입니다.');
-            valueCheck = false;
-        } else {
-            var introduction = document.getElementById('introduction');
-            var form = new FormData($('#projectForm5')[0]);
-            formAjax('POST', false, '/project', form, function(e) {
-                alert(error_msg);
-                location.href = '/project/create';
-            }, function(data) {
-                introduction.classList.add('fill');
-                valueCheck = true;
-            });
+    // 디자이너/브랜드 소개
+    document.getElementById('introduction').addEventListener('click', function () {
+        var tab_list = document.getElementsByClassName('tab-list');
+        for (var i = 0; i < tab_list.length; i++) {
+            var tab_on = tab_list[i].querySelector('.tab-on').id;
         }
+        var form_name = formName(tab_on);                                                           // 이전의 선택된 폼 id
+        var validation = projectValidation(form_name);
+
+        if (validation === false) {
+            valueCheck = false;
+            return false;
+        }
+
+        // projectForm4
+        if (form_name == '#projectForm3') {
+            oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+        }
+        var introduction = document.getElementById(tab_on);
+        var form = new FormData($(form_name)[0]);
+        formAjax('POST', false, '/project', form, function(e) {
+            alert(error_msg);
+            location.href = '/project/create';}, function(data) {
+            introduction.classList.add('fill');
+            valueCheck = true;
+        });
+
+    });
+
+    // 정산정보
+    document.getElementById('account').addEventListener('click', function () {
+        var tab_list = document.getElementsByClassName('tab-list');
+        for (var i = 0; i < tab_list.length; i++) {
+            var tab_on = tab_list[i].querySelector('.tab-on').id;
+        }
+        var form_name = formName(tab_on);                                                           // 이전의 선택된 폼 id
+        var validation = projectValidation(form_name);
+
+        if (validation === false) {
+            valueCheck = false;
+            return false;
+        }
+
+        if (form_name == '#projectForm3') {
+            oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+        }
+        var account = document.getElementById(tab_on);
+        var form = new FormData($(form_name)[0]);
+        formAjax('POST', false, '/project', form, function(e) {
+            alert(error_msg);
+            location.href = '/project/create';}, function(data) {
+            account.classList.add('fill');
+            valueCheck = true;
+        });
+
     });
 
     // 검토요청하기
     document.getElementById('store_btn').addEventListener('click', function () {
-        var company_radio = document.getElementById('company_radio');
-        var company_number = document.getElementById('company_number').value;
-        var company_file = document.getElementById('company_file').value;
-        var bank_file = document.getElementById('bank_file').value;
-        var account_email = document.getElementById('account_email').value;
-        var account_phone = document.getElementById('account_phone').value;
-        var company_file_check = document.getElementById('company_file_check').value;
-        var bank_file_check = document.getElementById('bank_file_check').value;
+        var tab_list = document.getElementsByClassName('tab-list');
+        for (var i = 0; i < tab_list.length; i++) {
+            var tab_on = tab_list[i].querySelector('.tab-on').id;
+        }
+        var form_name = formName(tab_on);                                                           // 이전의 선택된 폼 id
+        var validation = projectValidation(form_name);
 
-        if (company_radio.checked === true) {
-            if (!company_number) {
-                alert('사업자등록번호를 입력해주세요.');
-                 return false;
-            } else if (!company_file && !company_file_check) {
-                alert('사업자등록증을 등록해주세요.');
-                return false;
-            }
+        if (validation === false) {
+            valueCheck = false;
+            return false;
         }
 
-        if (!bank_file && !bank_file_check) {
-            alert('통장사본을 등록해주세요.');
-        } else if (!account_email || !account_phone) {
-            alert('이메일과 전화번호는 필수 입력입니다.')
-        } else {
-            if (confirm('관리자에게 검토를 요청하시겠습니까?')) {
-                var account = document.getElementById('account');
-                var form = new FormData($('#projectForm6')[0]);
-                formAjax('POST', false, '/project', form, function(e) {
-                    alert(error_msg);
-                    location.href = '/project/create';
-                }, function(data) {
-                    account.setAttribute("class", "fill");
-                    alert('완료되었습니다.');
-                    location.href = '/project/create';
-                    valueCheck = true;
-                });
+        if (confirm('관리자에게 검토를 요청하시겠습니까?')) {
+            if (form_name == '#projectForm3') {
+                oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
             }
+            var store = document.getElementById(tab_on);
+            var form = new FormData($(form_name)[0]);
+            var project_id = document.getElementsByClassName('projectId')[0].value;
+            formAjax('POST', false, '/project', form, function(e) {
+                alert(error_msg);
+                location.href = '/project/create';}, function(data) {
+                store.setAttribute("class", "fill");
+                alert('완료되었습니다.');
+                location.href = '/mypage_project';
+                valueCheck = true;
+            });
         }
 
     });
@@ -549,3 +496,251 @@ function fnUploadFile(fileInput){
    var fileSize = fileInput.files[0].size/1024;
    console.log(fileSize);
 }
+
+
+
+/* form 찾기 */
+var formName = function (tab_on) {
+    var form;
+    switch (tab_on) {
+        case 'summary':
+            form = '#projectForm1';
+            break;
+        case 'product_information':
+            form = '#projectForm2';
+            break;
+        case 'story_telling':
+            form = '#projectForm3';
+            break;
+        case 'project_date':
+            form = '#projectForm4';
+            break;
+        case 'introduction':
+            form = '#projectForm5';
+            break;
+        case 'account':
+            form = '#projectForm6';
+            break;
+        default :
+            form = '#projectForm1';
+            break;
+    }
+
+    return form;
+};
+
+
+/* 상품정보 validation */
+var projectValidation = function (form_name) {
+    if (form_name === '#projectForm1') {
+        var title = document.getElementById('project_title').value;                 // 프로젝트 제목
+        var first_category = document.getElementById('first_category').value;       // 프로젝트 1차카테고리
+        var second_category = document.getElementById('second_category').value;     // 프로젝트 2차 카테고리
+        var summary = document.getElementById('project_summary').value;             // 프로젝트 개요
+        var main_file = document.getElementById('main_file').value;                 // 프로젝트 대표이미지
+        var success_count = document.getElementById('success_count').value;         // 프로젝트 성공개수
+        var file_check = document.getElementById('file_check').value;
+
+        if (title.length > 30) {
+            alert('프로젝트 제목이 30자가 초과되었습니다');
+            return false;
+        } else if (first_category === '0') {
+            alert('1차 카테고리를 선택해주세요.');
+            return false;
+        } else if (second_category === '0') {
+            alert('2차 카테고리를 선택해주세요.');
+            return false;
+        } else if (!main_file && !file_check) {
+            alert('대표이미지(썸네일)은 필수입니다.');
+            return false;
+        } else if (summary.length < 10) {
+            alert('프로젝트 개요는 최소 10자 이상입니다.');
+            return false;
+        } else if (summary.length > 50) {
+            alert('프로젝트 개요가 50자가 초과되었습니다');
+            return false;
+        } else if (success_count < 10) {
+            alert('프로젝트 성공 개수는 최소 10개 이상입니다.');
+            return false;
+        }
+        else if (success_count > 30) {
+            alert('프로젝트 성공 개수는 최대 30개 까지만 설정 가능합니다');
+            return false;
+        }
+        return true;
+    } else if (form_name === '#projectForm2') {
+        var option_name = document.getElementsByClassName('option_name');                          // 옵션명
+        var option_price = document.getElementsByClassName('option_price');                        // 옵션가격
+        var size_category = document.getElementById('size_category').value;                         // 사이즈 카테고리
+        var information_water = document.getElementsByClassName('information_water');              // 물세탁
+        var information_bleach = document.getElementsByClassName('information_bleach');            // 표백
+        var information_iron = document.getElementsByClassName('information_iron');                // 다림질
+        var information_drycleaning = document.getElementsByClassName('information_drycleaning');  // 드라이클리닝
+        var information_dry = document.getElementsByClassName('information_dry');                  // 건조
+        var size = document.getElementById('size').value;                                           // 사이즈
+        var fabric = document.getElementsByClassName('fabric');                                    // 원단/재질
+        var fabric_ratio = document.getElementsByClassName('fabric_ratio');                        // 원단/재질 비율
+
+
+        // 1. 재질명은 있는데 비율이 없을 때
+        // 2. 비율은 있는데 재질명이 없을 때
+
+        for (var i = 0; i <fabric.length; i++) {
+            if (!fabric[i].value || !fabric_ratio[i].value) {
+                alert('재질명 또는 비율을 입력해주세요.');
+                // valueCheck = false;
+                return false;
+            }
+        }
+
+        for (var i = 0; i <fabric_ratio.length; i++) {
+            if (!fabric[i].value || !fabric_ratio[i].value) {
+                alert('재질명 또는 비율을 입력해주세요.');
+                // valueCheck = false;
+                return false;
+            }
+        }
+
+        var num = 0;
+        for (var i = 0; i < information_water.length; i++) {
+            if (information_water[i].checked) {
+                num++;
+            }
+        }
+
+        for (var i = 0; i < information_bleach.length; i++) {
+            if (information_bleach[i].checked) {
+                num++;
+            }
+        }
+
+        for (var i = 0; i < information_iron.length; i++) {
+            if (information_iron[i].checked) {
+                num++;
+            }
+        }
+
+        for (var i = 0; i < information_drycleaning.length; i++) {
+            if (information_drycleaning[i].checked) {
+                num++;
+            }
+        }
+        for (var i = 0; i < information_dry.length; i++) {
+            if (information_dry[i].checked) {
+                num++;
+            }
+        }
+
+        if (num != 5) {
+            num = 0;
+            alert('취급정보는 필수 선택입니다.');
+            // valueCheck = false;
+            return false;
+        }
+
+        for (var i = 0; i < option_name.length; i++) {
+            if (option_name[i].value.length > 30) {
+                alert('옵션명: 30자가 초과 되었습니다.');
+                // valueCheck = false;
+                return false;
+            }
+            if (option_name[i].value.length > 0 && !option_price[i].value){
+                alert('옵션명 또는 가격을 입력해주세요.');
+                // valueCheck = false;
+                return false;
+            }
+        }
+
+        for (var j = 0; j < option_price.length; j++){
+            if (option_price[j].value.length > 30) {
+                alert('옵션가격: 30자가 초과 되었습니다.');
+                // valueCheck = false;
+                return false;
+            }
+            if (option_price[j].value > 0 && !option_name[j].value) {
+                alert('옵션명 또는 가격을 입력해주세요.');
+                // valueCheck = false;
+                return false;
+            }
+        }
+
+
+        if (size_category === '0') {
+            alert('사이즈 카테고리를 선택해주세요.');
+            // valueCheck = false;
+            return false;
+        } else if (!size) {
+            alert('사이즈는 필수 입력입니다.');
+            // valueCheck = false;
+            return false;
+        } else if (!information_water || !information_bleach || !information_iron || !information_drycleaning || !information_dry) {
+            alert('취급정보를 선택해주세요.');
+            // valueCheck = false;
+            return false;
+        }
+
+        return true;
+    } else if (form_name === '#projectForm3') {
+        return true;
+    } else if (form_name === '#projectForm4') {
+        var agree = document.getElementById('agree');
+        var deadline = document.getElementById('deadline').value;
+        var account_date = document.getElementById('account_date').value;
+        var delivery_date = document.getElementById('delivery_date').value;
+
+        if (!deadline || !account_date || !delivery_date) {
+            alert('프로젝트 일정은 필수 입력입니다.');
+            return false;
+        } else if (agree.checked == false) {
+            alert('약관을 동의해주세요.');
+            return false;
+        }
+        return true;
+    } else if (form_name === '#projectForm5') {
+        var designer_name = document.getElementById('designer_name').value;
+        var brand_name = document.getElementById('brand_name').value;
+        var email = document.getElementById('email').value;
+        var phone = document.getElementById('phone').value;
+        var homepage = document.getElementById('homepage').value;
+        var facebook = document.getElementById('facebook').value;
+        var instagram = document.getElementById('instagram').value;
+        var twitter = document.getElementById('twitter').value;
+
+        if (!designer_name || !brand_name  || !email || !phone || !homepage || !facebook || !instagram || !twitter) {
+            alert('디자이너/브랜드 소개는 필수 입력입니다.');
+            valueCheck = false;
+            return false;
+        } else {
+            return true;
+        }
+
+    } else if (form_name === '#projectForm6') {
+        var company_radio = document.getElementById('company_radio');
+        var company_number = document.getElementById('company_number').value;
+        var company_file = document.getElementById('company_file').value;
+        var bank_file = document.getElementById('bank_file').value;
+        var account_email = document.getElementById('account_email').value;
+        var account_phone = document.getElementById('account_phone').value;
+        var company_file_check = document.getElementById('company_file_check').value;
+        var bank_file_check = document.getElementById('bank_file_check').value;
+
+        if (company_radio.checked === true) {
+            if (!company_number) {
+                alert('사업자등록번호를 입력해주세요.');
+                return false;
+            } else if (!company_file && !company_file_check) {
+                alert('사업자등록증을 등록해주세요.');
+                return false;
+            }
+        }
+
+        if (!bank_file && !bank_file_check) {
+            alert('통장사본을 등록해주세요.');
+            return false;
+        } else if (!account_email || !account_phone) {
+            alert('이메일과 전화번호는 필수 입력입니다.')
+            return false;
+        }
+        return true;
+    }
+};

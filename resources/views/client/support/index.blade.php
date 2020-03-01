@@ -7,7 +7,7 @@
     <main class="container">
         <div class="inner">
             <div class="con-project-view">
-                @include('client.project.partial.show.header')
+                @include('client.project.partial.layouts.header')
                 {{--<h2 class="project-headline">
                     project
                 </h2>
@@ -216,7 +216,7 @@
                             <div class="sponsor-total">
                                 <div class="total">
                                     <p class="total-caption">후원금액</p>
-                                    <p class="total-price">67,850</p>
+                                    <p class="total-price">{{ number_format($option_total_cost) }}</p>
                                     <label class="checkbox-wrap">
                                         <input type="checkbox">
                                         <p>위 사항을 모두 확인 하였으며, 구매 진행에 동의합니다.</p>

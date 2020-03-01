@@ -76,10 +76,18 @@ function fnCancelCm(e){
  *  author      : minyeong kim
  ***********************************************************/
 function fnAddOption(e){
-    //console.log(e.value);
     var option_name = e.options[document.getElementById("select_option").selectedIndex].text;
     var option_price = $(e).find(':selected').data("value");
     var option_id = e.options[document.getElementById("select_option").selectedIndex].value;
+
+    var option_exist = document.getElementsByClassName('optionId');
+    var option_exist_amount = document.getElementsByClassName('option-amount');
+    for (var i = 0; i < option_exist.length; i++) {
+        if (option_exist[i].value === option_id) {
+            option_exist_amount[i].value++;
+            return false;
+        }
+    }
 
     var optionList = document.getElementsByClassName('option-list')[0];
     var optionItem = '<li class="option-item">' +
