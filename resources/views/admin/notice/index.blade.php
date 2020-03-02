@@ -163,7 +163,7 @@
             <!-- //pagination -->
 
             <div class="btn-wrap">
-                <a href="" class="btn-black">작성하기</a>
+                <a href="{{route('admin_notice.create')}}" class="btn-black">작성하기</a>
             </div>
 
         </div>
