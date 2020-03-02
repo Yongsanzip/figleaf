@@ -14,9 +14,13 @@
             </div>
             <!-- //headline -->
 
-            <form action="">
+            <form action="{{route('admin_notice.store')}}" method="POST">
+                @csrf
                 <div class="row">
-                    <input type="text" class="text-field w-100" placeholder="제목을 입력해주세요" autofocus>
+                    <input type="text" name="title" class="text-field w-100" placeholder="제목을 입력해주세요" autofocus>
+                    <label for="up_fix" class="checkbox-group">상단고정
+                        <input type="checkbox" name="up_fix" id="up_fix">
+                    </label>
                 </div>
 
                 <!-- text editor -->
@@ -27,7 +31,7 @@
                 <!-- //text editor -->
                 <div class="row mt-20 text-right">
                     <button class="btn-white btn-m w-100px">삭제</button>
-                    <button class="btn-black btn-m w-100px">등록</button>
+                    <button type="submit" class="btn-black btn-m w-100px">등록</button>
                 </div>
             </form>
         </div>

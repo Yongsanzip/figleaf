@@ -2,87 +2,155 @@
 
 namespace App\Http\Controllers\Admin\Notice;
 
+use App\Notice;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class NoticeController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     * @description Admin 공지사항
-     * @url : /admin_notice
-     * @return view
-     */
-    public function index()
-    {
-        return view('admin.notice.index');
+class NoticeController {
+
+    /************************************************************************
+     * Construct
+     * @description :
+     ************************************************************************/
+    public function __construct() {
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @description Admin 공지사항 생성
-     * @url : /admin_notice/create
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.notice.partial.create.index');
+    /************************************************************************
+     * Display main view
+     * @description : 관리자 - 공지사항목록
+     * @url         : /admin_notice
+     * @method      : GET
+     * @return      : view
+     ************************************************************************/
+    public function index(){
+        try {
+            $datas = Notice::orderBy('created_at','DESC')->paginate(15);
+            return view('admin.notice.index',compact('datas'));
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    /************************************************************************
+     * Display create view
+     * @description : 관리자 - 공지사항 생성페이지
+     * @url         : /admin_notice/create
+     * @method      : GET
+     * @return      : view
+     ************************************************************************/
+    public function create(){
+        try {
+            return view('admin.notice.partial.create.index');
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
-    /**
-     * Display the specified resource.
-     * @description Admin 공지사항 - 상세보기
-     * @url : /admin_notice/{$id}
-     * @param  int  $id
-     * @return view
-     */
-    public function show($id)
-    {
-        return view('admin.notice.partial.show.index');
+    /************************************************************************
+     * Display create action
+     * @description : 관리자 - 공지사항 생성액션
+     * @url         : /admin_notice
+     * @method      : POST
+     * @return      : redirect
+     ************************************************************************/
+    public function store(Request $request){
+//        try {
+            Notice::create([
+                'title' =>$request->title,
+                'content'=>$request['notice-trixFields']['content'],
+                'up_fix'=>$request->up_fix ? 1 : 0,
+                'user_id'=>auth()->user()->id,
+            ]);
+            //return redirect(route('admin_notice.index'));
+//        } catch (\Exception $e){
+//            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+//            flash($msg)->error();
+//            // return redirect(route('url'));
+//            return back();
+//        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    /************************************************************************
+     * Display detail view
+     * @description : 관리자 - 공지사항 상새
+     * @url         : /admin_notice/{id}
+     * @method      : GET
+     * @return      : view
+     ************************************************************************/
+    public function show($id){
+        try {
+            $datas = Notice::find($id);
+            $datas->hit +=1;
+            $datas->save();
+            return view('admin.notice.partial.show.index',compact('datas'));
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    /************************************************************************
+     * Display edit view
+     * @description : 설명1 - 설명2
+     * @url         : /url/{id}/edit
+     * @method      : /GET
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function edit($id) {
+        try {
+            $datas = Notice::find($id);
+            return view('admin.notice.partial.edit.index',compact('datas'));
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    /************************************************************************
+     * Display update action
+     * @description : 설명1 - 설명2
+     * @url         : /url/{id}
+     * @method      : PUT
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function update(Request $request, $id){
+        try {
+            return  redirect(route('admin_note.show',['id'=>$id]));
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
+    }
+
+    /************************************************************************
+     * Display destroy action
+     * @description : 설명 1 설명
+     * @url         : /url/{id}
+     * @method      : DELETE
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function destroy($id) {
+        try {
+            Notice::destroy($id);
+            return redirect(route('admin_notice.index'));
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 }

@@ -49,116 +49,27 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>41</td>
-                    <td class="text-left">오픈기념 이벤트 안내</td>
-                    <td>상단고정</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>40</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>39</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>38</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>37</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>36</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>35</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>34</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>33</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>32</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>31</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>30</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>29</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>28</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-                <tr>
-                    <td>27</td>
-                    <td class="text-left">공지사항 안내드립니다.</td>
-                    <td>-</td>
-                    <td>2019-00-00</td>
-                </tr>
-
+                @if(count($datas) > 0)
+                    @foreach($datas as $data)
+                        <tr onclick="fn_link({{$data->id}})" style="cursor: pointer;">
+                            <td></td>
+                            <td>{{ $data->title}}</td>
+                            <td>{{ $data->up_fix == 1 ? '고정' : '미고정'}}</td>
+                            <td>{{ $data->created_at->format('Y-m-d')}}</td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="4">공지사항이 없습니다</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
             <!-- //table type1 -->
 
             <!-- paginiation -->
             <nav class="pagination-wrap">
-                <ul class="pagination">
-                    <li><a> preview </a></li>
-                    <li class="active"><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>4</a></li>
-                    <li><a>5</a></li>
-                    <li><a>6</a></li>
-                    <li><a>7</a></li>
-                    <li><a>8</a></li>
-                    <li><a>9</a></li>
-                    <li><a> next </a></li>
-                </ul>
+                {{$datas->links()}}
             </nav>
             <!-- //pagination -->
 
@@ -169,5 +80,9 @@
         </div>
         <!-- //contesnts-inner -->
     </div>
-
+    <script>
+        var fn_link = function(el){
+            document.location.href='/admin_notice/'+el;
+        }
+    </script>
 @endsection
