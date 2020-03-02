@@ -39,40 +39,6 @@
                     <h2 class="category-title">collection</h2>
                 </div>
 
-
-                <ul class="category-detail-list">
-                    <li class="on">
-                        <a href="">view all</a>
-                    </li>
-                    <li>
-                        <a href="">outer</a>
-                    </li>
-                    <li>
-                        <a href="">top</a>
-                    </li>
-                    <li>
-                        <a href="">t-shirts/handie</a>
-                    </li>
-                    <li>
-                        <a href="">pants</a>
-                    </li>
-                    <li>
-                        <a href="">sports</a>
-                    </li>
-                    <li>
-                        <a href="">dress</a>
-                    </li>
-                    <li>
-                        <a href="">skirts</a>
-                    </li>
-                    <li>
-                        <a href="">shoes</a>
-                    </li>
-                    <li>
-                        <a href="">accessories</a>
-                    </li>
-                </ul>
-
                 <div class="card-list">
                     <!-- card * 20 -->
                     <div class="card">

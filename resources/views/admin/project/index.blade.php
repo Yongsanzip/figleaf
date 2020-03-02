@@ -82,13 +82,9 @@
 
             <!-- paginiation -->
             <nav class="pagination-wrap">
-                <ul class="pagination">
-                     @if($datas->count())
-                        <div class="text-center">
-                            {!! $datas->appends(request()->except('page'))->render() !!}
-                        </div>
-                    @endif
-                </ul>
+                @if($datas->count())
+                        {!! $datas->appends(request()->except('page'))->render() !!}
+                @endif
             </nav>
             <!-- //pagination -->
 

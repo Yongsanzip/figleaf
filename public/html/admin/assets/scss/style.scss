@@ -9,6 +9,16 @@ $color-main:#99a759;
 $color-bg:#F4F5F6;
 $color-input:#ecedef;
 
+a{
+    &:hover , &:focus{
+        color:inherit;
+        text-decoration: inherit;
+    }
+}
+
+.row{
+    margin: 0;
+}
 
 #wrap{
 	min-width:1280px;
@@ -56,6 +66,7 @@ $color-input:#ecedef;
 	transition: background-color 0.3s;
 	&:hover{
 		background-color:$color-gray-01;
+        color:white;
 	}
 }
 .btn-s{
@@ -193,6 +204,8 @@ $color-input:#ecedef;
 .container{
 	width:100%;
 	font-size:0;
+    padding:0;
+    margin: 0;
 	.contents-wrap{
 		display: inline-block;
 		width:calc(100% - 181px);
@@ -357,7 +370,7 @@ $color-input:#ecedef;
 					border-left: 6px solid transparent;
 					border-right: 6px solid transparent;
 					border-top: 6px solid white;
-					right:8px;
+					right:12px;
 					top:18px;
 				}
 			}
@@ -621,7 +634,7 @@ $color-input:#ecedef;
 				font-size:0;
 				a{
 					padding:0;
-					width:48px;
+					width:32px;
 				}
 				a::after {
 					content: '';
@@ -643,7 +656,7 @@ $color-input:#ecedef;
 				border-right:none;
 				a {
 					padding: 0;
-					width: 48px;
+					width: 32px;
 				}
 				a::after {
 					content: '';
@@ -667,6 +680,8 @@ $color-input:#ecedef;
 			}
 			a{
 				color:white;
+                background-color:#474747;
+                border-color:#474747;
 			}
 		}
 	}
@@ -714,6 +729,8 @@ $color-input:#ecedef;
 	text-align: center;
 	padding:3px 8px;
 	min-width:60px;
+    border-radius: 0;
+    line-height: normal;
 }
 .badge-green{
 	background:#99a759;
@@ -1278,6 +1295,7 @@ $color-input:#ecedef;
 			border-bottom:1px solid #dadce0;
 			padding-bottom:8px;
 			margin-top:24px;
+            min-height:36px;
 		}
 		.contact-sns{
 			font-size:18px;

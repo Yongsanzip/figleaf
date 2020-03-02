@@ -1,3 +1,8 @@
+a:hover, a:focus {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 .inner {
   max-width: 1200px;
   padding: 0 10px;
@@ -6,6 +11,9 @@
 
 .container {
   min-height: 640px;
+  width: auto;
+  padding: 0;
+  margin: 0;
 }
 
 /* header */
@@ -74,6 +82,7 @@
   background-color: transparent;
   -webkit-appearance: none;
   appearance: none;
+  outline: none;
 }
 .header .menu-user {
   display: inline-block;
@@ -121,6 +130,9 @@
 .header .category-list .category > li > a {
   padding: 13px 0;
 }
+.header .category-list .category > li > a:hover {
+  color: #d1e65d;
+}
 .header .category-list .category > li:hover {
   color: #d1e65d;
 }
@@ -160,6 +172,9 @@
   text-align: center;
   z-index: 11;
   top: 0;
+}
+.header .search .inner {
+  height: 100%;
 }
 .header .search .search-box {
   margin: 48px auto;
@@ -774,6 +789,8 @@
   padding: 3px 12px;
   text-transform: uppercase;
   min-width: 56px;
+  border-radius: 0;
+  line-height: normal;
 }
 
 .badge-orange {
@@ -864,6 +881,7 @@
   line-height: 16px;
   vertical-align: top;
   margin-left: 2px;
+  margin-top: 3px;
 }
 
 /* pagination */

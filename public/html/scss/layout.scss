@@ -3,6 +3,13 @@ $color-light:#d1e65d;
 $commonPath: '../images/common';
 $cleaningPath: '../images/cleaning';
 
+a{
+    &:hover , &:focus{
+        color:inherit;
+        text-decoration: inherit;
+    }
+}
+
 .inner{
     max-width: 1200px;
     padding:0 10px;
@@ -11,7 +18,11 @@ $cleaningPath: '../images/cleaning';
 
 .container{
     min-height: 640px;
+    width:auto;
+    padding:0;
+    margin: 0;
 }
+
 
 /* header */
 .header{
@@ -73,6 +84,7 @@ $cleaningPath: '../images/cleaning';
             background-color:transparent;
             -webkit-appearance: none;
             appearance: none;
+            outline: none;
         }
     }
     .menu-user{
@@ -118,6 +130,9 @@ $cleaningPath: '../images/cleaning';
                 letter-spacing: 0.5px;
                 >a{
                     padding:13px 0;
+                    &:hover{
+                        color:$color-light;
+                    }
                 }
                 &:hover{
                     color:$color-light;
@@ -163,6 +178,9 @@ $cleaningPath: '../images/cleaning';
         text-align: center;
         z-index: 11;
         top:0;
+        .inner{
+            height:100%;
+        }
         .search-box{
             margin: 48px auto;
             max-width: 600px;
@@ -780,6 +798,8 @@ $cleaningPath: '../images/cleaning';
     padding:3px 12px;
     text-transform: uppercase;
     min-width: 56px;
+    border-radius: 0;
+    line-height: normal;
 }
 .badge-orange{
     background: #ffa83b;
@@ -860,6 +880,7 @@ $cleaningPath: '../images/cleaning';
         line-height: 16px;
         vertical-align: top;
         margin-left:2px;
+        margin-top: 3px;
     }
 }
 

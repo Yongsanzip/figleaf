@@ -1,3 +1,12 @@
+a:hover, a:focus {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.row {
+  margin: 0;
+}
+
 #wrap {
   min-width: 1280px;
   min-height: 1024px;
@@ -46,6 +55,7 @@
 }
 .btn-black:hover {
   background-color: #181818;
+  color: white;
 }
 
 .btn-s {
@@ -170,6 +180,8 @@
 .container {
   width: 100%;
   font-size: 0;
+  padding: 0;
+  margin: 0;
 }
 .container .contents-wrap {
   display: inline-block;
@@ -337,7 +349,7 @@
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-top: 6px solid white;
-  right: 8px;
+  right: 12px;
   top: 18px;
 }
 .table-data tbody tr {
@@ -579,7 +591,7 @@
 }
 .pagination-wrap .pagination li:first-child a {
   padding: 0;
-  width: 48px;
+  width: 32px;
 }
 .pagination-wrap .pagination li:first-child a::after {
   content: "";
@@ -600,7 +612,7 @@
 }
 .pagination-wrap .pagination li:last-child a {
   padding: 0;
-  width: 48px;
+  width: 32px;
 }
 .pagination-wrap .pagination li:last-child a::after {
   content: "";
@@ -623,6 +635,8 @@
 }
 .pagination-wrap .pagination .active a {
   color: white;
+  background-color: #474747;
+  border-color: #474747;
 }
 
 /* text-contents */
@@ -663,6 +677,8 @@
   text-align: center;
   padding: 3px 8px;
   min-width: 60px;
+  border-radius: 0;
+  line-height: normal;
 }
 
 .badge-green {
@@ -1260,6 +1276,7 @@
   border-bottom: 1px solid #dadce0;
   padding-bottom: 8px;
   margin-top: 24px;
+  min-height: 36px;
 }
 .portfolio-contact .contact-form .contact-sns {
   font-size: 18px;
