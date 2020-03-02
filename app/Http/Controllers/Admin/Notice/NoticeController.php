@@ -68,7 +68,7 @@ class NoticeController {
                 'up_fix'=>$request->up_fix ? 1 : 0,
                 'user_id'=>auth()->user()->id,
             ]);
-            //return redirect(route('admin_notice.index'));
+            return redirect(route('admin_notice.index'));
 //        } catch (\Exception $e){
 //            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
 //            flash($msg)->error();
@@ -100,13 +100,14 @@ class NoticeController {
 
     /************************************************************************
      * Display edit view
-     * @description : 설명1 - 설명2
-     * @url         : /url/{id}/edit
+     * @description : 관리자 - 공지사항 수정 페이지
+     * @url         : /admin_notice/{id}/edit
      * @method      : /GET
      * @return      : view , data , msg ...
      ************************************************************************/
     public function edit($id) {
         try {
+            error_log(1);
             $datas = Notice::find($id);
             return view('admin.notice.partial.edit.index',compact('datas'));
         } catch (\Exception $e){

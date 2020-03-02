@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="referrer" content="no-referrer" />
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('scss/reset.css')}}">
     <link rel="stylesheet" href="{{asset('scss/layout.css')}}">
     <link rel="stylesheet" href="{{asset('scss/client.css')}}">
@@ -18,7 +19,6 @@
     <script src="{{asset('js/includeHTML.js')}}"></script>
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js')}}"></script>
-    @trixassets
     <title>Figleaf</title>
 </head>
 <body>

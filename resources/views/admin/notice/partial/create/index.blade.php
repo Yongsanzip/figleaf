@@ -3,7 +3,12 @@
 ?>
 @extends('admin.layouts.app')
 @section('content')
-
+    <!-- include libraries(jQuery, bootstrap) -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <!-- include summernote css/js-->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
     <div class="contents-wrap">
         <!-- contesnts-inner -->
         <div class="contents-inner">
@@ -26,7 +31,7 @@
                 <!-- text editor -->
                 <div class="row mt-20">
                     @csrf
-                    @trix(\App\Notice::class, 'content')
+                    <textarea name="" id="summernote" cols="30" rows="10"></textarea>
                 </div>
                 <!-- //text editor -->
                 <div class="row mt-20 text-right">
@@ -37,5 +42,15 @@
         </div>
         <!-- //contesnts-inner -->
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                height: 300,                 // set editor height
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                focus: true                  // set focus to editable area after initializing summernote
+            });
+        });
 
+    </script>
 @endsection
