@@ -51,6 +51,5 @@
                 focus: true                  // set focus to editable area after initializing summernote
             });
         });
-
     </script>
 @endsection
