@@ -31,7 +31,7 @@
                 <!-- text editor -->
                 <div class="row mt-20">
                     @csrf
-                    <textarea name="" id="summernote" cols="30" rows="10"></textarea>
+                    <textarea name="contents" id="summernote" cols="30" rows="10"></textarea>
                 </div>
                 <!-- //text editor -->
                 <div class="row mt-20 text-right">

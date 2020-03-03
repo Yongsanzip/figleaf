@@ -19,7 +19,7 @@ class CreateNoticesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned()->comment('유저 id');
             $table->string('title')->comment('제목');
-            $table->text('content')->comment('내용');
+            $table->text('content')->nullable()->comment('내용');
             $table->integer('hit')->unsigned()->default(0)->comment('조회수');
             $table->tinyInteger('up_fix')->unsigned()->comment('상단고정여부(0미고정 1고정)');
             $table->timestamps();

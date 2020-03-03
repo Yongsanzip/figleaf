@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Notice;
 
 use App\Notice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Controllers\Controller;
 
 class NoticeController {
@@ -61,20 +63,39 @@ class NoticeController {
      * @return      : redirect
      ************************************************************************/
     public function store(Request $request){
-//        try {
-            Notice::create([
+        try {
+        $dom = new \DOMDocument();
+        $dom->loadHTML($request->contents, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+        foreach($images as $k => $img) {
+            $src = $img->getAttribute('src');
+            if (preg_match('/data:image/', $src)) {
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                $mimetype = $groups['mime'];
+                $filename = uniqid();
+                $filepath = "images/notice/$filename.$mimetype";
+                $image = Image::make($src)->encode($mimetype, 100);                                              // encode file to the specified mimetype
+                Storage::disk('public')->put($filepath,$image->encode());
+                $new_src = asset('storage/'.$filepath);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+            }
+        }
+
+
+           $notice =  Notice::create([
                 'title' =>$request->title,
-                'content'=>$request['notice-trixFields']['content'],
+                'content'=>$dom->saveHTML(),
                 'up_fix'=>$request->up_fix ? 1 : 0,
                 'user_id'=>auth()->user()->id,
             ]);
             return redirect(route('admin_notice.index'));
-//        } catch (\Exception $e){
-//            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-//            flash($msg)->error();
-//            // return redirect(route('url'));
-//            return back();
-//        }
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
     /************************************************************************
