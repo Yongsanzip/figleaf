@@ -3,12 +3,7 @@
 ?>
 @extends('admin.layouts.app')
 @section('content')
-    <!-- include libraries(jQuery, bootstrap) -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-    <!-- include summernote css/js-->
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+    @include('common.summernote')
     <div class="contents-wrap">
         <!-- contesnts-inner -->
         <div class="contents-inner">
@@ -19,10 +14,10 @@
             </div>
             <!-- //headline -->
 
-            <form action="{{route('admin_notice.store')}}" method="POST">
+            <form action="{{route('admin_notice.store')}}" method="POST" onsubmit="return fn_notice_submit(this);">
                 @csrf
                 <div class="row">
-                    <input type="text" name="title" class="text-field w-100" placeholder="제목을 입력해주세요" autofocus>
+                    <input type="text" name="title" class="text-field w-100 required" data-title="제목" placeholder="제목을 입력해주세요" autofocus>
                     <label for="up_fix" class="checkbox-group">상단고정
                         <input type="checkbox" name="up_fix" id="up_fix">
                     </label>
@@ -48,8 +43,35 @@
                 height: 300,                 // set editor height
                 minHeight: null,             // set minimum height of editor
                 maxHeight: null,             // set maximum height of editor
-                focus: true                  // set focus to editable area after initializing summernote
+                focus: true,                 // set focus to editable area after initializing summernote
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['insert', ['link', 'picture']],
+                ],
+                popover: {
+                    image: [
+                        ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+                        ['float', ['floatLeft', 'floatRight', 'floatNone']],
+                        ['remove', ['removeMedia']]
+                    ],
+                }
+
             });
         });
+
+        var fn_notice_submit = function(f){
+            gn_validation(f);
+        }
     </script>
+    <style>
+        .note-group-image-url {
+            display: none;
+        }
+    </style>
 @endsection

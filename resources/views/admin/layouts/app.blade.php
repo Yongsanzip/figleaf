@@ -20,7 +20,7 @@
 <body>
 <section id="wrap">
     @include('admin.layouts.partial.header')
-
+    @include('flash::message')
     <main class="container">
     @include('admin.layouts.partial.left')
     @yield('content')
@@ -28,5 +28,16 @@
 
     @include('admin.layouts.partial.footer')
 </section>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $('#flash-overlay-modal').modal();
+    $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+</script>
 </body>
 </html>

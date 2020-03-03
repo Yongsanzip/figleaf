@@ -64,28 +64,13 @@ class NoticeController {
      ************************************************************************/
     public function store(Request $request){
         try {
-        $dom = new \DOMDocument();
-        $dom->loadHTML($request->contents, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $images = $dom->getElementsByTagName('img');
-        foreach($images as $k => $img) {
-            $src = $img->getAttribute('src');
-            if (preg_match('/data:image/', $src)) {
-                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
-                $mimetype = $groups['mime'];
-                $filename = uniqid();
-                $filepath = "images/notice/$filename.$mimetype";
-                $image = Image::make($src)->encode($mimetype, 100);                                              // encode file to the specified mimetype
-                Storage::disk('public')->put($filepath,$image->encode());
-                $new_src = asset('storage/'.$filepath);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $new_src);
-            }
-        }
-
-
+            $request->validate([
+                'title' =>'required'
+            ]);
+           $content = summernote_save_image($request->contents,'images/notice/');
            $notice =  Notice::create([
                 'title' =>$request->title,
-                'content'=>$dom->saveHTML(),
+                'content'=>$content,
                 'up_fix'=>$request->up_fix ? 1 : 0,
                 'user_id'=>auth()->user()->id,
             ]);
