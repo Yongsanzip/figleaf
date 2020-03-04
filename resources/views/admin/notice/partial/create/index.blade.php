@@ -24,7 +24,7 @@
                 </div>
 
                 <!-- text editor -->
-                <div class="row mt-20">
+                <div class="row mt-20 style-reset">
                     @csrf
                     <textarea name="contents" id="summernote" cols="30" rows="10"></textarea>
                 </div>
@@ -64,6 +64,7 @@
                 }
 
             });
+            $('.dropdown-toggle').dropdown();
         });
 
         var fn_notice_submit = function(f){

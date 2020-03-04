@@ -1606,3 +1606,27 @@ a{
         line-height: 40px;
     }
 }
+
+
+.style-reset{
+    ol{
+        display: block;
+        list-style: decimal;
+        list-style-type: decimal;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 40px;
+    }
+    ul{
+        display: block;
+        list-style: disc;
+        list-style-type: disc;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 40px;
+    }
+}
