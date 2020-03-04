@@ -107,7 +107,7 @@ Route::group(['middleware'=>'locale'],function(){
 });
 
 
-Route::group(['middleware'=>'auth'],function(){
+Route::group(['middleware'=>'only_admin'],function(){
     /************************************** Admin **************************************/
 // 관리자 메인
     Route::get('/admin', 'Admin\HomeController@index')->name('admin');

@@ -95,4 +95,16 @@ class User extends Authenticatable {
         }
         return false;
     }
+
+    /**************************************************************
+     * @function in_semi_admin
+     * @description 프로젝트 허가자 체크
+     * @return boolean
+     **************************************************************/
+    public function only_admin(){
+        if($this->role_id > 2){
+            return true;
+        }
+        return false;
+    }
 }
