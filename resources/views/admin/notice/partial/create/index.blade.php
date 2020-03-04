@@ -44,6 +44,7 @@
                 minHeight: null,             // set minimum height of editor
                 maxHeight: null,             // set maximum height of editor
                 focus: true,                 // set focus to editable area after initializing summernote
+                lang: 'ko-KR',               // default: 'en-US'
                 toolbar: [
                     // [groupName, [list of button]]
                     ['style', ['bold', 'italic', 'underline', 'clear']],

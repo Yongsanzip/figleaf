@@ -15,7 +15,7 @@ if (! function_exists('summernote_save_image')) {
     function summernote_save_image($content,$path) {
 
         $dom = new \DOMDocument();
-        $dom->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $images = $dom->getElementsByTagName('img');
         foreach($images as $k => $img) {
             $src = $img->getAttribute('src');

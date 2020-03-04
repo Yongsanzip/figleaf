@@ -4,3 +4,4 @@
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<script src="{{asset('js/summernote-0.8.16-dist/lang/summernote-ko-KR.js')}}"></script>

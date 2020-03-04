@@ -107,36 +107,39 @@ Route::group(['middleware'=>'locale'],function(){
 });
 
 
-/************************************** Admin **************************************/
+Route::group(['middleware'=>'auth'],function(){
+    /************************************** Admin **************************************/
 // 관리자 메인
-Route::get('/admin', 'Admin\HomeController@index')->name('admin');
+    Route::get('/admin', 'Admin\HomeController@index')->name('admin');
 // 관리자 공지사항
-Route::resource('admin_notice', 'Admin\Notice\NoticeController');
+    Route::resource('admin_notice', 'Admin\Notice\NoticeController');
 // 관리자 페이지 - 배너 관리
-Route::resource('admin_banner', 'Admin\Page\BannerController');
+    Route::resource('admin_banner', 'Admin\Page\BannerController');
 // 관리자 페이지 - 콘텐츠 관리
-Route::resource('admin_contents', 'Admin\Page\ContentsController');
+    Route::resource('admin_contents', 'Admin\Page\ContentsController');
 // 관리자 페이지 - 뉴스등록
-Route::resource('admin_news', 'Admin\Page\NewsController');
+    Route::resource('admin_news', 'Admin\Page\NewsController');
 // 관리자 결제/배송 - 후원내역
-Route::resource('admin_support', 'Admin\PaymentDelivery\SupportController');
+    Route::resource('admin_support', 'Admin\PaymentDelivery\SupportController');
 // 관리자 결제/배송 - 배송내역
-Route::resource('admin_delivery', 'Admin\PaymentDelivery\DeliveryController');
+    Route::resource('admin_delivery', 'Admin\PaymentDelivery\DeliveryController');
 // 관리자 프로젝트
-Route::resource('admin_project', 'Admin\Project\ProjectController')->except([
-    'create', 'update', 'destroy'
-]);
+    Route::resource('admin_project', 'Admin\Project\ProjectController')->except([
+        'create', 'update', 'destroy'
+    ]);
 // 관리자 프로젝트 - 비고
-Route::resource('admin_note', 'Admin\Project\NoteController')->only([
-    'index', 'store'
-]);
+    Route::resource('admin_note', 'Admin\Project\NoteController')->only([
+        'index', 'store'
+    ]);
 // 관리자 커뮤니티
-Route::resource('admin_community', 'Admin\Project\CommunityController');
+    Route::resource('admin_community', 'Admin\Project\CommunityController');
 // 관리자 회원 - 회원정보
-Route::resource('admin_information', 'Admin\User\InformationController');
+    Route::resource('admin_information', 'Admin\User\InformationController');
 // 관리자 회원 - 메시지
-Route::resource('admin_message', 'Admin\User\MessageController');
+    Route::resource('admin_message', 'Admin\User\MessageController');
 // 관리자 회원 - 포트폴리오
-Route::resource('admin_portfolio', 'Admin\User\PortfolioController');
+    Route::resource('admin_portfolio', 'Admin\User\PortfolioController');
 // 관리자 회원 - 1:1 문의
-Route::resource('admin_question', 'Admin\User\QuestionController');
+    Route::resource('admin_question', 'Admin\User\QuestionController');
+
+});
