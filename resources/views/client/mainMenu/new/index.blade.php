@@ -3,35 +3,10 @@
 ?>
 @extends('client.layouts.app')
 @section('content')
-    <link rel="stylesheet" href="{{asset('/css/swiper.min.css')}}">
-
     <main class="container">
         <!-- hero -->
-        <div class="main-hero">
-            <!-- slide -->
-            <div class="swiper-container hero-slide">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="{{asset('/images/dummy/img-dummy-10.png')}}" alt="">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{asset('/images/dummy/img-dummy-11.png')}}" alt="">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{asset('/images/dummy/img-dummy-10.png')}}" alt="">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{asset('/images/dummy/img-dummy-11.png')}}" alt="">
-                    </div>
-                </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination hero-pagination"></div>
-            </div>
-            <!-- //slide -->
-        </div>
-        <!-- //hero -->
-
-
+    @include('client.layouts.partial.hero')
+    <!-- //hero -->
         <div class="inner">
             <section class="con-project">
 
@@ -382,23 +357,4 @@
         </div>
 
     </main>
-    <script src="{{asset('js/swiper.min.js')}}"></script>
-    <script>
-
-        // hero slide
-        var swiper = new Swiper('.hero-slide', {
-            spaceBetween: 0,
-            navigation: {
-                nextEl: '.hero-button-next',
-                prevEl: '.hero-button-prev',
-            },
-            loop:true,
-            pagination: {
-                el: '.hero-pagination',
-                clickable: true,
-            },
-        });
-
-    </script>
-
 @endsection
