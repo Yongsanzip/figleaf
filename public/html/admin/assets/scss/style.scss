@@ -1629,4 +1629,12 @@ a{
         margin-right: 0;
         padding-left: 40px;
     }
+    sub{
+        vertical-align: sub;
+        font-size: smaller;
+    }
+    sup{
+        vertical-align: super;
+        font-size: smaller;
+    }
 }
