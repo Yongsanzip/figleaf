@@ -43,13 +43,32 @@
                 height: 300,                 // set editor height
                 minHeight: null,             // set minimum height of editor
                 maxHeight: null,             // set maximum height of editor
-                focus: true                  // set focus to editable area after initializing summernote
+                focus: true,                 // set focus to editable area after initializing summernote
+                lang: 'ko-KR',               // default: 'en-US'
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['insert', ['link', 'picture']],
+                ],
+                popover: {
+                    image: [
+                        ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+                        ['float', ['floatLeft', 'floatRight', 'floatNone']],
+                        ['remove', ['removeMedia']]
+                    ],
+                }
+
             });
+            $('.dropdown-toggle').dropdown();
         });
 
         var fn_notice_submit = function(f){
             gn_validation(f);
-            return false;
         }
     </script>
 @endsection

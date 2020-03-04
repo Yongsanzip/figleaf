@@ -25,9 +25,14 @@ class NoticeController {
      * @method      : GET
      * @return      : view
      ************************************************************************/
-    public function index(){
+    public function index(Request $request){
         try {
-            $datas = Notice::orderBy('created_at','DESC')->paginate(15);
+            if($request->input('searchKeyword')){
+                $datas = Notice::where($request->searchCondition,'LIKE','%'.$request->searchKeyword.'%')->orderBy('created_at','DESC')->paginate(15);
+            } else {
+                $datas = Notice::orderBy('created_at','DESC')->paginate(15);
+            }
+
             return view('admin.notice.index',compact('datas'));
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();

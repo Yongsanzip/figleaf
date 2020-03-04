@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>admin</title>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('html/admin/assets/scss/reset.css')}}">
     <link rel="stylesheet" href="{{asset('html/admin/assets/scss/style.css')}}">
     <script src="{{asset('html/admin/assets/js/style.js')}}"></script>

@@ -16,17 +16,18 @@
 
             <!-- search -->
             <div class="search">
-                <div class="search-select">
-                    <select>
-                        <option disabled selected>- 검색기준 -</option>
-                        <option>검색기준</option>
-                        <option>검색기준</option>
-                    </select>
-                </div>
-                <div class="search-keyword">
-                    <input type="text" placeholder="검색어를 입력하세요" spellcheck="false">
-                    <button>검색</button>
-                </div>
+                <form action="{{route('admin_notice.index')}}" onsubmit="return fn_notice_search(this);" method="GET">
+                    <div class="search-select">
+                        <select name="searchCondition">
+                            <option disabled selected>- 검색기준 -</option>
+                            <option value="title" {{isset($_GET['searchCondition']) ? ($_GET['searchCondition'] == 'title' ? 'selected' :'') : ''}} >제목</option>
+                        </select>
+                    </div>
+                    <div class="search-keyword">
+                        <input type="text" name="searchKeyword" value="{{(isset($_GET['searchKeyword'])) ? $_GET['searchKeyword'] : ''}}" class="required" data-title="검색어" placeholder="검색어를 입력하세요" spellcheck="false">
+                        <button type="submit">검색</button>
+                    </div>
+                </form>
             </div>
 
             <!-- table 20 row-->
@@ -83,6 +84,9 @@
     <script>
         var fn_link = function(el){
             document.location.href='/admin_notice/'+el;
+        }
+        var fn_notice_search = function(f){
+            gn_validation(f);
         }
     </script>
 @endsection

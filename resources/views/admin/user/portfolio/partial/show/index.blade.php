@@ -10,9 +10,9 @@
 
             <div class="headline">
                 <form action="{{route('admin_portfolio.update',['id'=>$datas->id])}}" onsubmit="return fn_admin_portfolio_submit(this);" method="POST">
-                <h2>{{$datas->user->name}} 포트폴리오</h2>
+                <h2>{{$datas->user->name}} <small style="font-size: 15px; top: 20px;letter-spacing: 1px;"><span>({{$datas->user->role->role_name}})</span></small> 포트폴리오</h2>
                 <label class="checkbox-group mt-16">
-                    <input type="checkbox" name="open_yn" {{$datas->open_yn ==1 ? 'checked' : ''}}>
+                    <input type="checkbox" id="open_yn" name="open_yn" onclick="fn_check_designer(this);" data-title="{{$datas->user->user_code}}" {{$datas->open_yn ==1 ? 'checked' : ''}} >
                     <p>열람여부</p>
                 </label>
                 <div class="portfolio-show-box">
@@ -20,8 +20,8 @@
                         {!! method_field('PUT') !!}
                         <select class="text-field" name="hidden_yn">
                             <option value="" disabled selected>- 노출여부 - </option>
-                            <option value="1">노출</option>
-                            <option value="0">미노출</option>
+                            <option value="1" {{$datas->hidden_yn ==1 ? 'selected' : ''}}>노출</option>
+                            <option value="0" {{$datas->hidden_yn ==0 ? 'selected' : ''}}>미노출</option>
                         </select>
                         <button type="submit" class="btn-black btn-s">업데이트</button>
                 </div>
@@ -31,7 +31,7 @@
 
             <!-- 포트폴리오 컨텐츠  -->
             <div class="portfolio-contents">
-                <img src="{{ asset('storage/'.(count($datas->portfolio_images) > 0 ? $datas->portfolio_images->first()->image_path : '#'))}}" alt="">
+                <img src="{{ count($datas->portfolio_images) > 0 ? asset('storage/'.( $datas->portfolio_images->first()->image_path )) : '#'}}" alt="">
                 <p class="">
                     @if( app()->getLocale() =='ko')
                         {{ $datas->content_ko ? $datas->content_ko : ''}}
@@ -136,7 +136,7 @@
 
             <!-- 브랜드 -->
             <div class="portfolio-brand">
-                <img src="{{ asset('storage/'.(count($datas->brand_thumbnail_images) > 0  ? $datas->brand_thumbnail_images->first()->image_path : '#'))}}" alt="">
+                <img src="{{ count($datas->brand_thumbnail_images) > 0  ? asset('storage/'. $datas->brand_thumbnail_images->first()->image_path ) : '#'}}" alt="">
                 @if( app()->getLocale() =='ko')
                     {{ $datas->brand->contents_ko}}
                 @elseif(app()->getLocale() =='en')
@@ -488,6 +488,37 @@
         if(f.hidden_yn.value==""){
             alert('노출 여부를 선택해주세요');
             return false;
+        }
+    }
+    var fn_check_designer = function(e){
+        if(e.checked){
+            e.checked = false;
+        } else {
+            e.checked = true;
+        }
+        var params = {code:e.getAttribute('data-title')};
+        callAjax('POST',true,'/check_designer',"JSON",'JSON',params,fn_check_designer_ajax_error,fn_check_designer_ajax_success);
+    }
+    var fn_check_designer_ajax_error = function(e){
+        console.log(e);
+    }
+    var fn_check_designer_ajax_success = function(e){
+        var open_chk = document.getElementById('open_yn');
+        if(e.msg == 'normal'){
+            if(!open_chk.checked){
+                if(confirm('해당 유저는 일반회원등급입니다. 디자이너로 등급을 올리시겠습니까?')){
+                    open_chk.checked = true;
+                    return true;
+                }
+            }
+            open_chk.checked = false;
+            return false;
+        } else {
+            if(open_chk.checked){
+                open_chk.checked = false;
+            } else {
+                open_chk.checked = true;
+            }
         }
     }
 </script>

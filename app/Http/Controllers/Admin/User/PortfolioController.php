@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Portfolio;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -117,11 +118,14 @@ class PortfolioController  extends Controller {
      ************************************************************************/
     public function update(Request $request, $id){
         try {
-            error_log($request->open_yn);
-            Portfolio::find($id)->update([
-                'hidden_yn' => $request->hidden_yn,
-                'open_yn'   => $request->open_yn ? 1: 0,
-            ]);
+            $portfolio = Portfolio::find($id);
+            $portfolio->hidden_yn = $request->hidden_yn;
+            $portfolio->open_yn = $request->open_yn ? 1 : 0;
+            $portfolio->save();
+
+            if($portfolio->user->role_id < 2){
+                User::find($portfolio->user->id)->update(['role_id'=>2]);
+            }
             return redirect(route('admin_portfolio.show' ,['id'=>$id]));
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
@@ -130,7 +134,27 @@ class PortfolioController  extends Controller {
             return back();
         }
     }
-
+    /************************************************************************
+     * Check
+     * @description : 설명1 - 설명2
+     * @url         : /url/{id}
+     * @method      : PUT
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function check_designer(Request $request){
+        try {
+            $user = User::whereUserCode($request->code)->first();
+            if($user->role_id == 1){
+                $msg = 'normal';
+            } else if($user->role_id ==2){
+                $msg = 'designer';
+            }
+            return response()->json(['msg'=>$msg],200,[],JSON_PRETTY_PRINT);
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            return response()->json(['msg'=>$msg],522,[],JSON_PRETTY_PRINT);
+        }
+    }
     /************************************************************************
      * Display destroy action
      * @description : 설명 1 설명
