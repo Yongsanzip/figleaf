@@ -270,7 +270,7 @@ button {
   padding-bottom: 75%;
 }
 .news-list .card .card-contents {
-  min-height: 86px;
+  min-height: 90px;
 }
 .news-list .card .card-contents .card-title {
   overflow: hidden;
