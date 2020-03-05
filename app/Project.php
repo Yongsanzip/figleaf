@@ -28,6 +28,9 @@ class Project extends Model {
     public function category() {
         return $this->belongsTo('App\Category','category_id','id');
     }
+    public function user(){
+        return $this->belongsTo('App\User','user_id','id');
+    }
     // 2차 카테고리
     public function category_detail() {
         return $this->belongsTo('App\CategoryDetail','category2_id','id');

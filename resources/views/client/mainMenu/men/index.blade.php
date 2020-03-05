@@ -44,338 +44,60 @@
                 </ul>
 
                 <div class="card-list">
-                    <!-- card * 20 -->
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <div class="text-box">
-                                <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                <p class="card-text"> 강주원 </p>
-                            </div>
-
-                            <div class="card-info">
-                                <div class="rating">
-                                    <div class="rating-bar" style="width: 80%">80</div>
-                                </div>
-                                <div class="info-box-list">
-                                    <div class="info-box amount">
-                                        180개 남음
+                    @if(count($datas) > 0)
+                        @foreach($datas as $data)
+                            <!-- card * 20 -->
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="{{$data->main_image ? asset('storage/'.$data->main_image->image_path)  : asset('/images/common/img_no_image.jpg')}}" alt="">
                                     </div>
-                                    <div class="info-box date">
-                                        6일 남음
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 성공할경우 뱃지 출력 -->
-                        <div class="badge badge-orange">성공</div>
-                        <!-- 진행중인 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-green">진행중</div> -->
-                        <!-- 실패한 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-grey">실패</div> -->
+                                    <div class="card-contents">
+                                        <div class="text-box">
+                                            <p class="card-title">{{$data->title}}</p>
+                                            <p class="card-text"> {{$data->user->name}} </p>
+                                        </div>
 
-                        <a href="" class="link"></a>
-                    </div>
-                    <!-- //card -->
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <div class="text-box">
-                                <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                <p class="card-text"> 강주원 </p>
-                            </div>
-
-                            <div class="card-info">
-                                <div class="rating">
-                                    <div class="rating-bar" style="width: 80%">80</div>
-                                </div>
-                                <div class="info-box-list">
-                                    <div class="info-box amount">
-                                        180개 남음
+                                        <div class="card-info">
+                                            <div class="rating">
+                                                <div class="rating-bar" style="width: 80%">80</div>
+                                            </div>
+                                            <div class="info-box-list">
+                                                <div class="info-box amount">
+                                                    {{$data->success_count}}개 남음
+                                                </div>
+                                                <div class="info-box date">
+                                                    {{$data->deadline->format('d')}}일 남음
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="info-box date">
-                                        6일 남음
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 성공할경우 뱃지 출력 -->
-                        <div class="badge badge-orange">성공</div>
-                        <!-- 진행중인 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-green">진행중</div> -->
-                        <!-- 실패한 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-grey">실패</div> -->
+                                    <!-- 성공할경우 뱃지 출력 -->
+                                    <div class="badge badge-orange">성공</div>
+                                    <!-- 진행중인 경우 뱃지 출력 -->
+                                    <!-- <div class="badge badge-green">진행중</div> -->
+                                    <!-- 실패한 경우 뱃지 출력 -->
+                                    <!-- <div class="badge badge-grey">실패</div> -->
 
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <div class="text-box">
-                                <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                <p class="card-text"> 강주원 </p>
-                            </div>
-
-                            <div class="card-info">
-                                <div class="rating">
-                                    <div class="rating-bar" style="width: 80%">80</div>
+                                    <a href="/project/{{ $data->id }}" class="link"></a>
                                 </div>
-                                <div class="info-box-list">
-                                    <div class="info-box amount">
-                                        180개 남음
-                                    </div>
-                                    <div class="info-box date">
-                                        6일 남음
-                                    </div>
+                            <!-- //card -->
+                        @endforeach
+                        @else
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="{{asset('images/common/img_no_image.jpg')}}" alt="">
                                 </div>
-                            </div>
-                        </div>
-                        <!-- 성공할경우 뱃지 출력 -->
-                        <div class="badge badge-orange">성공</div>
-                        <!-- 진행중인 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-green">진행중</div> -->
-                        <!-- 실패한 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-grey">실패</div> -->
-
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <div class="text-box">
-                                <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                <p class="card-text"> 강주원 </p>
-                            </div>
-
-                            <div class="card-info">
-                                <div class="rating">
-                                    <div class="rating-bar" style="width: 80%">80</div>
-                                </div>
-                                <div class="info-box-list">
-                                    <div class="info-box amount">
-                                        180개 남음
+                                <div class="card-contents">
+                                    <div class="text-box">
+                                        <p class="card-title"> 진행중인 프로젝트가 없습니다</p>
+                                        <p class="card-text"> - </p>
                                     </div>
-                                    <div class="info-box date">
-                                        6일 남음
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 성공할경우 뱃지 출력 -->
-                        <div class="badge badge-orange">성공</div>
-                        <!-- 진행중인 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-green">진행중</div> -->
-                        <!-- 실패한 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-grey">실패</div> -->
 
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <div class="text-box">
-                                <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                <p class="card-text"> 강주원 </p>
-                            </div>
-
-                            <div class="card-info">
-                                <div class="rating">
-                                    <div class="rating-bar" style="width: 80%">80</div>
                                 </div>
-                                <div class="info-box-list">
-                                    <div class="info-box amount">
-                                        180개 남음
-                                    </div>
-                                    <div class="info-box date">
-                                        6일 남음
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 성공할경우 뱃지 출력 -->
-                        <div class="badge badge-orange">성공</div>
-                        <!-- 진행중인 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-green">진행중</div> -->
-                        <!-- 실패한 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-grey">실패</div> -->
 
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <div class="text-box">
-                                <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                <p class="card-text"> 강주원 </p>
+                                <a href="" class="link"></a>
                             </div>
-
-                            <div class="card-info">
-                                <div class="rating">
-                                    <div class="rating-bar" style="width: 80%">80</div>
-                                </div>
-                                <div class="info-box-list">
-                                    <div class="info-box amount">
-                                        180개 남음
-                                    </div>
-                                    <div class="info-box date">
-                                        6일 남음
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 성공할경우 뱃지 출력 -->
-                        <div class="badge badge-orange">성공</div>
-                        <!-- 진행중인 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-green">진행중</div> -->
-                        <!-- 실패한 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-grey">실패</div> -->
-
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <div class="text-box">
-                                <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                <p class="card-text"> 강주원 </p>
-                            </div>
-
-                            <div class="card-info">
-                                <div class="rating">
-                                    <div class="rating-bar" style="width: 80%">80</div>
-                                </div>
-                                <div class="info-box-list">
-                                    <div class="info-box amount">
-                                        180개 남음
-                                    </div>
-                                    <div class="info-box date">
-                                        6일 남음
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 성공할경우 뱃지 출력 -->
-                        <div class="badge badge-orange">성공</div>
-                        <!-- 진행중인 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-green">진행중</div> -->
-                        <!-- 실패한 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-grey">실패</div> -->
-
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <div class="text-box">
-                                <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                <p class="card-text"> 강주원 </p>
-                            </div>
-
-                            <div class="card-info">
-                                <div class="rating">
-                                    <div class="rating-bar" style="width: 80%">80</div>
-                                </div>
-                                <div class="info-box-list">
-                                    <div class="info-box amount">
-                                        180개 남음
-                                    </div>
-                                    <div class="info-box date">
-                                        6일 남음
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 성공할경우 뱃지 출력 -->
-                        <div class="badge badge-orange">성공</div>
-                        <!-- 진행중인 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-green">진행중</div> -->
-                        <!-- 실패한 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-grey">실패</div> -->
-
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <div class="text-box">
-                                <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                <p class="card-text"> 강주원 </p>
-                            </div>
-
-                            <div class="card-info">
-                                <div class="rating">
-                                    <div class="rating-bar" style="width: 80%">80</div>
-                                </div>
-                                <div class="info-box-list">
-                                    <div class="info-box amount">
-                                        180개 남음
-                                    </div>
-                                    <div class="info-box date">
-                                        6일 남음
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 성공할경우 뱃지 출력 -->
-                        <div class="badge badge-orange">성공</div>
-                        <!-- 진행중인 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-green">진행중</div> -->
-                        <!-- 실패한 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-grey">실패</div> -->
-
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <div class="text-box">
-                                <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                <p class="card-text"> 강주원 </p>
-                            </div>
-
-                            <div class="card-info">
-                                <div class="rating">
-                                    <div class="rating-bar" style="width: 80%">80</div>
-                                </div>
-                                <div class="info-box-list">
-                                    <div class="info-box amount">
-                                        180개 남음
-                                    </div>
-                                    <div class="info-box date">
-                                        6일 남음
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 성공할경우 뱃지 출력 -->
-                        <div class="badge badge-orange">성공</div>
-                        <!-- 진행중인 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-green">진행중</div> -->
-                        <!-- 실패한 경우 뱃지 출력 -->
-                        <!-- <div class="badge badge-grey">실패</div> -->
-
-                        <a href="" class="link"></a>
-                    </div>
+                    @endif
                 </div>
 
                 <div class="btn-wrap">
