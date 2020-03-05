@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\MainMenu;
 
+use App\Portfolio;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,8 +26,8 @@ class DesignerController extends Controller{
      ************************************************************************/
     public function index(){
         try {
-            $datas = User::whereRoleId(2)->with('portfolio')->has('portfolio')->limit(8);
-            return view('client.mainMenu.designer.index');
+            $datas = User::whereRoleId(2)->limit(8)->with('portfolio')->has('portfolio')->get();
+            return view('client.mainMenu.designer.index',compact('datas'));
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->error();
@@ -80,7 +81,8 @@ class DesignerController extends Controller{
      ************************************************************************/
     public function show($id){
         try {
-
+            $datas = Portfolio::find($id)->first();
+            return view('client.mainMenu.designer.show',compact('datas'));
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->error();

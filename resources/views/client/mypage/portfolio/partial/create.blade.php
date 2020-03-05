@@ -305,7 +305,7 @@ $tab = 'portfolio';
                                 </div>
                                 <div class="sns-item">
                                     <span class="item-name">전화번호</span>
-                                    <input type="tel" class="input-field" name="phone" placeholder="전화번호를 입력하세요">
+                                    <input type="tel" class="input-field" name="home_phone" placeholder="전화번호를 입력하세요">
                                     <label class="checkbox-wrap">
                                         <input type="checkbox" name="phone_hidden" value="1">
                                         <p>숨기기</p>

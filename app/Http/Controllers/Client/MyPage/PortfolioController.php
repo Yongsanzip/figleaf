@@ -44,12 +44,12 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function create(){
-        /*$check = Portfolio::whereUserId(auth()->user()->id)->first();
+        $check = Portfolio::whereUserId(auth()->user()->id)->first();
         if(isset($check)){
             return redirect(route('mypage_portfolio.index'));
         } else {
             return view('client.mypage.portfolio.partial.create');
-        }*/
+        }
         return view('client.mypage.portfolio.partial.create');
     }
 
