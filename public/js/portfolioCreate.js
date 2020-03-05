@@ -532,7 +532,7 @@ function fnAddLookbook(){
     var item = document.getElementsByClassName('lookbook-item');
     var lookbookItem = '<div class="lookbook-item">' +
         '                  <div class="lookbook-name">' +
-        '                      <input type="text"  placeholder="시즌명(EX/2019)" name="year'+item.length+'" class="input-field lookbook-season yearpicker" readonly>' +
+        '                      <input type="text"  placeholder="시즌명(EX/2019)" name="season'+item.length+'" class="input-field lookbook-season yearpicker" readonly>' +
         '                      <select class="select"  name="season_type'+item.length+'">' +
         '                          <option selected disabled>전체</option>' +
         '                          <option value="S/S">SS</option>' +
@@ -631,5 +631,4 @@ var fn_portfolio_submit = function(f){
 
     gn_validation(f);
 
-    return false;
 };

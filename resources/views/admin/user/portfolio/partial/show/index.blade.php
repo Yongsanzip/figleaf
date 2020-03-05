@@ -160,6 +160,7 @@
                     <!-- lookbook item -->
                             <h4 class="year">{{$look_book->year}} {{$look_book->season}}</h4>
                             <div class="slide-card slide-lookbook mb-60">
+                                <div class="slide-wrap">
                                 @if($look_book->look_book_images())
                                     @foreach($look_book->look_book_images as $image)
                                         <div class="slide-item">
@@ -167,6 +168,7 @@
                                         </div>
                                     @endforeach
                                 @endif
+                                </div>
                             </div>
                     @endforeach
                 @endif

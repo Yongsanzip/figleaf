@@ -21,9 +21,9 @@ class CreateAssociationActivitiesTable extends Migration
             $table->bigInteger('portfolio_id')->unsigned()->comment('포트폴리오 id');
             $table->string('start_year', 5)->nullable()->comment('시작연도');
             $table->string('end_year', 5)->nullable()->comment('끝연도');
-            $table->string('association_ko', 50)->nullable()->comment('협회명(한)');
-            $table->string('association_cn', 50)->nullable()->comment('협회명(중)');
-            $table->string('association_en', 50)->nullable()->comment('협회명(영)');
+            $table->text('association_ko', 50)->nullable()->comment('협회명(한)');
+            $table->text('association_cn', 50)->nullable()->comment('협회명(중)');
+            $table->text('association_en', 50)->nullable()->comment('협회명(영)');
             $table->timestamps();
             $table->softDeletes();
         });

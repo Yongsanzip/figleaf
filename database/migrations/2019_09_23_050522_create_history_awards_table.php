@@ -21,9 +21,9 @@ class CreateHistoryAwardsTable extends Migration
             $table->bigInteger('portfolio_id')->unsigned()->comment('포트폴리오 id');
             $table->string('year', 5)->nullable()->comment('연도');
             $table->tinyInteger('type')->unsigned()->comment('타입(히스토리 0, 수상내역 1)');
-            $table->string('history_ko')->nullable()->comment('수상내역(한)');
-            $table->string('history_cn')->nullable()->comment('수상내역(중)');
-            $table->string('history_en')->nullable()->comment('수상내역(영)');
+            $table->text('history_ko')->nullable()->comment('수상내역(한)');
+            $table->text('history_cn')->nullable()->comment('수상내역(중)');
+            $table->text('history_en')->nullable()->comment('수상내역(영)');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -15,7 +15,7 @@ $tab = 'portfolio';
                     <h2 class="headline">포트폴리오 만들기/수정하기</h2>
                 </div>
                 <div class="portfolio-btn-wrap">
-                    <a onclick="fn_portfolio_submit(this.parentElement.parentElement); return false;" class="btn-white">미리보기</a>
+                    <?php /*<a onclick="fn_portfolio_submit(this.parentElement.parentElement); return false;" class="btn-white">미리보기</a>*/?>
                     <button type="submit" class="btn-black">저장하기</button>
                     <div class="portfolio-options">
                         <label class="checkbox-wrap">
@@ -281,7 +281,7 @@ $tab = 'portfolio';
                                                 <!-- script add item-->
                                             </div>
                                             <label class="upload-image">
-                                                <input type="file" title="0" name="images[0][]" accept="image/jpeg, image/jpg, image/png" onchange="fnAddLookbookItemInit(this)">
+                                                <input type="file" title="0" accept="image/jpeg, image/jpg, image/png" onchange="fnAddLookbookItemInit(this)">
                                                 <span class="shape">클릭하여 사진을 추가하세요</span>
                                             </label>
                                         </div>
@@ -366,10 +366,6 @@ $tab = 'portfolio';
                 endYear: 2200,
             });
         });
-
-        var test = function(){
-            gn_make_input_json('history_list' ,'input' , 'history_array');
-        }
     </script>
 
 @endsection

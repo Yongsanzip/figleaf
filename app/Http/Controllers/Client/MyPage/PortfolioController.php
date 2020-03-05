@@ -12,6 +12,7 @@ use App\PortfolioImage;
 use File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class PortfolioController extends Controller {
 
@@ -60,14 +61,37 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function store(Request $request){
-        try {
+        for($i = 0; $i< $request->season_count; $i++){
+            $season_type = 'season_type'.$i;
+            $season = 'season'.$i;
+            $look_book = LookBook::firstOrCreate([
+                'portfolio_id' =>1,
+                'season'=>$request->$season,
+                'year'=>$request->$season
+            ]);
+
+            $look_book_images = $request->file('images');
+            if($look_book_images) {
+                foreach ($look_book_images[$i] as $image) {
+                    var_dump($image);
+                    $savePath = $image->store('images/lookbook/'.$look_book->id, 'public');
+                    LookBookImage::updateOrCreate([                                                                                // 포트폴리오 이미지 등록
+                        'look_book_id'      =>$look_book->id,
+                        'image_type'        =>$image->getClientMimeType(),
+                        'image_path'        =>$savePath,
+                        'origin_name'       =>$image->getClientOriginalName(),
+                    ]);
+                }
+            }
+        }
+        /*try {
             $check = Portfolio::whereUserId(auth()->user()->id)->first();
             if(isset($check)) {flash('포트폴리오가 존재합니다.')->warning(); return back();}
 
             $request->validate([
                 'portfolio_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
-
+            DB::beginTransaction();
             $portfolio = Portfolio::firstOrCreate([
                 'user_id'           =>auth()->user()->id,                                                               // 사용자 ID
                 'content_ko'        =>$request->context_ko,                                                             // 한글내용
@@ -148,7 +172,6 @@ class PortfolioController extends Controller {
 
             // 수상내역
             if(isset($request->awards_array)){
-                error_log("어워즈 있다 씨벌러마");
                 foreach (json_decode($request->awards_array, true) as $awards){
                     $awards['portfolio_id'] = $portfolio->id;
                     $awards['type'] = '1';
@@ -158,7 +181,6 @@ class PortfolioController extends Controller {
 
             // 협회활동동
             if(isset($request->society_array)){
-                error_log("협회활동 있다 씨벌러마");
                 foreach (json_decode($request->society_array, true) as $society){
                     $society['portfolio_id'] = $portfolio->id;
                     AssociationActivity::create($society);
@@ -166,16 +188,18 @@ class PortfolioController extends Controller {
             }
 
             for($i = 0; $i< $request->season_count; $i++){
+                $season_type = 'season_type'.$i;
+                $season = 'season'.$i;
                 $look_book = LookBook::firstOrCreate([
                     'portfolio_id' =>$portfolio->id,
-                    'season'=>$request->seasion.$i,
-                    'year'=>$request->year.$i
+                    'season'=>$request->$season,
+                    'year'=>$request->$season
                 ]);
 
                 $look_book_images = $request->file('images');
                 if($look_book_images) {
                     foreach ($look_book_images[$i] as $image) {
-                        $savePath = $image->store('images/lookbook/1', 'public');
+                        $savePath = $image->store('images/lookbook/'.$portfolio->id, 'public');
                         LookBookImage::updateOrCreate([                                                                                // 포트폴리오 이미지 등록
                             'look_book_id'      =>$look_book->id,
                             'image_type'        =>$image->getClientMimeType(),
@@ -185,13 +209,14 @@ class PortfolioController extends Controller {
                     }
                 }
             }
-
+            DB::commit();
             return redirect(route('mypage_portfolio.index'));
         } catch (\Exception $e){
+            DB::rollBack();
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->important();
             return back();
-        }
+        }*/
     }
 
     /************************************************************************
