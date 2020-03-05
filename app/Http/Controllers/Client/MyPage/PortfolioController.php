@@ -61,30 +61,7 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function store(Request $request){
-        for($i = 0; $i< $request->season_count; $i++){
-            $season_type = 'season_type'.$i;
-            $season = 'season'.$i;
-            $look_book = LookBook::firstOrCreate([
-                'portfolio_id' =>1,
-                'season'=>$request->$season,
-                'year'=>$request->$season
-            ]);
-
-            $look_book_images = $request->file('images');
-            if($look_book_images) {
-                foreach ($look_book_images[$i] as $image) {
-                    var_dump($image);
-                    $savePath = $image->store('images/lookbook/'.$look_book->id, 'public');
-                    LookBookImage::updateOrCreate([                                                                                // 포트폴리오 이미지 등록
-                        'look_book_id'      =>$look_book->id,
-                        'image_type'        =>$image->getClientMimeType(),
-                        'image_path'        =>$savePath,
-                        'origin_name'       =>$image->getClientOriginalName(),
-                    ]);
-                }
-            }
-        }
-        /*try {
+        try {
             $check = Portfolio::whereUserId(auth()->user()->id)->first();
             if(isset($check)) {flash('포트폴리오가 존재합니다.')->warning(); return back();}
 
@@ -162,7 +139,6 @@ class PortfolioController extends Controller {
 
             // 히스토리
             if(isset($request->history_array)){
-            error_log("히스토리 있다 씨벌러마");
                 foreach (json_decode($request->history_array,true) as $history){
                     $history['portfolio_id'] = $portfolio->id;
                     $history['type'] = '0';
@@ -216,7 +192,7 @@ class PortfolioController extends Controller {
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->important();
             return back();
-        }*/
+        }
     }
 
     /************************************************************************
