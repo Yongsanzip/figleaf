@@ -19,88 +19,37 @@
                 </div>
 
                 <div class="card-list">
+                @if(count($datas)>0)
+                    @foreach($datas as $data)
+                        @if(isset($data->portfolio->brand))
+                        <!-- card * 20 -->
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="{{$data->portfolio->brand_logo_images ? asset('storage/'.$data->portfolio->brand_logo_images->first()->image_path) :  asset('images/common/img_no_image.jpg')}}" alt="">
+                                </div>
+                                <div class="card-contents">
+                                    <p class="card-title">{{$data->portfolio->brand->name_ko}}</p>
+                                    <p class="card-text">{!! $data->portfolio->brand->contents_ko !!}</p>
+                                </div>
+                                <a href="{{route('designer.show',['id'=>$data->portfolio->id])}}" class="link"></a>
+                            </div>
+                            <!-- //card -->
+                        @endif
+                    @endforeach
+                @else
                     <!-- card * 20 -->
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="{{asset('images/common/img_no_image.jpg')}}" alt="">
+                            </div>
+                            <div class="card-contents">
+                                <p class="card-title">등록된 브랜드가 없습니다</p>
+                                <p class="card-text">-</p>
+                            </div>
+                            <a href="" class="link"></a>
                         </div>
-                        <div class="card-contents">
-                            <p class="card-title">티르티르</p>
-                            <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                        </div>
-                        <a href="" class="link"></a>
-                    </div>
-                    <!-- //card -->
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <p class="card-title">티르티르</p>
-                            <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                        </div>
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <p class="card-title">티르티르</p>
-                            <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                        </div>
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <p class="card-title">티르티르</p>
-                            <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                        </div>
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <p class="card-title">티르티르</p>
-                            <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                        </div>
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <p class="card-title">티르티르</p>
-                            <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                        </div>
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <p class="card-title">티르티르</p>
-                            <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                        </div>
-                        <a href="" class="link"></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                        </div>
-                        <div class="card-contents">
-                            <p class="card-title">티르티르</p>
-                            <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                        </div>
-                        <a href="" class="link"></a>
-                    </div>
+                        <!-- //card -->
+                    @endif
                 </div>
                 <div class="btn-wrap">
                     <div class="btn-more">View More Brand</div>

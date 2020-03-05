@@ -7,7 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DesignerController extends Controller{
+class DesignerController extends Controller {
 
     /************************************************************************
      * Construct
@@ -36,41 +36,6 @@ class DesignerController extends Controller{
         }
     }
 
-    /************************************************************************
-     * Display create view
-     * @description : 설명1 - 설명2
-     * @url         : /url
-     * @method      : GET
-     * @return      : view , data , msg ...
-     ************************************************************************/
-    public function create(){
-        try {
-
-        } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
-        }
-    }
-
-    /************************************************************************
-     * Display create action
-     * @description : 설명1 - 설명2
-     * @url         : /url
-     * @method      : POST
-     * @return      : view , data , msg ...
-     ************************************************************************/
-    public function store(Request $request){
-        try {
-
-        } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
-        }
-    }
 
     /************************************************************************
      * Display detail view
@@ -91,57 +56,4 @@ class DesignerController extends Controller{
         }
     }
 
-    /************************************************************************
-     * Display edit view
-     * @description : 설명1 - 설명2
-     * @url         : /url/{id}/edit
-     * @method      : /GET
-     * @return      : view , data , msg ...
-     ************************************************************************/
-    public function edit($id) {
-        try {
-
-        } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
-        }
-    }
-
-    /************************************************************************
-     * Display update action
-     * @description : 설명1 - 설명2
-     * @url         : /url/{id}
-     * @method      : PUT
-     * @return      : view , data , msg ...
-     ************************************************************************/
-    public function update(Request $request, $id){
-        try {
-
-        } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
-        }
-    }
-
-    /************************************************************************
-     * Display destroy action
-     * @description : 설명 1 설명
-     * @url         : /url/{id}
-     * @method      : DELETE
-     * @return      : view , data , msg ...
-     ************************************************************************/
-    public function destroy($id) {
-        try {
-
-        } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
-        }
-    }
 }

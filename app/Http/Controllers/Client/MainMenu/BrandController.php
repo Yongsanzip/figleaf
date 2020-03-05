@@ -2,85 +2,58 @@
 
 namespace App\Http\Controllers\Client\MainMenu;
 
+use App\Portfolio;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class BrandController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     * @description 메인메뉴 - 브랜드
-     * @url : /brand
-     * @return view
-     */
-    public function index()
-    {
-        return view('client.mainMenu.brand.index');
+class BrandController extends Controller{
+
+    /************************************************************************
+     * Construct
+     * @description :
+     ************************************************************************/
+    public function __construct() {
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    /************************************************************************
+     * Display main view
+     * @description : 메인메뉴 - 디자이너 목록
+     * @url         : /url
+     * @method      : GET
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function index(){
+        try {
+            $datas = User::whereRoleId(2)->limit(8)->with('portfolio')->has('portfolio')->get();
+            return view('client.mainMenu.brand.index',compact('datas'));
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+
+    /************************************************************************
+     * Display detail view
+     * @description : 설명1 - 설명2
+     * @url         : /url/{id}
+     * @method      : GET
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function show($id){
+        try {
+            $datas = Portfolio::find($id)->first();
+            return view('client.mainMenu.brand.show',compact('datas'));
+        } catch (\Exception $e){
+            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+            flash($msg)->error();
+            // return redirect(route('url'));
+            return back();
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

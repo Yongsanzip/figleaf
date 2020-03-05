@@ -38,11 +38,11 @@
                         <!-- card * 20 -->
                             <div class="card">
                                 <div class="card-image">
-                                    <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
+                                    <img src="{{asset('images/common/img_no_image.jpg')}}" alt="">
                                 </div>
                                 <div class="card-contents">
-                                    <p class="card-title">티르티르</p>
-                                    <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
+                                    <p class="card-title">등록된 디자이너가 없습니다</p>
+                                    <p class="card-text">-</p>
                                 </div>
                                 <a href="" class="link"></a>
                             </div>
