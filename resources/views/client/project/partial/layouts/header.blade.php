@@ -107,7 +107,7 @@
                             <li class="option-item">
                                 <div class="option-value">
                                     <span class="option-name">{{ $option_arr['option_name'][$i] }}</span>
-                                    <input class="option-amount amount" name="option_amount[]" min="1" type="number" value="{{ $option_arr['option_amount'][$i] }}" readonly>
+                                    <input class="option-amount" name="option_amount[]" min="1" type="number" value="{{ $option_arr['option_amount'][$i] }}" readonly>
                                     <input class="optionId" min="1" name="option_id[]" type="hidden" value="{{ $option_arr['option_id'][$i] }}">
                                     <span class="option-price">{{ number_format($option_arr['option_price'][$i]) }}원</span>
                                 </div>
