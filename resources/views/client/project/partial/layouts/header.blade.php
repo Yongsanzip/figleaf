@@ -69,7 +69,9 @@
                 {{ $data->introduction->designer_name }}
             </p>
             <p class="owner-text">
+                @if(isset($portfolio))
                 {{ $portfolio->content_ko }}
+                @endif
             </p>
             <a href="" class="btn-green">포트폴리오로 이동</a>
         </div>
