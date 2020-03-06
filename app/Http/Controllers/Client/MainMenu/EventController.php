@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\MainMenu;
 
+use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -24,7 +25,8 @@ class EventController extends Controller {
      ************************************************************************/
     public function index(){
         try {
-            return view('client.mainMenu.event.index');
+            $datas = Project::whereCondition(array([1,2,5]))->orderBy('created_at','DESC')->limit(8)->get();
+            return view('client.mainMenu.event.index',compact('datas'));
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->error();

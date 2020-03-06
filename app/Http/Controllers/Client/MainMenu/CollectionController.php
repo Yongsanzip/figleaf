@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\MainMenu;
 
+use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,9 +14,10 @@ class CollectionController extends Controller
      * @url : /collection
      * @return view
      */
-    public function index()
-    {
-        return view('client.mainMenu.collection.index');
+    public function index() {
+
+        $datas = Project::whereCondition(array([1,2,5]))->orderBy('created_at','DESC')->limit(8)->get();
+        return view('client.mainMenu.collection.index',compact('datas'));
     }
 
     /**

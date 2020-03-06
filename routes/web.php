@@ -29,6 +29,8 @@ Route::group(['middleware'=>'locale'],function(){
     Route::resource('brand', 'Client\MainMenu\BrandController');
     // 메인 메뉴 - 뉴스 페이지
     Route::resource('news', 'Client\MainMenu\NewsController');
+    //test
+    Route::resource('menu', 'Client\MainMenu\MenuController');
     // 메인 메뉴 - Women's apparel
     Route::resource('women', 'Client\MainMenu\WomenController');
     // 메인 메뉴 - Men's apparel

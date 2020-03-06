@@ -17,6 +17,7 @@ class CreateCategoryDetailsTable extends Migration
         //컬럼 명세
         Schema::create('category_details', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('code')->unique()->nullable()->comment('카테고리코드');
             $table->bigInteger('category_id')->unsigned()->comment('1차 카테고리 id');
             $table->string('category_name', 50)->comment('2차 카테고리 이름');
             $table->timestamps();

@@ -23,7 +23,7 @@
 </head>
 <body>
 <div class="wrap">
-    @include('client.layouts.partial.header')
+    @include('client.layouts.partial.testHeader')
     @include('flash::message')
     @yield('content')
     @include('client.layouts.partial.footer')

@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             //컬럼명세
             $table->bigIncrements('id');
+            $table->string('code')->unique()->nullable()->comment('카테고리코드');
             $table->string('category_name', 50)->comment('카테고리 이름');
             $table->timestamps();
         });
