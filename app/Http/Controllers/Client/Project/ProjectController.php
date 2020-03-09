@@ -448,16 +448,16 @@ class ProjectController extends Controller
             $date_diff = ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24));                 // 남은시간 (남은 일자)
 
             $SignatureUtil = new \INIStdPayUtil();
-
             //############################################
             // 1.전문 필드 값 설정(***가맹점 개발수정***)
             //############################################
             // 여기에 설정된 값은 Form 필드에 동일한 값으로 설정
-            $mid 			= "INIBillTst";
+            $mid 			= "INIBillTst";  								                                            // 가맹점 ID(가맹점 수정후 고정)
             //인증
-            $signKey 		= "SU5JTElURV9UUklQTEVERVNfS0VZU1RS";
-            $orderNumber 	= $mid . "_" . $timestamp;
-            $price 			= "1000";        								// 상품가격(특수기호 제외, 가맹점에서 직접 설정)
+            $signKey 		= "SU5JTElURV9UUklQTEVERVNfS0VZU1RS"; 			                                            // 가맹점에 제공된 키(이니라이트키) (가맹점 수정후 고정) !!!절대!! 전문 데이터로 설정금지
+            $timestamp 		= $SignatureUtil->getTimestamp();   			                                            // util에 의해서 자동생성
+            $orderNumber 	= $mid . "_" . $timestamp; 						                                            // 가맹점 주문번호(가맹점에서 직접 설정)
+            $price 			= "1000";        								                                            // 상품가격(특수기호 제외, 가맹점에서 직접 설정)
 
             //
             //###################################
@@ -484,17 +484,9 @@ class ProjectController extends Controller
             $http_host 	= $_SERVER['HTTP_HOST'];
 
             /* 기타 */
-            $siteDomain = "http://".$_SERVER['HTTP_HOST']."/stdpay/INIStdPaySample"; //가맹점 도메인 입력
-            $timestamp = $SignatureUtil->getTimestamp();
-            $inicis_data = [];
-            $inicis_data['mid']             = "INIBillTst";                                                                 // 가맹점 ID(가맹점 수정후 고정)
-            $inicis_data['signKey']         = "SU5JTElURV9UUklQTEVERVNfS0VZU1RS";                                           // 가맹점에 제공된 키(이니라이트키) (가맹점 수정후 고정) !!!절대!! 전문 데이터로 설정금지
-            $inicis_data['timestamp']       = $timestamp;   			                                                    // util에 의해서 자동생성
-            $inicis_data['orderNumber']     = $mid . "_" . $timestamp;   			                                        // 가맹점 주문번호(가맹점에서 직접 설정)
-            $inicis_data['price']           = $datas->price;
-
-
-            return view('client.project.partial.show.index', compact('data', 'portfolio', 'communities', 'supporter_count', 'total_cost', 'date_diff', 'datas'));
+            $siteDomain = "http://".$_SERVER['HTTP_HOST']."/project/".$id; //가맹점 도메인 입력
+            return view('client.project.partial.show.index', compact('data', 'portfolio', 'communities', 'supporter_count', 'total_cost', 'date_diff', 'datas'
+                ,'mid', 'signKey', 'timestamp', 'orderNumber', 'price', 'mKey', 'sign', 'http_host','siteDomain'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
