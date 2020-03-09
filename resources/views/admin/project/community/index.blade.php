@@ -31,10 +31,10 @@
             <!-- table 20 row-->
             <table class="table-data table-normal">
                 <colgroup>
-                    <col>
-                    <col>
-                    <col>
-                    <col>
+                    <col width="320px">
+                    <col width="150px">
+                    <col width="160px">
+                    <col width="100px">
                     <col>
                     <col width="100px">
                 </colgroup>
@@ -51,20 +51,24 @@
                 <tbody>
                 @foreach($datas as $data)
                 <tr style="cursor: pointer" onclick="location.href='/admin_community/{{ $data->id }}'">
-                    <td class="text-left">{{ $data->project->title }}</td>
+                    <td class="text-left"><span class="text-overflow">{{ $data->project->title }}</span></td>
                     <td>{{ $data->created_at->format('Y-m-d h:i') }}</td>
                     <td>{{ $data->user->email }}</td>
                     <td>{{ $data->user->name }}</td>
-                    <td class="text-left">{!! $data->contents !!}</td>
+                    <td class="text-left"><span class="text-overflow">{!! $data->contents !!}</span></td>
                     <td>{{ $data->hidden_yn == 0 ? '-' : '히든' }}</td>
                 </tr>
                 @endforeach
                 <tr>
-                    <td class="text-left">끝나지 않는 나의 비지니스</td>
+                    <td class="text-left">
+                        <span class="text-overflow">끝나지 않는 나의 비지니스</span>
+                    </td>
                     <td>2019-00-00 00:00</td>
                     <td>ilovecat_koreancat@gmail.com</td>
                     <td>홍길도</td>
-                    <td class="text-left">배송 언제부터 시작되나요</td>
+                    <td class="text-left">
+                        <span class="text-overflow">배송 언제부터 시작되나요</span>
+                    </td>
                     <td>-</td>
                 </tr>
                 <tr>

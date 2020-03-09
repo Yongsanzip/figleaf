@@ -1603,4 +1603,13 @@ a:hover, a:focus {
   font-size: smaller;
 }
 
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
 /*# sourceMappingURL=style.css.map */
