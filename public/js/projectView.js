@@ -225,6 +225,13 @@ var communityDelete = function (e) {
 
 /* 후원하기 */
 var supportSubmit = function (e) {
-    document.getElementById('supportSubmitForm').submit();
+    var option_list = document.getElementsByClassName('option-item');
+    if(option_list.length == 0){
+        alert('한개이상의 옵션을 선택해주시기 바랍니다.')
+        document.getElementById('select_option').focus();
+        return false;
+    } else {
+        document.getElementById('supportSubmitForm').submit();
+    }
     // callAjax('GET',true,'/project_support',"JSON",'JSON',data,error,success);
 };
