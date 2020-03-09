@@ -7,31 +7,7 @@
 
     <main class="container">
         <!-- hero -->
-        <div class="main-hero">
-            <!-- slide -->
-            <div class="swiper-container hero-slide">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="{{asset('/images/dummy/img-dummy-10.png')}}" alt="">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{asset('/images/dummy/img-dummy-11.png')}}" alt="">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{asset('/images/dummy/img-dummy-10.png')}}" alt="">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{asset('/images/dummy/img-dummy-11.png')}}" alt="">
-                    </div>
-                </div>
-                <!-- Add Arrows -->
-                <div class="swiper-button-next hero-button-next"></div>
-                <div class="swiper-button-prev hero-button-prev"></div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination hero-pagination"></div>
-            </div>
-            <!-- //slide -->
-        </div>
+        @include('client.layouts.partial.hero')
         <!-- //hero -->
 
         <div class="inner">

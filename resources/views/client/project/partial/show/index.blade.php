@@ -2,6 +2,7 @@
 ?>
 @extends('client.layouts.app')
 @section('content')
+    <?php $page_type = 'project'?>
     <link rel="stylesheet" href="{{asset('/css/swiper.min.css')}}">
 
     <script src="{{asset('/js/projectView.js')}}"></script>

@@ -134,6 +134,11 @@ return [
     |
     */
 
+    // setting for incis information
+    'inicis_market_id' =>env('INICIS_MARKET_ID',"GBFfron687"),
+
+    'inicis_sign_key'  =>env('INICIS_SIGN_KEY',"bUxTS1RpbENPQnFuSEZvYWFtT3p0QT09"),
+
     'providers' => [
 
         /*
