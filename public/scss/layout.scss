@@ -897,14 +897,18 @@ a{
             font-size:12px;
             padding: 3px 4px;
             a{
+                color: black;
                 padding: 0px 5px;
+                border: 0px;
             }
         }
         .on{
             color:white;
             font-weight: 700;
             a{
-                background:black;
+                color: white;
+                background: black;
+                border-color: white;
             }
         }
         .prev{
