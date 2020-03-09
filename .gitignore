@@ -12,3 +12,5 @@ npm-debug.log
 yarn-error.log
 .idea
 /public/se2/upload
+/public/html/inicis
+/public/html/libs

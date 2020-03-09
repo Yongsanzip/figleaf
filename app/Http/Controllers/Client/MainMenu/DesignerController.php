@@ -29,10 +29,9 @@ class DesignerController extends Controller {
             $datas = User::whereRoleId(2)->limit(8)->with('portfolio')->has('portfolio')->get();
             return view('client.mainMenu.designer.index',compact('datas'));
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -49,10 +48,9 @@ class DesignerController extends Controller {
             $datas = Portfolio::find($id)->first();
             return view('client.mainMenu.designer.show',compact('datas'));
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 

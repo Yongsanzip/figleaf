@@ -35,10 +35,9 @@ class NoticeController {
 
             return view('admin.notice.index',compact('datas'));
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -53,10 +52,9 @@ class NoticeController {
         try {
             return view('admin.notice.partial.create.index');
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -81,10 +79,9 @@ class NoticeController {
             ]);
             return redirect(route('admin_notice.index'));
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -102,10 +99,9 @@ class NoticeController {
             $datas->save();
             return view('admin.notice.partial.show.index',compact('datas'));
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -122,10 +118,9 @@ class NoticeController {
             $datas = Notice::find($id);
             return view('admin.notice.partial.edit.index',compact('datas'));
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -140,10 +135,9 @@ class NoticeController {
         try {
             return  redirect(route('admin_note.show',['id'=>$id]));
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -159,10 +153,9 @@ class NoticeController {
             Notice::destroy($id);
             return redirect(route('admin_notice.index'));
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 }

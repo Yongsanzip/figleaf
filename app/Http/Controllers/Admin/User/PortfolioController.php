@@ -29,10 +29,9 @@ class PortfolioController  extends Controller {
             $datas = Portfolio::orderBy('created_at','desc')->paginate(15);
             return view('admin.user.portfolio.index',compact('datas'));
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -47,10 +46,9 @@ class PortfolioController  extends Controller {
         try {
 
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -65,10 +63,9 @@ class PortfolioController  extends Controller {
         try {
 
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -84,10 +81,9 @@ class PortfolioController  extends Controller {
             $datas = Portfolio::find($id);
             return view('admin.user.portfolio.partial.show.index',compact('datas'));
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -102,10 +98,9 @@ class PortfolioController  extends Controller {
         try {
 
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -128,10 +123,9 @@ class PortfolioController  extends Controller {
             }
             return redirect(route('admin_portfolio.show' ,['id'=>$id]));
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
     /************************************************************************
@@ -166,10 +160,9 @@ class PortfolioController  extends Controller {
         try {
 
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 }
