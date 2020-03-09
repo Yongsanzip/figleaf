@@ -68,12 +68,12 @@
             <p class="owner-name ko">
                 {{ $data->introduction->designer_name }}
             </p>
+            @if(isset($portfolio))
             <p class="owner-text">
-                @if(isset($portfolio))
                 {{ $portfolio->content_ko }}
-                @endif
             </p>
-            <a href="" class="btn-green">포트폴리오로 이동</a>
+            <a href="{{route('designer.show',['id'=>$portfolio->id])}}" class="btn-green">포트폴리오로 이동</a>
+            @endif
         </div>
         <!-- //owner -->
 

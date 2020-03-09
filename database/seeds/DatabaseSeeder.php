@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
 
             /******************** 테스트 데이터 ********************/
             //부가 요소
-            //PortfolioSeeder::class,
+            PortfolioSeeder::class,
             ProjectSeeder::class,
             SupportSeeder::class
         ]);
