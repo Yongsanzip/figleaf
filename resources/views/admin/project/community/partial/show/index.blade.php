@@ -35,8 +35,8 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td class="text-left">끝나지 않는 나의 비지니스</td>
-                    <td>2019-00-00</td>
+                    <td class="text-left">{{ $data->project->title }}</td>
+                    <td>{{ $data->created_at->format('Y-m-d h:i') }}</td>
                     <td>ilovecat_koreancat@gmail.com</td>
                     <td>홍길도</td>
                     <td>-</td>

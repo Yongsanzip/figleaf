@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Project;
 
+use App\Community;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +17,8 @@ class CommunityController extends Controller
     public function index()
     {
         try {
-            return view('admin.project.community.index');
+            $datas = Community::orderBy('created_at', 'desc')->get();
+            return view('admin.project.community.index', compact('datas'));
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->error();
@@ -70,7 +72,8 @@ class CommunityController extends Controller
     public function show($id)
     {
         try {
-            return view('admin.project.community.show.index');
+            $data = Community::find($id);
+            return view('admin.project.community.partial.show.index', compact('data'));
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->error();

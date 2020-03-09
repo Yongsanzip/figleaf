@@ -3,7 +3,6 @@
 ?>
 @extends('admin.layouts.app')
 @section('content')
-
     <div class="contents-wrap">
         <!-- contesnts-inner -->
         <div class="contents-inner">
@@ -50,14 +49,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td class="text-left">끝나지 않는 나의 비지니스</td>
-                    <td>2019-00-00 00:00</td>
-                    <td>ilovecat_koreancat@gmail.com</td>
-                    <td>홍길도</td>
-                    <td class="text-left">배송 언제부터 시작되나요</td>
-                    <td>-</td>
+                @foreach($datas as $data)
+                <tr style="cursor: pointer" onclick="location.href='/admin_community/{{ $data->id }}'">
+                    <td class="text-left">{{ $data->project->title }}</td>
+                    <td>{{ $data->created_at->format('Y-m-d h:i') }}</td>
+                    <td>{{ $data->user->email }}</td>
+                    <td>{{ $data->user->name }}</td>
+                    <td class="text-left">{!! $data->contents !!}</td>
+                    <td>{{ $data->hidden_yn == 0 ? '-' : '히든' }}</td>
                 </tr>
+                @endforeach
                 <tr>
                     <td class="text-left">끝나지 않는 나의 비지니스</td>
                     <td>2019-00-00 00:00</td>

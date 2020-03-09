@@ -32,6 +32,7 @@ class ProjectSeeder extends Seeder
                 'success_count'         => 20,
                 'comment'               => 'TEST',
                 'deadline'              => '2020-03-01',
+                'account_date'          => '2020-03-30',
                 'delivery_date'         => '2020-03-01',
                 'agree'                 => 'Y',
                 'delay_date'            => 7,

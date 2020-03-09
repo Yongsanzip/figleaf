@@ -18,6 +18,10 @@ class Community extends Model {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
+    public function project() {
+        return $this->belongsTo('App\Project', 'project_id', 'id');
+    }
+
     /*******************************************************************
      * @return HasMany
      *******************************************************************/
