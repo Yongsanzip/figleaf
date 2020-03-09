@@ -393,11 +393,13 @@ button{
 
 .category-title-wrap {
     font-size: 32px;
-    font-weight: 300;
     letter-spacing: 10px;
     text-transform: uppercase;
     padding-bottom: 64px;
     text-align: center;
+    .category-title, h2{
+        font-weight: 300;
+    }
 }
 
 .category-detail-list {
@@ -3205,6 +3207,8 @@ button{
                                 box-sizing: border-box;
                                 text-align: center;
                                 border: 1px solid #cccccc;
+                                height: 20px;
+                                font-size: 14px;
                             }
 
                             .option-price {

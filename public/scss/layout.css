@@ -831,7 +831,7 @@ a:hover, a:focus {
   color: white;
   font-size: 14px;
   height: 40px;
-  line-height: 40px;
+  line-height: 36px;
   text-align: center;
   text-transform: uppercase;
   font-weight: 500;
@@ -846,7 +846,7 @@ a:hover, a:focus {
   border: 1px solid black;
   font-size: 14px;
   height: 40px;
-  line-height: 40px;
+  line-height: 36px;
   text-align: center;
   text-transform: uppercase;
   font-weight: 500;
@@ -899,18 +899,14 @@ a:hover, a:focus {
   padding: 3px 4px;
 }
 .pagination-wrap .pagination li a {
-    color: black;
   padding: 0px 5px;
-    border: 0px;
 }
 .pagination-wrap .pagination .on {
   color: white;
   font-weight: 700;
 }
 .pagination-wrap .pagination .on a {
-    color: white;
   background: black;
-    border-color: white;
 }
 .pagination-wrap .pagination .prev {
   font-size: 0;
