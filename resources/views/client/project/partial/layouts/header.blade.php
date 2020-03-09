@@ -118,8 +118,8 @@
                     @endif
                 </ul>
                 <div class="btn-wrap">
-                    <?/*<button class="btn-white" type="button" onclick="supportSubmit(this.parentElement.parentElement)">후원하기</button>*/?>\
-                    <button class="btn-white" type="button" onclick="paybtn();">후원하기</button>
+                   <button class="btn-white" type="button" onclick="supportSubmit(this.parentElement.parentElement)">후원하기</button>
+<?/*                    <button class="btn-white" type="button" onclick="paybtn();">후원하기</button>*/?>
                     <!-- <a class="btn-white" href="">후원내역 상세보기</a> -->
                     <!-- <a class="btn-white" href="">프로젝트 관리하기</a> -->
                     <button class="btn-black" type="button" onclick="fnOpenModal()">디자이너에게 문의하기</button>
