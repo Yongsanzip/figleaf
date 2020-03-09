@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\MyPage;
 
+use App\Community;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +16,8 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        return view('client.mypage.community.index');
+        $datas = Community::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(15);
+        return view('client.mypage.community.index', compact('datas'));
     }
 
     /**
