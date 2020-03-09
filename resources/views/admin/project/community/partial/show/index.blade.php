@@ -37,9 +37,9 @@
                 <tr>
                     <td class="text-left">{{ $data->project->title }}</td>
                     <td>{{ $data->created_at->format('Y-m-d h:i') }}</td>
-                    <td>ilovecat_koreancat@gmail.com</td>
-                    <td>홍길도</td>
-                    <td>-</td>
+                    <td>{{ $data->user->email }}</td>
+                    <td>{{ $data->user->name }}</td>
+                    <td id="hidden_name">{{ $data->hidden_yn == 0 ? '-' : '히든' }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -47,35 +47,57 @@
 
             <!-- contents -->
             <p class="text-contents-gray mt-20">
-                놀이 전인 불러 이상이 눈에 풍부하게 뿐이다. 쓸쓸한 크고 인생을 찾아 황금시대의 가는 살았으며, 얼마나 것이다. 있으며, 그림자는 품고 약동하다. 인류의 사랑의 곳으로 미묘한 안고, 일월과 얼음이
-                것이다. 끓는 찬미를 무한한 가는 충분히 것이다. 청춘의 날카로우나 꾸며 생명을 천고에 지혜는 사막이다. 고동을 열락의 그들은 가슴에 뜨거운지라, 넣는 인생을 불어 그들은 것이다. 위하여 청춘 타오르고
-                같이, 같은 예수는 피부가 철환하였는가? 찬미를 되려니와, 구할 노래하며 거친 할지니, 시들어 천하를 실현에 봄바람이다. 이것을 청춘의 앞이 피부가 천자만홍이 것이다.보라, 그러므로 운다.
-
-                때까지 곳으로 투명하되 석가는 구하기 청춘을 속에 약동하다. 때에, 위하여 것은 뭇 인간이 남는 만물은 위하여 있는가? 것은 하였으며, 물방아 얼마나 인생에 뛰노는 찾아다녀도, 가슴이 것이다. 전인 싸인
-                예가 맺어, 피다. 수 장식하는 유소년에게서 귀는 것이다. 따뜻한 길지 소리다.이것은 이 행복스럽고 끓는 보이는 있다. 사랑의 설산에서 관현악이며, 방황하였으며, 석가는 있는 바로 것이다. 얼마나 하여도
-                넣는 미인을 수 무엇이 얼마나 피가 그러므로 것이다. 열매를 유소년에게서 끝까지 위하여, 교향악이다. 피부가 그들은 장식하는 같으며, 그들에게 끓는다. 그들의 풀이 너의 이상 그들에게 기쁘며,
-                그리하였는가?
-
-                이것이야말로 가는 오아이스도 그러므로 것은 교향악이다. 광야에서 싹이 하여도 가는 모래뿐일 곧 것이다. 사람은 스며들어 힘차게 같이, 끓는 몸이 아니더면, 얼마나 운다. 위하여 온갖 따뜻한 사막이다.
-                인생의 능히 않는 말이다. 주며, 낙원을 피고 너의 가치를 무엇을 인간은 철환하였는가? 인간의 구하기 얼마나 품에 이것이다. 보내는 거친 힘차게 이상이 뜨고, 주는 이상의 것이다. 구하지 피가 방황하여도,
-                아니한 무엇을 꽃이 것이다. 하였으며, 우리 있음으로써 간에 무한한 전인 약동하다.이것이야말로 가는 오아이스도 그러므로 것은 교향악이다. 광야에서 싹이 하여도 가는 모래뿐일 곧 것이다. 사람은 스며들어
-                힘차게 같이, 끓는 몸이 아니더면, 얼마나 운다. 위하여 온갖 따뜻한 사막이다. 인생의 능히 않는 말이다. 주며, 낙원을 피고 너의 가치를 무엇을 인간은 철환하였는가? 인간의 구하기 얼마나 품에 이것이다.
-                보내는 거친 힘차게 이상이 뜨고, 주는 이상의 것이다. 구하지 피가 방황하여도, 아니한 무엇을 꽃이 것이다. 하였으며, 우리 있음으로써 간에 무한한 전인 약동하다.이것이야말로 가는 오아이스도 그러므로 것은
-                교향악이다. 광야에서 싹이 하여도 가는 모래뿐일 곧 것이다. 사람은 스며들어 힘차게 같이, 끓는 몸이 아니더면, 얼마나 운다. 위하여 온갖 따뜻한 사막이다. 인생의 능히 않는 말이다. 주며, 낙원을 피고
-                너의 가치를 무엇을 인간은 철환하였는가? 인간의 구하기 얼마나 품에 이것이다. 보내는 거친 힘차게 이상이 뜨고, 주는 이상의 것이다. 구하지 피가 방황하여도, 아니한 무엇을 꽃이 것이다. 하였으며, 우리
-                있음으로써 간에 무한한 전인 약동하다.이것이야말로 가는 오아이스도 그러므로 것은 교향악이다. 광야에서 싹이 하여도 가는 모래뿐일 곧 것이다. 사람은 스며들어 힘차게 같이, 끓는 몸이 아니더면, 얼마나
-                운다. 위하여 온갖 따뜻한 사막이다. 인생의 능히 않는 말이다. 주며, 낙원을 피고 너의 가치를 무엇을 인간은 철환하였는가? 인간의 구하기 얼마나 품에 이것이다. 보내는 거친 힘차게 이상이 뜨고, 주는
-                이상의 것이다. 구하지 피가 방황하여도, 아니한 무엇을 꽃이 것이다. 하였으며, 우리 있음으로써 간에 무한한 전인 약동하다.
+                {!! $data->contents !!}
             </p>
             <!-- //contents -->
 
             <!-- row -->
             <div class="row text-right mt-20">
-                <button class="btn-m btn-white w-100px">목록</button>
-                <button class="btn-m btn-black w-100px">히든 처리</button>
+                <button type="button" class="btn-m btn-white w-100px" onclick="location.href='{{ $url }}'">목록</button>
+                <button type="button" class="btn-m btn-black w-100px" id="hidden_btn">히든 처리</button>
             </div>
         </div>
         <!-- //contesnts-inner -->
     </div>
+
+    <script>
+        document.getElementById('hidden_btn').addEventListener('click', function () {
+            var hidden_yn = 0;
+            var hidden_name = document.getElementById('hidden_name').textContent;
+            var msg = '';
+
+            if (hidden_name === '히든') {
+                hidden_yn = 1;
+            }
+
+            var data = {
+                id: "{{ $data->id }}",
+                hidden_yn: hidden_yn
+            };
+
+            var error = function () {
+                alert('오류');
+            };
+
+            var success = function (data) {
+                if (data === 'hidden_y') {
+                    document.getElementById('hidden_name').textContent = '히든';
+                } else {
+                    document.getElementById('hidden_name').textContent = '-';
+                }
+                alert('완료되었습니다.');
+            };
+
+            if (hidden_yn == 0) {
+                msg = '히든처리 하시겠습니까?';
+            } else {
+                msg = '히든처리해제 하시겠습니까?';
+            }
+
+            if (confirm(msg)) {
+                callAjax('POST',true,'/admin_community/',"JSON",'JSON',data,error,success);
+            }
+        });
+    </script>
 
 @endsection
