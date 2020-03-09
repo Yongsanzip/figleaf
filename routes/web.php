@@ -134,7 +134,9 @@ Route::group(['middleware'=>'only_admin'],function(){
         'index', 'store'
     ]);
 // 관리자 커뮤니티
-    Route::resource('admin_community', 'Admin\Project\CommunityController');
+    Route::resource('admin_community', 'Admin\Project\CommunityController')->only([
+        'index', 'store', 'show'
+    ]);
 // 관리자 회원 - 회원정보
     Route::resource('admin_information', 'Admin\User\InformationController');
 // 관리자 회원 - 메시지

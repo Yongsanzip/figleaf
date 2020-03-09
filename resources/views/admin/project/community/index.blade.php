@@ -15,17 +15,21 @@
 
             <!-- search -->
             <div class="search">
+                <form action="{{ route('admin_community.index') }}" method="GET">
                 <div class="search-select">
-                    <select>
+                    <select name="search">
                         <option disabled selected>- 검색기준 -</option>
-                        <option>검색기준</option>
-                        <option>검색기준</option>
+                        <option value="title" {{ $search == 'title' ? 'selected' : '' }}>프로젝트명</option>
+                        <option value="email" {{ $search == 'email' ? 'selected' : '' }}>이메일</option>
+                        <option value="name" {{ $search == 'name' ? 'selected' : '' }}>작성자명</option>
+                        <option value="contents" {{ $search == 'contents' ? 'selected' : '' }}>내용</option>
                     </select>
                 </div>
                 <div class="search-keyword">
-                    <input type="text" placeholder="검색어를 입력하세요" spellcheck="false">
+                    <input type="text" name="keyword" value="{{ $keyword }}" placeholder="검색어를 입력하세요" spellcheck="false">
                     <button>검색</button>
                 </div>
+                </form>
             </div>
 
             <!-- table 20 row-->
@@ -59,94 +63,15 @@
                     <td>{{ $data->hidden_yn == 0 ? '-' : '히든' }}</td>
                 </tr>
                 @endforeach
-                <tr>
-                    <td class="text-left">
-                        <span class="text-overflow">끝나지 않는 나의 비지니스</span>
-                    </td>
-                    <td>2019-00-00 00:00</td>
-                    <td>ilovecat_koreancat@gmail.com</td>
-                    <td>홍길도</td>
-                    <td class="text-left">
-                        <span class="text-overflow">배송 언제부터 시작되나요</span>
-                    </td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td class="text-left">끝나지 않는 나의 비지니스</td>
-                    <td>2019-00-00 00:00</td>
-                    <td>ilovecat_koreancat@gmail.com</td>
-                    <td>홍길도</td>
-                    <td class="text-left">배송 언제부터 시작되나요</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td class="text-left">끝나지 않는 나의 비지니스</td>
-                    <td>2019-00-00 00:00</td>
-                    <td>ilovecat_koreancat@gmail.com</td>
-                    <td>홍길도</td>
-                    <td class="text-left">배송 언제부터 시작되나요</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td class="text-left">끝나지 않는 나의 비지니스</td>
-                    <td>2019-00-00 00:00</td>
-                    <td>ilovecat_koreancat@gmail.com</td>
-                    <td>홍길도</td>
-                    <td class="text-left">배송 언제부터 시작되나요</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td class="text-left">끝나지 않는 나의 비지니스</td>
-                    <td>2019-00-00 00:00</td>
-                    <td>ilovecat_koreancat@gmail.com</td>
-                    <td>홍길도</td>
-                    <td class="text-left">배송 언제부터 시작되나요</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td class="text-left">끝나지 않는 나의 비지니스</td>
-                    <td>2019-00-00 00:00</td>
-                    <td>ilovecat_koreancat@gmail.com</td>
-                    <td>홍길도</td>
-                    <td class="text-left">배송 언제부터 시작되나요</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td class="text-left">끝나지 않는 나의 비지니스</td>
-                    <td>2019-00-00 00:00</td>
-                    <td>ilovecat_koreancat@gmail.com</td>
-                    <td>홍길도</td>
-                    <td class="text-left">배송 언제부터 시작되나요</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td class="text-left">끝나지 않는 나의 비지니스</td>
-                    <td>2019-00-00 00:00</td>
-                    <td>ilovecat_koreancat@gmail.com</td>
-                    <td>홍길도</td>
-                    <td class="text-left">배송 언제부터 시작되나요</td>
-                    <td>-</td>
-                </tr>
-
                 </tbody>
             </table>
             <!-- //table type1 -->
 
             <!-- paginiation -->
             <nav class="pagination-wrap">
-                <ul class="pagination">
-                    <li><a> preview </a></li>
-                    <li class="active"><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>4</a></li>
-                    <li><a>5</a></li>
-                    <li><a>6</a></li>
-                    <li><a>7</a></li>
-                    <li><a>8</a></li>
-                    <li><a>9</a></li>
-                    <li><a> next </a></li>
-                </ul>
+                @if($datas->count())
+                    {!! $datas->appends(request()->except('page'))->render() !!}
+                @endif
             </nav>
             <!-- //pagination -->
 
