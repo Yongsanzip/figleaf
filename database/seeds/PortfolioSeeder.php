@@ -84,7 +84,7 @@ class PortfolioSeeder extends Seeder
                 'end_year'=>'2020',
                 'association_ko'=>$faker->text(20)
             ]);
-            for($i = 1 ; $i<3; $i++){
+            for($t = 1 ; $t<3; $t++){
                 $look_book = LookBook::firstOrCreate([
                     'portfolio_id' =>$portfolio->id,
                     'season'=>'F/W',

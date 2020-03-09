@@ -56,7 +56,7 @@
                 @foreach($datas as $data)
                 <tr style="cursor: pointer" onclick="location.href='/admin_community/{{ $data->id }}'">
                     <td class="text-left"><span class="text-overflow">{{ $data->project->title }}</span></td>
-                    <td>{{ $data->created_at->format('Y-m-d h:i') }}</td>
+                    <td>{{ $data->created_at->format('Y-m-d H:i') }}</td>
                     <td>{{ $data->user->email }}</td>
                     <td>{{ $data->user->name }}</td>
                     <td class="text-left"><span class="text-overflow">{!! $data->contents !!}</span></td>

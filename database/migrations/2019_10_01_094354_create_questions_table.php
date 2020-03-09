@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             //컬럼 명세
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned()->comment('유저 id');
-            $table->bigInteger('answer_user_id')->unsigned()->comment('관리자(답변자) id');
+            $table->bigInteger('answer_user_id')->unsigned()->nullable()->comment('관리자(답변자) id');
             $table->string('title')->comment('제목');
             $table->text('content')->comment('내용');
             $table->text('answer')->nullable()->comment('답변');

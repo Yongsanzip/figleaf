@@ -36,7 +36,7 @@
                 <tbody>
                 <tr>
                     <td class="text-left">{{ $data->project->title }}</td>
-                    <td>{{ $data->created_at->format('Y-m-d h:i') }}</td>
+                    <td>{{ $data->created_at->format('Y-m-d H:i') }}</td>
                     <td>{{ $data->user->email }}</td>
                     <td>{{ $data->user->name }}</td>
                     <td id="hidden_name">{{ $data->hidden_yn == 0 ? '-' : '히든' }}</td>

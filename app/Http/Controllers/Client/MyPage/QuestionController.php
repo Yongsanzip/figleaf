@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers\Client\MyPage;
 
+use App\Question;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class QuestionController extends Controller
 {
+
+    protected $rules;
+
+    public function __construct()
+    {
+        $this->rules = [
+            'title'           => 'required',
+            'contents'        => 'required',
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      * @description 마이페이지 - 1:1 문의
@@ -15,7 +28,8 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return view('client.mypage.question.index');
+        $datas = Question::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(15);
+        return view('client.mypage.question.index', compact('datas'));
     }
 
     /**
@@ -30,13 +44,24 @@ class QuestionController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @description 마이페이지 - 1:1 문의 하기 저장
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),$this->rules);
+        if($validator->fails()){
+            return back()->withErrors($validator)->withInput();
+        }
+
+        Question::create([
+            'user_id'       => auth()->user()->id,
+            'title'         => $request->title,
+            'content'       => $request->contents,
+        ]);
+
+        return redirect('/mypage_question');
     }
 
     /**
@@ -47,7 +72,9 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        return view('client.mypage.question.partial.show.index');
+        $data = Question::find($id);
+        $url = url()->previous();
+        return view('client.mypage.question.partial.show.index', compact('data', 'url'));
     }
 
     /**
@@ -81,6 +108,9 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        error_log('delete');
+        error_log($id);
+        Question::where('id', $id)->delete();
+        return response()->json('success', 200, [], JSON_PRETTY_PRINT);
     }
 }
