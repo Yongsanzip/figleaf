@@ -63,10 +63,9 @@ class ProjectController extends Controller
             return view('admin.project.index', compact('datas', 'option', 'keyword', 'status', 'categories', 'search_category'));
 
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -98,10 +97,9 @@ class ProjectController extends Controller
             }
             return response()->json('success', 200, [], JSON_PRETTY_PRINT);
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -121,10 +119,9 @@ class ProjectController extends Controller
 
             return view('admin.project.partial.show.index', compact('data', 'supporter_count'));
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 
@@ -143,10 +140,9 @@ class ProjectController extends Controller
 
             return Storage::download($path);
         } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            // return redirect(route('url'));
-            return back();
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
         }
     }
 }

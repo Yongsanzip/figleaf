@@ -487,5 +487,98 @@
     </main>
 
 
+    <?
+        /*<form id="SendPayForm_id" name="" method="POST" >
+        <!-- 필수 -->
+        <br/><b>***** 필 수 *****</b>
+        <div style="border:2px #dddddd double;padding:10px;background-color:#f3f3f3;">
+            <br/><input type="hidden" name="version" value="1.0" >
 
+            <br/><b>mid</b> :
+            <br/><input type="hidden" name="mid" value="<?php echo $mid ?>" >
+
+            <br/><b>goodname</b> :
+            <br/><input type="hidden" name="goodname" value="테스트" >
+
+            <br/><b>oid</b> :
+            <br/><input type="hidden" name="oid" value="<?php echo $orderNumber ?>" >
+
+            <br/><b>price</b> :
+            <br/><input type="hidden"  name="price" value="<?php echo $price ?>" >
+
+            <br/><b>currency</b> :
+            <br/>[WON|USD]
+            <br/><input type="hidden"  name="currency" value="WON" >
+
+            <br/><b>buyername</b> :
+            <br/><input type="hidden"  name="buyername" value="홍길동" >
+
+            <br/><b>buyertel</b> :
+            <br/><input type="hidden"  name="buyertel" value="010-1234-5678" >
+
+            <br/><b>buyeremail</b> :
+            <br/><input type="hidden"  name="buyeremail" value="test@inicis.com" >
+
+            <!-- <br/><b>timestamp</b> : -->
+            <input type="hidden"  style="width:100%;" name="timestamp" value="<?php echo $timestamp ?>" >
+            <br/>
+
+            <!-- <br/><b>signature</b> : -->
+            <input type="hidden" style="width:100%;" name="signature" value="<?php echo $sign ?>" >
+            <br/><b>returnUrl</b> :
+            <br/><input type="hidden"  name="returnUrl" value="<?php echo $siteDomain ?>/INIStdPayReturn.php" >
+
+            <input type="hidden"  name="mKey" value="<?php echo $mKey ?>" >
+        </div>
+
+        <br/><br/>
+        <b>***** 기본 옵션 *****</b>
+        <div style="border:2px #dddddd double;padding:10px;background-color:#f3f3f3;">
+            <br/><input type="hidden" style="width:100%;" name="gopaymethod" value="" >
+            <b>offerPeriod</b> : 제공기간
+            <br/>ex)20150101-20150331, [Y2:년단위결제, M2:월단위결제, yyyyMMdd-yyyyMMdd : 시작일-종료일]
+            <br/><input type="hidden"  name="offerPeriod" value="20160101-20161231" >
+            <br/>
+            <br/><b>acceptmethod</b> :
+            <br/>ex)  billauth(card) , billauth(hpp)
+            <br/><input type="hidden"  id="acceptmethod" name="acceptmethod" value="billauth(card)" >
+            <br/>
+            <b>결제일 알림 메세지</b> : 결제일 알림 메세지
+            <br/><input type="hidden"  id="billPrint_msg" name="billPrint_msg" value="고객님의 매월 결제일은 24일 입니다." >
+        </div>
+
+        <br/><br/>
+        <b>***** 표시 옵션 *****</b>
+        <div style="border:2px #dddddd double;padding:10px;background-color:#f3f3f3;">
+            <br/><b>languageView</b> : 초기 표시 언어
+            <br/>[ko|en] (default:ko)
+            <br/><input type="hidden"  name="languageView" value="" >
+            <br/>
+            <br/><b>charset</b> : 리턴 인코딩
+            <br/>[UTF-8|EUC-KR] (default:UTF-8)
+            <br/><input type="hidden"  name="charset" value="" >
+            <br/>
+            <br/><b>payViewType</b> : 결제창 표시방법
+            <br/>[overlay] (default:overlay)
+            <br/><input type="hidden"  name="payViewType" value="" >
+            <br/>
+            <br/><b>closeUrl</b> : payViewType='overlay','popup'시 취소버튼 클릭시 창닥기 처리 URL(가맹점에 맞게 설정)
+            <br/>close.jsp 샘플사용(생략가능, 미설정시 사용자에 의해 취소 버튼 클릭시 인증결과 페이지로 취소 결과를 보냅니다.)
+            <br/><input type="hidden"  name="closeUrl" value="<?php echo $siteDomain ?>/close.php" >
+            <br/>
+            <br/><b>popupUrl</b> : payViewType='popup'시 팝업을 띄울수 있도록 처리해주는 URL(가맹점에 맞게 설정)
+            <br/>popup.jsp 샘플사용(생략가능,payViewType='popup'으로 사용시에는 반드시 설정)
+            <br/><input  type="hidden" name="popupUrl" value="<?php echo $siteDomain ?>/popup.php" >
+
+        </div>
+
+        <br/><br/>
+        <b>***** 추가 옵션 *****</b>
+        <div style="border:2px #dddddd double;padding:10px;background-color:#f3f3f3;">
+            <br/><b>merchantData</b> : 가맹점 관리데이터(2000byte)
+            <br/>인증결과 리턴시 함께 전달됨
+            <br/><input  type="hidden"  name="merchantData" value="" >
+        </div>
+    </form>*/
+    ?>
 @endsection

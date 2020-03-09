@@ -33,7 +33,7 @@
 </head>
 <body>
 <h1>{{ $title }}</h1>
-<p>{{ $description }}</p>
+<p>{!! $description !!}</p>
 <p>
     <button class="btn-black" onclick="history.back();">뒤로가기</button>
 </p>
