@@ -3,6 +3,10 @@ button {
   outline: none;
 }
 
+.row {
+  margin: auto;
+}
+
 /***** main page *****/
 .main-hero .hero-slide {
   height: 600px;
@@ -3203,6 +3207,15 @@ button {
   font-size: 24px;
   font-weight: 300;
   margin-bottom: 16px;
+}
+.con-project-view .sponsor-form .sponsor-item .title-wrap .title {
+  display: inline-block;
+}
+.con-project-view .sponsor-form .sponsor-item .title-wrap .checkbox-wrap {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 12px;
+  margin-top: 12px;
 }
 .con-project-view .sponsor-form .sponsor-item .textarea {
   width: 100%;

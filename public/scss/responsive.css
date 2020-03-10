@@ -1186,6 +1186,10 @@
     margin-bottom: 8px;
     padding: 0 12px;
   }
+  .con-project-view .sponsor-form .sponsor-item .title-wrap .checkbox-wrap {
+    margin-left: 5px;
+    margin-top: 8px;
+  }
   .con-project-view .sponsor-form .sponsor-item .sponsor-box {
     padding: 24px 16px;
   }

@@ -7,6 +7,9 @@ $cleaningPath: '../images/cleaning';
 button{
     outline: none;
 }
+.row{
+    margin: auto;
+}
 
 /***** main page *****/
 .main-hero {
@@ -3924,7 +3927,17 @@ button{
                 font-weight: 300;
                 margin-bottom: 16px;
             }
-
+            .title-wrap{
+                .title{
+                    display: inline-block;
+                }
+                .checkbox-wrap{
+                    display: inline-block;
+                    vertical-align: top;
+                    margin-left: 12px;
+                    margin-top: 12px;
+                }
+            }
             .textarea {
                 width: 100%;
                 padding: 10px;

@@ -31,12 +31,14 @@
                                 </div>
                             </div>
                             <div class="sponsor-item">
-                                <h3 class="title">배송지 정보</h3>
-                                <div class="sponsor-box">
-                                    <div class="row">
-                                        <p class="option-name">후원자 정보와 동일</p>
+                                <div class="title-wrap">
+                                    <h3 class="title">배송지 정보</h3>
+                                    <label class="checkbox-wrap">
                                         <input type="checkbox" onchange="fn_get_user_info(this);" placeholder="이름" class="input-field required">
-                                    </div>
+                                        <p>후원자 정보와 동일</p>
+                                    </label>
+                                </div>
+                                <div class="sponsor-box">
                                     <div class="row">
                                         <p class="option-name">받는 분</p>
                                         <input type="text" placeholder="이름" class="input-field required" data-title="받는 분">
