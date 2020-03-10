@@ -11,6 +11,8 @@ class UserTableSeeder extends Seeder
      * @return void
      */
     public function run() {
+        $faker = \Faker\Factory::create();
+
         \App\User::firstOrCreate([
             'role_id' => 4,
             'email' => 'admin@figleaf.com',
@@ -33,10 +35,10 @@ class UserTableSeeder extends Seeder
         for($i=1;$i<5;$i++){
             DB::table('users')->insert([
                 'role_id' => 2,
-                'email' => 'test'.$i.'@test.com',
+                'email' => 'design'.$i.'@figleaf.com',
                 'password' => bcrypt('123123'),
                 'user_code' => encrypt(date('YmdHmi').\Illuminate\Support\Str::random(10)),
-                'name' => '테스트'.$i,
+                'name' => $faker->name,
                 'home_phone' => '0212341234',
                 'cellphone' => '01012341234',
                 'zip_code' => '11111',
@@ -52,16 +54,16 @@ class UserTableSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:i:s', time()),
             ]);
         }
-
+        for($i=1;$i<5;$i++){
             DB::table('users')->insert([
                 'role_id' => 2,
-                'email' => 'deyeo@yongsanzip.com',
+                'email' => 'test'.$i.'@figleaf.com',
                 'password' => bcrypt('123123'),
                 'user_code' => encrypt(date('YmdHmi').\Illuminate\Support\Str::random(10)),
-                'name' => '테스트'.$i,
-                'home_phone' => '0278992475',
-                'cellphone' => '01087521756',
-                'zip_code' => '14451',
+                'name' => $faker->name,
+                'home_phone' => '0212341234',
+                'cellphone' => '01012341234',
+                'zip_code' => '11111',
                 'address' => '서울특별시 용산구 문배동 3-3',
                 'address_detail' => '105~108호',
                 'gender' => 0,
@@ -73,5 +75,6 @@ class UserTableSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s', time()),
                 'updated_at' => date('Y-m-d H:i:s', time()),
             ]);
+        }
     }
 }

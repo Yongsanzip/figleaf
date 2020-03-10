@@ -17,9 +17,9 @@ class PortfolioSeeder extends Seeder
     public function run()
     {
         $faker = \Faker\Factory::create();
-        for($i=1;$i<5;$i++) {
+        for($i=1;$i<6;$i++) {
             $portfolio = \App\Portfolio::create([
-                'user_id'       => $i,
+                'user_id'       => $i+1,
                 'content_ko'    => $faker->text(300),
                 'content_cn'    => $faker->text(300),
                 'content_en'    => $faker->text(300),
@@ -60,7 +60,7 @@ class PortfolioSeeder extends Seeder
             ]);
             \App\PortfolioImage::create([                                                                                // 포트폴리오 이미지 등록
                 'portfolio_id'      => $portfolio->id,
-                'image_division'    => 2,
+                'image_division'    => 3,
                 'image_type'        =>'jpg',
                 'image_path'        =>'images/portfolio_dummy/a'.$i.'.jpg',
                 'origin_name'       =>'dummy'.$i,

@@ -31,7 +31,7 @@
 
             <!-- 포트폴리오 컨텐츠  -->
             <div class="portfolio-contents">
-                <img src="{{ count($datas->portfolio_images) > 0 ? asset('storage/'.( $datas->portfolio_images->first()->image_path )) : '#'}}" alt="">
+                <img src="{{ count($datas->portfolio_images) > 0 ? asset('storage/'.( $datas->portfolio_images->first()->image_path )) : '#'}}" alt="" style=" margin-left: auto; margin-right: auto; width: 50%;">
                 <p class="">
                     @if( app()->getLocale() =='ko')
                         {{ $datas->content_ko ? $datas->content_ko : ''}}
