@@ -24,7 +24,7 @@ class ProjectSeeder extends Seeder
                 'supporter'             => 0,
                 'count'                 => 0,
                 'condition'             => 1,
-                'title'                 => $faker->title,
+                'title'                 => $faker->text(20),
                 'summary'               => '개요입니다.',
                 'success_count'         => 20,
                 'comment'               => 'TEST',
@@ -43,7 +43,7 @@ class ProjectSeeder extends Seeder
              for ($j = 0; $j < 2; $j++){
                  \Illuminate\Support\Facades\DB::table('options')->insert([
                      'project_id'            => $project->id,
-                     'option_name'           => $faker->words,
+                     'option_name'           => $faker->text(10),
                      'price'                 => 5000+5000*($j % 2),
                      'created_at' => date('Y-m-d H:i:s', time()),
                      'updated_at' => date('Y-m-d H:i:s', time()),
