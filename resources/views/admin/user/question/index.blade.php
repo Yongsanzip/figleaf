@@ -32,110 +32,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>2019-00-00 00:00</td>
-                    <td>송칠득</td>
-                    <td>ilovebird@gmail.com</td>
-                    <td class="text-left">나 이거 궁금쓰</td>
-                    <td>완료</td>
+                @foreach($datas as $data)
+                <tr style="cursor: pointer" onclick="location.href='/admin_question/{{ $data->id }}'">
+                    <td>{{ $data->created_at->format('Y-m-d H:i') }}</td>
+                    <td>{{ $data->user->name }}</td>
+                    <td>{{ $data->user->email }}</td>
+                    <td class="text-left">{{ $data->title }}</td>
+                    <td>{{ $data->answer_yn == 0 ? '-' : '완료' }}</td>
                 </tr>
-                <tr>
-                    <td>2019-00-00 00:00</td>
-                    <td>송칠득</td>
-                    <td>ilovebird@gmail.com</td>
-                    <td class="text-left">나 이거 궁금쓰</td>
-                    <td>완료</td>
-                </tr>
-                <tr>
-                    <td>2019-00-00 00:00</td>
-                    <td>송칠득</td>
-                    <td>ilovebird@gmail.com</td>
-                    <td class="text-left">나 이거 궁금쓰</td>
-                    <td>완료</td>
-                </tr>
-                <tr>
-                    <td>2019-00-00 00:00</td>
-                    <td>송칠득</td>
-                    <td>ilovebird@gmail.com</td>
-                    <td class="text-left">나 이거 궁금쓰</td>
-                    <td>완료</td>
-                </tr>
-                <tr>
-                    <td>2019-00-00 00:00</td>
-                    <td>송칠득</td>
-                    <td>ilovebird@gmail.com</td>
-                    <td class="text-left">나 이거 궁금쓰</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>2019-00-00 00:00</td>
-                    <td>송칠득</td>
-                    <td>ilovebird@gmail.com</td>
-                    <td class="text-left">나 이거 궁금쓰</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>2019-00-00 00:00</td>
-                    <td>송칠득</td>
-                    <td>ilovebird@gmail.com</td>
-                    <td class="text-left">나 이거 궁금쓰</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>2019-00-00 00:00</td>
-                    <td>송칠득</td>
-                    <td>ilovebird@gmail.com</td>
-                    <td class="text-left">나 이거 궁금쓰</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>2019-00-00 00:00</td>
-                    <td>송칠득</td>
-                    <td>ilovebird@gmail.com</td>
-                    <td class="text-left">나 이거 궁금쓰</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>2019-00-00 00:00</td>
-                    <td>송칠득</td>
-                    <td>ilovebird@gmail.com</td>
-                    <td class="text-left">나 이거 궁금쓰</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>2019-00-00 00:00</td>
-                    <td>송칠득</td>
-                    <td>ilovebird@gmail.com</td>
-                    <td class="text-left">나 이거 궁금쓰</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>2019-00-00 00:00</td>
-                    <td>송칠득</td>
-                    <td>ilovebird@gmail.com</td>
-                    <td class="text-left">나 이거 궁금쓰</td>
-                    <td>-</td>
-                </tr>
-
+                @endforeach
                 </tbody>
             </table>
             <!-- //table type1 -->
 
             <!-- paginiation -->
             <nav class="pagination-wrap">
-                <ul class="pagination">
-                    <li><a> preview </a></li>
-                    <li class="active"><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>4</a></li>
-                    <li><a>5</a></li>
-                    <li><a>6</a></li>
-                    <li><a>7</a></li>
-                    <li><a>8</a></li>
-                    <li><a>9</a></li>
-                    <li><a> next </a></li>
-                </ul>
+                @if($datas->count())
+                    {!! $datas->appends(request()->except('page'))->render() !!}
+                @endif
             </nav>
             <!-- //pagination -->
 

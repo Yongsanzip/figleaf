@@ -20,14 +20,16 @@ $tab='community';
                         <colgroup>
                             <col width="200px">
                             <col width="200px">
-                            <col>
+                            <col width="">
                         </colgroup>
                         <thead>
+                        @if(count($datas) > 0)
                         <tr>
                             <th style="text-align: center">등록일</th>
                             <th style="text-align: center">프로젝트명</th>
                             <th style="text-align: center">내용</th>
                         </tr>
+                        @endif
                         </thead>
                         <tbody>
                         <!-- tr * 10 -->

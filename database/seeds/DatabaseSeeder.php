@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
             ProjectSeeder::class,
             SupportSeeder::class,
             CommunitySeeder::class,
+            QuestionSeeder::class
         ]);
 
     }
