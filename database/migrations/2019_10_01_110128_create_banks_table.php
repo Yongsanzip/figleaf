@@ -17,6 +17,8 @@ class CreateBanksTable extends Migration
         Schema::create('banks', function (Blueprint $table) {
             //컬럼 명세
             $table->bigIncrements('id');
+            $table->char('code',10)->comment('은행코드');
+            $table->tinyInteger('use_yn')->default(1)->comment('사용여부');
             $table->string('bank_name', 30)->comment('은행명');
             $table->timestamps();
         });

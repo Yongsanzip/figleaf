@@ -1,6 +1,26 @@
 document.addEventListener('DOMContentLoaded',function () {
-
+    if(document.getElementById('address_btn')){
+        document.getElementById('address_btn').addEventListener('click', function () {
+            var zipcode = document.getElementById('zip_code');
+            var address = document.getElementById('address');
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                    // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+                    zipcode.value = data.zonecode;
+                    if (data.userSelectedType === 'R') {
+                        // 사용자가 도로명 주소를 선택했을 경우
+                        address.value =  data.roadAddress;
+                    } else {
+                        // 사용자가 지번 주소를 선택했을 경우(J)
+                        address.value = data.jibunAddress;
+                    }
+                }
+            }).open();
+        });
+    }
 });
+
 
 //navigation open
 function fnOpenNav(){

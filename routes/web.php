@@ -80,6 +80,7 @@ Route::group(['middleware'=>'locale'],function(){
     Route::resource('project_community', 'Client\Project\CommunityController');
     // 프로젝트 - 후원하기
     Route::resource('project_support', 'Client\Support\SupportController');
+    Route::match(array('GET','POST'),'/complete','Client\Support\SupportController@complete');
     // 포트폴리오
 
 

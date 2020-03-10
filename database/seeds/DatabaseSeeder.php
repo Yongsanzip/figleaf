@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
             PaymentSelectsTableSeeder::class,
             //은행 리스트 테이블 데이터 세팅
             BanksTableSeeder::class,
+            //카드리스트
+            CardSeeder::class,
             //취급정보 탭 테이블 데이터 세팅
             InformationTabsTableSeeder::class,
             //취급정보 셀렉트 리스트 테이블 데이터 세팅

@@ -34,22 +34,26 @@
                                 <h3 class="title">배송지 정보</h3>
                                 <div class="sponsor-box">
                                     <div class="row">
+                                        <p class="option-name">후원자 정보와 동일</p>
+                                        <input type="checkbox" onchange="fn_get_user_info(this);" placeholder="이름" class="input-field required">
+                                    </div>
+                                    <div class="row">
                                         <p class="option-name">받는 분</p>
-                                        <input type="text" placeholder="이름" class="input-field">
+                                        <input type="text" placeholder="이름" class="input-field required" data-title="받는 분">
                                     </div>
                                     <div class="row">
                                         <p class="option-name">전화번호</p>
-                                        <input type="tel" placeholder="전화번호" class="input-field">
+                                        <input type="tel" placeholder="전화번호" class="input-field required" data-title="받는분 전화번호">
                                     </div>
                                     <div class="row">
                                         <p class="option-name">주소</p>
                                         <div class="address-form">
                                             <label>
-                                                <input type="text" class="input-field code" placeholder="우편번호">
-                                                <input type="text" class="input-field address" placeholder="주소">
-                                                <button class="btn-black" type="button">검색하기</button>
+                                                <input type="text" class="input-field code required" data-title="받는분 우편번호"  name="zip_code" id="zip_code" placeholder="우편번호" readonly>
+                                                <input type="text" class="input-field address required" data-title="받는분 주소"  name="address" id="address"  placeholder="주소" readonly>
+                                                <button class="btn-black" type="button"  id="address_btn">검색하기</button>
                                             </label>
-                                            <input type="text" placeholder="상세주소" class="input-field detail">
+                                            <input type="text" class="input-field detail" name="address_detail" placeholder="상세주소" >
                                         </div>
                                     </div>
                                     <div class="row">
@@ -110,8 +114,8 @@
                                     </label>
                                 </div>
                                 <div class="btn-wrap">
-                                    <button class="btn-black">후원하기</button>
-                                    <button class="btn-white">후원취소</button>
+                                    <button onclick="paybtn();" class="btn-black">후원하기</button>
+                                    <a href="{{$returnUrl}}" class="btn-white">후원취소</a>
                                 </div>
                             </div>
                         </div>
@@ -122,6 +126,13 @@
             </div>
         </div>
     </main>
-
-
+    @include('client.support.partial.common.payment')
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        var fn_get_user_info = function(e){
+            if(e.checked){
+                alert('checked');
+            }
+        };
+    </script>
 @endsection
