@@ -56,7 +56,7 @@ class UserTableSeeder extends Seeder
         }
         for($i=1;$i<6;$i++){
             DB::table('users')->insert([
-                'role_id' => 3,
+                'role_id' => 1,
                 'email' => 'test'.$i.'@figleaf.com',
                 'password' => bcrypt('123123'),
                 'user_code' => encrypt(date('YmdHmi').\Illuminate\Support\Str::random(10)),
