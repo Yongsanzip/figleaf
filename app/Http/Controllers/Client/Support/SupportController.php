@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\Support;
 
+use App\Bank;
 use App\Option;
 use App\Portfolio;
 use App\Project;
@@ -40,6 +41,7 @@ class SupportController extends Controller
 
             $date_diff = ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24));                 // 남은시간 (남은 일자)
             $data = Project::where('id',$request->project_id)->first();                                                 // 프로젝트 데이터
+            $banks = Bank::whereUseYn(1)->get();                                                                        // 은행정보
             $option_arr = array();
             for ($i = 0; $i < count($option_id); $i++) {
                 $option_arr['option_id'][$i] = $option_id[$i];                                                          // 옵션 주문 id
@@ -81,12 +83,12 @@ class SupportController extends Controller
             $sign		= $SignatureUtil->makeSignature($params);
 
             $http_host 	= $_SERVER['HTTP_HOST'];
-            $price = 10000;
+            $price = $option_total_cost;
             /* 기타 */
             $siteDomain = "http://".$_SERVER['HTTP_HOST']."/complete"; //가맹점 도메인 입력
             $returnUrl = route('project.show',['id'=>$request->project_id]);
 
-            return view('client.support.index', compact('data', 'supporter_count', 'total_cost', 'date_diff', 'portfolio', 'option_id', 'option_arr', 'option_total_cost'
+            return view('client.support.index', compact('data', 'supporter_count', 'total_cost', 'date_diff', 'portfolio', 'option_id', 'option_arr', 'option_total_cost','banks'
                 ,'mid', 'signKey', 'timestamp', 'orderNumber',  'mKey', 'sign', 'http_host','siteDomain','price','returnUrl'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();

@@ -20,6 +20,7 @@ class CreateCardsTable extends Migration
             $table->tinyInteger('use_yn')->default(1)->comment('사용여부');
             $table->string('card_name', 30)->comment('카드명');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -21,6 +21,7 @@ class CreateBanksTable extends Migration
             $table->tinyInteger('use_yn')->default(1)->comment('사용여부');
             $table->string('bank_name', 30)->comment('은행명');
             $table->timestamps();
+            $table->softDeletes();
         });
         //테이블 명세
         DB::statement('ALTER TABLE `banks` COMMENT = "은행 테이블"');

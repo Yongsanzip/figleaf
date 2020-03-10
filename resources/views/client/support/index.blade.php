@@ -41,21 +41,21 @@
                                 <div class="sponsor-box">
                                     <div class="row">
                                         <p class="option-name">받는 분</p>
-                                        <input type="text" placeholder="이름" class="input-field required" data-title="받는 분">
+                                        <input type="text" id="receiver_name" placeholder="이름" class="input-field required" data-title="받는 분">
                                     </div>
                                     <div class="row">
                                         <p class="option-name">전화번호</p>
-                                        <input type="tel" placeholder="전화번호" class="input-field required" data-title="받는분 전화번호">
+                                        <input type="tel" id="receiver_cellphone" placeholder="전화번호" class="input-field required" data-title="받는분 전화번호">
                                     </div>
                                     <div class="row">
                                         <p class="option-name">주소</p>
                                         <div class="address-form">
                                             <label>
-                                                <input type="text" class="input-field code required" data-title="받는분 우편번호"  name="zip_code" id="zip_code" placeholder="우편번호" readonly>
-                                                <input type="text" class="input-field address required" data-title="받는분 주소"  name="address" id="address"  placeholder="주소" readonly>
+                                                <input type="text" id="receiver_zip_code" class="input-field code required" data-title="받는분 우편번호"  name="zip_code" id="zip_code" placeholder="우편번호" readonly>
+                                                <input type="text" id="receiver_address" class="input-field address required" data-title="받는분 주소"  name="address" id="address"  placeholder="주소" readonly>
                                                 <button class="btn-black" type="button"  id="address_btn">검색하기</button>
                                             </label>
-                                            <input type="text" class="input-field detail" name="address_detail" placeholder="상세주소" >
+                                            <input type="text" id="receiver_address_detail" class="input-field detail" name="address_detail" placeholder="상세주소" >
                                         </div>
                                     </div>
                                     <div class="row">
@@ -92,8 +92,11 @@
                                         <p class="option-name">은행명</p>
                                         <select class="select">
                                             <option selected disabled>- 은행명 -</option>
-                                            <option>옵션1</option>
-                                            <option>옵션2</option>
+                                            @if(count($banks) > 0)
+                                                @foreach($banks as $bank)
+                                                    <option>옵션1</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </div>
                                     <div class="row">
@@ -133,7 +136,17 @@
     <script>
         var fn_get_user_info = function(e){
             if(e.checked){
-                alert('checked');
+                document.getElementById('receiver_name').value              = '{{auth()->user()->name}}';
+                document.getElementById('receiver_cellphone').value         = '{{auth()->user()->cellphone}}';
+                document.getElementById('receiver_zip_code').value          = '{{auth()->user()->zip_code}}';
+                document.getElementById('receiver_address').value           = '{{auth()->user()->address}}';
+                document.getElementById('receiver_address_detail').value    = '{{auth()->user()->address_detail}}';
+            } else{
+                document.getElementById('receiver_name').value              = null;
+                document.getElementById('receiver_cellphone').value         = null;
+                document.getElementById('receiver_zip_code').value          = null;
+                document.getElementById('receiver_address').value           = null;
+                document.getElementById('receiver_address_detail').value    = null;
             }
         };
     </script>
