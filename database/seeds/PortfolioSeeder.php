@@ -39,12 +39,12 @@ class PortfolioSeeder extends Seeder
                 'image_path'        =>'images/portfolio_dummy/profile'.$i.'.jpg',
                 'origin_name'       =>'dummy'.$i,
             ]);
-
+            $brand= ['VOGUE','SAINT LAURENT','LOUIS VITTON','GOYARD','GUCCI'];
             \App\Brand::create([
                 'portfolio_id'  => $portfolio->id,
-                'name_ko'       => '테스트'.$i,
-                'name_en'       => '테스트'.$i,
-                'name_cn'       => '테스트'.$i,
+                'name_ko'       => $brand[$i-1],
+                'name_en'       => $brand[$i-1],
+                'name_cn'       => $brand[$i-1],
                 'contents_ko'   => $faker->text(500),
                 'contents_en'   => $faker->text(500),
                 'contents_cn'   => $faker->text(500),
@@ -55,8 +55,8 @@ class PortfolioSeeder extends Seeder
                 'portfolio_id'      => $portfolio->id,
                 'image_division'    => 2,
                 'image_type'        =>'jpg',
-                'image_path'        =>'images/portfolio_dummy/logo.jpg',
-                'origin_name'       =>'dummy'.$i,
+                'image_path'        =>'images/logo_dummy/l'.$i.'.jpg',
+                'origin_name'       =>'l'.$i.'.jpg',
             ]);
             \App\PortfolioImage::create([                                                                                // 포트폴리오 이미지 등록
                 'portfolio_id'      => $portfolio->id,

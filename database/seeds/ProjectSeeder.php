@@ -84,13 +84,13 @@ class ProjectSeeder extends Seeder
                 ]);
             }
 
-
+            $rand = rand(1,26);
             for ($j = 1; $j < 4; $j++) {
                 \Illuminate\Support\Facades\DB::table('project_images')->insert([
                     'project_id'            => $project->id,
                     'image_division'        => $j,
                     'image_type'            => 'image/png',
-                    'image_path'            => 'images/project/2020-02-25/thumbnail/W1Iq9JydOY1lRlcQehP0D1AKAkF24hSrCSDOhhUp.jpeg',
+                    'image_path'            => 'images/project_dummy/p'.$rand.'.jpg',
                     'origin_name'           => 'test.png',
                     'created_at' => date('Y-m-d H:i:s', time()),
                     'updated_at' => date('Y-m-d H:i:s', time()),
