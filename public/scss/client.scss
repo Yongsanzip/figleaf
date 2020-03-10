@@ -825,15 +825,15 @@ button{
         text-align: left;
         font-size: 0;
 
-        > div {
-            display: inline-block;
-        }
+        //> div {
+        //    display: inline-block;
+        //}
 
         .user-info {
-            border-right: 1px solid #cccccc;
-            width: calc(100% - 200px);
-            padding-right: 15px;
-
+            //border-right: 1px solid #cccccc;
+            //width: calc(100% - 200px);
+            //padding-right: 15px;
+            text-align: center;
             .user-id {
                 font-size: 14px;
                 font-weight: 500;
@@ -963,7 +963,11 @@ button{
                         color: #9b9b9b;
                     }
                 }
-
+                .exist-password{
+                    .btn-white{
+                        margin-left:8px;
+                    }
+                }
                 .new-password {
                     .input-field:first-child {
                         margin-right: 8px;
@@ -999,6 +1003,7 @@ button{
                         .input-field {
                             min-width: 160px;
                             margin-right: 4px;
+                            font-weight: 400;
                         }
 
                         .btn-white {
@@ -1016,6 +1021,10 @@ button{
                         }
                     }
                 }
+            }
+
+            .checkbox-wrap{
+                white-space: nowrap;
             }
         }
 
@@ -1493,7 +1502,7 @@ button{
         .question-table {
             width: 100%;
             border-top: 2px solid black;
-
+            margin-bottom: 40px;
             thead tr {
                 border-bottom: 1px solid #cccccc;
             }
@@ -1564,6 +1573,10 @@ button{
         }
 
         .question-row {
+            .pagination-wrap{
+                margin-top:0;
+                margin-bottom: 40px;
+            }
             .btn-white {
                 width: 200px;
                 position: absolute;
@@ -3830,7 +3843,7 @@ button{
                     .btn-white, .btn-black {
                         width: 120px;
                         height: 36px;
-                        line-height: 36px;
+                        line-height: 32px;
                         vertical-align: top;
                     }
 

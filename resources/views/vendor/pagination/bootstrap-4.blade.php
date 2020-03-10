@@ -2,12 +2,12 @@
     <ul class="pagination" role="navigation">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
-            <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
+            <li class="page-item disabled prev" aria-disabled="true" aria-label="@lang('pagination.previous')">
                 <a class="page-link" aria-hidden="true">&lsaquo;</a>
             </li>
             {{--<li><a> preview </a></li>--}}
         @else
-            <li class="page-item">
+            <li class="page-item prev">
                 <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
             </li>
            {{-- <li><a>2</a></li>--}}
@@ -34,7 +34,7 @@
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <li class="page-item">
+            <li class="page-item next">
                 <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
             </li>
         @else

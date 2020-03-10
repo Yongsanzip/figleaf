@@ -17,11 +17,6 @@ $tab='community';
                 <!-- mypage contents -->
                 <div class="mypage-contents">
                     <table class="community-table">
-                        <colgroup>
-                            <col width="200px">
-                            <col width="200px">
-                            <col width="">
-                        </colgroup>
                         <thead>
                         @if(count($datas) > 0)
                         <tr>

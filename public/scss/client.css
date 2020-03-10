@@ -690,13 +690,8 @@ button {
   text-align: left;
   font-size: 0;
 }
-.con-mypage .user-info-wrap > div {
-  display: inline-block;
-}
 .con-mypage .user-info-wrap .user-info {
-  border-right: 1px solid #cccccc;
-  width: calc(100% - 200px);
-  padding-right: 15px;
+  text-align: center;
 }
 .con-mypage .user-info-wrap .user-info .user-id {
   font-size: 14px;
@@ -808,6 +803,9 @@ button {
   font-size: 10px;
   color: #9b9b9b;
 }
+.con-mypage .mypage-contents .user-table tr .exist-password .btn-white {
+  margin-left: 8px;
+}
 .con-mypage .mypage-contents .user-table tr .new-password .input-field:first-child {
   margin-right: 8px;
 }
@@ -831,6 +829,7 @@ button {
 .con-mypage .mypage-contents .user-table tr .address .postal .input-field {
   min-width: 160px;
   margin-right: 4px;
+  font-weight: 400;
 }
 .con-mypage .mypage-contents .user-table tr .address .postal .btn-white {
   height: 32px;
@@ -841,6 +840,9 @@ button {
 }
 .con-mypage .mypage-contents .user-table tr .address .detail .input-field:first-child {
   margin-right: 4px;
+}
+.con-mypage .mypage-contents .user-table .checkbox-wrap {
+  white-space: nowrap;
 }
 .con-mypage .mypage-contents .btn-wrap .btn-black, .con-mypage .mypage-contents .btn-wrap .btn-white {
   width: 200px;
@@ -1227,6 +1229,7 @@ button {
 .con-mypage .mypage-contents .question-table {
   width: 100%;
   border-top: 2px solid black;
+  margin-bottom: 40px;
 }
 .con-mypage .mypage-contents .question-table thead tr {
   border-bottom: 1px solid #cccccc;
@@ -1285,6 +1288,10 @@ button {
 }
 .con-mypage .mypage-contents .question-table tr .badge-grey {
   background: #cccccc;
+}
+.con-mypage .mypage-contents .question-row .pagination-wrap {
+  margin-top: 0;
+  margin-bottom: 40px;
 }
 .con-mypage .mypage-contents .question-row .btn-white {
   width: 200px;
@@ -3139,7 +3146,7 @@ button {
 .con-project-view .project-overview-wrap .community-item .cm-header .btn-wrap .btn-white, .con-project-view .project-overview-wrap .community-item .cm-header .btn-wrap .btn-black {
   width: 120px;
   height: 36px;
-  line-height: 36px;
+  line-height: 32px;
   vertical-align: top;
 }
 .con-project-view .project-overview-wrap .community-item .cm-header .btn-wrap .btn-white {

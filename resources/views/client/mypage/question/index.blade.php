@@ -21,13 +21,6 @@ $tab = 'question';
                 <!-- mypage contents -->
                 <div class="mypage-contents">
                     <table class="question-table">
-                        <colgroup>
-                            <col width="60px">
-                            <col width="300px">
-                            <col>
-                            <col width="150px">
-                            <col width="150px">
-                        </colgroup>
                         <thead>
                         <tr>
                             <th style="text-align: center">no.</th>
@@ -66,11 +59,11 @@ $tab = 'question';
                         </tbody>
                     </table>
                     <div class="question-row">
-                        <nav class="pagination-wrap">
                             @if($datas->count())
-                                {!! $datas->appends(request()->except('page'))->render() !!}
+                            <nav class="pagination-wrap">
+                            {!! $datas->appends(request()->except('page'))->render() !!}
+                            </nav>
                             @endif
-                        </nav>
                         <a href="/mypage_question/create" class="btn-white">1:1 문의하기</a>
                     </div>
 

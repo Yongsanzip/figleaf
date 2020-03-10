@@ -409,13 +409,18 @@ $cleaningPath: '../images/cleaning';
                             width: 100%;
                             min-width: auto;
                             margin-bottom: 5px;
+                            padding:8px;
                         }
 
                         .badge {
                             margin-left: 0;
                         }
                     }
-
+                    .exist-password{
+                        .btn-white{
+                            margin-left:0;
+                        }
+                    }
                     .new-password {
                         .input-field:first-child {
                             margin-right: 0;
@@ -566,7 +571,7 @@ $cleaningPath: '../images/cleaning';
             }
             .project-notice {
                 padding: 24px 12px;
-                margin: 32px auto;
+                margin: 20px auto 32px;
                 width: 100%;
                 .notice-list {
                     margin-top: 24px;
@@ -599,6 +604,7 @@ $cleaningPath: '../images/cleaning';
             }
 
             .project-message-list {
+                margin-top: 20px;
                 .project-message-card {
                     height:200px;
                     .card-image {
@@ -714,6 +720,7 @@ $cleaningPath: '../images/cleaning';
 
             .question-table {
                 border-top: none;
+                margin-bottom: 0;
                 thead{
                     display: none;
                 }
@@ -772,7 +779,6 @@ $cleaningPath: '../images/cleaning';
                 .btn-white {
                     width: 100%;
                     position: relative;
-                    margin-top:32px;
                 }
             }
 
@@ -1449,7 +1455,7 @@ $cleaningPath: '../images/cleaning';
                         .btn-white, .btn-black {
                             width: 80px;
                             height: 32px;
-                            line-height: 32px;
+                            line-height: 28px;
                         }
                         .btn-black {
                             margin-left: 8px;
@@ -1499,9 +1505,9 @@ $cleaningPath: '../images/cleaning';
                             white-space: normal;
                             word-break: keep-all;
                         }
-                        .input-field{
-                            margin-top:8px;
-                        }
+                        //.input-field{
+                        //    margin-top:8px;
+                        //}
                     }
                 }
                 .title {

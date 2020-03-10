@@ -24,10 +24,6 @@ $tab='info';
                         {{method_field('PUT')}}
                         @csrf
                         <table class="user-table">
-                            <colgroup>
-                                <col width="160px">
-                                <col>
-                            </colgroup>
                             <tbody>
                             <tr>
                                 <th>이름</th>
@@ -38,10 +34,10 @@ $tab='info';
                             </tr>
                             <tr>
                                 <th>기존 비밀번호</th>
-                                <td>
+                                <td class="exist-password">
                                     <input type="password" id="old_password" name="old_password" class="input-field" placeholder="비밀번호">
                                     <input type="checkbox" id="password_change_check" style="display: none;">
-                                    <button type="button" class="btn-white" id="password_check" style="margin-left: 1%">비밀번호확인</button>
+                                    <button type="button" class="btn-white btn-m" id="password_check">비밀번호확인</button>
                                 </td>
                             </tr>
                             <tr>

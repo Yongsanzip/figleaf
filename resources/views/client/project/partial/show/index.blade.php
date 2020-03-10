@@ -117,11 +117,11 @@
                                         <li>
                                             <p class="year">{{$association->start_year}}~{{$association->end_year}}</p>
                                             @if( app()->getLocale() =='ko')
-                                                <p>{{ $association->association_ko }}</p>
+                                                <p class="text">{{ $association->association_ko }}</p>
                                             @elseif(app()->getLocale() =='en')
-                                                <p>{{ $association->association_en }}</p>
+                                                <p class="text">{{ $association->association_en }}</p>
                                             @elseif(app()->getLocale() =='cn')
-                                                <p>{{ $association->association_cn }}</p>
+                                                <p class="text">{{ $association->association_cn }}</p>
                                             @else
                                                 협회활동이 내용이 존재하지 않습니다
                                             @endif

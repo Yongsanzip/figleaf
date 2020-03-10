@@ -320,8 +320,12 @@
     width: 100%;
     min-width: auto;
     margin-bottom: 5px;
+    padding: 8px;
   }
   .con-mypage .mypage-contents .user-table tr td .badge {
+    margin-left: 0;
+  }
+  .con-mypage .mypage-contents .user-table tr .exist-password .btn-white {
     margin-left: 0;
   }
   .con-mypage .mypage-contents .user-table tr .new-password .input-field:first-child {
@@ -441,7 +445,7 @@
   }
   .con-mypage .mypage-contents .project-notice {
     padding: 24px 12px;
-    margin: 32px auto;
+    margin: 20px auto 32px;
     width: 100%;
   }
   .con-mypage .mypage-contents .project-notice .notice-list {
@@ -463,6 +467,9 @@
     margin-right: 10px;
     min-width: auto;
     width: calc(50% - 5px);
+  }
+  .con-mypage .mypage-contents .project-message-list {
+    margin-top: 20px;
   }
   .con-mypage .mypage-contents .project-message-list .project-message-card {
     height: 200px;
@@ -559,6 +566,7 @@
   }
   .con-mypage .mypage-contents .question-table {
     border-top: none;
+    margin-bottom: 0;
   }
   .con-mypage .mypage-contents .question-table thead {
     display: none;
@@ -611,7 +619,6 @@
   .con-mypage .mypage-contents .question-row .btn-white {
     width: 100%;
     position: relative;
-    margin-top: 32px;
   }
   .con-mypage .mypage-contents .question-form .btn-wrap .btn-white, .con-mypage .mypage-contents .question-form .btn-wrap .btn-black {
     width: calc(50% - 6px);
@@ -1146,7 +1153,7 @@
   .con-project-view .project-overview-wrap .community-item .cm-header .btn-wrap .btn-white, .con-project-view .project-overview-wrap .community-item .cm-header .btn-wrap .btn-black {
     width: 80px;
     height: 32px;
-    line-height: 32px;
+    line-height: 28px;
   }
   .con-project-view .project-overview-wrap .community-item .cm-header .btn-wrap .btn-black {
     margin-left: 8px;
@@ -1177,9 +1184,6 @@
   .con-project-view .sponsor-form .sponsor-item:last-child .sponsor-box .option-name {
     white-space: normal;
     word-break: keep-all;
-  }
-  .con-project-view .sponsor-form .sponsor-item:last-child .sponsor-box .input-field {
-    margin-top: 8px;
   }
   .con-project-view .sponsor-form .sponsor-item .title {
     font-size: 20px;

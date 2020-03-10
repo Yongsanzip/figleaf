@@ -337,8 +337,14 @@ a:hover, a:focus {
   letter-spacing: 0.4px;
   margin-bottom: 10px;
 }
-.header .navigation .user-box .login-link {
+.header .navigation .user-box .auth-link {
   color: #606060;
+}
+.header .navigation .user-box .auth-link-row {
+  margin-bottom: 5px;
+}
+.header .navigation .user-box .auth-link-row:last-child {
+  margin-bottom: 0;
 }
 .header .navigation .category-box {
   padding: 20px;
@@ -868,6 +874,11 @@ a:hover, a:focus {
   cursor: pointer;
 }
 
+.btn-m {
+  height: 32px;
+  line-height: 28px;
+}
+
 /* input */
 .checkbox-wrap {
   display: inline-block;
@@ -883,6 +894,7 @@ a:hover, a:focus {
   vertical-align: top;
   margin-left: 5px;
   font-weight: 400;
+  margin-top: 2px;
 }
 
 /* pagination */
@@ -900,8 +912,9 @@ a:hover, a:focus {
 }
 .pagination-wrap .pagination li a {
   color: black;
-  padding: 0px 5px;
-  border: 0px;
+  padding: 0 5px;
+  border: 0;
+  border-radius: 0;
 }
 .pagination-wrap .pagination .on {
   color: white;
@@ -920,12 +933,22 @@ a:hover, a:focus {
   background-size: 16px 16px;
   margin-right: 4px;
 }
+.pagination-wrap .pagination .prev a {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
 .pagination-wrap .pagination .next {
   font-size: 0;
   width: 24px;
   height: 24px;
   background: url("../images/common/ic-arrow-right-black.png") center no-repeat;
   background-size: 16px 16px;
+}
+.pagination-wrap .pagination .next a {
+  width: 100%;
+  height: 100%;
+  background: transparent;
 }
 
 /******** media query ********/

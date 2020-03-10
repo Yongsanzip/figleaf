@@ -91,27 +91,40 @@
     </div>
     <div class="navigation" id="gnb_navigation">
         <div class="user-box">
-            <!-- login -->
-            <p class="guide">로그인 해주세요.</p>
-            <a href="" class="login-link">로그인</a>
-            <!-- //login -->
+        @auth
+            <div class="auth-link-row">
+                <a href="/mypage_information" class="auth-link">마이페이지</a>
+            </div>
+            <div class="auth-link-row">
+                <a class="auth-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-m').submit();">로그아웃</a>
+                <form id="logout-form-m" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+            </div>
+        @else
+                <!-- login -->
+                    <p class="guide">로그인 해주세요.</p>
+                    <div class="auth-link-row">
+                        <a href="/login" class="auth-link">로그인</a>
+                    </div>
+                <!-- //login -->
+        @endauth
+
         </div>
         <div class="category-box">
             <div class="category-title">Category</div>
             <ul class="category">
-                <li><a href="">designer</a></li>
-                <li><a href="">brand</a></li>
-                <li><a href="">designer</a></li>
+                <li><a href="/designer">designer</a></li>
+                <li><a href="/brand">brand</a></li>
+                <li><a href="/news">news</a></li>
             </ul>
             <ul class="category">
-                <li><a href="">women's apparel</a></li>
-                <li><a href="">men's apparel</a></li>
+                <li><a href="{{route('menu.index',['type'=>'women'])}}">women's apparel</a></li>
+                <li><a href="{{route('menu.index',['type'=>'men'])}}">men's apparel</a></li>
             </ul>
             <ul class="category">
-                <li><a href="">new</a></li>
-                <li><a href="">special</a></li>
-                <li><a href="">collection</a></li>
-                <li><a href="">event</a></li>
+                <li><a href="{{route('menu.index',['type'=>'new'])}}">new</a></li>
+                <li><a href="{{route('menu.index',['type'=>'special'])}}">special</a></li>
+                <li><a href="{{route('menu.index',['type'=>'collection'])}}">collection</a></li>
+                <li><a href="{{route('menu.index',['type'=>'event'])}}">event</a></li>
             </ul>
         </div>
         <div class="menu-box">
@@ -125,7 +138,11 @@
                     </select>
                 </div>
             </div>
-            <a href="" class="btn-project">프로젝트 만들기</a>
+            @auth
+                @if(auth()->user()->is_designer())
+                    <a href="{{ route('project.create') }}" class="btn-project">프로젝트 만들기</a>
+                @endif
+            @endauth
             <p class="copyright">Copyright ⓒ 2019 프론티어 All Right Reserved.</p>
         </div>
         <button class="nav-close" onclick="fnCloseNav();">모달닫기</button>
