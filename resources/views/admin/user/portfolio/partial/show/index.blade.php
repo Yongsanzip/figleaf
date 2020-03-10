@@ -44,24 +44,21 @@
                     @endif
                 </p>
             </div>
-
-            <div class="headline mt-100">
-                <h3>history</h3>
-                <div class="devider mt-4"></div>
-            </div>
-
-
             <!-- 연혁 -->
-            <div class="portfolio-history">
             @if($datas->histories())
+                <div class="headline mt-100">
+                    <h3>history</h3>
+                    <div class="devider mt-4"></div>
+                </div>
+                <div class="portfolio-history">
                 @foreach( $datas->histories() as $history)
                     <!-- history item -->
                             <h4 class="year">{{ $history->year }}</h4>
                             <ul class="history">
                                 @if( app()->getLocale() =='ko')
-                                    <li>{{ $history->history_cn }}</li>
+                                    <li>{{ $history->history_ko }}</li>
                                 @elseif(app()->getLocale() =='en')
-                                    <li>{{ $history->history_cn }}</li>
+                                    <li>{{ $history->history_en }}</li>
                                 @elseif(app()->getLocale() =='cn')
                                     <li>{{ $history->history_cn }}</li>
                                 @else
@@ -70,18 +67,18 @@
                             </ul>
                         <!-- //history item -->
                     @endforeach
+                </div>
                 @endif
-            </div>
 
 
-            <div class="headline mt-100">
-                <h3>award history</h3>
-                <div class="devider mt-4"></div>
-            </div>
-
-            <!-- 수상내역 -->
-            <div class="portfolio-history">
             @if($datas->awards())
+                <div class="headline mt-100">
+                    <h3>award history</h3>
+                    <div class="devider mt-4"></div>
+                </div>
+
+                <!-- 수상내역 -->
+                <div class="portfolio-history">
                 @foreach($datas->awards() as $awards)
                     <!-- history item -->
                             <h4 class="year">{{ $awards->year }}</h4>
@@ -98,18 +95,18 @@
                             </ul>
                         <!-- //history item -->
                     @endforeach
+                </div>
                 @endif
-            </div>
 
-            <div class="headline mt-100">
-                <h3>association</h3>
-                <div class="devider mt-4"></div>
-            </div>
-
-            <!-- 협회 -->
-            <div class="portfolio-assoc">
-                <ul class="list-assoc">
                 @if($datas->association_activties())
+                <div class="headline mt-100">
+                    <h3>association</h3>
+                    <div class="devider mt-4"></div>
+                </div>
+
+                <!-- 협회 -->
+                <div class="portfolio-assoc">
+                    <ul class="list-assoc">
                     @foreach($datas->association_activties() as $association)
                         <!-- history item -->
                             <li>
@@ -125,9 +122,10 @@
                                 @endif
                             </li>
                         @endforeach
+                    </ul>
+                </div>
                     @endif
-                </ul>
-            </div>
+
 
             <div class="headline mt-100">
                 <h3>brand</h3>
@@ -459,7 +457,7 @@
                 </div>
                 <div class="contact-form">
                     <p class="contact-title">전화번호</p>
-                    <p class="contact-text">{{$datas->phone}}</p>
+                    <p class="contact-text">{{$datas->home_phone}}</p>
                 </div>
                 <div class="contact-form">
                     <p class="contact-title">홈페이지</p>
