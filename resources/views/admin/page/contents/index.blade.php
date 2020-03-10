@@ -28,31 +28,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>HOME</td>
+                @foreach($datas as $key=>$data)
+                <tr style="cursor: pointer" onclick="location.href='/admin_contents/{{ $data->id }}'">
+                    <td>{{ $key+1 }}</td>
+                    <td>{{ $data->menu }}</td>
                     <td>2019-00-00 00:00</td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>NEW</td>
-                    <td>2019-00-00 00:00</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>SPECIAL</td>
-                    <td>2019-00-00 00:00</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>COLLECTION</td>
-                    <td>2019-00-00 00:00</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>EVENT</td>
-                    <td>2019-00-00 00:00</td>
-                </tr>
+                @endforeach
                 </tbody>
             </table>
             <!-- //table type1 -->

@@ -39,6 +39,8 @@ class DatabaseSeeder extends Seeder
             MaterialsTableSeeder::class,
             //배너 테이블 데이터 세팅
             BannersTableSeeder::class,
+            //어드민 페이지-콘텐츠 데이터 세팅
+            ContentsSeeder::class,
 
             /******************** 테스트 데이터 ********************/
             //부가 요소
@@ -46,7 +48,7 @@ class DatabaseSeeder extends Seeder
             ProjectSeeder::class,
             SupportSeeder::class,
             CommunitySeeder::class,
-            QuestionSeeder::class
+            QuestionSeeder::class,
         ]);
 
     }

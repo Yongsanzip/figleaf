@@ -17,7 +17,7 @@ class CreateContentsTable extends Migration
         Schema::create('contents', function (Blueprint $table) {
             //컬럼 명세
             $table->bigIncrements('id');
-            $table->tinyInteger('menu')->comment('컨텐츠 메뉴');
+            $table->string('menu')->nullable()->comment('컨텐츠 메뉴');
             $table->timestamps();
         });
         //테이블 명세

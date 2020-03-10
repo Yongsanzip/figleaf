@@ -14,6 +14,18 @@ class ContentDetail extends Model {
     /*******************************************************************
      * @return BelongsTo
      *******************************************************************/
+    public function content() {
+        return $this->belongsTo('App\Content', 'content_id', 'id');
+    }
+
+    public function project() {
+        return $this->belongsTo('App\Project', 'model_id', 'id')->where('status', 1);
+    }
+
+    public function portfolio() {
+        return $this->belongsTo('App\Portfolio', 'model_id', 'id')->where('status', 0);
+    }
+
 
     /*******************************************************************
      * @return HasMany

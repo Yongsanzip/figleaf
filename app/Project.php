@@ -110,5 +110,12 @@ class Project extends Model {
     }
 
 
+    public function contentDetail($model_id, $content_id) {
+        error_log($content_id);
+
+        return $this->belongsTo('App\ContentDetail', 'model_id', 'id')
+            ->where('model_id', $model_id)
+            ->where('content_id', $content_id)->first();
+    }
 
 }
