@@ -66,7 +66,8 @@
                             </div>
                         </div>
                         <div class="col">
-                            <div class="sponsor-item">
+                            {{--결제 정보--}}
+                            <?/*<div class="sponsor-item">
                                 <h3 class="title">결제 정보</h3>
                                 <div class="sponsor-box">
                                     <div class="row point">
@@ -84,7 +85,8 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*/?>
+                            {{--환불계좌 정보--}}
                             <div class="sponsor-item">
                                 <h3 class="title">환불계좌 정보</h3>
                                 <div class="sponsor-box">
@@ -94,7 +96,7 @@
                                             <option selected disabled>- 은행명 -</option>
                                             @if(count($banks) > 0)
                                                 @foreach($banks as $bank)
-                                                    <option>옵션1</option>
+                                                    <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
                                                 @endforeach
                                             @endif
                                         </select>
@@ -109,6 +111,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{--후원금액--}}
                             <div class="sponsor-total">
                                 <div class="total">
                                     <p class="total-caption">후원금액</p>
@@ -119,7 +122,7 @@
                                     </label>
                                 </div>
                                 <div class="btn-wrap">
-                                    <button onclick="paybtn();" class="btn-black">후원하기</button>
+                                    <button type="button" onclick="paybtn();" class="btn-black">후원하기</button>
                                     <a href="{{$returnUrl}}" class="btn-white">후원취소</a>
                                 </div>
                             </div>
