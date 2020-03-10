@@ -10,8 +10,8 @@
     <title>admin</title>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="{{asset('html/admin/assets/scss/reset.css')}}">
-    <link rel="stylesheet" href="{{asset('html/admin/assets/scss/style.css')}}">
+    <link rel="stylesheet" href="{{asset('scss/reset.css')}}">
+    <link rel="stylesheet" href="{{asset('scss/style.css')}}">
     <script src="{{asset('html/admin/assets/js/style.js')}}"></script>
     <script src="{{ asset('/js/common.js') }}"></script>
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
