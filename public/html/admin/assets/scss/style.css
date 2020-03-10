@@ -518,6 +518,7 @@ a:hover, a:focus {
   vertical-align: bottom;
   position: relative;
   bottom: auto;
+  font-weight: 400;
 }
 
 /* textarea */
@@ -1199,7 +1200,9 @@ a:hover, a:focus {
   color: #181818;
 }
 .portfolio-contents img {
-  margin-bottom: 20px;
+  margin: 20px 0;
+  max-width: 100%;
+  display: block;
 }
 
 .portfolio-history {
@@ -1254,6 +1257,8 @@ a:hover, a:focus {
 }
 .portfolio-brand img {
   margin: 20px 0;
+  max-width: 100%;
+  display: block;
 }
 
 .portfolio-project .checkbox-group {

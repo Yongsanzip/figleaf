@@ -1912,7 +1912,20 @@ $cleaningPath: '../images/cleaning';
             }
         }
     }
-
+    .designer-headline-out {
+        .designer-name {
+            font-size: 24px;
+            letter-spacing: 6px;
+            padding: 16px 20px;
+            span {
+                font-size: 14px;
+                letter-spacing: 2px;
+            }
+        }
+        .designer-type {
+            display: none;
+        }
+    }
     .con-portfolio-view{
         padding:32px 0 56px;
         .portfolio-headline {
@@ -1920,22 +1933,7 @@ $cleaningPath: '../images/cleaning';
             letter-spacing: 8px;
             margin-bottom: 24px;
         }
-        .designer-headline {
-            width:calc(100% + 20px);
-            margin-left:-10px;
-            .designer-name {
-                font-size: 24px;
-                letter-spacing: 6px;
-                padding: 16px 20px;
-                span {
-                    font-size: 14px;
-                    letter-spacing: 2px;
-                }
-            }
-            .designer-type {
-                display: none;
-            }
-        }
+
 
         .headline-wrap{
             margin-bottom: 20px;

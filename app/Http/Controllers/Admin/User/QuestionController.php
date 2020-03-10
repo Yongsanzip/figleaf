@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use App\Question;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +17,8 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return view('admin.user.question.index');
+        $datas = Question::orderBy('created_at', 'desc')->paginate(17);
+        return view('admin.user.question.index', compact('datas'));
     }
 
     /**
@@ -30,13 +33,19 @@ class QuestionController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @description Admin 회원 - 1:1 문의 답변 작성
+     * @url : /admin_question
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        Question::where('id', $request->id)->update([
+            'answer'        => $request->contents,
+            'answer_yn'     => 1,
+            'answer_at'     => Carbon::now()
+        ]);
+        return response()->json('success', 200, [], JSON_PRETTY_PRINT);
     }
 
     /**
@@ -48,7 +57,8 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        return view('admin.user.question.partial.show.index');
+        $data = Question::find($id);
+        return view('admin.user.question.partial.show.index', compact('data'));
     }
 
     /**
@@ -76,12 +86,18 @@ class QuestionController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     * @description Admin 회원 - 1:1 문의 답변 삭제
+     * @url : /admin_question/{$id}
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        Question::where('id', $id)->update([
+            'answer'            => null,
+            'answer_yn'         => 0
+        ]);
+
+        return response()->json('success', 200, [], JSON_PRETTY_PRINT);
     }
 }

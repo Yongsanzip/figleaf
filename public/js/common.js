@@ -174,3 +174,13 @@ var getParam = function (sname) {
     }
     return sval;
 };
+
+
+/***********************************************************************
+ * function Name : replaceAll
+ * description : 해당 문자 모두 변환
+ *
+ ***********************************************************************/
+var replaceAll = function (str, searchStr, replaceStr) {
+    return str.split(searchStr).join(replaceStr);
+};

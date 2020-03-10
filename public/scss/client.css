@@ -69,6 +69,7 @@ button {
   right: 0;
   margin-top: -60px;
   opacity: 0.8;
+  outline: none;
 }
 .con-designer .designer-slide .swiper-button-prev {
   width: 32px;
@@ -79,6 +80,7 @@ button {
   left: 0;
   opacity: 0.8;
   margin-top: -60px;
+  outline: none;
 }
 
 .con-brand {
@@ -2918,8 +2920,10 @@ button {
   font-size: 14px;
   color: #181818;
   display: inline-block;
-  vertical-align: middle;
   line-height: 28px;
+}
+.con-project-view .project-overview-wrap .product-info-list .product-info-item .size-wrap .size-list li .size-text span {
+  vertical-align: baseline;
 }
 .con-project-view .project-overview-wrap .product-info-list .product-info-item .size-wrap .size-list li .size-text span:after {
   content: " | ";
@@ -4584,18 +4588,7 @@ button {
   display: block;
 }
 
-.con-portfolio-view {
-  padding: 80px 0 120px;
-}
-.con-portfolio-view .portfolio-headline {
-  text-align: center;
-  font-size: 32px;
-  text-transform: uppercase;
-  letter-spacing: 10px;
-  font-weight: 300;
-  margin-bottom: 32px;
-}
-.con-portfolio-view .designer-headline .designer-name {
+.designer-headline-out .designer-name {
   font-size: 36px;
   font-weight: 700;
   background: #181818;
@@ -4603,7 +4596,7 @@ button {
   letter-spacing: 10px;
   padding: 24px 32px;
 }
-.con-portfolio-view .designer-headline .designer-name span {
+.designer-headline-out .designer-name span {
   display: inline-block;
   font-size: 16px;
   letter-spacing: 4px;
@@ -4611,12 +4604,23 @@ button {
   vertical-align: middle;
   text-transform: capitalize;
 }
-.con-portfolio-view .designer-headline .designer-type {
+.designer-headline-out .designer-type {
   background: #eeeeee;
   font-size: 24px;
   padding: 20px 32px;
   text-transform: uppercase;
   letter-spacing: 8px;
+}
+
+.con-portfolio-view {
+  padding: 80px 0;
+}
+.con-portfolio-view .portfolio-headline {
+  text-align: center;
+  font-size: 32px;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  font-weight: 300;
 }
 .con-portfolio-view .headline-wrap {
   margin-bottom: 30px;

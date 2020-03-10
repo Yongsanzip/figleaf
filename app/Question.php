@@ -11,9 +11,16 @@ class Question extends Model {
     // 컬럼중 노출하지않을것을 표기
     protected $guarded =[];
 
+    protected $dates = [
+        'answer_at',
+    ];
+
     /*******************************************************************
      * @return BelongsTo
      *******************************************************************/
+    public function user() {
+        return $this->belongsTo('App\User', 'user_id', 'id');
+    }
 
     /*******************************************************************
      * @return HasMany

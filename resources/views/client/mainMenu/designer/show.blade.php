@@ -11,17 +11,20 @@ $tab = 'portfolio';
                 <h2 class="portfolio-headline">
                     portfolio
                 </h2>
-                <!-- designer profile -->
-                <div class="designer-headline">
-                    <div class="designer-name">
-                        {{$datas->user->name}}
-                    </div>
-                    <div class="designer-type">
-                        standard
-                    </div>
-                </div>
-                <!--//designer profile -->
-
+            </div>
+        </div>
+        <!-- designer profile -->
+        <div class="designer-headline-out">
+            <div class="designer-name">
+                {{$datas->user->name}}
+            </div>
+            <div class="designer-type">
+                standard
+            </div>
+        </div>
+        <!--//designer profile -->
+        <div class="inner">
+            <div class="con-portfolio-view">
                 <!-- project overview-->
                 <div class="contents-wrap portfolio-overview">
                     <img src="{{ $datas->portfolio_images ?  asset('storage/'.$datas->portfolio_images->first()->image_path) : asset('images/common/img_no_image.jpg')}}" alt="">
@@ -107,11 +110,11 @@ $tab = 'portfolio';
                                 <li>
                                     <p class="year">{{$association->start_year}}~{{$association->end_year}}</p>
                                     @if( app()->getLocale() =='ko')
-                                        <p>{{ $association->association_ko }}</p>
+                                        <p class="text">{{ $association->association_ko }}</p>
                                     @elseif(app()->getLocale() =='en')
-                                        <p>{{ $association->association_en }}</p>
+                                        <p class="text">{{ $association->association_en }}</p>
                                     @elseif(app()->getLocale() =='cn')
-                                        <p>{{ $association->association_cn }}</p>
+                                        <p class="text">{{ $association->association_cn }}</p>
                                     @else
                                         협회활동이 내용이 존재하지 않습니다
                                     @endif
@@ -223,12 +226,12 @@ $tab = 'portfolio';
                             @endif
                         </ul>
                     </div>
-                    <div class="btn-wrap btn-edit-wrap">
-                        <a class="btn-black">수정하기</a>
-                    </div>
+
                 </div>
                 <!-- //contact -->
-
+                <div class="btn-wrap btn-edit-wrap">
+                    <a class="btn-black">수정하기</a>
+                </div>
             </div>
         </div>
 
