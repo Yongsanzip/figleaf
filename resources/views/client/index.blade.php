@@ -892,9 +892,8 @@
 
     <script src="{{asset('js/swiper.min.js')}}"></script>
     <script>
-
         // hero slide
-        var swiper = new Swiper('.hero-slide', {
+        var heroSwiper = new Swiper('.hero-slide', {
             spaceBetween: 0,
             navigation: {
                 nextEl: '.hero-button-next',
@@ -907,10 +906,24 @@
             },
         });
 
+
+        var designerSwiper, brandSwiper, rpSwiper, npSwiper;
+        var swpViewInit = window.innerWidth;
+        var swpSpaceInit = 0;
+
+        if(swpViewInit >= 1024){
+            swpViewInit = 4;
+            swpSpaceInit = 20;
+        }else{
+            swpViewInit = 2;
+            swpSpaceInit = 10;
+        }
+
+
         //designer slide
-        var swiper = new Swiper('.designer-slide', {
-            slidesPerView: 4,
-            spaceBetween: 20,
+        designerSwiper = new Swiper('.designer-slide', {
+            slidesPerView: swpViewInit,
+            spaceBetween: swpSpaceInit,
             centeredSlides: true,
             navigation: {
                 nextEl: '.designer-button-next',
@@ -918,10 +931,11 @@
             },
         });
 
+
         //brand slide
-        var swiper = new Swiper('.brand-slide', {
-            slidesPerView:4,
-            spaceBetween: 20,
+        brandSwiper = new Swiper('.brand-slide', {
+            slidesPerView:swpViewInit,
+            spaceBetween: swpSpaceInit,
             navigation: {
                 nextEl: '.brand-button-next',
                 prevEl: '.brand-button-prev',
@@ -930,19 +944,20 @@
         });
 
         //recommend project slide
-        var swiper = new Swiper('.recommend-project-slide', {
-            slidesPerView:4,
-            spaceBetween: 20,
+        rpSwiper = new Swiper('.recommend-project-slide', {
+            slidesPerView:swpViewInit,
+            spaceBetween: swpSpaceInit,
             navigation: {
                 nextEl: '.recommend-button-next',
                 prevEl: '.recommend-button-prev',
             },
         });
 
+
         //new project slide
-        var swiper = new Swiper('.new-project-slide', {
-            slidesPerView:4,
-            spaceBetween: 20,
+        npSwiper = new Swiper('.new-project-slide', {
+            slidesPerView:swpViewInit,
+            spaceBetween: swpSpaceInit,
             navigation: {
                 nextEl: '.new-button-next',
                 prevEl: '.new-button-prev',
@@ -950,6 +965,41 @@
         });
 
 
+        function resizeSlide(){
+            //device width check
+            var ww = $(window).width();
+            //pc device
+            if (ww>=1024){
+                designerSwiper.params.slidesPerView = 4;
+                brandSwiper.params.slidesPerView = 4;
+                rpSwiper.params.slidesPerView = 4;
+                npSwiper.params.slidesPerView = 4;
+
+                designerSwiper.params.spaceBetween = 20;
+                brandSwiper.params.paceBetweenw =20;
+                rpSwiper.params.spaceBetween = 20;
+                npSwiper.params.spaceBetween = 20;
+
+            }
+            //mobile device
+            if (ww<1024){
+                designerSwiper.params.slidesPerView = 2;
+                brandSwiper.params.slidesPerView = 2;
+                rpSwiper.params.slidesPerView = 2;
+                npSwiper.params.slidesPerView = 2;
+
+                designerSwiper.params.spaceBetween = 10;
+                brandSwiper.params.paceBetweenw =10;
+                rpSwiper.params.spaceBetween = 10;
+                npSwiper.params.spaceBetween = 10;
+            }
+        }
+
+        //responsive
+        window.addEventListener('resize',resizeSlide);
+
+        //designer contents reset
+        document.getElementsByClassName('designer-button-next')[0].click();
     </script>
 
 @endsection

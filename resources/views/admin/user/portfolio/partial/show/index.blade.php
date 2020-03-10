@@ -10,7 +10,9 @@
 
             <div class="headline">
                 <form action="{{route('admin_portfolio.update',['id'=>$datas->id])}}" onsubmit="return fn_admin_portfolio_submit(this);" method="POST">
-                <h2>{{$datas->user->name}} <small style="font-size: 15px; top: 20px;letter-spacing: 1px;"><span>({{$datas->user->role->role_name}})</span></small> 포트폴리오</h2>
+                <h2>{{$datas->user->name}} 포트폴리오
+{{--                    <small style="font-size: 15px; top: 20px;letter-spacing: 1px;"><span>({{$datas->user->role->role_name}})</span></small>--}}
+                </h2>
                 <label class="checkbox-group mt-16">
                     <input type="checkbox" id="open_yn" name="open_yn" onclick="fn_check_designer(this);" data-title="{{$datas->user->user_code}}" {{$datas->open_yn ==1 ? 'checked' : ''}} >
                     <p>열람여부</p>
@@ -31,7 +33,7 @@
 
             <!-- 포트폴리오 컨텐츠  -->
             <div class="portfolio-contents">
-                <img src="{{ count($datas->portfolio_images) > 0 ? asset('storage/'.( $datas->portfolio_images->first()->image_path )) : '#'}}" alt="" style=" margin-left: auto; margin-right: auto; width: 50%;">
+                <img src="{{ count($datas->portfolio_images) > 0 ? asset('storage/'.( $datas->portfolio_images->first()->image_path )) : '#'}}" alt="">
                 <p class="">
                     @if( app()->getLocale() =='ko')
                         {{ $datas->content_ko ? $datas->content_ko : ''}}
@@ -54,7 +56,7 @@
                 @foreach( $datas->histories() as $history)
                     <!-- history item -->
                             <h4 class="year">{{ $history->year }}</h4>
-                            <ul class="history">
+                            <ul class="list-history mb-80">
                                 @if( app()->getLocale() =='ko')
                                     <li>{{ $history->history_ko }}</li>
                                 @elseif(app()->getLocale() =='en')
@@ -82,7 +84,7 @@
                 @foreach($datas->awards() as $awards)
                     <!-- history item -->
                             <h4 class="year">{{ $awards->year }}</h4>
-                            <ul class="history">
+                            <ul class="list-history mb-80">
                                 @if( app()->getLocale() =='ko')
                                     <li>{{ $awards->history_ko }}</li>
                                 @elseif(app()->getLocale() =='en')
@@ -110,7 +112,7 @@
                     @foreach($datas->association_activties() as $association)
                         <!-- history item -->
                             <li>
-                                <p class="year">{{$association->start_year}}~{{$association->end_year}}</p>
+                                <h4 class="year">{{$association->start_year}}~{{$association->end_year}}</h4>
                                 @if( app()->getLocale() =='ko')
                                     <p>{{ $association->association_ko }}</p>
                                 @elseif(app()->getLocale() =='en')

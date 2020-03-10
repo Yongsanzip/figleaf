@@ -1531,6 +1531,19 @@
     height: 2px;
   }
 
+  .designer-headline-out .designer-name {
+    font-size: 24px;
+    letter-spacing: 6px;
+    padding: 16px 20px;
+  }
+  .designer-headline-out .designer-name span {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+  .designer-headline-out .designer-type {
+    display: none;
+  }
+
   .con-portfolio-view {
     padding: 32px 0 56px;
   }
@@ -1538,22 +1551,6 @@
     font-size: 24px;
     letter-spacing: 8px;
     margin-bottom: 24px;
-  }
-  .con-portfolio-view .designer-headline {
-    width: calc(100% + 20px);
-    margin-left: -10px;
-  }
-  .con-portfolio-view .designer-headline .designer-name {
-    font-size: 24px;
-    letter-spacing: 6px;
-    padding: 16px 20px;
-  }
-  .con-portfolio-view .designer-headline .designer-name span {
-    font-size: 14px;
-    letter-spacing: 2px;
-  }
-  .con-portfolio-view .designer-headline .designer-type {
-    display: none;
   }
   .con-portfolio-view .headline-wrap {
     margin-bottom: 20px;

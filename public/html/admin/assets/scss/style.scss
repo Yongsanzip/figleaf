@@ -567,6 +567,7 @@ a{
 		vertical-align: bottom;
         position: relative;
         bottom:auto;
+        font-weight:400;
 	}
 }
 
@@ -1217,7 +1218,9 @@ a{
 	font-size:14px;
 	color:$color-gray-01;
 	img{
-		margin-bottom:20px;
+        margin:20px 0;
+        max-width: 100%;
+        display: block;
 	}
 }
 
@@ -1272,6 +1275,8 @@ a{
 	color:$color-gray-01;
 	img{
 		margin:20px 0;
+        max-width: 100%;
+        display: block;
 	}
 }
 .portfolio-project{
