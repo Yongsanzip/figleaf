@@ -218,7 +218,7 @@ $tab = 'portfolio';
                             @endif
                             @if($datas->instagram_hidden == 0)
                                 <li class="sns-item">
-                                    <a href="{{$datas->instgram}}" target="_blank">인스타그램</a>
+                                    <a href="{{$datas->instagram}}" target="_blank">인스타그램</a>
                                 </li>
                             @endif
                         </ul>

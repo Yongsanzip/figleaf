@@ -12,6 +12,8 @@ class ProjectSeeder extends Seeder
     public function run()
     {
         $k = 2;
+        $faker = \Faker\Factory::create();
+        $gender = $faker->randomElement(['male', 'female']);
         for($i = 1; $i < 100; $i++) {
             $project = \App\Project::create([
                 'user_id'               => rand(2,6),
@@ -22,7 +24,7 @@ class ProjectSeeder extends Seeder
                 'supporter'             => 0,
                 'count'                 => 0,
                 'condition'             => 1,
-                'title'                 => '테스트 제목'.$i,
+                'title'                 => $faker->title,
                 'summary'               => '개요입니다.',
                 'success_count'         => 20,
                 'comment'               => 'TEST',
@@ -41,7 +43,7 @@ class ProjectSeeder extends Seeder
              for ($j = 0; $j < 2; $j++){
                  \Illuminate\Support\Facades\DB::table('options')->insert([
                      'project_id'            => $project->id,
-                     'option_name'           => '테스트 옵션'.$i.$j,
+                     'option_name'           => $faker->words,
                      'price'                 => 5000+5000*($j % 2),
                      'created_at' => date('Y-m-d H:i:s', time()),
                      'updated_at' => date('Y-m-d H:i:s', time()),
@@ -60,8 +62,8 @@ class ProjectSeeder extends Seeder
 
             \Illuminate\Support\Facades\DB::table('introductions')->insert([
                 'project_id'            => $project->id,
-                'brand_name'            => '펭수네',
-                'designer_name'         => '펭수',
+                'brand_name'            => $faker->company,
+                'designer_name'         => $faker->name($gender),
                 'email'                 => 'test@test.com',
                 'phone'                 => '01012341234',
                 'facebook'              => 'test@test.com',
