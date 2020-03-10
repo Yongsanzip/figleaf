@@ -33,14 +33,14 @@
 
                         <!-- project overview-->
                         <div class="contents-wrap portfolio-overview">
-                            <img src="{{ $data->portfolio_images ? asset('storage/'. $data->portfolio_images->first()->image_path) :asset('images/common/img_no_image.jpg')}}" alt="">
+                            <img src="{{ $datas->portfolio_images ? asset('storage/'. $datas->portfolio_images->first()->image_path) :asset('images/common/img_no_image.jpg')}}" alt="">
                             <p>
                                 @if( app()->getLocale() =='ko')
-                                    {{ $data->content_ko ? $data->content_ko : ''}}
+                                    {{ $datas->content_ko ? $data->content_ko : ''}}
                                 @elseif(app()->getLocale() =='en')
-                                    {{ $data->content_en ? $data->content_en : ''}}
+                                    {{ $datas->content_en ? $data->content_en : ''}}
                                 @elseif(app()->getLocale() =='cn')
-                                    {{ $data->content_cn ? $data->content_cn : ''}}
+                                    {{ $datas->content_cn ? $data->content_cn : ''}}
                                 @else
                                     포트폴리오 내용이 존재하지 않습니다
                                 @endif
@@ -53,16 +53,16 @@
                             <div class="headline-wrap">
                                 <h3 class="headline">history</h3>
                             </div>
-                        @if($data->histories)
-                            @foreach( $data->histories() as $history)
+                        @if($datas->histories())
+                            @foreach( $datas->histories() as $history)
                                 <!-- history item -->
                                     <div class="history-item">
                                         <h4 class="year">{{ $history->year }}</h4>
                                         <ul class="history">
                                             @if( app()->getLocale() =='ko')
-                                                <li>{{ $history->history_cn }}</li>
+                                                <li>{{ $history->history_ko }}</li>
                                             @elseif(app()->getLocale() =='en')
-                                                <li>{{ $history->history_cn }}</li>
+                                                <li>{{ $history->history_en }}</li>
                                             @elseif(app()->getLocale() =='cn')
                                                 <li>{{ $history->history_cn }}</li>
                                             @else
@@ -81,8 +81,8 @@
                             <div class="headline-wrap">
                                 <h3 class="headline">award history</h3>
                             </div>
-                        @if($data->awards)
-                            @foreach($data->awards() as $awards)
+                        @if($datas->awards())
+                            @foreach($datas->awards() as $awards)
                                 <!-- history item -->
                                     <div class="history-item">
                                         <h4 class="year">{{ $awards->year }}</h4>
@@ -110,8 +110,8 @@
                                 <h3 class="headline">association</h3>
                             </div>
                             <ul class="association-list">
-                            @if($data->association_activties)
-                                @foreach($data->association_activties() as $association)
+                            @if($datas->association_activties())
+                                @foreach($datas->association_activties() as $association)
                                     <!-- history item -->
                                         <li>
                                             <p class="year">{{$association->start_year}}~{{$association->end_year}}</p>
@@ -137,13 +137,13 @@
                                 <h3 class="headline">brand</h3>
                             </div>
                             <div class="contents-overview">
-                                <img src="{{ $data->brand_thumbnail_images ? asset('storage/'. $data->brand_thumbnail_images->first()->image_path) :asset('images/common/img_no_image.jpg')}}" alt="">
+                                <img src="{{ $datas->brand_thumbnail_images ? asset('storage/'. $datas->brand_thumbnail_images->first()->image_path) :asset('images/common/img_no_image.jpg')}}" alt="">
                                 @if( app()->getLocale() =='ko')
-                                    {{ $data->brand ? $data->brand->contents_ko : ''}}
+                                    {{ $datas->brand ? $datas->brand->contents_ko : ''}}
                                 @elseif(app()->getLocale() =='en')
-                                    {{ $data->brand ? $data->brand->contents_en : ''}}
+                                    {{ $datas->brand ? $datas->brand->contents_en : ''}}
                                 @elseif(app()->getLocale() =='en')
-                                    {{ $data->brand ? $data->brand->contents_cn : ''}}
+                                    {{ $datas->brand ? $datas->brand->contents_cn : ''}}
                                 @else
                                     브랜드 설명 존재하지 않습니다
                                 @endif
