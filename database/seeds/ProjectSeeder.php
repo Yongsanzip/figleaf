@@ -13,13 +13,8 @@ class ProjectSeeder extends Seeder
     {
         $k = 2;
         for($i = 1; $i < 100; $i++) {
-            if ($k == 2){
-                $k = 3;
-            } else {
-                $k = 2;
-            }
             $project = \App\Project::create([
-                'user_id'               => $k,
+                'user_id'               => rand(2,6),
                 'category_id'           => 4,
                 'category2_id'          => 3,
                 'size_category_id'      => 2,

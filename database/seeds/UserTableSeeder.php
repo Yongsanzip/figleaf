@@ -32,7 +32,7 @@ class UserTableSeeder extends Seeder
             'thumbnail' => '1',
         ]);
 
-        for($i=1;$i<5;$i++){
+        for($i=1;$i<6;$i++){
             DB::table('users')->insert([
                 'role_id' => 2,
                 'email' => 'design'.$i.'@figleaf.com',
@@ -54,9 +54,9 @@ class UserTableSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:i:s', time()),
             ]);
         }
-        for($i=1;$i<5;$i++){
+        for($i=1;$i<6;$i++){
             DB::table('users')->insert([
-                'role_id' => 2,
+                'role_id' => 3,
                 'email' => 'test'.$i.'@figleaf.com',
                 'password' => bcrypt('123123'),
                 'user_code' => encrypt(date('YmdHmi').\Illuminate\Support\Str::random(10)),
