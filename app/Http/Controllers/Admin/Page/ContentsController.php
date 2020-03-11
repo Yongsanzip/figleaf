@@ -43,21 +43,30 @@ class ContentsController extends Controller
     public function store(Request $request)
     {
         if ($request->status < 3) {
-            $status = 0;                // 포트폴리오
+            $status = 0;                                                                                                // 포트폴리오
         } else {
-            $status = 1;                // 프로젝트
+            $status = 1;                                                                                                // 프로젝트
         }
 
-        $content_id = $request->status;
+        $content_id = $request->status;                                                                                 // 0: 포트폴리오, 1: 프로젝트
+        $checked_contents = $request->checked_contents;                                                                 // 선택된 포트폴리오/프로젝트 id
 
-        foreach ($request->checked_contents as $data) {
-            ContentDetail::firstOrcreate([
-                'content_id'        => $content_id,
-                'model_id'          => $data,
-                'status'            => $status,
-            ]);
+        if ($checked_contents) {                                                                                        // 모두 체크 해제 되었을 때
+            foreach ($checked_contents as $data) {
+                ContentDetail::firstOrcreate([
+                    'content_id'        => $content_id,
+                    'model_id'          => $data,
+                    'status'            => $status,
+                ]);
+            }
+            $delete_data = ContentDetail::where('content_id', $content_id)->whereNotIn('model_id', $checked_contents)->get();
+        } else {
+            $delete_data = ContentDetail::where('content_id', $content_id)->get();
         }
 
+        foreach ($delete_data as $data) {                                                                               // 선택 해제된 데이터 삭제
+            $data->forceDelete();
+        }
 
         return response()->json('success', 200, [], JSON_PRETTY_PRINT);
     }
@@ -71,12 +80,25 @@ class ContentsController extends Controller
      */
     public function show($id)
     {
-        if ($id == 1 || $id == 2) {     // 포트폴리오
-            $datas = Portfolio::orderBy('created_at', 'desc')->get();
+        if ($id == 1 || $id == 2) {                                                                                     // 포트폴리오
+            $datas = Portfolio::Leftjoin('content_details', function ($join) {
+                    $join->on('portfolios.id', '=', 'content_details.model_id')
+                        ->where('content_details.status', '=', 0);
+                })
+                ->select('portfolios.*', 'portfolios.id as p_id', 'content_details.*')
+                ->orderBy('status', 'desc')
+                ->get();
             $menu = Content::find($id);
             $status = 0;
-        } else {                        // 프로젝트
-            $datas = Project::where('condition', 2)->orWhere('condition', 4)->orWhere('condition',5)->orderBy('created_at', 'desc')->get();
+        } else {                                                                                                        // 프로젝트
+            $datas = Project::where('condition', 2)->orWhere('condition', 4)->orWhere('condition', 5)
+                ->Leftjoin('content_details', function ($join) {
+                    $join->on('projects.id', '=', 'content_details.model_id')
+                        ->where('content_details.status', '=', 1);
+                })
+                ->select('projects.*', 'projects.id as p_id', 'content_details.*')
+                ->orderBy('status', 'desc')
+                ->get();
             $menu = Content::find($id);
             $status = 1;
         }

@@ -79,6 +79,11 @@ class Project extends Model {
         return $this->hasMany('App\Note', 'project_id', 'id');
     }
 
+    // 콘텐츠 상세
+    public function contentDetails() {
+        return $this->hasMany('App\ContentDetail', 'model_id', 'id')->where('status', 1)->orderBy('content_details.model_id', 'asc');
+    }
+
 
     /*******************************************************************
      * @return HasOne
@@ -110,12 +115,20 @@ class Project extends Model {
     }
 
 
-    public function contentDetail($model_id, $content_id) {
-        error_log($content_id);
+    /*******************************************************************
+     * @return 사용자정의
+     *******************************************************************/
 
-        return $this->belongsTo('App\ContentDetail', 'model_id', 'id')
-            ->where('model_id', $model_id)
-            ->where('content_id', $content_id)->first();
+    public function contentsRelation($model_id, $content_id) {
+        $data = ContentDetail::where('model_id', $model_id)->where('content_id', $content_id)->first();
+
+        if (isset($data)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+
+        return $result;
     }
 
 }

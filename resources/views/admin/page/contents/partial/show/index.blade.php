@@ -42,7 +42,16 @@
                 <div class="dropdown-group">
                     <div class="dropdown-header">
                         <p class="dropdown-title">{{ $menu->menu }}</p>
-                        <p class="dropdown-caption">총 120명의 디자이너</p>
+                        <p class="dropdown-caption">총
+                            {{ count($datas)  }}
+                            @if($menu->id == 1)
+                                명의 디자이너
+                            @elseif($menu->id == 2)
+                                개의 브랜드
+                            @else
+                                개의 프로젝트
+                            @endif
+                        </p>
                         <div class="btn-drop"></div>
                     </div>
 
@@ -56,7 +65,7 @@
                             </colgroup>
                             <thead>
                             <tr>
-                                <th></th>
+                                <th><input type="checkbox" id="all_check" onclick="allCheck(this, 'contentsId')"></th>
                                 <th>디자이너명</th>
                                 <th>{{ $datas->first()->brand ? "브랜드명" : "프로젝트명" }}</th>
                                 <th>바로가기</th>
@@ -65,11 +74,11 @@
                             <tbody>
                             @foreach($datas as $data)
                             <tr>
-                                <td><input type="checkbox" name="contents_id[]" class="contentsId" value="{{ $data->id }}" {{ $data->contentDetail($data->id, $menu->id) ?  'checked' : '' }}></td>
+                                <td><input type="checkbox" name="contents_id[]" class="contentsId" value="{{ $data->p_id }}" {{ $data->contentsRelation($data->p_id, $menu->id) == true ?  'checked' : '' }}></td>
                                 <td>{{ $data->user->name }}</td>
                                 <td>{{ $data->brand ? $data->brand->name_ko : $data->title }}</td>
                                 <td>
-                                    <a href="{{ $data->brand ? '/admin_portfolio/'.$data->id : '/admin_project/'.$data->id }}" class="btn-s btn-white">바로가기</a>
+                                    <a href="{{ $data->brand ? '/admin_portfolio/'.$data->p_id : '/admin_project/'.$data->p_id }}" class="btn-s btn-white">바로가기</a>
                                 </td>
                             </tr>
                             @endforeach

@@ -141,3 +141,16 @@ var deleteAnswer = function (i) {
         callAjax('DELETE',true,'/admin_question/'+i,"JSON",'JSON',null,error,success);
     }
 };
+
+var allCheck = function (e, name) {
+    var checkBox = document.getElementsByClassName(name);
+    if (e.checked === true) {
+        for (var i = 0; i < checkBox.length; i++) {
+            checkBox[i].checked = true;
+        }
+    } else {
+        for (var i = 0; i < checkBox.length; i++) {
+            checkBox[i].checked = false;
+        }
+    }
+};

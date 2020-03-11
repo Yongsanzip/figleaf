@@ -73,4 +73,16 @@ class Portfolio extends Model {
         return $this->hasOne('App\Brand','portfolio_id','id');
     }
 
+
+    public function contentsRelation($model_id, $content_id) {
+        $data = ContentDetail::where('model_id', $model_id)->where('content_id', $content_id)->first();
+
+        if (isset($data)) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+
+        return $result;
+    }
 }
