@@ -1,3 +1,4 @@
+
 <?php
 // url : /
 ?>
@@ -9,6 +10,7 @@
 
             <div class="con-login">
                 <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}" id="loginForm" onsubmit="return fn_login_submit(this);">
+                    <input type="hidden" name="returnUrl" value="{{$returnUrl}}">
                     @csrf
                     <h2 class="title">login</h2>
 

@@ -39,7 +39,10 @@ class LoginController extends Controller
 
         $this->middleware('guest')->except('logout');
     }
-
+    public function showLoginForm(Request $request) {
+        $returnUrl = $request->returnUrl;
+        return view('auth.login',compact('returnUrl'));
+    }
     /************************************************************************
      * Action to Login process
      * @description : 로그인 - 로그인 액션
@@ -60,7 +63,7 @@ class LoginController extends Controller
             $forward = '/login';
             flash($email . '의 계정이 인증되지 않았습니다. 메일함을 확인해주세요')->warning();
         } else {
-
+            $returnUrl = $request->returnUrl;
             if(auth()->user()->role_id == 4){                                                                           // 최고 관리자일 경우
                 $forward = '/admin';
                 flash(auth()->user()->name . ' 님 환영합니다.')->success();
@@ -68,10 +71,10 @@ class LoginController extends Controller
                 $forward = '/admin';
                 flash(auth()->user()->name . ' 님 환영합니다.')->success();
             } else if(auth()->user()->role_id == 2) {                                                                   // 디자이너일 경우
-                $forward = '/';
+                $forward = $returnUrl ? $returnUrl : '/';
                 flash(auth()->user()->name . ' 님 환영합니다.')->success();
             } else if(auth()->user()->role_id == 1){                                                                    // 일반 유저일경
-                $forward = '/';
+                $forward = $returnUrl ? $returnUrl : '/';
                 flash(auth()->user()->name . ' 님 환영합니다.')->success();
             } else {
                 Auth::logout();

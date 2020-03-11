@@ -226,12 +226,19 @@ var communityDelete = function (e) {
 /* 후원하기 */
 var supportSubmit = function (e) {
     var option_list = document.getElementsByClassName('option-item');
-    if(option_list.length == 0){
-        alert('한개이상의 옵션을 선택해주시기 바랍니다.')
-        document.getElementById('select_option').focus();
-        return false;
+    var login_check = document.getElementById('login_check').value;
+    if(login_check){
+        if(option_list.length == 0){
+            alert('한개이상의 옵션을 선택해주시기 바랍니다.')
+            document.getElementById('select_option').focus();
+            return false;
+        } else {
+            document.getElementById('supportSubmitForm').submit();
+        }
     } else {
-        document.getElementById('supportSubmitForm').submit();
+        alert('로그인후 이용해주시기 바랍니다.');
+        window.location.href = '/login?returnUrl='+encodeURIComponent(window.location.pathname);
     }
+
     // callAjax('GET',true,'/project_support',"JSON",'JSON',data,error,success);
 };

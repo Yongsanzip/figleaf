@@ -25,6 +25,7 @@ use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
@@ -446,9 +447,9 @@ class ProjectController extends Controller
             $datas = Portfolio::where('user_id', $data->user_id)->first();                                              // 포트폴리오 데이터
 
             $date_diff = ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24));                 // 남은시간 (남은 일자)
+            $auth_check = Auth::check();
 
-
-            return view('client.project.partial.show.index', compact('data', 'portfolio', 'communities', 'supporter_count', 'total_cost', 'date_diff', 'datas'));
+            return view('client.project.partial.show.index', compact('data', 'portfolio', 'communities', 'supporter_count', 'total_cost', 'date_diff', 'datas','auth_check'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';

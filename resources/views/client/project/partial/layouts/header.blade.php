@@ -91,6 +91,7 @@
                 </p>
             </div>
             <form action="{{ route('project_support.index') }}" method="GET" id="supportSubmitForm">
+                <input type="hidden" id="login_check" value="{{$auth_check}}">
             <div class="info-item">
                 @if(empty($option_id))
                 <p class="info-name">옵션</p>
