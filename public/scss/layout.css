@@ -843,6 +843,9 @@ a:hover, a:focus {
   font-weight: 500;
   cursor: pointer;
 }
+.btn-black:hover {
+  color: white;
+}
 
 .btn-white {
   display: inline-block;
@@ -857,6 +860,9 @@ a:hover, a:focus {
   text-transform: uppercase;
   font-weight: 500;
   cursor: pointer;
+}
+.btn-white:hover {
+  color: black;
 }
 
 .btn-green {

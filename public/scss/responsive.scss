@@ -232,8 +232,10 @@ $cleaningPath: '../images/cleaning';
     }
 
     .category-detail-list {
-        text-align: left;
         border-bottom: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         li {
             text-align: center;
             border-bottom: 1px solid #dadce0;

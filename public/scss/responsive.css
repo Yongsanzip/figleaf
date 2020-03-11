@@ -176,8 +176,10 @@
   }
 
   .category-detail-list {
-    text-align: left;
     border-bottom: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
   .category-detail-list li {
     text-align: center;
