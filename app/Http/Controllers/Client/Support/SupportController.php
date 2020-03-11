@@ -63,6 +63,7 @@ class SupportController extends Controller
             $signKey 		= env('INICIS_SIGN_KEY'); 			                                                    // 가맹점에 제공된 키(이니라이트키) (가맹점 수정후 고정) !!!절대!! 전문 데이터로 설정금지
             $timestamp 		= $SignatureUtil->getTimestamp();   			                                            // util에 의해서 자동생성
             $orderNumber 	= $mid . "_" . $timestamp; 						                                            // 가맹점 주문번호(가맹점에서 직접 설정)
+            $price = $option_total_cost;
 
             //
             //###################################
@@ -80,15 +81,16 @@ class SupportController extends Controller
              */
             $params = array(
                 "oid" => $orderNumber,
+                "price" => $price,
                 "timestamp" => $timestamp
             );
 
             $sign		= $SignatureUtil->makeSignature($params);
 
             $http_host 	= $_SERVER['HTTP_HOST'];
-            $price = $option_total_cost;
+
             /* 기타 */
-            $siteDomain = "http://".$_SERVER['HTTP_HOST'];                                                              //가맹점 도메인 입력
+            $siteDomain = get_connet_protocol().$_SERVER['HTTP_HOST'].'/project_support';                                                              //가맹점 도메인 입력
             $prevUrl = route('project.show',['id'=>$request->project_id]);
             $close = $request->getQueryString();
             return view('client.support.index', compact('data', 'supporter_count', 'total_cost', 'date_diff', 'portfolio', 'option_id', 'option_arr', 'option_total_cost','banks'
@@ -109,6 +111,10 @@ class SupportController extends Controller
             $title = '500 ERROR';
             return view('errors.error',compact('description','title'));
         }
+    }
+
+    public function close(){
+        echo "<script language=\"javascript\" type=\"text/javascript\" src=\"https://stdpay.inicis.com/stdjs/INIStdPay_close.js\" charset=\"UTF-8\"></script>";
     }
 
     /************************************************************************

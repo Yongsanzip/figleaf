@@ -34,6 +34,27 @@ if (! function_exists('summernote_save_image')) {
         return $dom->saveHTML();
     }
 
+    if (! function_exists('check_ssl_protocol')) {
+
+        function check_ssl_protocol(){
+            // $CI		=& get_instance();
+            $ssl = "";
+            $ssl = ((!empty($_SERVER['HTTPS'])) && ($_SERVER['HTTPS']=='on')) ? true : false;
+            return $ssl;
+        }
+    }
+
+    if (! function_exists('get_connet_protocol')) {
+
+        function get_connet_protocol(){
+            // $CI		=get_http_protocol& get_instance();
+            $protocol = "";
+            $protocol = (check_ssl_protocol())? 'https://' : 'http://';
+            return $protocol;
+        }
+    }
+
+
 
     if (! class_exists('CreateIdModule')) {
         class CreateIdModule{

@@ -29,7 +29,7 @@
 <input type="hidden" style="width:100%;" name="gopaymethod" value="" >
 
 {{--acceptmethod : ex)  billauth(card) , billauth(hpp)--}}
-<input type="hidden"  id="acceptmethod" name="acceptmethod" value="billauth(card)" >
+<input style="width:100%;" name="acceptmethod" value="HPP(1):no_receipt:va_receipt:vbanknoreg(0):below1000" >
 {{--결제일 알림 메세지 : 결제일 알림 메세지--}}
 <input type="hidden"  id="billPrint_msg" name="billPrint_msg" value="고객님의 매월 결제일은 24일 입니다." >
 {{--***** 표시 옵션 *****--}}
@@ -41,7 +41,7 @@
 <input type="hidden"  name="payViewType" value="overlay" >
 {{--closeUrl : payViewType='overlay','popup'시 취소버튼 클릭시 창닥기 처리 URL(가맹점에 맞게 설정)
 close.jsp 샘플사용(생략가능, 미설정시 사용자에 의해 취소 버튼 클릭시 인증결과 페이지로 취소 결과를 보냅니다.)--}}
-<input type="hidden"  name="closeUrl" value="{{$siteDomain}}/project_support?{{$close}}" >
+<input type="hidden"  name="closeUrl" value="{{$siteDomain}}/close" >
 <?php
 /*popupUrl : payViewType='popup'시 팝업을 띄울수 있도록 처리해주는 URL(가맹점에 맞게 설정)
 popup.jsp 샘플사용(생략가능,payViewType='popup'으로 사용시에는 반드시 설정)
