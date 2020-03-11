@@ -85,11 +85,11 @@ class SupportController extends Controller
             $http_host 	= $_SERVER['HTTP_HOST'];
             $price = $option_total_cost;
             /* 기타 */
-            $siteDomain = "http://".$_SERVER['HTTP_HOST']."/complete"; //가맹점 도메인 입력
-            $returnUrl = route('project.show',['id'=>$request->project_id]);
-
+            $siteDomain = "http://".$_SERVER['HTTP_HOST'];                                                              //가맹점 도메인 입력
+            $prevUrl = route('project.show',['id'=>$request->project_id]);
+            $close = $request->getQueryString();
             return view('client.support.index', compact('data', 'supporter_count', 'total_cost', 'date_diff', 'portfolio', 'option_id', 'option_arr', 'option_total_cost','banks'
-                ,'mid', 'signKey', 'timestamp', 'orderNumber',  'mKey', 'sign', 'http_host','siteDomain','price','returnUrl'));
+                ,'mid', 'signKey', 'timestamp', 'orderNumber',  'mKey', 'sign', 'http_host','siteDomain','price','prevUrl','close'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';

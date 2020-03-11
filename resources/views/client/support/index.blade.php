@@ -11,7 +11,9 @@
                 @include('client.project.partial.layouts.header')
                 <!-- sponsor form -->
                 <div class="sponsor-form">
-                    <form>
+                    <form id="supportForm">
+                        @csrf
+                        @include('client.support.partial.common.payment')
                         <div class="col">
                             <div class="sponsor-item">
                                 <h3 class="title">후원자 정보</h3>
@@ -111,30 +113,34 @@
                                     </div>
                                 </div>
                             </div>
-                            {{--후원금액--}}
-                            <div class="sponsor-total">
-                                <div class="total">
-                                    <p class="total-caption">후원금액</p>
-                                    <p class="total-price">{{ number_format($option_total_cost) }}</p>
-                                    <label class="checkbox-wrap">
-                                        <input type="checkbox">
-                                        <p>위 사항을 모두 확인 하였으며, 구매 진행에 동의합니다.</p>
-                                    </label>
-                                </div>
-                                <div class="btn-wrap">
-                                    <button type="button" onclick="paybtn();" class="btn-black">후원하기</button>
-                                    <a href="{{$returnUrl}}" class="btn-white">후원취소</a>
-                                </div>
-                            </div>
                         </div>
                     </form>
+                    <div class="col"></div>
+                    <div class="col">
+                        {{--후원금액--}}
+                        <div class="sponsor-total">
+                            <div class="total">
+                                <p class="total-caption">후원금액</p>
+                                <p class="total-price">{{ number_format($option_total_cost) }}</p>
+                                <label class="checkbox-wrap">
+                                    <input type="checkbox">
+                                    <p>위 사항을 모두 확인 하였으며, 구매 진행에 동의합니다.</p>
+                                </label>
+                            </div>
+                            <div class="btn-wrap">
+                                <button type="button" onclick="paybtn(this);" class="btn-black">후원하기</button>
+                                <a href="{{$prevUrl}}" class="btn-white">후원취소</a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <!-- //sponsor form-->
 
             </div>
         </div>
     </main>
-    @include('client.support.partial.common.payment')
+
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
         var fn_get_user_info = function(e){
