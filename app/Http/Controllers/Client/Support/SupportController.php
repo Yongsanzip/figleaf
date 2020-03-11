@@ -9,6 +9,7 @@ use App\Project;
 use App\ViewProject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class SupportController extends Controller
 {
@@ -29,6 +30,8 @@ class SupportController extends Controller
      ************************************************************************/
     public function index(Request $request){
         try {
+            $auth_check = Auth::check();
+
             $option_id = $request->option_id;
             $option_amount = $request->option_amount;
             $option_total_cost = 0;
@@ -89,7 +92,7 @@ class SupportController extends Controller
             $prevUrl = route('project.show',['id'=>$request->project_id]);
             $close = $request->getQueryString();
             return view('client.support.index', compact('data', 'supporter_count', 'total_cost', 'date_diff', 'portfolio', 'option_id', 'option_arr', 'option_total_cost','banks'
-                ,'mid', 'signKey', 'timestamp', 'orderNumber',  'mKey', 'sign', 'http_host','siteDomain','price','prevUrl','close'));
+                ,'mid', 'signKey', 'timestamp', 'orderNumber',  'mKey', 'sign', 'http_host','siteDomain','price','prevUrl','close','auth_check'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';

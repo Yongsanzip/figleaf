@@ -94,8 +94,8 @@
                                 <div class="sponsor-box">
                                     <div class="row">
                                         <p class="option-name">은행명</p>
-                                        <select class="select">
-                                            <option selected disabled>- 은행명 -</option>
+                                        <select class="select required" data-title="은행명" name="banks" id="bank_select">
+                                            <option selected disabled value="">- 은행명 -</option>
                                             @if(count($banks) > 0)
                                                 @foreach($banks as $bank)
                                                     <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
@@ -105,11 +105,11 @@
                                     </div>
                                     <div class="row">
                                         <p class="option-name">예금주명</p>
-                                        <input type="text" placeholder="예금주명" class="input-field">
+                                        <input type="text" placeholder="예금주명" class="input-field required" data-title="예금주명">
                                     </div>
                                     <div class="row">
                                         <p class="option-name">계좌번호</p>
-                                        <input type="text" placeholder="계좌번호" class="input-field">
+                                        <input type="text" placeholder="계좌번호" class="input-field required" data-title="계좌번호">
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@
                                 <p class="total-caption">후원금액</p>
                                 <p class="total-price">{{ number_format($option_total_cost) }}</p>
                                 <label class="checkbox-wrap">
-                                    <input type="checkbox">
+                                    <input type="checkbox" id="agree">
                                     <p>위 사항을 모두 확인 하였으며, 구매 진행에 동의합니다.</p>
                                 </label>
                             </div>

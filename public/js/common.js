@@ -156,14 +156,16 @@ var gn_make_input_json = function(div_id ,type , json_input){
  ***********************************************************************/
 var gn_validation = function(e){
     var check_list = e.querySelectorAll('.required');
+    var flag = true;
     for(var i=0; i<check_list.length; i++){
         if(!gn_nullCheck(check_list[i].value)){
             alert(check_list[i].getAttribute('data-title') +"(은)는 입력 필수사항입니다.");
             check_list[i].focus();
+            flag = false;
             return false;
         }
-
     }
+    return flag;
 };
 
 

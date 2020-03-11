@@ -12,11 +12,11 @@
 <!--currency:[WON|USD]-->
 <input type="hidden"  name="currency" value="WON" >
 {{--buyername :--}}
-<input type="hidden"  name="buyername" value="홍길동" >
+<input type="hidden"  name="buyername" value="{{auth()->user()->name}}" >
 {{--buyertel :--}}
-<input type="hidden"  name="buyertel" value="010-1234-5678" >
+<input type="hidden"  name="buyertel" value="{{auth()->user()->cellphone}}" >
 {{--buyeremail :--}}
-<input type="hidden"  name="buyeremail" value="test@inicis.com" >
+<input type="hidden"  name="buyeremail" value="{{auth()->user()->email}}" >
 <!--timestamp : -->
 <input type="hidden"  style="width:100%;" name="timestamp" value="{{$timestamp}}" >
 <!-- signature : -->
@@ -55,7 +55,16 @@ popup.jsp 샘플사용(생략가능,payViewType='popup'으로 사용시에는 �
 <script language="javascript" type="text/javascript" src="https://stgstdpay.inicis.com/stdjs/INIStdPay.js" charset="UTF-8"></script>
 <script type="text/javascript">
     function paybtn(e) {
-        INIStdPay.pay("supportForm");
+
+        if(gn_validation(document.getElementById('supportForm'))){
+            if(!document.getElementById('agree').checked){
+                alert("동의란을 체크해 주세요!");
+                document.getElementById('agree').focus();
+                return false;
+            } else {
+                INIStdPay.pay("supportForm");
+            }
+        }
     }
 
     function cardShow(){
