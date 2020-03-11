@@ -9,6 +9,8 @@ $color-main:#99a759;
 $color-bg:#F4F5F6;
 $color-input:#ecedef;
 
+$commonPath: '../images/common';
+
 a{
     &:hover , &:focus{
         color:inherit;
@@ -297,7 +299,7 @@ a{
 			-webkit-appearance: none;
 			-moz-appearance: none;
 			appearance: none;
-			background:url(../image/ic-arrow-down-16.png) no-repeat 90% 50%;
+			background:url('#{$commonPath}/ic-arrow-down-16.png') no-repeat 90% 50%;
 			&::-ms-expand{
 				display: none;
 			}
@@ -325,7 +327,7 @@ a{
 			cursor: pointer;
 			width:24px;
 			height:24px;
-			background-image: url(../image/ic-search.png);
+			background-image: url('#{$commonPath}/ic-search.png');
 			background-repeat: no-repeat;
 			background-size: contain;
 			position: absolute;
@@ -523,7 +525,7 @@ a{
 			position: absolute;
 			right:0;
 			top:12px;
-			background:url(../image/ic-arrow-down-24.png);
+			background:url('#{$commonPath}/ic-arrow-down-24.png');
 			background-size: contain;
 			background-repeat: no-repeat;
 		}
@@ -549,7 +551,7 @@ a{
 			display: inline-block;
 			width:16px;
 			height:16px;
-			background-image: url(../image/ic-arrow-right-16.png);
+			background-image: url('#{$commonPath}/ic-arrow-right-16.png');
 			background-repeat: no-repeat;
 			background-size:contain;
 			vertical-align: bottom;
@@ -641,7 +643,7 @@ a{
 					content: '';
 					width: 24px;
 					height: 24px;
-					background-image: url(../image/ic-arrow-left-24.png);
+					background-image: url('#{$commonPath}/ic-arrow-left-24.png');
 					background-repeat: no-repeat;
 					position: absolute;
 					top:0;
@@ -663,7 +665,7 @@ a{
 					content: '';
 					width: 24px;
 					height: 24px;
-					background-image: url(../image/ic-arrow-right-24.png);
+					background-image: url('#{$commonPath}/ic-arrow-right-24.png');
 					background-repeat: no-repeat;
 					position: absolute;
 					top: 0;
@@ -901,7 +903,7 @@ a{
 		display: inline-block;
 		width:24px;
 		height:24px;
-		background-image: url(../image/ic-link.png);
+		background-image: url('#{$commonPath}/ic-link.png');
 		background-repeat: no-repeat;
 		background-size: contain;
 		margin-right:4px;
@@ -1166,7 +1168,7 @@ a{
 			-webkit-appearance: none;
 			-moz-appearance: none;
 			appearance: none;
-			background:url(../image/ic-arrow-down-16.png) no-repeat 90% 50%;
+			background:url('#{$commonPath}/ic-arrow-down-16.png') no-repeat 90% 50%;
 			&::-ms-expand{
 				display: none;
 			}
@@ -1480,11 +1482,11 @@ a{
 		outline:none;
 	}
 	.btn-slide-left{
-		background-image: url(../image/ic-arrow-left-32-white.png);
+		background-image: url('#{$commonPath}/ic-arrow-left-32-white.png');
 	}
 	.btn-slide-right{
 		float:right;
-		background-image: url(../image/ic-arrow-right-32-white.png);
+		background-image: url('#{$commonPath}/ic-arrow-right-32-white.png');
 	}
 }
 

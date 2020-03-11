@@ -277,7 +277,7 @@ a:hover, a:focus {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: url(../image/ic-arrow-down-16.png) no-repeat 90% 50%;
+  background: url("../images/common/ic-arrow-down-16.png") no-repeat 90% 50%;
 }
 .search .search-select select::-ms-expand {
   display: none;
@@ -305,7 +305,7 @@ a:hover, a:focus {
   cursor: pointer;
   width: 24px;
   height: 24px;
-  background-image: url(../image/ic-search.png);
+  background-image: url("../images/common/ic-search.png");
   background-repeat: no-repeat;
   background-size: contain;
   position: absolute;
@@ -475,7 +475,7 @@ a:hover, a:focus {
   position: absolute;
   right: 0;
   top: 12px;
-  background: url(../image/ic-arrow-down-24.png);
+  background: url("../images/common/ic-arrow-down-24.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -501,7 +501,7 @@ a:hover, a:focus {
   display: inline-block;
   width: 16px;
   height: 16px;
-  background-image: url(../image/ic-arrow-right-16.png);
+  background-image: url("../images/common/ic-arrow-right-16.png");
   background-repeat: no-repeat;
   background-size: contain;
   vertical-align: bottom;
@@ -598,7 +598,7 @@ a:hover, a:focus {
   content: "";
   width: 24px;
   height: 24px;
-  background-image: url(../image/ic-arrow-left-24.png);
+  background-image: url("../images/common/ic-arrow-left-24.png");
   background-repeat: no-repeat;
   position: absolute;
   top: 0;
@@ -619,7 +619,7 @@ a:hover, a:focus {
   content: "";
   width: 24px;
   height: 24px;
-  background-image: url(../image/ic-arrow-right-24.png);
+  background-image: url("../images/common/ic-arrow-right-24.png");
   background-repeat: no-repeat;
   position: absolute;
   top: 0;
@@ -886,7 +886,7 @@ a:hover, a:focus {
   display: inline-block;
   width: 24px;
   height: 24px;
-  background-image: url(../image/ic-link.png);
+  background-image: url("../images/common/ic-link.png");
   background-repeat: no-repeat;
   background-size: contain;
   margin-right: 4px;
@@ -1149,7 +1149,7 @@ a:hover, a:focus {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: url(../image/ic-arrow-down-16.png) no-repeat 90% 50%;
+  background: url("../images/common/ic-arrow-down-16.png") no-repeat 90% 50%;
 }
 .project-status .col-status .status-select::-ms-expand {
   display: none;
@@ -1450,11 +1450,11 @@ a:hover, a:focus {
   outline: none;
 }
 .btn-slide-wrap .btn-slide-left {
-  background-image: url(../image/ic-arrow-left-32-white.png);
+  background-image: url("../images/common/ic-arrow-left-32-white.png");
 }
 .btn-slide-wrap .btn-slide-right {
   float: right;
-  background-image: url(../image/ic-arrow-right-32-white.png);
+  background-image: url("../images/common/ic-arrow-right-32-white.png");
 }
 
 .form-message {
