@@ -892,21 +892,6 @@
 
     <script src="{{asset('js/swiper.min.js')}}"></script>
     <script>
-        // hero slide
-        var heroSwiper = new Swiper('.hero-slide', {
-            spaceBetween: 0,
-            navigation: {
-                nextEl: '.hero-button-next',
-                prevEl: '.hero-button-prev',
-            },
-            loop:true,
-            pagination: {
-                el: '.hero-pagination',
-                clickable: true,
-            },
-        });
-
-
         var designerSwiper, brandSwiper, rpSwiper, npSwiper;
         var swpViewInit = window.innerWidth;
         var swpSpaceInit = 0;
