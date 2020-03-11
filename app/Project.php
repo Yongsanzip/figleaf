@@ -131,4 +131,10 @@ class Project extends Model {
         return $result;
     }
 
+    public function supportCount($id) {
+        $support = ViewProject::where('id', $id)->first();                                                          // 뷰프로젝트 데이터
+        $supporter_count = $support->supporter_count;                                                               // 후원자 수
+
+        return $supporter_count;
+    }
 }

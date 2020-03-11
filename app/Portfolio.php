@@ -61,6 +61,12 @@ class Portfolio extends Model {
     public function look_books(){
         return $this->hasMany('App\LookBook','portfolio_id','id');
     }
+
+    // 콘텐츠 상세
+    public function contentDetails() {
+        return $this->hasMany('App\ContentDetail', 'model_id', 'id')->where('status', 0)->orderBy('content_details.model_id', 'asc');
+    }
+
     /*******************************************************************
      * @return HasOne
      *******************************************************************/

@@ -92,16 +92,19 @@ class ContentsController extends Controller
             $status = 0;
         } else {                                                                                                        // 프로젝트
             $datas = Project::where('condition', 2)->orWhere('condition', 4)->orWhere('condition', 5)
-                ->Leftjoin('content_details', function ($join) {
+                ->Leftjoin('content_details', function ($join) use ($id) {
                     $join->on('projects.id', '=', 'content_details.model_id')
+                        ->where('content_details.content_id', '=', $id)
                         ->where('content_details.status', '=', 1);
                 })
                 ->select('projects.*', 'projects.id as p_id', 'content_details.*')
-                ->orderBy('status', 'desc')
+                ->orderBy('content_details.status', 'desc')
                 ->get();
             $menu = Content::find($id);
             $status = 1;
         }
+
+        error_log($datas);
 
         return view('admin.page.contents.partial.show.index', compact('datas', 'menu', 'status'));
     }

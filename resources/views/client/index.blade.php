@@ -17,103 +17,35 @@
                 <div class="section-title-wrap">
                     <h2 class="section-title">designer</h2>
                     <span class="caption">디자이너</span>
-                    <a href="" class="more">전체보기</a>
+                    <a href="/designer" class="more">전체보기</a>
                 </div>
                 <!-- slide -->
                 <div class="swiper-container designer-slide">
                     <div class="swiper-wrapper">
                         <!-- slide item-->
+                        @foreach($designer as $data)
                         <div class="swiper-slide card">
                             <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
+                                <img src="{{asset('storage/'.$data->portfolio_images->first()->image_path)}}" alt="">
                             </div>
                             <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
+                                <p class="card-title">{{ $data->user->name }}</p>
+                                <p class="card-text">
+                                    @if( app()->getLocale() =='ko')
+                                        {{ $data->content_ko ? $data->content_ko : ''}}
+                                    @elseif(app()->getLocale() =='en')
+                                        {{ $data->content_en ? $data->content_en : ''}}
+                                    @elseif(app()->getLocale() =='cn')
+                                        {{ $data->content_cn ? $data->content_cn : ''}}
+                                    @else
+                                        포트폴리오 내용이 존재하지 않습니다
+                                    @endif
+                                </p>
                             </div>
-                            <a href="" class="link"></a>
+                            <a href="/designer/{{ $data->id }}" class="link"></a>
                         </div>
+                        @endforeach
                         <!-- //slide item -->
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
                     </div>
                     <!-- Add Arrows -->
                     <div class="swiper-button-next designer-button-next"></div>
@@ -123,111 +55,40 @@
             </section>
             <!--// designer-->
 
-
-
-
             <!-- brand -->
             <section class="con-brand">
                 <div class="section-title-wrap">
                     <h2 class="section-title">brand</h2>
                     <span class="caption">브랜드</span>
-                    <a href="" class="more">전체보기</a>
+                    <a href="/brand" class="more">전체보기</a>
                 </div>
                 <!-- slide -->
                 <div class="swiper-container brand-slide">
                     <div class="swiper-wrapper">
                         <!-- slide item-->
+                        @foreach($brand as $data)
                         <div class="swiper-slide card">
                             <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
+                                <img src="{{asset('storage/'.$data->brand_thumbnail_images->first()->image_path)}}" alt="">
                             </div>
                             <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text"> 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
+                                <p class="card-title">{{ $data->user->name }}</p>
+                                <p class="card-text">
+                                    @if( app()->getLocale() =='ko')
+                                        {{ $data->brand->name_ko}}
+                                    @elseif(app()->getLocale() =='en')
+                                        {{ $data->brand->name_en}}
+                                    @elseif(app()->getLocale() =='en')
+                                        {{ $data->brand->name_cn}}
+                                    @else
+                                        브랜드명이 존재하지 않습니다
+                                    @endif
+                                </p>
                             </div>
-                            <a href="" class="link"></a>
+                            <a href="/designer/{{ $data->id }}" class="link"></a>
                         </div>
+                        @endforeach
                         <!-- //slide item -->
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <p class="card-title">티르티르</p>
-                                <p class="card-text">천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서. </p>
-                            </div>
-                            <a href="" class="link"></a>
-                        </div>
                     </div>
                     <!-- Add Arrows -->
                     <div class="swiper-button-next brand-button-next"></div>
@@ -336,264 +197,44 @@
                 <div class="swiper-container recommend-project-slide">
                     <div class="swiper-wrapper">
                         <!-- slide item-->
+                        @foreach($project as $data)
                         <div class="swiper-slide card">
                             <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
+                                <img src="{{asset('storage/'.$data->main_image->image_path)}}" alt="">
                             </div>
                             <div class="card-contents">
                                 <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
+                                    <p class="card-title">{{ $data->title }}</p>
+                                    <p class="card-text">{{ $data->introduction->designer_name }}</p>
                                 </div>
 
                                 <div class="card-info">
                                     <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
+                                        <div class="rating-bar" style="width: {{ ceil($data->supportCount($data->id)/$data->success_count*100) }}%"></div>
                                     </div>
                                     <div class="info-box-list">
                                         <div class="info-box amount">
-                                            180개 남음
+                                            {{ $data->success_count - $data->supportCount($data->id) }}개 남음
                                         </div>
                                         <div class="info-box date">
-                                            6일 남음
+                                            {{ $date = ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) > 0 ? $date.'일 남음' : '마감' }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- 성공할경우 뱃지 출력 -->
                             <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                            <!-- 진행중인 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-green">진행중</div> -->
-                            <!-- 실패한 경우 뱃지 출력 -->
-                            <!-- <div class="badge badge-grey">실패</div> -->
+                            <a href="/project/{{ $data->id }}" class="link"></a>
+                            @if($data->condition == 2)
+                                <div class="badge badge-green">진행중</div>
+                            @elseif($data->condition == 4)
+                                <div class="badge badge-grey">실패</div>
+                            @elseif($data->condition == 5)
+                                <div class="badge badge-orange">성공</div>
+                            @endif
                         </div>
+                        @endforeach
                         <!-- //slide item -->
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-02.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">주얼리 악세사리</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-
                     </div>
                     <!-- Add Arrows -->
                     <div class="swiper-button-next recommend-button-next"></div>
@@ -608,266 +249,49 @@
                 <div class="section-title-wrap">
                     <h2 class="section-title">new projects</h2>
                     <span class="caption">신규</span>
-                    <a href="" class="more">전체보기</a>
+                    <a href="/menu?type=new" class="more">전체보기</a>
                 </div>
                 <!-- slide -->
                 <div class="swiper-container new-project-slide">
                     <div class="swiper-wrapper">
                         <!-- slide item-->
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
+                        @foreach($new_project as $data)
+                            <div class="swiper-slide card">
+                                <div class="card-image">
+                                    <img src="{{asset('storage/'.$data->main_image->image_path)}}" alt="">
                                 </div>
+                                <div class="card-contents">
+                                    <div class="text-box">
+                                        <p class="card-title">{{ $data->title }}</p>
+                                        <p class="card-text">{{ $data->introduction->designer_name }}</p>
+                                    </div>
 
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
+                                    <div class="card-info">
+                                        <div class="rating">
+                                            <div class="rating-bar" style="width: {{ ceil($data->supportCount($data->id)/$data->success_count*100) }}%"></div>
                                         </div>
-                                        <div class="info-box date">
-                                            6일 남음
+                                        <div class="info-box-list">
+                                            <div class="info-box amount">
+                                                {{ $data->success_count - $data->supportCount($data->id) }}개 남음
+                                            </div>
+                                            <div class="info-box date">
+                                                {{ $date = ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) > 0 ? $date.'일 남음' : '마감' }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- 성공할경우 뱃지 출력 -->
+                                <a href="/project/{{ $data->id }}" class="link"></a>
+                                @if($data->condition == 2)
+                                    <div class="badge badge-green">진행중</div>
+                                @elseif($data->condition == 4)
+                                    <div class="badge badge-grey">실패</div>
+                                @elseif($data->condition == 5)
+                                    <div class="badge badge-orange">성공</div>
+                                @endif
                             </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
+                        @endforeach
                         <!-- //slide item -->
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-02.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">주얼리 악세사리</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-                        <div class="swiper-slide card">
-                            <div class="card-image">
-                                <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="text-box">
-                                    <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                    <p class="card-text"> 강주원 </p>
-                                </div>
-
-                                <div class="card-info">
-                                    <div class="rating">
-                                        <div class="rating-bar" style="width: 80%">80</div>
-                                    </div>
-                                    <div class="info-box-list">
-                                        <div class="info-box amount">
-                                            180개 남음
-                                        </div>
-                                        <div class="info-box date">
-                                            6일 남음
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
-                            <a href="" class="link"></a>
-                        </div>
-
                     </div>
                     <!-- Add Arrows -->
                     <div class="swiper-button-next new-button-next"></div>

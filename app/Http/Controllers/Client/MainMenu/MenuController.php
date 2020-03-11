@@ -26,7 +26,28 @@ class MenuController extends Controller {
     public function index(Request $request){
         try {
             $type = $request->type;
-            $datas = Project::whereCondition(array([1,2,5]))->orderBy('created_at','DESC')->limit(8)->get();
+
+            if ($type == 'new') {
+                $content_id = 4;
+            } elseif ($type == 'special') {
+                $content_id = 5;
+            } elseif ($type == 'collection') {
+                $content_id = 6;
+            } elseif ($type == 'event') {
+                $content_id = 7;
+            } else {
+                $content_id = 0;
+            }
+
+            if ($content_id > 0) {
+                $datas = Project::whereIn('condition', [2,4,5])->whereHas('contentDetails', function ($q) use ($content_id) {
+                    $q->where('status', 1);
+                    $q->where('content_id', $content_id);
+                })->orderBy('created_at','DESC')->paginate(20);
+            } else { // women's apparel or men's apparel
+                $datas = Project::whereIn('condition', [2,4,5])->orderBy('created_at','DESC')->paginate(20);
+            }
+
             return view('client.mainMenu.index',compact('datas','type'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
