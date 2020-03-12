@@ -32,7 +32,7 @@
                 <tr style="cursor: pointer" onclick="location.href='/admin_contents/{{ $data->id }}'">
                     <td>{{ $key+1 }}</td>
                     <td>{{ $data->menu }}</td>
-                    <td>2019-00-00 00:00</td>
+                    <td>{{ $data->lastestContent($data->id) }}</td>
                 </tr>
                 @endforeach
                 </tbody>

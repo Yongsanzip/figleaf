@@ -24,4 +24,21 @@ class Content extends Model {
     /*******************************************************************
      * @return HasOne
      *******************************************************************/
+
+
+    /*******************************************************************
+     * @return 사용자정의
+     *******************************************************************/
+    public function lastestContent($id) {
+        $data = ContentDetail::where('content_id', $id)->orderBy('updated_at', 'desc')->first();
+        if ($data) {
+            $result = $data->updated_at;
+        } else {
+            $result = Content::where('id', $id)->first()->updated_at;
+        }
+
+        $result = $result->format('Y-m-d H:i');
+
+        return $result;
+    }
 }

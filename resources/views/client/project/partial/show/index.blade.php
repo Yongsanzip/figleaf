@@ -32,7 +32,7 @@
                         <!--//designer profile -->
 
                         <!-- project overview-->
-                        <?/*<div class="contents-wrap portfolio-overview">*/?>
+                        <div class="contents-wrap portfolio-overview">
                             <div class="contents-overview">
                             <img src="{{ $datas->portfolio_images ? asset('storage/'. $datas->portfolio_images->first()->image_path) :asset('images/common/img_no_image.jpg')}}" alt="">
                             <p>

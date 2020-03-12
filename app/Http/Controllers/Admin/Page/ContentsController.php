@@ -81,8 +81,9 @@ class ContentsController extends Controller
     public function show($id)
     {
         if ($id == 1 || $id == 2) {                                                                                     // 포트폴리오
-            $datas = Portfolio::Leftjoin('content_details', function ($join) {
+            $datas = Portfolio::Leftjoin('content_details', function ($join) use ($id) {
                     $join->on('portfolios.id', '=', 'content_details.model_id')
+                        ->where('content_details.content_id', '=', $id)
                         ->where('content_details.status', '=', 0);
                 })
                 ->select('portfolios.*', 'portfolios.id as p_id', 'content_details.*')
@@ -90,6 +91,7 @@ class ContentsController extends Controller
                 ->get();
             $menu = Content::find($id);
             $status = 0;
+
         } else {                                                                                                        // 프로젝트
             $datas = Project::where('condition', 2)->orWhere('condition', 4)->orWhere('condition', 5)
                 ->Leftjoin('content_details', function ($join) use ($id) {
@@ -103,8 +105,6 @@ class ContentsController extends Controller
             $menu = Content::find($id);
             $status = 1;
         }
-
-        error_log($datas);
 
         return view('admin.page.contents.partial.show.index', compact('datas', 'menu', 'status'));
     }

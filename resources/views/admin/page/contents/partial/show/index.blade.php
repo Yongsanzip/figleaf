@@ -31,7 +31,7 @@
                 <tr>
                     <td>{{ $menu->id }}</td>
                     <td>{{ $menu->menu }}</td>
-                    <td>2019-00-00 00:00</td>
+                    <td>{{ $menu->lastestContent($menu->id) }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -78,7 +78,7 @@
                                 <td>{{ $data->user->name }}</td>
                                 <td>{{ $data->brand ? $data->brand->name_ko : $data->title }}</td>
                                 <td>
-                                    <a href="{{ $data->brand ? '/admin_portfolio/'.$data->p_id : '/admin_project/'.$data->p_id }}" class="btn-s btn-white">바로가기</a>
+                                    <button type="button" class="btn-s btn-white" onclick="window.open('{{ $data->brand ? '/admin_portfolio/'.$data->p_id : '/admin_project/'.$data->p_id }}')">바로가기</button>
                                 </td>
                             </tr>
                             @endforeach

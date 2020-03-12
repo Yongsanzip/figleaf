@@ -72,17 +72,17 @@ class SearchController extends Controller
         if ($id == 1){ // 디자이너
             $datas = Portfolio::where('hidden_yn', 0)->whereHas('user', function ($q) use ($keyword) {
                 $q->where('name', 'LIKE', '%' . $keyword . '%');
-            })->orderBy('created_at', 'desc')->get();
+            })->orderBy('created_at', 'desc')->paginate(20);
 
             return view('client.search.designer.index', compact('datas', 'keyword'));
         } elseif ($id == 2) { // 브랜드
             $datas = Portfolio::where('hidden_yn', 0)->whereHas('brand', function ($q) use ($keyword) {
                 $q->where('name_ko', 'LIKE', '%' . $keyword . '%');
-            })->orderBy('created_at', 'desc')->get();
+            })->orderBy('created_at', 'desc')->paginate(20);
 
-            return view('client.search.brand.index', 'datas', 'keyword');
+            return view('client.search.brand.index', compact('datas', 'keyword'));
         } else { // 프로젝트
-            $datas = Project::whereIn('condition', [2,4,5])->where('title', 'LIKE', '%' . $keyword . '%')->orderBy('created_at', 'desc')->get();
+            $datas = Project::whereIn('condition', [2,4,5])->where('title', 'LIKE', '%' . $keyword . '%')->orderBy('created_at', 'desc')->paginate(20);
 
             return view('client.search.project.index', compact('datas','keyword'));
         }
