@@ -438,8 +438,13 @@ class ProjectController extends Controller
     {
         try {
             $support = ViewProject::where('id', $id)->first();                                                          // 뷰프로젝트 데이터
-            $supporter_count = $support->supporter_count;                                                               // 후원자 수
-            $total_cost = $support->total_cost;                                                                         // 모인금액
+            if ($support) {
+                $supporter_count = $support->supporter_count;                                                           // 후원자 수
+                $total_cost = $support->total_cost;                                                                     // 모인금액
+            } else {
+                $supporter_count = 0;
+                $total_cost = 0;
+            }
 
             $data = Project::where('id',$id)->first();                                                                  // 프로젝트 데이터
             $portfolio = Portfolio::where('user_id', $data->user_id)->first();                                          // 포트폴리오 데이터

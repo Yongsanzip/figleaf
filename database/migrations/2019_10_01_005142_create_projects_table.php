@@ -23,7 +23,6 @@ class CreateProjectsTable extends Migration
             $table->bigInteger('user_id')->unsigned()->comment('유저ID');
             $table->bigInteger('category_id')->unsigned()->comment('1차 카테고리');
             $table->bigInteger('category2_id')->unsigned()->comment('2차 카테고리');
-            $table->tinyInteger('division')->nullable()->default(0)->comment('구분값 0:없음 ,1:special, 2:collection 3: event');
             $table->bigInteger('size_category_id')->nullable()->unsigned()->comment('사이즈 카테고리 id');
             $table->integer('total_cost')->default(0)->comment('모인금액');
             $table->integer('supporter')->default(0)->comment('후원자수');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Client\Search;
 
+use App\Portfolio;
+use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,9 +15,26 @@ class SearchController extends Controller
      * @url /search
      * @return view
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('client.search.index');
+        $keyword = $request->keyword;
+        // limit = 4
+
+        // 디자이너 - 포트폴리오
+        $designer = Portfolio::where('hidden_yn', 0)->whereHas('user', function ($q) use ($keyword) {
+            $q->where('name', 'LIKE', '%' . $keyword . '%');
+        })->orderBy('created_at', 'desc')->get();
+
+        // 브랜드 - 포트폴리오
+        $brand = Portfolio::where('hidden_yn', 0)->whereHas('brand', function ($q) use ($keyword) {
+            $q->where('name_ko', 'LIKE', '%' . $keyword . '%');
+        })->orderBy('created_at', 'desc')->get();
+
+        // 프로젝트
+        $project = Project::where('title', 'LIKE', '%' . $keyword . '%')->orderBy('created_at', 'desc')->get();
+
+
+        return view('client.search.index', compact('designer', 'brand', 'project', 'keyword'));
     }
 
     /**

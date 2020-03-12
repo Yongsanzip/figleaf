@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
             SupportSeeder::class,
             CommunitySeeder::class,
             QuestionSeeder::class,
+            ContentDetailsSeeder::class
         ]);
 
     }

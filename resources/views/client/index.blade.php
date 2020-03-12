@@ -191,7 +191,7 @@
                 <div class="section-title-wrap">
                     <h2 class="section-title">recommend projects</h2>
                     <span class="caption">추천</span>
-                    <a href="" class="more">전체보기</a>
+                    {{--<a href="" class="more">전체보기</a>--}}
                 </div>
                 <!-- slide -->
                 <div class="swiper-container recommend-project-slide">
@@ -217,7 +217,7 @@
                                             {{ $data->success_count - $data->supportCount($data->id) }}개 남음
                                         </div>
                                         <div class="info-box date">
-                                            {{ $date = ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) > 0 ? $date.'일 남음' : '마감' }}
+                                            {{ ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) > 0 ? ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)).'일 남음' : '마감' }}
                                         </div>
                                     </div>
                                 </div>
@@ -275,7 +275,7 @@
                                                 {{ $data->success_count - $data->supportCount($data->id) }}개 남음
                                             </div>
                                             <div class="info-box date">
-                                                {{ $date = ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) > 0 ? $date.'일 남음' : '마감' }}
+                                                {{ ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) > 0 ? ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)).'일 남음' : '마감' }}
                                             </div>
                                         </div>
                                     </div>
