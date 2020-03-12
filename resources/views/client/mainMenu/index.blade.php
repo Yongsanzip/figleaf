@@ -13,8 +13,18 @@
             <section class="con-project">
 
                 <div class="category-title-wrap">
-                    <h2 class="category-title">{{ $type }}</h2>
+                    <h2 class="category-title">{{ $type == 'men' || $type == 'women' ? $type.'\'s apparel' : $type }}</h2>
                 </div>
+
+                @if($type == 'men' || $type == 'women')
+                <ul class="category-detail-list {{ $type == 'men' ? 'category-detail-8' : 'category-detail-10' }} ">
+                    @foreach($category_details as $category)
+                    <li class="{{ $category_details_id ? ($category_details_id == $category->id ? 'on' : '') : ($category->id == 1 | $category->id == 11 ? 'on' : '') }}">
+                        <a href="menu?type={{ $type }}&category={{ $category->id }}">{{ $category->category_name }}</a>
+                    </li>
+                    @endforeach
+                </ul>
+                @endif
 
                 <div class="card-list">
                 @if(count($datas) > 0)

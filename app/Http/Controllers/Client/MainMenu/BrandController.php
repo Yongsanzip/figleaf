@@ -26,7 +26,7 @@ class BrandController extends Controller{
      ************************************************************************/
     public function index(){
         try {
-            $datas = User::whereRoleId(2)->limit(8)->with('portfolio')->has('portfolio')->get();
+            $datas = User::whereRoleId(2)->limit(8)->with('portfolio')->has('portfolio')->paginate(20);
             return view('client.mainMenu.brand.index',compact('datas'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();

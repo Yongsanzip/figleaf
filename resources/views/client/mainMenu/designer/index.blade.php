@@ -15,7 +15,6 @@
                 <div class="section-title-wrap">
                     <h2 class="section-title">designer</h2>
                     <span class="caption">디자이너</span>
-                    <a href="" class="more">전체보기</a>
                 </div>
 
                 <div class="card-list">
@@ -49,9 +48,11 @@
                         <!-- //card -->
                     @endif
                 </div>
-                <div class="btn-wrap">
-                    <div class="btn-more">View More Designer</div>
-                </div>
+                <nav class="pagination-wrap">
+                    @if($datas->count())
+                        {!! $datas->appends(request()->except('page'))->render() !!}
+                    @endif
+                </nav>
             </section>
             <!--// designer-->
         </div>

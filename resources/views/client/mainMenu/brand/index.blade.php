@@ -15,7 +15,6 @@
                 <div class="section-title-wrap">
                     <h2 class="section-title">brand</h2>
                     <span class="caption">브랜드</span>
-                    <a href="" class="more">전체보기</a>
                 </div>
 
                 <div class="card-list">
@@ -51,9 +50,11 @@
                         <!-- //card -->
                     @endif
                 </div>
-                <div class="btn-wrap">
-                    <div class="btn-more">View More Brand</div>
-                </div>
+                <nav class="pagination-wrap">
+                    @if($datas->count())
+                        {!! $datas->appends(request()->except('page'))->render() !!}
+                    @endif
+                </nav>
             </section>
             <!--// brand -->
         </div>

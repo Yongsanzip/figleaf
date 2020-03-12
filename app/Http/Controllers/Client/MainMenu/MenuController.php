@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\MainMenu;
 
+use App\CategoryDetail;
 use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,6 +27,7 @@ class MenuController extends Controller {
     public function index(Request $request){
         try {
             $type = $request->type;
+            $category_details_id = $request->category;
 
             if ($type == 'new') {
                 $content_id = 4;
@@ -39,16 +41,29 @@ class MenuController extends Controller {
                 $content_id = 0;
             }
 
-            if ($content_id > 0) {
+            if ($content_id > 0) {                                                                                      // new, spacial, collection, event
                 $datas = Project::whereIn('condition', [2,4,5])->whereHas('contentDetails', function ($q) use ($content_id) {
                     $q->where('status', 1);
                     $q->where('content_id', $content_id);
                 })->orderBy('created_at','DESC')->paginate(20);
-            } else { // women's apparel or men's apparel
-                $datas = Project::whereIn('condition', [2,4,5])->orderBy('created_at','DESC')->paginate(20);
+            } else {                                                                                                    // women's apparel or men's apparel
+                if ($type == 'women') {                                                                                 // women
+                    $catogory_id = 4;
+                } else {                                                                                                // men
+                    $catogory_id = 5;
+                }
+
+                $datas = Project::whereIn('condition', [2,4,5])->where('category_id', $catogory_id);
+
+                if ($request->category && $category_details_id != 1) { // 2차 카테고리
+                    $datas = $datas->where('category2_id', $category_details_id);
+                }
+
+                $datas = $datas->orderBy('created_at','DESC')->paginate(20);
+                $category_details = CategoryDetail::where('category_id', $catogory_id)->get();
             }
 
-            return view('client.mainMenu.index',compact('datas','type'));
+            return view('client.mainMenu.index',compact('datas','type', 'category_details', 'category_details_id'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
