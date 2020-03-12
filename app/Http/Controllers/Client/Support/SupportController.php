@@ -185,24 +185,36 @@ class SupportController extends Controller
         }
     }
 
-    public function complete(Request $request){
+    public function inicis_complete(Request $request){
         try {
             if($request->resultCode =='0000'){
-               $support = Support::whereSupportCode($request->orderNumber)->first();
-               $support->condition = 2;
-               $support->save();
+                $support = Support::whereSupportCode($request->orderNumber)->first();
+                $support->condition = 2;
+                $support->save();
 
-               $logs = SupportLog::whereSupportId($support->id)->get();
-               foreach($logs as $log){
-                   SupportLog::firstOrCreate([
-                       'support_id'          => $support->id,
-                       'support_option_id'   =>$log->support_option_id,
-                       'amount'              =>$log->ammount,
-                       'price'               =>$log->price,
-                       'condition'           =>2,
-                   ]);
-               }
+                $logs = SupportLog::whereSupportId($support->id)->get();
+                foreach($logs as $log){
+                    SupportLog::firstOrCreate([
+                        'support_id'          => $support->id,
+                        'support_option_id'   =>$log->support_option_id,
+                        'amount'              =>$log->ammount,
+                        'price'               =>$log->price,
+                        'condition'           =>2,
+                    ]);
+                }
             }
+            return redirect(route('complete.get',['orderNumber'=>$request->orderNumber]));
+        } catch (\Exception $e){
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
+        }
+    }
+
+    public function complete(Request $request){
+        try {
+            error_log("check");
+            $support = Support::whereSupportCode($request->orderNumber)->first();
             return view('client.support.partial.complete.index',compact('support'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();

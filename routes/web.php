@@ -80,7 +80,8 @@ Route::group(['middleware'=>'locale'],function(){
     Route::resource('project_community', 'Client\Project\CommunityController');
     // 프로젝트 - 후원하기
     Route::resource('project_support', 'Client\Support\SupportController');
-    Route::POST('/project_support/complete','Client\Support\SupportController@complete');
+    Route::POST('/project_support/complete','Client\Support\SupportController@inicis_complete');
+    Route::GET('/project_support/complete','Client\Support\SupportController@complete')->name('complete.get');
     Route::POST('/project_support/order_create','Client\Support\SupportController@order_create');
     Route::get('/project_support/close','Client\Support\SupportController@close');
     // 포트폴리오

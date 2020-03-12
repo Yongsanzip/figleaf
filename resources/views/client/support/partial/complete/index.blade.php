@@ -8,7 +8,7 @@
         <div class="inner">
             <div class="con-project-view">
                 <h2 class="project-headline">
-                    project
+                    {{$support->project->title}}
                 </h2>
                 <!-- project info-->
                 <div class="project-info">
