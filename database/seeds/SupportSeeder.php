@@ -21,6 +21,7 @@ class SupportSeeder extends Seeder
                 'user_id'           => mt_rand(1,5),
                 'project_id'        => mt_rand(1,99),
                 'supporter'         => '테스트후원자'.$i,
+                'total_amount'      => 100,
                 'phone'             => '01012341234',
                 'email'             => 'test@test.com',
                 'receiver'          => '테스트'.$i,

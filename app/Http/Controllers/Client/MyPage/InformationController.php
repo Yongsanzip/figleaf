@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\MyPage;
 
+use App\Bank;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,7 +23,8 @@ class InformationController extends Controller {
      ************************************************************************/
     public function index() {
         $datas = auth()->user();
-        return view('client.mypage.information.index',compact('datas'));
+        $banks = Bank::whereUseYn(1)->get();
+        return view('client.mypage.information.index',compact('datas','banks'));
     }
 
 

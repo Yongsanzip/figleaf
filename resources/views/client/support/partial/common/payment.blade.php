@@ -1,28 +1,24 @@
-<!-- 필수 -->
-{{--***** 필 수 *****--}}
-<input type="hidden" name="version" value="1.0" >
-<input type="hidden" name="mid" value="{{$mid}}" >
-<input type="hidden" name="goodname" value="{{ $data->title }}" >
-<input type="hidden" name="oid" value="{{$orderNumber}}" >
-<input type="hidden"  name="price" value="{{$price}}" >
-<input type="hidden"  name="currency" value="WON" >
-<input type="hidden"  name="buyername" value="{{auth()->user()->name}}" >
-<input type="hidden"  name="buyertel" value="{{auth()->user()->cellphone}}" >
-<input type="hidden"  name="buyeremail" value="{{auth()->user()->email}}" >
-<input type="hidden"  style="width:100%;" name="timestamp" value="{{$timestamp}}" >
-<input type="hidden" style="width:100%;" name="signature" value="{{$sign}}" >
-<input type="hidden"  name="returnUrl" value="{{$siteDomain}}/complete" >
-<input type="hidden"  name="mKey" value="{{$mKey}}" >
-<input type="hidden" style="width:100%;" name="gopaymethod" value="" >
-<input type="hidden" name="acceptmethod" value="HPP(1):no_receipt:va_receipt:vbanknoreg(0):below1000" >
-{{--결제일 알림 메세지 : 결제일 알림 메세지--}}
-<input type="hidden"  id="billPrint_msg" name="billPrint_msg" value="고객님의 매월 결제일은 24일 입니다." >
-{{--***** 표시 옵션 *****--}}
-<input type="hidden"  name="languageView" value="ko" >
-<input type="hidden"  name="charset" value="UTF-8" >
-<input type="hidden"  name="payViewType" value="overlay" >
-<input type="hidden"  name="closeUrl" value="{{$siteDomain}}/close" >
-<input type="hidden"  name="merchantData" value="" >
+<input type="hidden" id="version"      name="version"       >
+<input type="hidden" id="mid"          name="mid"           >
+<input type="hidden" id="goodname"     name="goodname"      >
+<input type="hidden" id="oid"          name="oid"           >
+<input type="hidden" id="price"        name="price"         >
+<input type="hidden" id="currency"     name="currency"      >
+<input type="hidden" id="buyername"    name="buyername"     >
+<input type="hidden" id="buyertel"     name="buyertel"      >
+<input type="hidden" id="buyeremail"   name="buyeremail"    >
+<input type="hidden" id="timestamp"    name="timestamp"     >
+<input type="hidden" id="signature"    name="signature"     >
+<input type="hidden" id="returnUrl"    name="returnUrl"     >
+<input type="hidden" id="mKey"         name="mKey"          >
+<input type="hidden" id="gopaymethod"  name="gopaymethod"   >
+<input type="hidden" id="acceptmethod" name="acceptmethod"  >
+<input type="hidden" id="billPrint_msg"name="billPrint_msg" >
+<input type="hidden" id="languageView" name="languageView"  >
+<input type="hidden" id="charset"      name="charset"       >
+<input type="hidden" id="payViewType"  name="payViewType"   >
+<input type="hidden" id="closeUrl"     name="closeUrl"      >
+<input type="hidden" id="merchantData" name="merchantData"  >
 
 <script language="javascript" type="text/javascript" src="https://stdpay.inicis.com/stdjs/INIStdPay.js" charset="UTF-8"></script>
 <script type="text/javascript">
@@ -34,7 +30,15 @@
                 document.getElementById('agree').focus();
                 return false;
             } else {
-                INIStdPay.pay("supportForm");
+                var data = {
+                    '1':document.getElementById('receiver_name').value,
+                    '2':document.getElementById('receiver_cellphone').value,
+                    '3':document.getElementById('receiver_zip_code').value,
+                    '4':document.getElementById('receiver_address').value,
+                    '5':document.getElementById('receiver_address_detail').value,
+                };
+                callAjax('POST',true,'/project_support/order_create',"JSON",'JSON',data,gn_ajax_error,gn_ajax_success);
+                //INIStdPay.pay("supportForm");
             }
         }
     }

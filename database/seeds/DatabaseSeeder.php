@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             //부가 요소
             PortfolioSeeder::class,
             ProjectSeeder::class,
-            SupportSeeder::class,
+            //SupportSeeder::class,
             CommunitySeeder::class,
             QuestionSeeder::class,
             ContentDetailsSeeder::class

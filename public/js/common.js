@@ -125,7 +125,12 @@ var callAjax = function(methodType,asyncType,urlPath,dataReceiveType,sendContent
         alert("에러코드 : " + e.code + "\r\n 에러내용 : " + e.message);
     }
 };
-
+var gn_ajax_success = function(e){
+    console.log(e);
+}
+var gn_ajax_error  = function(e){
+    console.log(e);
+}
 /***********************************************************************
  * function Name : gn_make_input_json
  * description : input 데이터 JSON 으로 만들기

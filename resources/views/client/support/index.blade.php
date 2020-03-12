@@ -14,6 +14,7 @@
 
                     <form id="supportForm" name="" method="POST">
                         @include('client.support.partial.common.payment')
+                        <input type="hidden" id="options" value="{{json_encode($option_id)}}">
                         <div class="col">
                             <div class="sponsor-item">
                                 <h3 class="title">후원자 정보</h3>
@@ -94,7 +95,7 @@
                                 <div class="sponsor-box">
                                     <div class="row">
                                         <p class="option-name">은행명</p>
-                                        <select class="select required" data-title="은행명" name="banks" id="bank_select">
+                                        <select class="select required" data-title="은행명" id="bank_select">
                                             <option selected disabled value="">- 은행명 -</option>
                                             @if(count($banks) > 0)
                                                 @foreach($banks as $bank)
@@ -105,11 +106,11 @@
                                     </div>
                                     <div class="row">
                                         <p class="option-name">예금주명</p>
-                                        <input type="text" placeholder="예금주명" class="input-field required" data-title="예금주명">
+                                        <input type="text" placeholder="예금주명" id="bank_account_holder" class="input-field required" data-title="예금주명">
                                     </div>
                                     <div class="row">
                                         <p class="option-name">계좌번호</p>
-                                        <input type="text" placeholder="계좌번호" class="input-field required" data-title="계좌번호">
+                                        <input type="text" placeholder="계좌번호" id="bank_account" class="input-field required" data-title="계좌번호">
                                     </div>
                                 </div>
                             </div>

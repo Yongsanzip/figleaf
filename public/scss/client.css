@@ -1385,6 +1385,23 @@ button {
   width: 150px;
   margin-left: 10px;
 }
+.con-mypage .mypage-contents .select {
+  width: calc(100% - 657px);
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background: white;
+  border: 1px solid #cccccc;
+  height: 32px;
+  font-size: 14px;
+  padding: 0 8px;
+  outline: none;
+  transition: border 0.3s;
+  background-image: url(../images/common/ic-arrow-down-16.png);
+  background-repeat: no-repeat;
+  background-position: 97% 50%;
+}
 
 /****** notice ******/
 .con-notice {

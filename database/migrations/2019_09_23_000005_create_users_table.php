@@ -36,6 +36,9 @@ class CreateUsersTable extends Migration
             $table->string('verified_token')->nullable()->comment('이메일인증토큰');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('thumbnail')->nullable()->comment('썸네일 (디자이너 이미지)');
+            $table->bigInteger('bank_id')->nullable()->unsigned()->comment('은행ID');
+            $table->string('bank_account_holder')->nullable()->comment('예금주명');
+            $table->string('bank_account_number')->nullable()->comment('예금주명');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

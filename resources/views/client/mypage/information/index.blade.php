@@ -115,7 +115,23 @@ $tab='info';
                                     </div>
                                 </td>
                             </tr>
-
+                            <tr>
+                                <th>환불은행계좌</th>
+                                <td class="phone">
+                                    <div class="postal">
+                                            <select class="select" name="bank_id" id="">
+                                                <option value="" disabled {{$datas->bank_id ? '': 'selected'}}>은행을선택해주세요</option>
+                                                @foreach($banks as $bank)
+                                                    <option value="{{$bank->id}}" {{$bank->id == $datas->bank_id ? 'selected' :''}}>{{$bank->bank_name}}</option>
+                                                @endforeach
+                                            </select>
+                                    </div>
+                                    <div>
+                                        <input type="tel" class="input-field" name="bank_account_holder" value="{{$datas->bank_account_holder}}" placeholder="예금주">
+                                        <input type="tel" class="input-field" name="bank_account_holder" value="{{$datas->bank_account_number}}" placeholder="계좌번호">
+                                    </div>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                         <div class="btn-wrap">
