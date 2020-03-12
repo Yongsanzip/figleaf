@@ -128,7 +128,7 @@ $tab='info';
                                     </div>
                                     <div>
                                         <input type="tel" class="input-field" name="bank_account_holder" value="{{$datas->bank_account_holder}}" placeholder="예금주">
-                                        <input type="tel" class="input-field" name="bank_account_holder" value="{{$datas->bank_account_number}}" placeholder="계좌번호">
+                                        <input type="tel" class="input-field" name="bank_account_number" value="{{$datas->bank_account_number}}" placeholder="계좌번호">
                                     </div>
                                 </td>
                             </tr>
@@ -235,6 +235,24 @@ $tab='info';
                 if(!gn_nullCheck(f.address.value)){
                     f.address.focus();
                     alert("주소를 입력해주세요!");
+                    return false;
+                }
+
+                if(!gn_nullCheck(f.bank_id.value)){
+                    f.address.focus();
+                    alert("은행명을 선택해주세요!");
+                    return false;
+                }
+
+                if(!gn_nullCheck(f.bank_account_holder.value)){
+                    f.address.focus();
+                    alert("예금주를 입력해주세요!");
+                    return false;
+                }
+
+                if(!gn_nullCheck(f.bank_account_number.value)){
+                    f.address.focus();
+                    alert("계좌번호 입력해주세요!");
                     return false;
                 }
 

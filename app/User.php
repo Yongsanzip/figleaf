@@ -31,14 +31,17 @@ class User extends Authenticatable {
         'email_verified_at' => 'datetime',
     ];
 
-    public function role(){
-        return $this->belongsTo('App\Role','role_id','id');
-    }
-
 
     /*******************************************************************
      * @return BelongsTo
      *******************************************************************/
+    public function role(){
+        return $this->belongsTo('App\Role','role_id','id');
+    }
+
+    public function bank(){
+        return $this->belongsTo('App\Bank','bank_id','id');
+    }
 
     /*******************************************************************
      * @return HasMany

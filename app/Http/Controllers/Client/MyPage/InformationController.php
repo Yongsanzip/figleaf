@@ -70,6 +70,9 @@ class InformationController extends Controller {
                 'address_detail'=>$request->address_detail,                                                             // 상세주소
                 'password'=>$request->new_password                                                                      // 비밀번호가 있다면 ? hash(패스워드) 아니라면 기존 패스워드
                     ? Hash::make($request->new_password) : auth()->user()->getAuthPassword(),                           //
+                'bank_id'=>$request->bank_id,                                                                           // 은행ID
+                'bank_account_holder'=>$request->bank_account_holder,                                                   // 예금주
+                'bank_account_number'=>$request->bank_account_number,                                                   // 계좌번호
             ]);
             flash('정보가 수정되었습니다.')->success();
             return redirect(route('mypage_information.index'));

@@ -94,23 +94,37 @@
                                 <h3 class="title">환불계좌 정보</h3>
                                 <div class="sponsor-box">
                                     <div class="row">
-                                        <p class="option-name">은행명</p>
-                                        <select class="select required" data-title="은행명" id="bank_select">
-                                            <option selected disabled value="">- 은행명 -</option>
-                                            @if(count($banks) > 0)
-                                                @foreach($banks as $bank)
-                                                    <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
+                                        <p class="option-name">{{auth()->user()->bank->bank_name}}</p>
+                                        @if(auth()->user()->bank_id)
+                                            <p class="option-name">은행명</p>
+                                            @else
+                                            <select class="select required" data-title="은행명" id="bank_select">
+                                                <option selected disabled value="">- 은행명 -</option>
+                                                @if(count($banks) > 0)
+                                                    @foreach($banks as $bank)
+                                                        <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        @endif
                                     </div>
                                     <div class="row">
                                         <p class="option-name">예금주명</p>
-                                        <input type="text" placeholder="예금주명" id="bank_account_holder" class="input-field required" data-title="예금주명">
+                                        @if(auth()->user()->bank_account_holder)
+                                            <p class="option-name">{{auth()->user()->bank_account_holder}}</p>
+                                        @else
+
+                                            <input type="text" placeholder="예금주명" id="bank_account_holder" class="input-field required" data-title="예금주명" value="">
+                                        @endif
                                     </div>
+
                                     <div class="row">
                                         <p class="option-name">계좌번호</p>
-                                        <input type="text" placeholder="계좌번호" id="bank_account" class="input-field required" data-title="계좌번호">
+                                        @if(auth()->user()->bank_account_number)
+                                            <p class="option-name">{{auth()->user()->bank_account_number}}</p>
+                                        @else
+                                            <input type="text" placeholder="계좌번호" id="bank_account" class="input-field required" data-title="계좌번호">
+                                        @endif
                                     </div>
                                 </div>
                             </div>
