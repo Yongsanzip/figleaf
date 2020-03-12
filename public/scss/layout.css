@@ -680,6 +680,35 @@ a:hover, a:focus {
   height: 100%;
   background: black;
 }
+.card .card-contents .card-info .info-box-list {
+  margin-top: 10px;
+}
+.card .card-contents .card-info .info-box {
+  display: inline-block;
+  font-size: 12px;
+  color: #2d2d2d;
+  line-height: 20px;
+  margin-right: 16px;
+  padding-left: 20px;
+}
+.card .card-contents .card-info .info-box::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.card .card-contents .card-info .amount::before {
+  background-image: url("../images/common/ic-product.png");
+}
+.card .card-contents .card-info .date::before {
+  background-image: url("../images/common/ic-calandar.png");
+}
 .card .card-footer {
   font-size: 12px;
   padding: 0 12px 12px;

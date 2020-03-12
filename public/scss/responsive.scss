@@ -148,9 +148,13 @@ $cleaningPath: '../images/cleaning';
 
         .project-card {
             .card-contents {
-                min-height: 145px;
+                min-height: 150px;
                 .text-box {
                     min-height: 64px;
+                }
+
+                .info-box-list {
+                    margin-top: 10px;
                 }
             }
         }

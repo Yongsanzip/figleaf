@@ -107,10 +107,13 @@
     min-height: 72px;
   }
   .con-search .project-card .card-contents {
-    min-height: 145px;
+    min-height: 150px;
   }
   .con-search .project-card .card-contents .text-box {
     min-height: 64px;
+  }
+  .con-search .project-card .card-contents .info-box-list {
+    margin-top: 10px;
   }
 
   .news-list .card {

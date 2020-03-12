@@ -17,12 +17,11 @@
 
             <p class="search-result-text">{{ count($datas) }} 개의 프로젝트가 있습니다.</p>
 
-            <!-- news -->
             <section class="con-search">
                 <div class="card-list">
                     <!-- card * 20 -->
                     @foreach($datas as $data)
-                    <div class="card">
+                    <div class="card project-card">
                         <div class="card-image">
                             <img src="{{asset('storage/'.$data->main_image->image_path)}}" alt="">
                         </div>
@@ -58,7 +57,7 @@
                     </div>
                     @endforeach
                     <!-- //card -->
-                    <div class="card">
+                    <div class="card project-card">
                         <div class="card-image">
                             <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
                         </div>
@@ -91,7 +90,7 @@
 
                         <a href="" class="link"></a>
                     </div>
-                    <div class="card">
+                    <div class="card project-card">
                         <div class="card-image">
                             <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
                         </div>
@@ -124,7 +123,7 @@
 
                         <a href="" class="link"></a>
                     </div>
-                    <div class="card">
+                    <div class="card project-card">
                         <div class="card-image">
                             <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
                         </div>
@@ -157,7 +156,7 @@
 
                         <a href="" class="link"></a>
                     </div>
-                    <div class="card">
+                    <div class="card project-card">
                         <div class="card-image">
                             <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
                         </div>
@@ -190,7 +189,7 @@
 
                         <a href="" class="link"></a>
                     </div>
-                    <div class="card">
+                    <div class="card project-card">
                         <div class="card-image">
                             <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
                         </div>
@@ -223,7 +222,7 @@
 
                         <a href="" class="link"></a>
                     </div>
-                    <div class="card">
+                    <div class="card project-card">
                         <div class="card-image">
                             <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
                         </div>
@@ -256,7 +255,7 @@
 
                         <a href="" class="link"></a>
                     </div>
-                    <div class="card">
+                    <div class="card project-card">
                         <div class="card-image">
                             <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
                         </div>
@@ -289,7 +288,7 @@
 
                         <a href="" class="link"></a>
                     </div>
-                    <div class="card">
+                    <div class="card project-card">
                         <div class="card-image">
                             <img src="{{asset('/images/dummy/img-dummy-01.png')}}" alt="">
                         </div>
@@ -328,7 +327,6 @@
                     <div class="btn-more">View More Project</div>
                 </div>
             </section>
-            <!--// news-->
 
         </div>
 
