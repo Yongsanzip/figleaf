@@ -10,12 +10,12 @@
             <!-- headline -->
             <div class="headline-wrap">
                 <h2 class="headline">
-                    ‘keyword’ 검색결과
+                    ‘{{ $keyword }}’ 검색결과
                 </h2>
             </div>
             <!-- //headline -->
 
-            <p class="search-result-text">12 명의 디자이너가 있습니다.</p>
+            <p class="search-result-text">{{ count($datas) }} 명의 디자이너가 있습니다.</p>
 
             <!-- designer -->
             <section class="con-search">

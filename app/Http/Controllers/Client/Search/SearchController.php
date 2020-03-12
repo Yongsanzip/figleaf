@@ -20,6 +20,7 @@ class SearchController extends Controller
         $keyword = $request->keyword;
         // limit = 4
 
+        // dd($request);
         // 디자이너 - 포트폴리오
         $designer = Portfolio::where('hidden_yn', 0)->whereHas('user', function ($q) use ($keyword) {
             $q->where('name', 'LIKE', '%' . $keyword . '%');
@@ -31,7 +32,7 @@ class SearchController extends Controller
         })->orderBy('created_at', 'desc')->get();
 
         // 프로젝트
-        $project = Project::where('title', 'LIKE', '%' . $keyword . '%')->orderBy('created_at', 'desc')->get();
+        $project = Project::whereIn('condition', [2,4,5])->where('title', 'LIKE', '%' . $keyword . '%')->orderBy('created_at', 'desc')->get();
 
 
         return view('client.search.index', compact('designer', 'brand', 'project', 'keyword'));
@@ -64,17 +65,26 @@ class SearchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        error_log($id);
+        $keyword = $request->keyword;
+
         if ($id == 1){ // 디자이너
-            return view('client.search.designer.index');
+            $datas = Portfolio::where('hidden_yn', 0)->whereHas('user', function ($q) use ($keyword) {
+                $q->where('name', 'LIKE', '%' . $keyword . '%');
+            })->orderBy('created_at', 'desc')->get();
+
+            return view('client.search.designer.index', compact('datas', 'keyword'));
         } elseif ($id == 2) { // 브랜드
-            return view('client.search.brand.index');
-        } elseif ($id == 3) { // 뉴스
-            return view('client.search.news.index');
+            $datas = Portfolio::where('hidden_yn', 0)->whereHas('brand', function ($q) use ($keyword) {
+                $q->where('name_ko', 'LIKE', '%' . $keyword . '%');
+            })->orderBy('created_at', 'desc')->get();
+
+            return view('client.search.brand.index', 'datas', 'keyword');
         } else { // 프로젝트
-            return view('client.search.project.index');
+            $datas = Project::whereIn('condition', [2,4,5])->where('title', 'LIKE', '%' . $keyword . '%')->orderBy('created_at', 'desc')->get();
+
+            return view('client.search.project.index', compact('datas','keyword'));
         }
     }
 

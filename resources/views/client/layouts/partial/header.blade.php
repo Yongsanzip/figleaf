@@ -70,9 +70,9 @@
     <!-- search -->
     <div class="search" id="gnb_search">
         <div class="inner">
-            <form action="/search">
+            <form action="{{ route('search.index') }}" method="GET">
                 <div class="search-box">
-                    <input type="text" class="search-field" placeholder="검색">
+                    <input type="text" name="keyword" class="search-field" placeholder="검색">
                     <button class="btn-search">검색</button>
                 </div>
             </form>

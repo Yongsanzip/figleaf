@@ -72,14 +72,24 @@
                                 <img src="{{asset('storage/'.$data->brand_thumbnail_images->first()->image_path)}}" alt="">
                             </div>
                             <div class="card-contents">
-                                <p class="card-title">{{ $data->user->name }}</p>
-                                <p class="card-text">
+                                <p class="card-title">
                                     @if( app()->getLocale() =='ko')
                                         {{ $data->brand->name_ko}}
                                     @elseif(app()->getLocale() =='en')
                                         {{ $data->brand->name_en}}
                                     @elseif(app()->getLocale() =='en')
                                         {{ $data->brand->name_cn}}
+                                    @else
+                                        브랜드명이 존재하지 않습니다
+                                    @endif
+                                </p>
+                                <p class="card-text">
+                                    @if( app()->getLocale() =='ko')
+                                        {{ $data->brand->contents_ko}}
+                                    @elseif(app()->getLocale() =='en')
+                                        {{ $data->brand->contents_en}}
+                                    @elseif(app()->getLocale() =='en')
+                                        {{ $data->brand->contents_cn}}
                                     @else
                                         브랜드명이 존재하지 않습니다
                                     @endif
@@ -223,7 +233,6 @@
                                 </div>
                             </div>
                             <!-- 성공할경우 뱃지 출력 -->
-                            <div class="badge badge-orange">성공</div>
                             <a href="/project/{{ $data->id }}" class="link"></a>
                             @if($data->condition == 2)
                                 <div class="badge badge-green">진행중</div>
