@@ -11,8 +11,8 @@
                 @include('client.project.partial.layouts.header')
                 <!-- sponsor form -->
                 <div class="sponsor-form">
+
                     <form id="supportForm">
-                        @csrf
                         @include('client.support.partial.common.payment')
                         <div class="col">
                             <div class="sponsor-item">
@@ -115,6 +115,8 @@
                             </div>
                         </div>
                     </form>
+
+
                     <div class="col"></div>
                     <div class="col">
                         {{--후원금액--}}
