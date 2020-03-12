@@ -14,7 +14,7 @@
 
                     <form id="supportForm" name="" method="POST">
                         @include('client.support.partial.common.payment')
-                        <input type="hidden" id="options" value="{{json_encode($option_id)}}">
+                        <input type="hidden" name="support_code" id="support_code" value="{{$support->support_code}}">
                         <div class="col">
                             <div class="sponsor-item">
                                 <h3 class="title">후원자 정보</h3>
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="row">
                                         <p class="option-name">배송시 요구사항</p>
-                                        <input type="text" placeholder="배송시 요구사항" class="input-field">
+                                        <input type="text" placeholder="배송시 요구사항" name="requirement" id="requirement" class="input-field">
                                     </div>
                                 </div>
                             </div>
@@ -94,11 +94,12 @@
                                 <h3 class="title">환불계좌 정보</h3>
                                 <div class="sponsor-box">
                                     <div class="row">
-                                        <p class="option-name">{{auth()->user()->bank->bank_name}}</p>
+                                        <p class="option-name">은행명</p>
                                         @if(auth()->user()->bank_id)
-                                            <p class="option-name">은행명</p>
+                                            <p class="option-name">{{auth()->user()->bank->bank_name}}</p>
+                                            <input type="hidden" id="bank_id">
                                             @else
-                                            <select class="select required" data-title="은행명" id="bank_select">
+                                            <select class="select required" data-title="은행명" name="bank_id" id="bank_id">
                                                 <option selected disabled value="">- 은행명 -</option>
                                                 @if(count($banks) > 0)
                                                     @foreach($banks as $bank)
@@ -112,8 +113,8 @@
                                         <p class="option-name">예금주명</p>
                                         @if(auth()->user()->bank_account_holder)
                                             <p class="option-name">{{auth()->user()->bank_account_holder}}</p>
+                                            <input type="hidden" id="bank_account_holder">
                                         @else
-
                                             <input type="text" placeholder="예금주명" id="bank_account_holder" class="input-field required" data-title="예금주명" value="">
                                         @endif
                                     </div>
@@ -122,8 +123,9 @@
                                         <p class="option-name">계좌번호</p>
                                         @if(auth()->user()->bank_account_number)
                                             <p class="option-name">{{auth()->user()->bank_account_number}}</p>
+                                            <input type="hidden" id="bank_account_number">
                                         @else
-                                            <input type="text" placeholder="계좌번호" id="bank_account" class="input-field required" data-title="계좌번호">
+                                            <input type="text" placeholder="계좌번호" id="bank_account_number" class="input-field required" data-title="계좌번호">
                                         @endif
                                     </div>
                                 </div>

@@ -2,7 +2,7 @@
 <input type="hidden" id="mid"          name="mid"           >
 <input type="hidden" id="goodname"     name="goodname"      >
 <input type="hidden" id="oid"          name="oid"           >
-<input type="hidden" id="price"        name="price"         >
+<input type="hidden" id="price"        name="price"         value="{{$option_total_cost}}">
 <input type="hidden" id="currency"     name="currency"      >
 <input type="hidden" id="buyername"    name="buyername"     >
 <input type="hidden" id="buyertel"     name="buyertel"      >
@@ -22,6 +22,12 @@
 
 <script language="javascript" type="text/javascript" src="https://stdpay.inicis.com/stdjs/INIStdPay.js" charset="UTF-8"></script>
 <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded',function(){
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+    })
+
     function paybtn(e) {
 
         if(gn_validation(document.getElementById('supportForm'))){
@@ -31,18 +37,50 @@
                 return false;
             } else {
                 var data = {
-                    '1':document.getElementById('receiver_name').value,
-                    '2':document.getElementById('receiver_cellphone').value,
-                    '3':document.getElementById('receiver_zip_code').value,
-                    '4':document.getElementById('receiver_address').value,
-                    '5':document.getElementById('receiver_address_detail').value,
+                    'support_code': document.getElementById('support_code').value,
+                    'price': document.getElementById('price').value,
+                    'receiver':document.getElementById('receiver_name').value,
+                    'receiver_phone':document.getElementById('receiver_cellphone').value,
+                    'zipcode':document.getElementById('receiver_zip_code').value,
+                    'address':document.getElementById('receiver_address').value,
+                    'address_detail':document.getElementById('receiver_address_detail').value,
+                    'requirement':document.getElementById('requirement').value,
+                    'bank_id':document.getElementById('bank_id').value,
+                    'bank_account_holder':document.getElementById('bank_account_holder').value,
+                    'bank_account_number':document.getElementById('bank_account_number').value,
                 };
-                callAjax('POST',true,'/project_support/order_create',"JSON",'JSON',data,gn_ajax_error,gn_ajax_success);
-                //INIStdPay.pay("supportForm");
+                callAjax('POST',true,'/project_support/order_create',"JSON",'JSON',data,fn_support_ajax_error,fn_support_ajax_success);
             }
         }
     }
-
+    var fn_support_ajax_success = function(e){
+        var data = JSON.parse(e.returnData);
+        document.getElementById('version').value=data.version;
+        document.getElementById('mid').value=data.mid;
+        document.getElementById('goodname').value=data.goodname;
+        document.getElementById('oid').value=data.oid;
+        document.getElementById('price').value=data.price;
+        document.getElementById('currency').value=data.currency;
+        document.getElementById('buyername').value=data.buyername;
+        document.getElementById('buyertel').value=data.buyertel;
+        document.getElementById('buyeremail').value=data.buyeremail;
+        document.getElementById('timestamp').value=data.timestamp;
+        document.getElementById('signature').value=data.signature;
+        document.getElementById('returnUrl').value=data.returnUrl;
+        document.getElementById('mKey').value=data.mKey;
+        document.getElementById('gopaymethod').value=data.gopaymethod;
+        document.getElementById('acceptmethod').value=data.acceptmethod;
+        document.getElementById('billPrint_msg').value=data.billPrint_ms;
+        document.getElementById('languageView').value=data.languageView;
+        document.getElementById('charset').value=data.charset;
+        document.getElementById('payViewType').value=data.payViewType;
+        document.getElementById('closeUrl').value=data.closeUrl;
+        document.getElementById('merchantData').value=data.merchantData;
+        INIStdPay.pay("supportForm");
+    }
+    var fn_support_ajax_error = function(e){
+        alert(e.msg);
+    }
     function cardShow(){
         document.getElementById("acceptmethod").value = "BILLAUTH(card):FULLVERIFY";
     }

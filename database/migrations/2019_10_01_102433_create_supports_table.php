@@ -24,7 +24,7 @@ class CreateSupportsTable extends Migration
             $table->string('supporter', 50)->comment('후원자명');
             $table->string('phone', 100)->comment('전화번호');
             $table->string('email', 100)->comment('이메일');
-            $table->string('receiver', 10)->nullable()->comment('배송_받는분');
+            $table->string('receiver', 50)->nullable()->comment('배송_받는분');
             $table->string('receiver_phone', 100)->nullable()->comment('배송_전화번호');
             $table->string('zipcode', 50)->nullable()->comment('배송_우편번호');
             $table->string('address')->nullable()->comment('배송_1차주소');
@@ -32,7 +32,7 @@ class CreateSupportsTable extends Migration
             $table->text('requirement')->nullable()->comment('배송시 요구사항');
             $table->string('invoice_number')->nullable()->comment('송장번호');
             $table->tinyInteger('delivery_yn')->default(0)->comment('배송여부(0미배송/1배송완료)');
-            $table->tinyInteger('condition')->default(0)->comment('후원상태(0: 대기, 1:후원 , 10:환불대기 11:부분환불 , 12:전체환불)');
+            $table->tinyInteger('condition')->default(0)->comment('후원상태(0: 대기, 1:후원요청 , 2:후원결제완료 10:환불대기 11:부분환불 , 12:전체환불 , 98:결제실패 99: 결제취소)');
             $table->timestamps();
             $table->softDeletes();
         });
