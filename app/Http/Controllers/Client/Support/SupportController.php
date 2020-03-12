@@ -54,47 +54,48 @@ class SupportController extends Controller
                 $option_arr['option_price'][$i] = $option->price;                                                       // 옵션 가격
                 $option_total_cost += $option_arr['option_amount'][$i] * $option_arr['option_price'][$i];
             }
-            $SignatureUtil = new \INIStdPayUtil();
-            //############################################
-            // 1.전문 필드 값 설정(***가맹점 개발수정***)
-            //############################################
-            // 여기에 설정된 값은 Form 필드에 동일한 값으로 설정
+            $SignatureUtil = new \INIStdPayUtil();                                                                      // Inisic Util
             $mid 			= env('INICIS_MARKET_ID');  								                            // 가맹점 ID(가맹점 수정후 고정)
             $signKey 		= env('INICIS_SIGN_KEY'); 			                                                    // 가맹점에 제공된 키(이니라이트키) (가맹점 수정후 고정) !!!절대!! 전문 데이터로 설정금지
+            $cardNoInterestQuota = "11-2:3:,34-5:12,14-6:12:24,12-12:36,06-9:12,01-3:4";                                // 카드 무이자 여부 설정(가맹점에서 직접 설정)
+            $cardQuotaBase       = "2:3:4:5:6:11:12:24:36";                                                             // 가맹점에서 사용할 할부 개월수 설정
             $timestamp 		= $SignatureUtil->getTimestamp();   			                                            // util에 의해서 자동생성
             $orderNumber 	= $mid . "_" . $timestamp; 						                                            // 가맹점 주문번호(가맹점에서 직접 설정)
-            $price = $option_total_cost;
-
-            //
-            //###################################
-            // 2. 가맹점 확인을 위한 signKey를 해시값으로 변경 (SHA-256방식 사용)
-            //###################################
+            //$price = $option_total_cost;
+            $price=200;
             $mKey 					= $SignatureUtil->makeHash($signKey, "sha256");
-
-            /*
-             **** 위변조 방지체크를 signature 생성 ***
-             * oid, price, timestamp 3개의 키와 값을
-             * key=value 형식으로 하여 '&'로 연결한 하여 SHA-256 Hash로 생성 된값
-             * ex) oid=INIpayTest_1432813606995&price=819000&timestamp=2012-02-01 09:19:04.004
-             * key기준 알파벳 정렬
-             * timestamp는 반드시 signature생성에 사용한 timestamp 값을 timestamp input에 그데로 사용하여야함
-             */
-            $params = array(
-                "oid" => $orderNumber,
-                "price" => $price,
-                "timestamp" => $timestamp
-            );
-
-            $sign		= $SignatureUtil->makeSignature($params);
-
+            $params = array("oid" => $orderNumber, "price" => $price, "timestamp" => $timestamp );                      // sign key
+            $sign		= $SignatureUtil->makeSignature($params);                                                       // sign
             $http_host 	= $_SERVER['HTTP_HOST'];
+            $siteDomain = get_connet_protocol().$_SERVER['HTTP_HOST'].'/project_support';                               //가맹점 도메인 입력
+            $prevUrl = route('project.show',['id'=>$request->project_id]);                                        // 이전 페이지
 
-            /* 기타 */
-            $siteDomain = get_connet_protocol().$_SERVER['HTTP_HOST'].'/project_support';                                                              //가맹점 도메인 입력
-            $prevUrl = route('project.show',['id'=>$request->project_id]);
-            $close = $request->getQueryString();
-            return view('client.support.index', compact('data', 'supporter_count', 'total_cost', 'date_diff', 'portfolio', 'option_id', 'option_arr', 'option_total_cost','banks'
-                ,'mid', 'signKey', 'timestamp', 'orderNumber',  'mKey', 'sign', 'http_host','siteDomain','price','prevUrl','close','auth_check'));
+            $returnData  =[
+                  'data'
+                , 'supporter_count'
+                , 'cardNoInterestQuota'
+                , 'cardQuotaBase'
+                , 'total_cost'
+                , 'date_diff'
+                , 'portfolio'
+                , 'option_id'
+                , 'option_arr'
+                , 'option_total_cost'
+                , 'banks'
+                , 'mid'
+                , 'signKey'
+                , 'timestamp'
+                , 'orderNumber'
+                ,  'mKey'
+                , 'sign'
+                , 'http_host'
+                , 'siteDomain'
+                , 'price'
+                , 'prevUrl'
+                , 'auth_check'
+            ];
+
+            return view('client.support.index', compact($returnData));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
@@ -105,7 +106,8 @@ class SupportController extends Controller
     public function complete(Request $request){
         try {
 
-            return view('client.support.partial.complete.index');
+            //return view('client.support.partial.complete.index');
+            return view('client.support.partial.complete.returnSample');
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
@@ -114,7 +116,7 @@ class SupportController extends Controller
     }
 
     public function close(){
-        echo "<script language=\"javascript\" type=\"text/javascript\" src=\"https://stdpay.inicis.com/stdjs/INIStdPay_close.js\" charset=\"UTF-8\"></script>";
+        return view('client.support.partial.complete.close');
     }
 
     /************************************************************************

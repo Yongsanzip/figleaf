@@ -14,7 +14,7 @@
 <input type="hidden"  name="returnUrl" value="{{$siteDomain}}/complete" >
 <input type="hidden"  name="mKey" value="{{$mKey}}" >
 <input type="hidden" style="width:100%;" name="gopaymethod" value="" >
-<input style="width:100%;" name="acceptmethod" value="HPP(1):no_receipt:va_receipt:vbanknoreg(0):below1000" >
+<input type="hidden" name="acceptmethod" value="HPP(1):no_receipt:va_receipt:vbanknoreg(0):below1000" >
 {{--결제일 알림 메세지 : 결제일 알림 메세지--}}
 <input type="hidden"  id="billPrint_msg" name="billPrint_msg" value="고객님의 매월 결제일은 24일 입니다." >
 {{--***** 표시 옵션 *****--}}
@@ -22,9 +22,9 @@
 <input type="hidden"  name="charset" value="UTF-8" >
 <input type="hidden"  name="payViewType" value="overlay" >
 <input type="hidden"  name="closeUrl" value="{{$siteDomain}}/close" >
-<input  type="hidden"  name="merchantData" value="" >
+<input type="hidden"  name="merchantData" value="" >
 
-<script language="javascript" type="text/javascript" src="https://stgstdpay.inicis.com/stdjs/INIStdPay.js" charset="UTF-8"></script>
+<script language="javascript" type="text/javascript" src="https://stdpay.inicis.com/stdjs/INIStdPay.js" charset="UTF-8"></script>
 <script type="text/javascript">
     function paybtn(e) {
 

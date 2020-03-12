@@ -12,7 +12,7 @@
                 <!-- sponsor form -->
                 <div class="sponsor-form">
 
-                    <form id="supportForm">
+                    <form id="supportForm" name="" method="POST">
                         @include('client.support.partial.common.payment')
                         <div class="col">
                             <div class="sponsor-item">
@@ -53,11 +53,11 @@
                                         <p class="option-name">주소</p>
                                         <div class="address-form">
                                             <label>
-                                                <input type="text" id="receiver_zip_code" class="input-field code required" data-title="받는분 우편번호"  name="zip_code" id="zip_code" placeholder="우편번호" readonly>
-                                                <input type="text" id="receiver_address" class="input-field address required" data-title="받는분 주소"  name="address" id="address"  placeholder="주소" readonly>
+                                                <input type="text" id="receiver_zip_code" class="input-field code required" data-title="받는분 우편번호"   id="zip_code" placeholder="우편번호" readonly>
+                                                <input type="text" id="receiver_address" class="input-field address required" data-title="받는분 주소"   id="address"  placeholder="주소" readonly>
                                                 <button class="btn-black" type="button"  id="address_btn">검색하기</button>
                                             </label>
-                                            <input type="text" id="receiver_address_detail" class="input-field detail" name="address_detail" placeholder="상세주소" >
+                                            <input type="text" id="receiver_address_detail" class="input-field detail"  placeholder="상세주소" >
                                         </div>
                                     </div>
                                     <div class="row">
