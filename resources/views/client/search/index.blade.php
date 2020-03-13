@@ -171,14 +171,14 @@
 
                             <div class="card-info">
                                 <div class="rating">
-                                    <div class="rating-bar" style="width: {{ ceil($data->supportCount($data->id)/$data->success_count*100) }}%"></div>
+                                    <div class="rating-bar" style="width: {{ floor($data->supportCount($data->id)/$data->success_count*100) }}%"></div>
                                 </div>
                                 <div class="info-box-list">
                                     <div class="info-box amount">
                                         {{ $data->success_count - $data->supportCount($data->id) }}개 남음
                                     </div>
                                     <div class="info-box date">
-                                        {{ ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) > 0 ? ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)).'일 남음' : '마감' }}
+                                        {{ floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) > 0 ? floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)).'일 남음' : '마감' }}
                                     </div>
                                 </div>
                             </div>

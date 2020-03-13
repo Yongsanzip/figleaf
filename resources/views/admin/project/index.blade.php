@@ -70,7 +70,7 @@
                     <td>{{ $data->title }}</td>
                     <td>{{ $data->introduction->designer_name }}</td>
                     <td>{{ $data->success_count }}</td>
-                    <td>{{ $data->supporter_count }}({{ ceil($data->supporter_count/$data->success_count*100) }}%)</td>
+                    <td>{{ $data->supporter_count }}({{ floor($data->supporter_count/$data->success_count*100) }}%)</td>
                     <td>{{ number_format($data->total_cost) }}원</td>
                     <td>{{ $data->start_date }}</td>
                     <td>{{ $data->deadline }}</td>
