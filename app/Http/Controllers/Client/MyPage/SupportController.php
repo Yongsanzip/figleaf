@@ -2,85 +2,137 @@
 
 namespace App\Http\Controllers\Client\MyPage;
 
+use App\Support;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SupportController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     * @description 마이페이지 - 후원현황
-     * @url /mypage_support
-     * @return view
-     */
-    public function index()
-    {
-        return view('client.mypage.support.index');
+class SupportController extends Controller {
+
+    /************************************************************************
+     * Construct
+     * @description :
+     ************************************************************************/
+    public function __construct() {
+        $this->middleware('auth');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    /************************************************************************
+     * Display main view
+     * @description : 설명1 - 설명2
+     * @url         : /url
+     * @method      : GET
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function index(){
+        try {
+            $datas = Support::whereUserId(auth()->user()->id)->orderBy('created_at','DESC')->paginate(8);
+        return view('client.mypage.support.index',compact('datas'));
+        } catch (\Exception $e){
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    /************************************************************************
+     * Display create view
+     * @description : 설명1 - 설명2
+     * @url         : /url
+     * @method      : GET
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function create(){
+        try {
+
+        } catch (\Exception $e){
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    /************************************************************************
+     * Display create action
+     * @description : 설명1 - 설명2
+     * @url         : /url
+     * @method      : POST
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function store(Request $request){
+        try {
+
+        } catch (\Exception $e){
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    /************************************************************************
+     * Display detail view
+     * @description : 설명1 - 설명2
+     * @url         : /url/{id}
+     * @method      : GET
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function show($id){
+        try {
+
+        } catch (\Exception $e){
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    /************************************************************************
+     * Display edit view
+     * @description : 설명1 - 설명2
+     * @url         : /url/{id}/edit
+     * @method      : /GET
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function edit($id) {
+        try {
+
+        } catch (\Exception $e){
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    /************************************************************************
+     * Display update action
+     * @description : 설명1 - 설명2
+     * @url         : /url/{id}
+     * @method      : PUT
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function update(Request $request, $id){
+        try {
+
+        } catch (\Exception $e){
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
+        }
+    }
+
+    /************************************************************************
+     * Display destroy action
+     * @description : 설명 1 설명
+     * @url         : /url/{id}
+     * @method      : DELETE
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function destroy($id) {
+        try {
+
+        } catch (\Exception $e){
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
+        }
     }
 }
