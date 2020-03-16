@@ -42,7 +42,7 @@ $tab = 'support';
                                 <!-- <div class="badge badge-grey">실패</div> -->
                                 <!-- <div class="badge badge-orange">성공</div> -->
                             </div>
-                            <a href="" class="btn-white">상세내역</a>
+                            <a href="{{route('mypage_support.show',['id'=>$data->support_code])}}" class="btn-white">상세내역</a>
                         </div>
                         @endforeach
                             <div class="btn-wrap">

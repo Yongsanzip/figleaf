@@ -84,6 +84,8 @@ Route::group(['middleware'=>'locale'],function(){
     Route::GET('/project_support/order_complete','Client\Support\SupportController@order_complete')->name('complete.get');
     Route::POST('/project_support/order_create','Client\Support\SupportController@order_create');
     Route::get('/project_support/close','Client\Support\SupportController@close');
+
+    Route::POST('refund','Client\Support\SupportController@refund');
     // 포트폴리오
 
 

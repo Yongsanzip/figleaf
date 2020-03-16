@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client\MyPage;
 
 use App\Support;
+use App\ViewProject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -77,7 +78,11 @@ class SupportController extends Controller {
      ************************************************************************/
     public function show($id){
         try {
-
+            $support  = Support::whereSupportCode($id)->first();
+            $view     = ViewProject::where('id', $support->project_id)->first();                                // 뷰프로젝트 데이터
+            $total_cost                 = $view ? $view->total_cost : 0;                                        // 모인금액
+            $supporter_count            = $view ? $view->supporter_count : 0;                                   // 후원자 수
+            return view('client.mypage.support.detail',compact('support','view','total_cost','supporter_count'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
