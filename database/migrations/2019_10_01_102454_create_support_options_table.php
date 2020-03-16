@@ -19,6 +19,7 @@ class CreateSupportOptionsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('support_id')->unsigned()->comment('후원 id');
             $table->bigInteger('option_id')->unsigned()->comment('옵션 id');
+            $table->Integer('amount')->default(0)->comment('갯수');
             $table->timestamps();
             $table->softDeletes();
         });

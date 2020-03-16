@@ -17,10 +17,15 @@ class Support extends Model {
     public function project(){
         return $this->belongsTo('App\Project','project_id','id');
     }
+    public function user(){
+        return $this->belongsTo('App\User','user_id','id');
+    }
     /*******************************************************************
      * @return HasMany
      *******************************************************************/
-
+    public function support_options(){
+        return $this->hasMany('App\SupportOption','support_id','id');
+    }
     /*******************************************************************
      * @return HasOne
      *******************************************************************/

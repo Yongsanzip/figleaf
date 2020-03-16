@@ -13,14 +13,14 @@
                 <!-- project info-->
                 <div class="project-info">
                     <h3 class="project-title">
-                        가볍고 활동하기 좋은 면 슬립
+                        {{$support->project->summary}}
                     </h3>
                     <div class="project-category">
-                        <span>women's apparel</span>
-                        <span>top</span>
+                        <span>{{$support->project->category->category_name}}</span>
+                        <span>{{$support->project->category_detail->category_name}}</span>
                     </div>
                     <p class="project-outline">
-                        뜨고, 미인을 예수는 모래뿐일 따뜻한 커다란 가슴에 놀이 같이 있다. 새가 끓는 이것을 온갖 대중을 앞이 커다란 있으랴? 뛰노는 오직 웅대한 것이다. 품으며, 열매를 이것을 하였으며, 꽃이 더운지라 것이다. 목숨이 오직 청춘 장식하는 굳세게 인생을 아니다. 작고 새가 그들에게 싹이 힘있다. 고행을 구하지 같이, 밥을 피는 평화스러운 새 관현악이며, 방황하여도, 것이다. 그것을 곳으로 동산에는 그들의 이상을 맺어, 않는 새 철환하였는가? 전인 천자만홍이 끓는 쓸쓸한 위하여, 인류의 시들어 부패뿐이다. 방지하는 속에 인간에 타오르고 무엇을 눈이 소리다.이것은 이상은 남는 교향악이다.
+                        {!! $support->project->storytelling !!}
                     </p>
                 </div>
                 <!-- //project info -->
@@ -30,7 +30,7 @@
 
                     <div class="col">
                         <div class="project-cover">
-                            <img src="../images/dummy/img-dummy-04.png" alt="">
+                            <img src="{{$support->project->main_image ? asset('storage/'.$support->project->main_image->image_path) : '../images/common/img_no_image.jpg'}}" alt="">
                         </div>
                     </div>
                     <div class="col">
@@ -39,7 +39,7 @@
                             <div class="status-item">
                                 <p class="status-name">모인 금액</p>
                                 <p class="status-value">
-                                    284,000
+                                    {{$total_cost}}
                                     <span>원</span>
                                 </p>
                                 <p class="status-percentage">
@@ -49,17 +49,17 @@
                             <div class="status-item">
                                 <p class="status-name">남은 시간</p>
                                 <p class="status-value">
-                                    18
+                                    {{ $date = ceil((strtotime($support->project->deadline) - strtotime("now"))/(60*60 *24)) }}
                                     <span>일</span>
                                 </p>
                                 <p class="status-date">
-                                    2019년 10월 3일 마감
+                                    {{$support->project->deadline->format('Y년 m월 d일')}} 마감
                                 </p>
                             </div>
                             <div class="status-item">
-                                <p class="status-name">모인 금액</p>
+                                <p class="status-name">후원자 수</p>
                                 <p class="status-value">
-                                    317
+                                    {{$supporter_count}}
                                     <span>명</span>
                                 </p>
                             </div>
@@ -70,15 +70,12 @@
                         <div class="project-owner">
                             <p class="owner-caption">디자이너</p>
                             <p class="owner-name ko">
-                                김해우
-                            </p>
-                            <p class="owner-name en">
-                                Haewoo Kim
+                                {{$support->project->user->name}}
                             </p>
                             <p class="owner-text">
                                 이것을 만천하의 우리의 전인 굳세게 속에 할지라도 위하여서. 소리다.이것은 투명하되 꽃 그들은 것이다. 동산에는 따뜻한 뛰노는 때문이다. 얼마나 따뜻한 보배를 아름답고 모래뿐일 가지에 뛰노는 지혜는 약동하다. 피어나는 것이 이것을 밥을 피가 영원히 힘있다. 청춘이 품으며, 낙원을 이상은 인간의 날카로우나 아니한 운다. 넣는 그림자는 인생에 우리는 앞이 피다. 열락의 바이며, 있을 끓는 이것이다. 따뜻한 없는 황금시대를 못하다 피는 청춘을 주며, 가진 것이다. 바이며, 것은 기관과 투명하되 얼마나 가진 뿐이다.
                             </p>
-                            <a href="" class="btn-green">포트폴리오로 이동</a>
+                            <a href="{{route('designer.show',['id'=>$support->project->user->id])}}" class="btn-green">포트폴리오로 이동</a>
                         </div>
                         <!-- //owner -->
 
@@ -97,22 +94,18 @@
                             </div>
                             <div class="info-item">
                                 <ul class="option-list confirm">
-                                    <!-- option item -->
-                                    <li class="option-item">
-                                        <div class="option-value">
-                                            <span class="option-name">활동하기에 정말 좋은 면슬립 (Color : Blue / Size : M)</span>
-                                            <input class="option-amount" min="1" type="number" value="1">
-                                            <span class="option-price">5,552,500원</span>
-                                        </div>
-                                    </li>
-                                    <!-- //option item -->
-                                    <li class="option-item">
-                                        <div class="option-value">
-                                            <span class="option-name">활동하기에 정말 좋은 면슬립 (Color : Blue / Size : M)</span>
-                                            <input class="option-amount" min="1" type="number" value="1">
-                                            <span class="option-price">5,552,500원</span>
-                                        </div>
-                                    </li>
+                                    @if(count($support->support_options)>0)
+                                    @foreach($support->support_options as $support_option)
+                                        <!-- option item -->
+                                            <li class="option-item">
+                                                <div class="option-value">
+                                                    <span class="option-name">{{$support_option->option->option_name}}</span>
+                                                    <input class="option-amount" min="1" type="number" value="1">
+                                                    <span class="option-price">{{$support_option->option->price * $support_option->amount}}원</span>
+                                                </div>
+                                            </li>
+                                    @endforeach
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -129,15 +122,15 @@
                             <div class="sponsor-box">
                                 <div class="row">
                                     <p class="option-name">후원자명</p>
-                                    <p class="option-value">김해우</p>
+                                    <p class="option-value">{{$support->user->name}}</p>
                                 </div>
                                 <div class="row">
                                     <p class="option-name">전화번호</p>
-                                    <p class="option-value">010-0000-0000</p>
+                                    <p class="option-value">{{$support->user->cellphone}}</p>
                                 </div>
                                 <div class="row">
                                     <p class="option-name">이메일</p>
-                                    <p class="option-value">hwzzang@naver.com</p>
+                                    <p class="option-value">{{$support->user->email}}</p>
                                 </div>
                             </div>
                         </div>
@@ -146,28 +139,28 @@
                             <div class="sponsor-box">
                                 <div class="row">
                                     <p class="option-name">받는 분</p>
-                                    <p class="option-value">김민영</p>
+                                    <p class="option-value">{{$support->receiver}}</p>
                                 </div>
                                 <div class="row">
                                     <p class="option-name">전화번호</p>
-                                    <p class="option-value">010-0000-0000</p>
+                                    <p class="option-value">{{$support->receiver_phone}}</p>
                                 </div>
                                 <div class="row">
                                     <p class="option-name">주소</p>
                                     <div class="address-form">
-                                        <p class="option-value">(12345)서울시 서대문구 연희동 123</p>
-                                        <p class="option-value">행복빌라 302호</p>
+                                        <p class="option-value">{{$support->zipcode}}</p>
+                                        <p class="option-value">{{$support->address .' '. $support->address_detail}}</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <p class="option-name">배송시 요구사항</p>
-                                    <p class="option-value">도어락 비밀번호 1234 입니다 올라오셔서 문앞에 두고가세</p>
+                                    <p class="option-value">{{$support->requirement}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="sponsor-item">
+                        <?/*<div class="sponsor-item">
                             <h3 class="title">결제 정보</h3>
                             <div class="sponsor-box">
                                 <div class="row point">
@@ -181,32 +174,33 @@
                                     <p class="option-value">신용카드</p>
                                 </div>
                             </div>
-                        </div>
+                        </div>*/?>
+
                         <div class="sponsor-item">
                             <h3 class="title">환불계좌 정보</h3>
                             <div class="sponsor-box">
                                 <div class="row">
                                     <p class="option-name">은행명</p>
-                                    <p class="option-value">우리은행</p>
+                                    <p class="option-value">{{$support->user->bank->bank_name}}</p>
                                 </div>
                                 <div class="row">
                                     <p class="option-name">예금주명</p>
-                                    <p class="option-value">김해우</p>
+                                    <p class="option-value">{{$support->user->bank_account_holder}}</p>
                                 </div>
                                 <div class="row">
                                     <p class="option-name">계좌번호</p>
-                                    <p class="option-value">01248568155745</p>
+                                    <p class="option-value">{{$support->user->bank_account_number}}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="sponsor-total">
                             <div class="total">
                                 <p class="total-caption">후원금액</p>
-                                <p class="total-price">67,850</p>
+                                <p class="total-price">{{$support->total_amount}}</p>
                             </div>
                             <div class="btn-wrap">
-                                <a class="btn-black">프로젝트 페이지로 이동</a>
-                                <a class="btn-white">마이페이지로 이동</a>
+                                <a href="{{route('project.show',['id'=>$support->project->id])}}" class="btn-black">프로젝트 페이지로 이동</a>
+                                <a href="{{route('mypage_information.index')}}" class="btn-white">마이페이지로 이동</a>
                             </div>
                         </div>
                     </div>

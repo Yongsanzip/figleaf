@@ -8,6 +8,7 @@ use App\Portfolio;
 use App\Project;
 use App\Support;
 use App\SupportLog;
+use App\SupportOption;
 use App\User;
 use App\ViewProject;
 use Illuminate\Http\Request;
@@ -40,8 +41,8 @@ class SupportController extends Controller
             $option_total_cost          = 0;
 
             $support                    = ViewProject::where('id', $request->project_id)->first();                      // 뷰프로젝트 데이터
-            $supporter_count            = $support ? $support->supporter_count : 0;                    // 후원자 수
-            $total_cost                 = $support ? $support->total_cost : 0;                              // 모인금액
+            $supporter_count            = $support ? $support->supporter_count : 0;                                     // 후원자 수
+            $total_cost                 = $support ? $support->total_cost : 0;                                          // 모인금액
             $data                       = Project::where('id', $request->project_id)->first();                          // 프로젝트 데이터
             $portfolio                  = Portfolio::where('user_id', $data->user_id)->first();                         // 포트폴리오 데이터
 
@@ -77,6 +78,13 @@ class SupportController extends Controller
                 'email'          =>auth()->user()->email,
                 'condition'      =>0,
             ]);
+
+            for ($i = 0; $i < count($option_id); $i++) {
+                $options = SupportOption::firstOrCreate([
+                    'support_id'=>$support->id,
+                    'option_id'=>$option_id[$i] ,
+                ]);
+            }
             $log->support_id = $support->id;
             $log->save();
             if(!isset($support->support_code)){
@@ -131,7 +139,7 @@ class SupportController extends Controller
                 $support->save();
 
                 if($request->bank_id){
-                    $user = User::find(auth()->user()->id)->first();
+                    $user = User::find(auth()->user()->id);
                     $user->bank_id                    =$request->bank_id;
                     $user->bank_account_holder        =$request->bank_account_holder;
                     $user->bank_account_number        =$request->bank_account_number;
@@ -186,10 +194,106 @@ class SupportController extends Controller
     }
 
     public function inicis_complete(Request $request){
+        $util = new \INIStdPayUtil();
+        $condition=4;
+        $msg='';
         try {
-            if($request->resultCode =='0000'){
+            if(strcmp("0000", $request->resultCode) == 0){
+                $mid 			= $request->mid;     					                                                // 가맹점 ID 수신 받은 데이터로 설정
+                $signKey 		= "SU5JTElURV9UUklQTEVERVNfS0VZU1RS"; 		                                            // 가맹점에 제공된 키(이니라이트키) (가맹점 수정후 고정) !!!절대!! 전문 데이터로 설정금지
+                $timestamp 		= $util->getTimestamp();   					                                            // util에 의해서 자동생성
+                $charset 		= "UTF-8";        							                                            // 리턴형식[UTF-8,EUC-KR](가맹점 수정후 고정)
+                $format 		= "JSON";        							                                            // 리턴형식[XML,JSON,NVP](가맹점 수정후 고정)
+                $authToken 		= $request->authToken;   				                                                // 취소 요청 tid에 따라서 유동적(가맹점 수정후 고정)
+                $authUrl 		= $request->authUrl;    					                                            // 승인요청 API url(수신 받은 값으로 설정, 임의 세팅 금지)
+                $netCancel 		= $request->netCancelUrl;   				                                            // 망취소 API url(수신 받은f값으로 설정, 임의 세팅 금지)
+                $mKey 			= hash("sha256", $signKey);					                                    // 가맹점 확인을 위한 signKey를 해시값으로 변경 (SHA-256방식 사용)
+                $msg            = $request->resultMsg;
+
+                //#####################
+                // 2.signature 생성
+                //#####################
+                $signParam["authToken"] 	= $authToken;  	// 필수
+                $signParam["timestamp"] 	= $timestamp;  	// 필수
+                // signature 데이터 생성 (모듈에서 자동으로 signParam을 알파벳 순으로 정렬후 NVP 방식으로 나열해 hash)
+                $signature = $util->makeSignature($signParam);
+
+
+                //#####################
+                // 3.API 요청 전문 생성
+                //#####################
+                $authMap["mid"] 			= $mid;   		// 필수
+                $authMap["authToken"] 		= $authToken; 	// 필수
+                $authMap["signature"] 		= $signature; 	// 필수
+                $authMap["timestamp"] 		= $timestamp; 	// 필수
+                $authMap["charset"] 		= $charset;  	// default=UTF-8
+                $authMap["format"] 			= $format;  	// default=XML
+
+                try {
+                    $httpUtil = new \HttpClient();
+                    //#####################
+                    // 4.API 통신 시작
+                    //#####################
+
+                    $authResultString = "";
+
+                    if ($httpUtil->processHTTP($authUrl, $authMap)) {
+                        $authResultString = $httpUtil->body;
+                        $condition =2;
+                    } else {
+                        $msg = $httpUtil->errormsg;
+                        throw new Exception("Http Connect Error");
+                    }
+
+                    //############################################################
+                    //5.API 통신결과 처리(***가맹점 개발수정***)
+                    //############################################################
+
+                    $resultMap = json_decode($authResultString, true);
+
+                    /*************************  결제보안 추가 2016-05-18 START ****************************/
+                    $secureMap["mid"]		= $mid;							//mid
+                    $secureMap["tstamp"]	= $timestamp;					//timestemp
+                    $secureMap["MOID"]		= $resultMap["MOID"];			//MOID
+                    $secureMap["TotPrice"]	= $resultMap["TotPrice"];		//TotPrice
+
+                    $secureSignature = $util->makeSignatureAuth($secureMap);
+                    if ((strcmp("0000", $resultMap["resultCode"]) == 0) && (strcmp($secureSignature, $resultMap["authSignature"]) == 0) ){
+                        $condition =2;
+                    } else {
+                        if (strcmp($secureSignature, $resultMap["authSignature"]) != 0) {
+                            if(strcmp("0000", $resultMap["resultCode"]) == 0) {
+                                $msg ="데이터 위변조 체크 실패";
+                                abort(529,$msg);
+                            }
+                        } else {
+                                $msg = in_array($resultMap["resultMsg"] , $resultMap) ? $resultMap["resultMsg"] : "null";
+                                abort(529,$msg);
+                        }
+                    }
+
+                } catch (Exception $e){
+                    //####################################
+                    // 실패시 처리(***가맹점 개발수정***)
+                    //####################################
+                    $msg = $e->getMessage() . ' (오류코드:' . $e->getCode() . ')';
+
+                    //#####################
+                    // 망취소 API
+                    //#####################
+
+                    $netcancelResultString = ""; // 망취소 요청 API url(고정, 임의 세팅 금지)
+
+                    if ($httpUtil->processHTTP($netCancel, $authMap)) {
+                        $netcancelResultString = $httpUtil->body;
+                    } else {
+                        $msg = $httpUtil->errormsg;
+                    }
+                    abort(529,$msg);
+                }
+
                 $support = Support::whereSupportCode($request->orderNumber)->first();
-                $support->condition = 2;
+                $support->condition = $condition;
                 $support->save();
 
                 $logs = SupportLog::whereSupportId($support->id)->get();
@@ -199,23 +303,13 @@ class SupportController extends Controller
                         'support_option_id'   =>$log->support_option_id,
                         'amount'              =>$log->ammount,
                         'price'               =>$log->price,
-                        'condition'           =>2,
+                        'condition'           =>$condition,
+                        'description'         =>$msg,
                     ]);
                 }
             }
+            //return view('client.support.partial.complete.returnSample');
             return redirect(route('complete.get',['orderNumber'=>$request->orderNumber]));
-        } catch (\Exception $e){
-            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
-            $title = '500 ERROR';
-            return view('errors.error',compact('description','title'));
-        }
-    }
-
-    public function order_complete(Request $request){
-        try {
-            error_log("check");
-            $support = Support::whereSupportCode($request->orderNumber)->first();
-            return view('client.support.partial.complete.index',compact('support'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
@@ -227,39 +321,6 @@ class SupportController extends Controller
         return view('client.support.partial.complete.close');
     }
 
-    /************************************************************************
-     * Display create view
-     * @description : 설명1 - 설명2
-     * @url         : /url
-     * @method      : GET
-     * @return      : view , data , msg ...
-     ************************************************************************/
-    public function create(){
-        try {
-
-        } catch (\Exception $e){
-            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
-            $title = '500 ERROR';
-            return view('errors.error',compact('description','title'));
-        }
-    }
-
-    /************************************************************************
-     * Display create action
-     * @description : 설명1 - 설명2
-     * @url         : /url
-     * @method      : POST
-     * @return      : view , data , msg ...
-     ************************************************************************/
-    public function store(Request $request){
-        try {
-
-        } catch (\Exception $e){
-            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
-            $title = '500 ERROR';
-            return view('errors.error',compact('description','title'));
-        }
-    }
 
     /************************************************************************
      * Display detail view
@@ -268,9 +329,27 @@ class SupportController extends Controller
      * @method      : GET
      * @return      : view , data , msg ...
      ************************************************************************/
-    public function show($id){
+    public function show(Request $request,$id){
         try {
+            if($id == 'order_complete') {
+                $support  = Support::whereSupportCode($request->orderNumber)->first();
+                if(isset($support)){
+                    $view     = ViewProject::where('id', $support->project_id)->first();                                    // 뷰프로젝트 데이터
+                    $total_cost                 = $view ? $view->total_cost : 0;                                      // 모인금액
+                    $supporter_count            = $view ? $view->supporter_count : 0;                                 // 후원자 수
+                    return view('client.support.partial.complete.index', compact('support','supporter_count','total_cost'));
+                } else {
+                    flash('존재하지 않는 주문번호입니다.')->warning();
+                    return back();
+                }
 
+            } else {
+
+                $title = '결제에러';
+                $code = 500;
+                $description = '';
+                abort(529,$title);
+            }
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
