@@ -15,10 +15,11 @@ class ProjectSeeder extends Seeder
         $faker = \Faker\Factory::create();
         $gender = $faker->randomElement(['male', 'female']);
         for($i = 1; $i < 100; $i++) {
+            $category_rand = rand(4,5);
             $project = \App\Project::create([
                 'user_id'               => rand(2,6),
-                'category_id'           => 4,
-                'category2_id'          => 3,
+                'category_id'           => $category_rand,
+                'category2_id'          => $category_rand == 4 ? rand(1,10) : rand(11,18),
                 'size_category_id'      => 2,
                 'total_cost'            => 0,
                 'supporter'             => 0,
@@ -28,16 +29,23 @@ class ProjectSeeder extends Seeder
                 'summary'               => '개요입니다.',
                 'success_count'         => 20,
                 'comment'               => 'TEST',
-                'deadline'              => $faker->dateTimeBetween('-2 months','+2 months'),
+                'deadline'              => $faker->dateTimeBetween('-1 months','+2 months'),
                 'account_date'          => '2020-03-30',
                 'delivery_date'         => '2020-03-01',
                 'agree'                 => 'Y',
                 'delay_date'            => 7,
-                'storytelling'          => '<p>이곳은 스토리텔링</p>',
+                'storytelling'          => $faker->text(500),
                 'progress'              => 100,
                 'created_at' => date('Y-m-d H:i:s', time()),
                 'updated_at' => date('Y-m-d H:i:s', time()),
             ]);
+            if(\Carbon\Carbon::today() > $project->deadline){
+                $project->condition = 4;
+                $project->save();
+            } else {
+                $project->condition = 2;
+                $project->save();
+            }
 
 
              for ($j = 0; $j < 2; $j++){

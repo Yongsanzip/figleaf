@@ -25,7 +25,7 @@ class CreateViewProjectsTable extends Migration
                                 pr.condition             AS `condition`,
                                 pr.success_count         AS `success_count`,
                                 count(sp.project_id)     AS `supporter_count`,
-                                sum(pa.payment_price)    AS `total_cost`,
+                                sum(sp.total_amount)     AS `total_cost`,
                                 pr.start_date            AS `start_date`,
                                 pr.deadline              AS `deadline`,
                                 pr.created_at            AS `created_at`,
@@ -34,9 +34,8 @@ class CreateViewProjectsTable extends Migration
                             LEFT JOIN categories             AS cc ON pr.category_id  = cc.id
                             LEFT JOIN category_details       AS cd ON pr.category2_id = cd.id
                             LEFT JOIN supports               AS sp ON sp.project_id   = pr.id
-                            LEFT JOIN payments               AS pa ON pa.support_id   = sp.id
                             LEFT JOIN introductions          AS it ON it.project_id   = pr.id
-                        WHERE sp.condition = 0
+                        WHERE sp.condition = 2
                         AND pr.deleted_at IS NULL
                         GROUP BY pr.id
                         ORDER BY created_at DESC;

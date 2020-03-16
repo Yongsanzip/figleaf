@@ -35,14 +35,14 @@
                     <span>원</span>
                 </p>
                 <p class="status-percentage">
-                    {{ ceil($supporter_count/$data->success_count*100) }}%
+                    {{ floor($supporter_count/$data->success_count*100) }}%
                 </p>
             </div>
             <div class="status-item">
                 <p class="status-name">남은 시간</p>
                 <p class="status-value">
                     @if($date_diff > 0)
-                        {{ $date = ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) }}
+                        {{ $date = floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) }}
                         <span>일</span>
                     @else
                         마감
@@ -119,14 +119,15 @@
                     @endif
                 </ul>
                 @if($page_type =='project')
-                    @if(in_array($data->condition,[1,2]))
                             <div class="btn-wrap">
+                                @if(in_array($data->condition,[2,5]))
                                 <button class="btn-white" type="button" onclick="supportSubmit(this.parentElement.parentElement)">후원하기</button>
+                                @endif
                                 <?/*<a class="btn-white" href="">후원내역 상세보기</a>*/?>
                                 <?/*<a class="btn-white" href="">프로젝트 관리하기</a>*/?>
                                 <button class="btn-black" type="button" onclick="fnOpenModal()">디자이너에게 문의하기</button>
                             </div>
-                    @endif
+
                 @endif
                 <input type="hidden" name="project_id" value="{{ $data->id }}">
             </div>

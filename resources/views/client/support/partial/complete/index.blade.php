@@ -49,7 +49,7 @@
                             <div class="status-item">
                                 <p class="status-name">남은 시간</p>
                                 <p class="status-value">
-                                    {{ $date = ceil((strtotime($support->project->deadline) - strtotime("now"))/(60*60 *24)) }}
+                                    {{ $date = floor((strtotime($support->project->deadline) - strtotime("now"))/(60*60 *24)) }}
                                     <span>일</span>
                                 </p>
                                 <p class="status-date">
@@ -83,12 +83,12 @@
                         <div class="project-product">
                             <div class="info-item">
                                 <p class="info-name">상품명</p>
-                                <p class="info-value name">활동하기 좋은 면 슬립</p>
+                                <p class="info-value name">{{$support->project->options->first()->option_name}}</p>
                             </div>
                             <div class="info-item">
                                 <p class="info-name">상품가</p>
                                 <p class="info-value price">
-                                    17,500
+                                    {{$support->project->options->first()->price}}
                                     <span>원</span>
                                 </p>
                             </div>
@@ -196,7 +196,7 @@
                         <div class="sponsor-total">
                             <div class="total">
                                 <p class="total-caption">후원금액</p>
-                                <p class="total-price">{{$support->total_amount}}</p>
+                                <p class="total-price">{{number_format($support->total_amount)}}</p>
                             </div>
                             <div class="btn-wrap">
                                 <a href="{{route('project.show',['id'=>$support->project->id])}}" class="btn-black">프로젝트 페이지로 이동</a>

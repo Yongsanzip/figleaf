@@ -80,9 +80,11 @@ class SupportController extends Controller
             ]);
 
             for ($i = 0; $i < count($option_id); $i++) {
+                $option = Option::find($option_id[$i]);
                 $options = SupportOption::firstOrCreate([
                     'support_id'=>$support->id,
-                    'option_id'=>$option_id[$i] ,
+                    'option_id'=>$option_id[$i],
+                    'amount'   =>$option->price,
                 ]);
             }
             $log->support_id = $support->id;
@@ -334,9 +336,9 @@ class SupportController extends Controller
             if($id == 'order_complete') {
                 $support  = Support::whereSupportCode($request->orderNumber)->first();
                 if(isset($support)){
-                    $view     = ViewProject::where('id', $support->project_id)->first();                                    // 뷰프로젝트 데이터
-                    $total_cost                 = $view ? $view->total_cost : 0;                                      // 모인금액
-                    $supporter_count            = $view ? $view->supporter_count : 0;                                 // 후원자 수
+                    $view     = ViewProject::where('id', $support->project_id)->first();                                // 뷰프로젝트 데이터
+                    $total_cost                 = $view ? $view->total_cost : 0;                                        // 모인금액
+                    $supporter_count            = $view ? $view->supporter_count : 0;                                   // 후원자 수
                     return view('client.support.partial.complete.index', compact('support','supporter_count','total_cost'));
                 } else {
                     flash('존재하지 않는 주문번호입니다.')->warning();
