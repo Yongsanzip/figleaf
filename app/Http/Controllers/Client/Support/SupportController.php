@@ -211,7 +211,7 @@ class SupportController extends Controller
         }
     }
 
-    public function complete(Request $request){
+    public function order_complete(Request $request){
         try {
             error_log("check");
             $support = Support::whereSupportCode($request->orderNumber)->first();

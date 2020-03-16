@@ -20,6 +20,12 @@ $tab = 'portfolio';
                 @else
                 <!-- mypage contents -->
                     <div class="mypage-contents">
+                        <div class="project-notice">
+                            <h2 class="notice-title">PortFolio</h2>
+                            <ul class="notice-list">
+                                <li>포트폴리오를 등록하고 디자이너로 활동해보세요! </li>
+                            </ul>
+                        </div>
                         <div class="btn-wrap">
                             <a href="{{route('mypage_portfolio.create')}}" class="btn-black">포트폴리오 생성</a>
                         </div>

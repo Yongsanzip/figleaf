@@ -133,7 +133,7 @@
                         </div>
                     </form>
 
-
+                    @if(in_array($data->condition,[1,2]))
                     <div class="col"></div>
                     <div class="col">
                         {{--후원금액--}}
@@ -152,7 +152,7 @@
                             </div>
                         </div>
                     </div>
-
+                    @endif
                 </div>
                 <!-- //sponsor form-->
 
