@@ -84,33 +84,37 @@ class RegisterController extends Controller
      ************************************************************************/
     protected function create(Request $request) {
         try {
+            $subject ='가입인증메일';
             $check = User::whereEmail($request->email)->first();
             if(isset($check)){
-                flash('이미 존재하는 이메일입니다.')->error();
-                return back();
-            }
-            $user = User::firstOrCreate([
-                'role_id'       => 1,                                                                                        //
-                'email'         => $request->email,                                                                          //
-                'password'      => bcrypt($request->password),                                                               //
-                'user_code'     => encrypt(date('YmdHmi').\Illuminate\Support\Str::random(10)),          //
-                'name'          => $request->name,                                                                           //
-                'home_phone'    => $request->home_phone,                                                                     //
-                'cellphone'     => $request->cellphone,                                                                      //
-                'zip_code'      => $request->zip_code,                                                                       //
-                'address'       => $request->address,                                                                        //
-                'address_detail'=> $request->address_detail,                                                                 //
-                'gender'        => $request->gender,                                                                         //
-                'grade'         => 0,                                                                                        //
-                'email_yn'      => $request->email_check ? $request->email_check : 0,                                        //
-                'sms_yn'        => $request->sms_check ? $request->sms_check : 0,                                            //
-            ]);
-            $user->verified_token = Str::random(60);
-            $user->save();
-            $subject ='가입인증메일';
+                $mail = Mail::to($request->email)->send(new VerifyMail($check,$subject,$check->verified_token));
+                flash('이미 존재하는 이메일입니다.')->important();
+                return redirect('/');
+            } else {
+                $user = User::firstOrCreate([
+                    'role_id'       => 1,                                                                                        //
+                    'email'         => $request->email,                                                                          //
+                    'password'      => bcrypt($request->password),                                                               //
+                    'user_code'     => encrypt(date('YmdHmi').\Illuminate\Support\Str::random(10)),          //
+                    'name'          => $request->name,                                                                           //
+                    'home_phone'    => $request->home_phone,                                                                     //
+                    'cellphone'     => $request->cellphone,                                                                      //
+                    'zip_code'      => $request->zip_code,                                                                       //
+                    'address'       => $request->address,                                                                        //
+                    'address_detail'=> $request->address_detail,                                                                 //
+                    'gender'        => $request->gender,                                                                         //
+                    'grade'         => 0,                                                                                        //
+                    'email_yn'      => $request->email_check ? $request->email_check : 0,                                        //
+                    'sms_yn'        => $request->sms_check ? $request->sms_check : 0,                                            //
+                ]);
+                $user->verified_token = Str::random(60);
+                $user->save();
 
-            $mail = Mail::to($request->email)->send(new VerifyMail($user,$subject,$user->verified_token));
-            return view('auth.register.success');
+
+                $mail = Mail::to($request->email)->send(new VerifyMail($user,$subject,$user->verified_token));
+                return view('auth.register.success');
+            }
+
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
