@@ -21,6 +21,7 @@ class CreateSupportsTable extends Migration
             $table->bigInteger('project_id')->unsigned()->comment('프로젝트 id');
             $table->integer('total_amount')->comment('주문총액');
             $table->string('support_code')->unique()->nullable()->comment('후원코드');
+            $table->string('inicis_tid')->unique()->nullable()->comment('이니시스TID');
             $table->string('supporter', 50)->comment('후원자명');
             $table->string('phone', 100)->comment('전화번호');
             $table->string('email', 100)->comment('이메일');

@@ -14,3 +14,4 @@ yarn-error.log
 /public/se2/upload
 /public/html/inicis
 /public/html/libs
+/resources/views/client/support/partial/complete/returnSample.blade.php

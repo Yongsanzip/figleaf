@@ -69,6 +69,7 @@ class SupportController extends Controller
                     ]);
                 }
             }
+
             $support = Support::firstOrCreate([
                 'user_id'        =>auth()->user()->id,
                 'project_id'     =>$request->project_id,
@@ -202,7 +203,7 @@ class SupportController extends Controller
         try {
             if(strcmp("0000", $request->resultCode) == 0){
                 $mid 			= $request->mid;     					                                                // 가맹점 ID 수신 받은 데이터로 설정
-                $signKey 		= "SU5JTElURV9UUklQTEVERVNfS0VZU1RS"; 		                                            // 가맹점에 제공된 키(이니라이트키) (가맹점 수정후 고정) !!!절대!! 전문 데이터로 설정금지
+                $signKey 		= env('INICIS_SIGN_KEY'); 		                                                    // 가맹점에 제공된 키(이니라이트키) (가맹점 수정후 고정) !!!절대!! 전문 데이터로 설정금지
                 $timestamp 		= $util->getTimestamp();   					                                            // util에 의해서 자동생성
                 $charset 		= "UTF-8";        							                                            // 리턴형식[UTF-8,EUC-KR](가맹점 수정후 고정)
                 $format 		= "JSON";        							                                            // 리턴형식[XML,JSON,NVP](가맹점 수정후 고정)
@@ -253,7 +254,7 @@ class SupportController extends Controller
 
                     $resultMap = json_decode($authResultString, true);
 
-                    /*************************  결제보안 추가 2016-05-18 START ****************************/
+                    //######################  결제보안 추가 2016-05-18 START ############################//
                     $secureMap["mid"]		= $mid;							//mid
                     $secureMap["tstamp"]	= $timestamp;					//timestemp
                     $secureMap["MOID"]		= $resultMap["MOID"];			//MOID
@@ -296,6 +297,7 @@ class SupportController extends Controller
 
                 $support = Support::whereSupportCode($request->orderNumber)->first();
                 $support->condition = $condition;
+                $support->inicis_tid = $resultMap["tid"];
                 $support->save();
 
                 $logs = SupportLog::whereSupportId($support->id)->get();
