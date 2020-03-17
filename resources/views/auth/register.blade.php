@@ -58,16 +58,16 @@
                             <!-- <p class="text-error">형식이 올바르지 않습니다.</p> -->
                         </div>
                         <div class="input-item">
-                            <p class="input-name">핸드폰번호</p>
-                            <input type="tel" class="input-field" name="cellphone" placeholder="(-)없이 입력해주세요">
+                            <p class="input-name">핸드폰번호*</p>
+                            <input type="tel" class="input-field required" data-title="핸드폰번호" name="cellphone" placeholder="(-)없이 입력해주세요">
                             <!-- error -->
                             <!-- <p class="text-error">형식이 올바르지 않습니다.</p> -->
                         </div>
                         <div class="input-item">
-                            <p class="input-name">주소</p>
+                            <p class="input-name">주소*</p>
                             <div class="address">
-                                <input type="text" class="input-field" name="zip_code" id="zip_code" placeholder="우편번호">
-                                <input type="text" class="input-field" name="address" id="address" placeholder="주소">
+                                <input type="text" class="input-field required" data-title="우편번호" name="zip_code" id="zip_code" placeholder="우편번호" readonly>
+                                <input type="text" class="input-field required" data-title="주소" name="address" id="address" placeholder="주소" readonly>
                                 <button type="button" class="btn-black btn-adress" id="address_btn">검색</button>
                             </div>
                             <input type="text" class="input-field" name="address_detail" placeholder="상세주소" >
