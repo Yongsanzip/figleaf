@@ -9,12 +9,14 @@
 
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
-
+const CANCEL_PAYMENT_URL = 'http-://api.test:8000/api/v1/test';
+const TOKEN_HEADER = 'Accept';
+const TOKEN_HEADER_JSON ='application/json';
 
 if (! function_exists('postResponse')) {
 
-     function postResponse($request_url, $post_data = array(), $headers = array())
-    {
+    // $this->postResponse(self::CANCEL_PAYMENT_URL . $impUid ,$postData ,array(self::TOKEN_HEADER . ': ' . $accessToken));
+     function postResponse($request_url, $post_data = array(), $headers = array()) {
         $post_data_str = json_encode($post_data);
         $default_header = array('Content-Type: application/json', 'Content-Length: ' . strlen($post_data_str));
         $headers = array_merge($default_header, $headers);
@@ -30,13 +32,14 @@ if (! function_exists('postResponse')) {
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $r = json_decode(trim($body));
         curl_close($ch);
-        if ($error_code > 0) throw new Exception("AccessCode Error(HTTP STATUS : " . $status_code . ")", $error_code);
-        if (empty($r)) throw new Exception("API서버로부터 응답이 올바르지 않습니다. " . $body, 1);
-        if ($r->code !== 0) throw new IamportRequestException($r);
-        return $r->response;
+//        if ($error_code > 0) throw new Exception("AccessCode Error(HTTP STATUS : " . $status_code . ")", $error_code);
+//        if (empty($r)) throw new Exception("API서버로부터 응답이 올바르지 않습니다. " . $body, 1);
+//        if ($r->code !== 0) throw new IamportRequestException($r);
+         error_log(1);
+         error_log($body);
+        return $body;
     }
 }
-
 
 if (! function_exists('summernote_save_image')) {
 

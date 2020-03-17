@@ -199,17 +199,25 @@
                                 <p class="total-price">{{number_format($support->total_amount)}}</p>
                             </div>
                             <div class="btn-wrap">
-                                <button type="button" class="btn-black">환불하기</button>
+                                <button type="button" onclick="fn_refund(); " class="btn-black">환불하기</button>
                                 <a href="{{route('mypage_information.index')}}" class="btn-white">마이페이지로 이동</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- //sponsor form-->
-
+                <form action="{{route('refund')}}" method="POST" id="refund">
+                    @csrf
+                    <input type="hidden" name="code" value="{{$support->code}}">
+                </form>
             </div>
         </div>
     </main>
+    <script type="text/javascript">
+        var fn_refund = function(){
+            document.getElementById('refund').submit();
+        }
 
+    </script>
 
 @endsection

@@ -369,12 +369,11 @@ class SupportController extends Controller
      * @return      : view , data , msg ...
      ************************************************************************/
     public function refund(Request $request) {
-        try {
-
-        } catch (\Exception $e){
-            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
-            $title = '500 ERROR';
-            return view('errors.error',compact('description','title'));
-        }
+            $data = array('test'=>1,'test2'=>2);
+            $keys = array_flip(array('test' , 'test2' ));
+            $cancel_data = array_intersect_key($data , $keys);
+            $header = TOKEN_HEADER.':'.TOKEN_HEADER_JSON;
+            $response =  postResponse(CANCEL_PAYMENT_URL,$cancel_data,array($header));
+            return view('client.mypage.support.refund',compact('response'));
     }
 }
