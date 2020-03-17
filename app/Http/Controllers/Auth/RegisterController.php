@@ -84,6 +84,11 @@ class RegisterController extends Controller
      ************************************************************************/
     protected function create(Request $request) {
         try {
+            $check = User::whereEmail($request->email)->first();
+            if(isset($check)){
+                flash('이미 존재하는 이메일입니다.')->error();
+                return back();
+            }
             $user = User::firstOrCreate([
                 'role_id'       => 1,                                                                                        //
                 'email'         => $request->email,                                                                          //
