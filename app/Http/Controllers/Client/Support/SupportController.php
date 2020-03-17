@@ -84,7 +84,7 @@ class SupportController extends Controller
                 $options = SupportOption::firstOrCreate([
                     'support_id'=>$support->id,
                     'option_id'=>$option_id[$i],
-                    'amount'   =>$option->price,
+                    'amount'   =>$request->option_amount[$i],
                 ]);
             }
             $log->support_id = $support->id;
