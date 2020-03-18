@@ -27,7 +27,7 @@ use Intervention\Image\ImageManagerStatic as Image;
             public function cancel ($data) {
                 try {
                     $access_token = $this->getAccessCode();
-                    $keys = array_flip(array('amount' , 'reason' , 'refund_holder' , 'refund_bank' , 'refund_account'));
+                    $keys = array_flip(array('amount' , 'reason' , 'refund_holder' , 'refund_bank' , 'refund_account','code'));
                     $cancel_data = array_intersect_key($data , $keys);
                     $response = $this->postResponse(
                         self::TEST_API_URL ,
@@ -37,7 +37,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 
                     return $response;
                 } catch (Exception $e) {
-                    return new IamportResult(false , null , array('code' => $e->getCode() , 'message' => $e->getMessage()));
+                    return array('code' => $e->getCode() , 'message' => $e->getMessage());
                 }
             }
 

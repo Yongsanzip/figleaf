@@ -384,7 +384,7 @@ class SupportController extends Controller
                                               'code'=>$request->code,
                                               )
                                         );
-
-            return view('client.mypage.support.refund',compact('response'));
+            dd($response);
+            //return view('client.mypage.support.refund',compact('response'));
     }
 }
