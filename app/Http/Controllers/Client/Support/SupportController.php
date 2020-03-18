@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\Support;
 
+use Carbon\Carbon;
 use Inicis;
 use App\Bank;
 use App\Option;
@@ -372,7 +373,7 @@ class SupportController extends Controller
      ************************************************************************/
     public function refund(Request $request) {
             $util = new \INIStdPayUtil();
-            $timestamp=$util->getTimestamp();
+            $timestamp=Carbon::now()->format('YmdHis');
             $support = Support::whereSupportCode($request->code)->first();
         if(isset($support)){
 

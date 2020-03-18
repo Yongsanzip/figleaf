@@ -471,9 +471,8 @@ if (!class_exists('Inicis')) {
 
 
             protected function postResponse ($request_url , $post_data  , $headers = array()) {
-                $post_data_str = json_encode($post_data);
-                $default_header = array('Content-Type: application/x-www-form-urlencoded;charset=utf-8' , 'Content-Length: ' . strlen($post_data_str));
-                $data = urlencode(http_build_query($post_data));
+                $default_header = array('Content-Type: application/x-www-form-urlencoded;charset=utf-8' ,"cache-control: no-cache");
+                $data = http_build_query($post_data);
                 $headers = array_merge($default_header , $headers);
                 $ch = curl_init();
                 curl_setopt($ch , CURLOPT_URL , $request_url);
