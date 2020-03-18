@@ -42,25 +42,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 
             protected function getAccessCode () {
-                try {
-                    $now = time();
-                    if ($now < $this->expired_at && !empty($this->access_token)) return $this->access_token;
-                    $this->expired_at = null;
-                    $this->access_token = null;
-                    $response = $this->postResponse(
-                        self::GET_TOKEN_URL ,
-                        array(
-                            'key' => 1 ,
-                            'secret' => 1
-                        )
-                    );
-                    $offset = $response->expired_at - $response->now;
-                    $this->expired_at = time() + $offset;
-                    $this->access_token = $response->access_token;
-                    return $response->access_token;
-                } catch (Exception $e) {
-                    throw new IamportAuthException('[API인증오류] ' . $e->getMessage() , $e->getCode());
-                }
+                    return '';
             }
 
 

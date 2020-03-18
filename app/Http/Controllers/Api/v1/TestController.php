@@ -9,6 +9,7 @@ class TestController extends Controller {
 
     public function test1(Request $request){
         error_log("in get success111");
+        error_log($request->getContent());
         echo $request->code;
         return response()->json(['msg'=>'GET success'],200,[],JSON_PRETTY_PRINT);
     }

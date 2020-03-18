@@ -371,7 +371,10 @@ class SupportController extends Controller
      ************************************************************************/
     public function refund(Request $request) {
             error_log($request->code);
-            $url = "http://api.test2:8000/api/v1/test";
+            $data = array([
+               'code'=>$request->code,
+            ]);
+            $url = "http://api.test2:8000/api/v1/test"."?".http_build_query($data);
             $client = new \GuzzleHttp\Client();
             $request = $client->get($url);
             $response = $request->getBody();
