@@ -59,15 +59,11 @@ use Intervention\Image\ImageManagerStatic as Image;
                 curl_setopt($ch , CURLOPT_POSTFIELDS , $post_data_str);
                 curl_setopt($ch , CURLOPT_RETURNTRANSFER , true);
                 //execute post
-                $body = curl_exec($ch);
+                $response = curl_exec($ch);
                 $error_code = curl_errno($ch);
                 $status_code = curl_getinfo($ch , CURLINFO_HTTP_CODE);
-                $r = json_decode(trim($body));
                 curl_close($ch);
-                if ($error_code > 0) throw new Exception("AccessCode Error(HTTP STATUS : " . $status_code . ")" , $error_code);
-                if (empty($r)) throw new Exception("API서버로부터 응답이 올바르지 않습니다. " . $body , 1);
-                if ($r->code !== 0) throw new IamportRequestException($r);
-                return $r->response;
+                return $response;
             }
 
 
@@ -84,12 +80,10 @@ use Intervention\Image\ImageManagerStatic as Image;
                 $body = curl_exec($ch);
                 $error_code = curl_errno($ch);
                 $status_code = curl_getinfo($ch , CURLINFO_HTTP_CODE);
-                $r = json_decode(trim($body));
+                $response = $body;
                 curl_close($ch);
-                if ($error_code > 0) throw new Exception("Request Error(HTTP STATUS : " . $status_code . ")" , $error_code);
-                if (empty($r)) throw new Exception("API서버로부터 응답이 올바르지 않습니다. " . $body , 1);
-                if ($r->code !== 0) throw new IamportRequestException($r);
-                return $r->response;
+
+                return $response;
             }
 
 
@@ -105,12 +99,9 @@ use Intervention\Image\ImageManagerStatic as Image;
                 $body = curl_exec($ch);
                 $error_code = curl_errno($ch);
                 $status_code = curl_getinfo($ch , CURLINFO_HTTP_CODE);
-                $r = json_decode(trim($body));
+                $response = $body;
                 curl_close($ch);
-                if ($error_code > 0) throw new Exception("Request Error(HTTP STATUS : " . $status_code . ")" , $error_code);
-                if (empty($r)) throw new Exception("API서버로부터 응답이 올바르지 않습니다. " . $body , 1);
-                if ($r->code !== 0) throw new IamportRequestException($r);
-                return $r->response;
+                return $response;
             }
         }
 

@@ -299,6 +299,7 @@ class SupportController extends Controller
                 $support = Support::whereSupportCode($request->orderNumber)->first();
                 $support->condition = $condition;
                 $support->inicis_tid = $resultMap["tid"];
+                $support->inicis_payMethod = $resultMap["payMethod"];
                 $support->save();
 
                 $logs = SupportLog::whereSupportId($support->id)->get();
@@ -370,21 +371,28 @@ class SupportController extends Controller
      * @return      : view , data , msg ...
      ************************************************************************/
     public function refund(Request $request) {
-            $data = array(
-               'code'=>$request->code,
-            );
-            error_log(http_build_query($data));
-            $url = "http://api.test2:8000/api/v1/test"."?".http_build_query($data);
-            $inicis = new Inicis();
-            $response = $inicis->cancel(array('amount' 		  => 1,
-                                              'reason'		  => 1,
-                                              'refund_holder' => 1,
-                                              'refund_bank'	  => 1,
-                                              'refund_account'=> 1,
-                                              'code'=>$request->code,
-                                              )
-                                        );
-            dd($response);
-            //return view('client.mypage.support.refund',compact('response'));
+            $util = new \INIStdPayUtil();
+            $timestamp=$util->getTimestamp();
+            $support = Support::whereSupportCode($request->code)->first();
+            if(isset($support)){
+                $inicis = new Inicis();
+                $response = $inicis->cancel(array(
+                    "type"               =>"Refund",
+                    "paymethod"          =>$support->inicis_payMethod,
+                    "timestamp"          =>$timestamp,
+                    "clientIp"           =>$request->getClientIp(),
+                    "mid"                =>env('INICIS_MARKET_ID'),
+                    "tid"                =>$support->inicis_tid,
+                    "msg"                =>"개인결제취소",
+                    "hashData"           =>hash(env('INICIS_API_KEY'),"Refund",$support->patMethod,$timestamp,$request->getClientIp(),env('INICIS_MARKET_ID'),$support->tid),
+                ));
+                dd($response);
+            } else {
+                flash('존재하지 않는 주문번호이거나 이미 환불처리된 주문입니다. 관리자에게 문의하세요');
+                return back();
+            }
+
+
+
     }
 }
