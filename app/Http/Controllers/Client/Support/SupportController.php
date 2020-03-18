@@ -374,7 +374,8 @@ class SupportController extends Controller
             $util = new \INIStdPayUtil();
             $timestamp=$util->getTimestamp();
             $support = Support::whereSupportCode($request->code)->first();
-            if(isset($support)){
+        if(isset($support)){
+
                 $inicis = new Inicis();
                 $response = $inicis->cancel(array(
                     "type"               =>"Refund",
@@ -384,15 +385,16 @@ class SupportController extends Controller
                     "mid"                =>env('INICIS_MARKET_ID'),
                     "tid"                =>$support->inicis_tid,
                     "msg"                =>"개인결제취소",
-                    "hashData"           =>hash(env('INICIS_API_KEY'),"Refund",$support->patMethod,$timestamp,$request->getClientIp(),env('INICIS_MARKET_ID'),$support->tid),
+                    "hashData"           =>$inicis->refundHash($support->inicis_patMethod,$timestamp,$request->getClientIp(),$support->inicis_tid),
                 ));
-                dd($response);
+                if(is_array($response)){
+                    $response = json_encode($response);
+                }
+                return view('client.mypage.support.refund',compact('response'));
             } else {
                 flash('존재하지 않는 주문번호이거나 이미 환불처리된 주문입니다. 관리자에게 문의하세요');
                 return back();
             }
-
-
 
     }
 }

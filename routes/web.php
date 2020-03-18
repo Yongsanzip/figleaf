@@ -130,6 +130,7 @@ Route::group(['middleware'=>'only_admin'],function(){
     Route::resource('admin_news', 'Admin\Page\NewsController');
 // 관리자 결제/배송 - 후원내역
     Route::resource('admin_support', 'Admin\PaymentDelivery\SupportController');
+    Route::POST('/admin_refund', 'Admin\PaymentDelivery\SupportController@refund')->name('admin_refund');
 // 관리자 결제/배송 - 배송내역
     Route::resource('admin_delivery', 'Admin\PaymentDelivery\DeliveryController');
 // 관리자 프로젝트
