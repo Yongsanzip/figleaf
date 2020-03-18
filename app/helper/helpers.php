@@ -14,8 +14,8 @@ use Intervention\Image\ImageManagerStatic as Image;
 
     if (!class_exists('Inicis')) {
         class Inicis {
-            const GET_TOKEN_URL = 'http://api.test:8000/api/v1/test';
-            const CANCEL_PAYMENT_URL = 'http://api.test:8000/api/v1/test';
+            const INICIS_API_URL="https://iniapi.inicis.com/";
+            const CANCEL_PAYMENT_URL = 'api/v1/test';
             const TOKEN_HEADER = 'Authorization';
             private $imp_key = null;
             private $imp_secret = null;

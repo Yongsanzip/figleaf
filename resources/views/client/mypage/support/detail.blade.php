@@ -208,7 +208,7 @@
                 <!-- //sponsor form-->
                 <form action="{{route('refund')}}" method="POST" id="refund">
                     @csrf
-                    <input type="hidden" name="code" value="{{$support->code}}">
+                    <input type="hidden" name="code" value="{{$support->support_code}}">
                 </form>
             </div>
         </div>
