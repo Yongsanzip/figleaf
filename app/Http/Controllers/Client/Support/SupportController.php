@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\Support;
 
+use Inicis;
 use App\Bank;
 use App\Option;
 use App\Portfolio;
@@ -22,7 +23,7 @@ class SupportController extends Controller
      * @description :
      ************************************************************************/
     public function __construct() {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /************************************************************************
@@ -369,11 +370,10 @@ class SupportController extends Controller
      * @return      : view , data , msg ...
      ************************************************************************/
     public function refund(Request $request) {
-            $data = array('test'=>1,'test2'=>2);
-            $keys = array_flip(array('test' , 'test2' ));
-            $cancel_data = array_intersect_key($data , $keys);
-            $header = TOKEN_HEADER.':'.TOKEN_HEADER_JSON;
-            $response =  postResponse(CANCEL_PAYMENT_URL,$cancel_data,array($header));
+            $url = "http://api.test2:8000/api/v1/test";
+            $client = new \GuzzleHttp\Client();
+            $request = $client->get($url);
+            $response = $request->getBody();
             return view('client.mypage.support.refund',compact('response'));
     }
 }

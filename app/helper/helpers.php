@@ -9,36 +9,128 @@
 
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
-const CANCEL_PAYMENT_URL = 'http-://api.test:8000/api/v1/test';
-const TOKEN_HEADER = 'Accept';
-const TOKEN_HEADER_JSON ='application/json';
 
-if (! function_exists('postResponse')) {
 
-    // $this->postResponse(self::CANCEL_PAYMENT_URL . $impUid ,$postData ,array(self::TOKEN_HEADER . ': ' . $accessToken));
-     function postResponse($request_url, $post_data = array(), $headers = array()) {
-        $post_data_str = json_encode($post_data);
-        $default_header = array('Content-Type: application/json', 'Content-Length: ' . strlen($post_data_str));
-        $headers = array_merge($default_header, $headers);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $request_url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data_str);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        //execute post
-        $body = curl_exec($ch);
-        $error_code = curl_errno($ch);
-        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $r = json_decode(trim($body));
-        curl_close($ch);
-//        if ($error_code > 0) throw new Exception("AccessCode Error(HTTP STATUS : " . $status_code . ")", $error_code);
-//        if (empty($r)) throw new Exception("API서버로부터 응답이 올바르지 않습니다. " . $body, 1);
-//        if ($r->code !== 0) throw new IamportRequestException($r);
-         error_log(1);
-         error_log($body);
-        return $body;
-    }
+
+    if (!class_exists('Inicis')) {
+        class Inicis {
+            const GET_TOKEN_URL = 'http://api.test:8000/api/v1/test';
+            const CANCEL_PAYMENT_URL = 'http://api.test:8000/api/v1/test';
+            const TOKEN_HEADER = 'Authorization';
+            private $imp_key = null;
+            private $imp_secret = null;
+            protected $access_token = null;
+            protected $expired_at = null;
+            protected $now = null;
+
+            public function cancel ($data) {
+                try {
+                    $access_token = $this->getAccessCode();
+                    $keys = array_flip(array('amount' , 'reason' , 'refund_holder' , 'refund_bank' , 'refund_account'));
+                    $cancel_data = array_intersect_key($data , $keys);
+                    $response = $this->postResponse(
+                        self::CANCEL_PAYMENT_URL ,
+                        $cancel_data ,
+                        array(self::TOKEN_HEADER . ': ' . $access_token)
+                    );
+
+                    return $response;
+                } catch (Exception $e) {
+                    return new IamportResult(false , null , array('code' => $e->getCode() , 'message' => $e->getMessage()));
+                }
+            }
+
+
+            protected function getAccessCode () {
+                try {
+                    $now = time();
+                    if ($now < $this->expired_at && !empty($this->access_token)) return $this->access_token;
+                    $this->expired_at = null;
+                    $this->access_token = null;
+                    $response = $this->postResponse(
+                        self::GET_TOKEN_URL ,
+                        array(
+                            'key' => 1 ,
+                            'secret' => 1
+                        )
+                    );
+                    $offset = $response->expired_at - $response->now;
+                    $this->expired_at = time() + $offset;
+                    $this->access_token = $response->access_token;
+                    return $response->access_token;
+                } catch (Exception $e) {
+                    throw new IamportAuthException('[API인증오류] ' . $e->getMessage() , $e->getCode());
+                }
+            }
+
+
+
+            protected function postResponse ($request_url , $post_data = array() , $headers = array()) {
+                $post_data_str = json_encode($post_data);
+                $default_header = array('Content-Type: application/json' , 'Content-Length: ' . strlen($post_data_str));
+                $headers = array_merge($default_header , $headers);
+                $ch = curl_init();
+                curl_setopt($ch , CURLOPT_URL , $request_url);
+                curl_setopt($ch , CURLOPT_POST , true);
+                curl_setopt($ch , CURLOPT_HTTPHEADER , $headers);
+                curl_setopt($ch , CURLOPT_POSTFIELDS , $post_data_str);
+                curl_setopt($ch , CURLOPT_RETURNTRANSFER , true);
+                //execute post
+                $body = curl_exec($ch);
+                $error_code = curl_errno($ch);
+                $status_code = curl_getinfo($ch , CURLINFO_HTTP_CODE);
+                $r = json_decode(trim($body));
+                curl_close($ch);
+                if ($error_code > 0) throw new Exception("AccessCode Error(HTTP STATUS : " . $status_code . ")" , $error_code);
+                if (empty($r)) throw new Exception("API서버로부터 응답이 올바르지 않습니다. " . $body , 1);
+                if ($r->code !== 0) throw new IamportRequestException($r);
+                return $r->response;
+            }
+
+
+
+            protected function getResponse ($request_url , $request_data = null) {
+                $access_token = $this->getAccessCode();
+                $headers = array(self::TOKEN_HEADER . ': ' . $access_token , 'Content-Type: application/json');
+                $ch = curl_init();
+                curl_setopt($ch , CURLOPT_URL , $request_url);
+                curl_setopt($ch , CURLOPT_POST , false);
+                curl_setopt($ch , CURLOPT_HTTPHEADER , $headers);
+                curl_setopt($ch , CURLOPT_RETURNTRANSFER , true);
+                //execute get
+                $body = curl_exec($ch);
+                $error_code = curl_errno($ch);
+                $status_code = curl_getinfo($ch , CURLINFO_HTTP_CODE);
+                $r = json_decode(trim($body));
+                curl_close($ch);
+                if ($error_code > 0) throw new Exception("Request Error(HTTP STATUS : " . $status_code . ")" , $error_code);
+                if (empty($r)) throw new Exception("API서버로부터 응답이 올바르지 않습니다. " . $body , 1);
+                if ($r->code !== 0) throw new IamportRequestException($r);
+                return $r->response;
+            }
+
+
+            protected function deleteResponse ($request_url , $headers = array()) {
+                $default_header = array('Content-Type: application/json');
+                $headers = array_merge($default_header , $headers);
+                $ch = curl_init();
+                curl_setopt($ch , CURLOPT_URL , $request_url);
+                curl_setopt($ch , CURLOPT_CUSTOMREQUEST , 'DELETE');
+                curl_setopt($ch , CURLOPT_HTTPHEADER , $headers);
+                curl_setopt($ch , CURLOPT_RETURNTRANSFER , true);
+                //execute delete
+                $body = curl_exec($ch);
+                $error_code = curl_errno($ch);
+                $status_code = curl_getinfo($ch , CURLINFO_HTTP_CODE);
+                $r = json_decode(trim($body));
+                curl_close($ch);
+                if ($error_code > 0) throw new Exception("Request Error(HTTP STATUS : " . $status_code . ")" , $error_code);
+                if (empty($r)) throw new Exception("API서버로부터 응답이 올바르지 않습니다. " . $body , 1);
+                if ($r->code !== 0) throw new IamportRequestException($r);
+                return $r->response;
+            }
+        }
+
 }
 
 if (! function_exists('summernote_save_image')) {
