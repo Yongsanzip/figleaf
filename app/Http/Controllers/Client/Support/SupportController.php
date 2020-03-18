@@ -370,14 +370,21 @@ class SupportController extends Controller
      * @return      : view , data , msg ...
      ************************************************************************/
     public function refund(Request $request) {
-            error_log($request->code);
-            $data = array([
+            $data = array(
                'code'=>$request->code,
-            ]);
+            );
+            error_log(http_build_query($data));
             $url = "http://api.test2:8000/api/v1/test"."?".http_build_query($data);
-            $client = new \GuzzleHttp\Client();
-            $request = $client->get($url);
-            $response = $request->getBody();
+            $inicis = new Inicis();
+            $response = $inicis->cancel(array('amount' 		  => 1,
+                                              'reason'		  => 1,
+                                              'refund_holder' => 1,
+                                              'refund_bank'	  => 1,
+                                              'refund_account'=> 1,
+                                              'code'=>$request->code,
+                                              )
+                                        );
+
             return view('client.mypage.support.refund',compact('response'));
     }
 }

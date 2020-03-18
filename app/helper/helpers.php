@@ -17,6 +17,7 @@ use Intervention\Image\ImageManagerStatic as Image;
             const INICIS_API_URL="https://iniapi.inicis.com/";
             const CANCEL_PAYMENT_URL = 'api/v1/test';
             const TOKEN_HEADER = 'Authorization';
+            const TEST_API_URL ='http://api.test2:8000/api/v1/test';
             private $imp_key = null;
             private $imp_secret = null;
             protected $access_token = null;
@@ -29,7 +30,7 @@ use Intervention\Image\ImageManagerStatic as Image;
                     $keys = array_flip(array('amount' , 'reason' , 'refund_holder' , 'refund_bank' , 'refund_account'));
                     $cancel_data = array_intersect_key($data , $keys);
                     $response = $this->postResponse(
-                        self::CANCEL_PAYMENT_URL ,
+                        self::TEST_API_URL ,
                         $cancel_data ,
                         array(self::TOKEN_HEADER . ': ' . $access_token)
                     );

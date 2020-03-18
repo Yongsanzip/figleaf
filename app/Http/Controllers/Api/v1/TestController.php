@@ -17,6 +17,8 @@ class TestController extends Controller {
 
     public function test2(Request $request){
         error_log("in post success");
+        error_log($request->getContent());
+        error_log($request);
         echo $request->code;
         return response()->json(['msg'=>'POST success'],200,[],JSON_PRETTY_PRINT);
     }
