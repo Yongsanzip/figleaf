@@ -68,7 +68,7 @@ class Kernel extends ConsoleKernel
                     ));
                     if($response->resultCode == 00){
 
-                        foreach($support->support_option as $option){
+                        foreach($support->support_options as $option){
                             SupportLog::create([
                                 'support_id' => $support->id,
                                 'support_option_id' => $option->id,
@@ -81,7 +81,7 @@ class Kernel extends ConsoleKernel
                         $support->save();
 
                     } else {
-                        foreach($support->support_option as $option){
+                        foreach($support->support_options as $option){
                             SupportLog::create([
                                 'support_id' => $support->id,
                                 'support_option_id' => $option->id,

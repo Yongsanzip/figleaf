@@ -115,17 +115,18 @@
 
         var fn_refund = function(){
             var params = new FormData($('#refundForm')[0]);
-            formAjax('POST',true,'admin_refund',params,fn_reffund_ajax_error,fn_refund_ajax_success)
-            // if(confirm("해당 후원내역을 환불하시겠습니까?")){
-            //     formAjax('POST',true,'admin_refund',params,fn_reffund_ajax_error,fn_refund_ajax_success)
-            // }
+
+             if(confirm("해당 후원내역을 환불하시겠습니까?")){
+                 formAjax('POST',true,'admin_refund',params,fn_refund_ajax_error,fn_refund_ajax_success)
+             }
         }
 
-        var fn_reffund_ajax_error = function(e){
-                alert(e.msg);
-                location.reload();
+        var fn_refund_ajax_error = function(e){
+            console.log(e.msg);
         }
         var fn_refund_ajax_success = function(e){
+            alert(e.msg);
+            location.reload();
             console.log(e);
         }
     </script>

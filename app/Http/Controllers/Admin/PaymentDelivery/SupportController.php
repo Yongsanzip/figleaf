@@ -169,6 +169,7 @@ class SupportController extends Controller {
                     }
                     $response = json_decode($response);
                     if($response->resultCode == 00){
+                        $msg = '환불처리 되었습니다.';
                         $support->condition=12;
                         $support->save();
                         foreach($support->support_options as $option){
@@ -182,6 +183,7 @@ class SupportController extends Controller {
                         }
 
                     } else {
+                        $msg = "환불이 실패되었습니다. 이니시스 관리자에서 직접확인하세요. 사유 : ".$response->resultMsg;
                         foreach($support->support_options as $option){
                             SupportLog::create([
                                 'support_id' => $support->id,
@@ -196,7 +198,8 @@ class SupportController extends Controller {
                     }
 
                 }
-                return response()->json(['msg'=>'환불처리 되었습니다.'],200,[],JSON_PRETTY_PRINT);
+
+                return response()->json(['msg'=>$msg],200,[],JSON_PRETTY_PRINT);
             } else {
 
             }
