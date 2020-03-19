@@ -7,6 +7,7 @@ use App\Support;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Http\Request;
 
 class Kernel extends ConsoleKernel
 {
@@ -46,6 +47,55 @@ class Kernel extends ConsoleKernel
                 }
             }
         })->everyMinute();
+
+        $schedule->call(function(){
+            $util = new \INIStdPayUtil();
+            $inicis = new Inicis();
+            $request = new Request();
+            $projects = Project::whereCondition(4)->get();
+            $timestamp=Carbon::now()->format('YmdHis');
+            foreach($projects as $project){
+                foreach($project->supports as $support){
+                    $response = $inicis->cancel(array(
+                        "type"               =>"Refund",
+                        "paymethod"          =>$support->inicis_payMethod,
+                        "timestamp"          =>$timestamp,
+                        "clientIp"           =>$request->getClientIp(),
+                        "mid"                =>env('INICIS_MARKET_ID'),
+                        "tid"                =>$support->inicis_tid,
+                        "msg"                =>"프로젝트 목표달성 실",
+                        "hashData"           =>$inicis->refundHash($support->inicis_payMethod,$timestamp,$request->getClientIp(),$support->inicis_tid),
+                    ));
+                    if($response->resultCode == 00){
+
+                        foreach($support->support_option as $option){
+                            SupportLog::create([
+                                'support_id' => $support->id,
+                                'support_option_id' => $option->id,
+                                'amount' => $option->amount,
+                                'price'  => $option->option->price,
+                                'condition'=>12
+                            ]);
+                        }
+                        $support->condition=12;
+                        $support->save();
+
+                    } else {
+                        foreach($support->support_option as $option){
+                            SupportLog::create([
+                                'support_id' => $support->id,
+                                'support_option_id' => $option->id,
+                                'amount' => $option->amount,
+                                'price'  => $option->option->price,
+                                'condition'=>13
+                            ]);
+                        }
+                        $support->condition=13;
+                        $support->save();
+                    }
+                }
+            }
+        })->daily();
     }
 
     /**

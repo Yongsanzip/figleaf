@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin\PaymentDelivery;
 
+use Inicis;
 use App\Support;
+use App\SupportLog;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -135,14 +138,73 @@ class SupportController extends Controller {
         }
     }
 
-    public function refund(Request $request){
+    /************************************************************************
+     * Display edit view
+     * @description : 설명1 - 설명2
+     * @url         : /url/{id}/edit
+     * @method      : /GET
+     * @return      : view , data , msg ...
+     ************************************************************************/
+    public function refund(Request $request) {
         try {
-            error_log($request->getContent());
-            return response()->json(['msg'=>'환불완료'],200,[],JSON_PRETTY_PRINT);
+            $util = new \INIStdPayUtil();
+            $inicis = new Inicis();
+            if(count($request->input())>0){
+                foreach($request->input('support') as $data){
+                    $support = null;
+                    $timestamp=Carbon::now()->format('YmdHis');
+                    $support = Support::find($data);
+                    $response = $inicis->cancel(array(
+                        "type"               =>"Refund",
+                        "paymethod"          =>$support->inicis_payMethod,
+                        "timestamp"          =>$timestamp,
+                        "clientIp"           =>$request->getClientIp(),
+                        "mid"                =>env('INICIS_MARKET_ID'),
+                        "tid"                =>$support->inicis_tid,
+                        "msg"                =>"개인결제취소",
+                        "hashData"           =>$inicis->refundHash($support->inicis_payMethod,$timestamp,$request->getClientIp(),$support->inicis_tid),
+                    ));
+                    if(is_array($response)){
+                        $response = json_encode($response);
+                    }
+                    $response = json_decode($response);
+                    if($response->resultCode == 00){
+                        $support->condition=12;
+                        $support->save();
+                        foreach($support->support_options as $option){
+                            SupportLog::create([
+                                'support_id' => $support->id,
+                                'support_option_id' => $option->id,
+                                'amount' => $option->amount,
+                                'price'  => $option->option->price,
+                                'condition'=>12
+                            ]);
+                        }
+
+                    } else {
+                        foreach($support->support_options as $option){
+                            SupportLog::create([
+                                'support_id' => $support->id,
+                                'support_option_id' => $option->id,
+                                'amount' => $option->amount,
+                                'price'  => $option->option->price,
+                                'condition'=>13
+                            ]);
+                        }
+                        $support->condition=13;
+                        $support->save();
+                    }
+
+                }
+                return response()->json(['msg'=>'환불처리 되었습니다.'],200,[],JSON_PRETTY_PRINT);
+            } else {
+
+            }
         } catch (\Exception $e){
-            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
-            $title = '500 ERROR';
-            return view('errors.error',compact('description','title'));
+            $msg = '500 ERROR '.$e->getMessage();;
+            return response()->json(['msg'=>$msg],529,[],JSON_PRETTY_PRINT);
         }
+
+
     }
 }

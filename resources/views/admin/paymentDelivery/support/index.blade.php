@@ -48,7 +48,7 @@
                 </colgroup>
                 <thead>
                 <tr>
-                    <th><input type="checkbox" name="chkAll"></th>
+                    <th><input type="checkbox" id="chkAll"></th>
                     <th>여부</th>
                     <th>프로젝트명</th>
                     <th>후원일</th>
@@ -62,12 +62,14 @@
                 </tr>
                 </thead>
                 <tbody>
-
-
                     @if(count($datas) > 0)
                         @foreach($datas as $key=>$data)
                             <tr>
-                                <td><input type="checkbox" name="support{{$key+1}}" value="{{$data->id}}"></td>
+                                @if($data->condition < 11)
+                                    <td><input type="checkbox" name="support[]" value="{{$data->id}}"></td>
+                                @else
+                                    <td></td>
+                                @endif
                                 <td>{{project_status($data->project->condition)}}</td>
                                 <td class="text-left">{{$data->project->title}}</td>
                                 <td>{{$data->created_at}}</td>
@@ -76,7 +78,6 @@
                                 <td>{{$data->support_options->first()->option->option_name}} {{count($data->support_options) > 1 ? "외 ". count($data->support_options) .' 개' : '' }}</td>
                                 <td>{{support_condition($data->condition)}}</td>
                             </tr>
-                            <input type="hidden" name="data{{$key}}" value="{{$key}}">
                         @endforeach
                     @else
                         <tr>
@@ -87,7 +88,6 @@
             </table>
             </form>
             <!-- //table type1 -->
-
             <!-- paginiation -->
             <nav class="pagination-wrap">
                 {!! $datas->links() !!}
@@ -99,7 +99,7 @@
     </div>
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded",function(){
-            $("input[name=chkAll]").click(function() {
+            $("#chkAll").click(function() {
                 if ($(this).prop('checked')) {
                     $("input[name^=support]").prop('checked', true);
                 } else {
@@ -115,7 +115,6 @@
 
         var fn_refund = function(){
             var params = new FormData($('#refundForm')[0]);
-            console.log(params);
             formAjax('POST',true,'admin_refund',params,fn_reffund_ajax_error,fn_refund_ajax_success)
             // if(confirm("해당 후원내역을 환불하시겠습니까?")){
             //     formAjax('POST',true,'admin_refund',params,fn_reffund_ajax_error,fn_refund_ajax_success)
@@ -123,7 +122,8 @@
         }
 
         var fn_reffund_ajax_error = function(e){
-                console.log(e);
+                alert(e.msg);
+                location.reload();
         }
         var fn_refund_ajax_success = function(e){
             console.log(e);

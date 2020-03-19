@@ -199,7 +199,7 @@
                                 <p class="total-price">{{number_format($support->total_amount)}}</p>
                             </div>
                             <div class="btn-wrap">
-                                <button type="button" onclick="fn_refund(); " class="btn-black">환불하기</button>
+                                <?php /*<button type="button" onclick="fn_refund(); " class="btn-black">환불하기</button>*/?>
                                 <a href="{{route('mypage_information.index')}}" class="btn-white">마이페이지로 이동</a>
                             </div>
                         </div>
@@ -213,11 +213,23 @@
             </div>
         </div>
     </main>
-    <script type="text/javascript">
+    <?php
+    /*
+     <script type="text/javascript">
         var fn_refund = function(){
-            document.getElementById('refund').submit();
+            var params = new FormData($('#refund')[0]);
+            formAjax('POST',true,'{{route('refund')}}',params,fn_refund_ajax_error,fn_refund_ajax_success)
         }
-
+        var fn_refund_ajax_error = function(e){
+            alert(e.msg);
+            location.reload();
+        }
+        var fn_refund_ajax_success = function(){
+            console.log(e);
+        }
     </script>
+     * */
+    ?>
+
 
 @endsection

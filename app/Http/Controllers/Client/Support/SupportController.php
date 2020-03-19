@@ -424,9 +424,9 @@ class SupportController extends Controller
      * @return      : view , data , msg ...
      ************************************************************************/
     public function refund(Request $request) {
-            $util = new \INIStdPayUtil();
-            $timestamp=Carbon::now()->format('YmdHis');
-            $support = Support::whereSupportCode($request->code)->first();
+        $util = new \INIStdPayUtil();
+        $timestamp=Carbon::now()->format('YmdHis');
+        $support = Support::whereSupportCode($request->code)->first();
         if(isset($support)){
 
                 $inicis = new Inicis();
@@ -455,7 +455,7 @@ class SupportController extends Controller
                     }
 
                 }
-                return view('client.mypage.support.refund',compact('response'));
+                return response()->json(['msg'=>'환불처리 되었습니다.'],200,[],JSON_PRETTY_PRINT);
             } else {
                 flash('존재하지 않는 주문번호이거나 이미 환불처리된 주문입니다. 관리자에게 문의하세요');
                 return back();
