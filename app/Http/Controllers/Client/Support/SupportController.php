@@ -36,6 +36,7 @@ class SupportController extends Controller
      ************************************************************************/
     public function index(Request $request){
         try {
+
             $auth_check = Auth::check();
 
             $option_id                  = $request->option_id;
@@ -90,7 +91,7 @@ class SupportController extends Controller
                     'amount'   =>$request->option_amount[$i],
                 ]);
                 $log->support_id = $support->id;
-                $log->$options->id;
+                $log->support_option_id = $options->id;
                 $log->save();
             }
 
@@ -115,8 +116,58 @@ class SupportController extends Controller
                 , 'prevUrl'
                 , 'auth_check'
             ];
+            error_log(1);
+            //return view('client.support.index', compact($returnData));
+            return redirect(route('support_order',['id'=>$support->id]));
+        } catch (\Exception $e){
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
+        }
+    }
 
-            return view('client.support.index', compact($returnData));
+    public function support_order(Request $request,$id){
+        try{
+            $auth_check = Auth::check();
+            $support = Support::find($id);
+            $porject_id = $support->project->id;
+            $option_id                  = $request->option_id;
+            $option_amount              = $request->option_amount;
+            $option_total_cost          = 0;
+
+            $viewData                   = ViewProject::where('id', $porject_id)->first();                               // 뷰프로젝트 데이터
+            $supporter_count            = $viewData ? $viewData->supporter_count : 0;                                   // 후원자 수
+            $total_cost                 = $viewData ? $viewData->total_cost : 0;                                        // 모인금액
+            $data                       = Project::where('id', $porject_id)->first();                                   // 프로젝트 데이터
+            $portfolio                  = Portfolio::where('user_id', $porject_id)->first();                            // 포트폴리오 데이터
+
+            $date_diff                  = ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24));// 남은시간 (남은 일자)
+            $data                       = Project::where('id',$porject_id)->first();                                    // 프로젝트 데이터
+            $banks                      = Bank::whereUseYn(1)->get();
+
+            $option_arr = array();
+            foreach ($support->support_options as $i => $option) {
+                $option_arr['option_id'][$i] = $option->id;                                                             // 옵션 주문 id
+                $option_arr['option_amount'][$i] = $option->amount;                                                     // 옵션 주문 수량
+                $option_arr['option_name'][$i] = $option->option->option_name;                                          // 옵션명
+                $option_arr['option_price'][$i] = $option->option->price;                                               // 옵션 가격
+                $option_total_cost += $option_arr['option_amount'][$i] * $option_arr['option_price'][$i];
+            }
+
+            $prevUrl                    = route('project.show',['id'=>$porject_id]);                              // 이전 페이지
+
+            return view('client.support.index', compact('data'
+                                                                , 'support'
+                                                                , 'supporter_count'
+                                                                , 'total_cost'
+                                                                , 'date_diff'
+                                                                , 'portfolio'
+                                                                , 'option_id'
+                                                                , 'option_arr'
+                                                                , 'option_total_cost'
+                                                                , 'banks'
+                                                                , 'prevUrl'
+                                                                , 'auth_check'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
@@ -393,7 +444,7 @@ class SupportController extends Controller
                     $response = json_encode($response);
                 }
                 if($response->resultCode == 00){
-                    foreach($support->option as $option){
+                    foreach($support->support_option as $option){
                         SupportLog::create([
                             'support_id' => $support->id,
                             'support_option_id' => $option->id,

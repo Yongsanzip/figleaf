@@ -8,7 +8,7 @@
     <main class="container">
         <div class="inner">
             <div class="con-project-view">
-                @include('client.project.partial.layouts.header')
+                @include('client.support.partial.layout.header')
                 <!-- sponsor form -->
                 <div class="sponsor-form">
 
