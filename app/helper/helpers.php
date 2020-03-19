@@ -443,8 +443,8 @@ if (!class_exists('Inicis')) {
             public function refundHash($method = null, $timestamp = null , $ip =null, $tid =null){
                 $key = env('INICIS_API_KEY');
                 $mid = env('INICIS_MARKET_ID');
-                $hash ="KEY=".$key."&type=Refund&paymethod=".$method ."&timestamp=".$timestamp."&clientIp=".$ip."&mid=".$mid."&tid=".$tid;
-                return hash('sha256',$hash);
+                $hash =$key.'Refund'.$method.$timestamp.$ip.$mid.$tid;
+                return hash('sha512',$hash);
             }
 
             public function cancel ($data) {
@@ -622,7 +622,7 @@ if (! function_exists('support_condition')) {
                 break;
             case 98: return "결제실패";
                 break;
-            case 99: return "결제취";
+            case 99: return "결제취소";
                 break;
         }
 

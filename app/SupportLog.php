@@ -11,7 +11,13 @@ class SupportLog extends Model {
     /*******************************************************************
      * @return BelongsTo
      *******************************************************************/
+    public function support(){
+        return $this->belongsTo('App\Support','support_id','id');
+    }
 
+    public function option(){
+        return $this->belongsTo('App\Option','support_option_id','id');
+    }
     /*******************************************************************
      * @return HasMany
      *******************************************************************/

@@ -63,7 +63,7 @@ class SupportController extends Controller
                 $option_arr['option_price'][$i] = $option->price;                                                       // 옵션 가격
                 $option_total_cost += $option_arr['option_amount'][$i] * $option_arr['option_price'][$i];
                 if(!session()->get('chk')){
-                    $log = SupportLog::firstOrCreate([
+                    $log = SupportLog::create([
                         'support_option_id'   =>$option_arr['option_id'][$i],
                         'amount'              =>$request->option_amount[$i],
                         'price'               =>$option->price,
@@ -84,14 +84,16 @@ class SupportController extends Controller
 
             for ($i = 0; $i < count($option_id); $i++) {
                 $option = Option::find($option_id[$i]);
-                $options = SupportOption::firstOrCreate([
+                $options = SupportOption::create([
                     'support_id'=>$support->id,
                     'option_id'=>$option_id[$i],
                     'amount'   =>$request->option_amount[$i],
                 ]);
+                $log->support_id = $support->id;
+                $log->$options->id;
+                $log->save();
             }
-            $log->support_id = $support->id;
-            $log->save();
+
             if(!isset($support->support_code)){
                 $support->support_code ='SP_'.$last_support_id.'_PJ_'.$request->project_id.'_'.date('YmdHis');
                 $support->save();                                                                                           // 은행정보
@@ -308,14 +310,13 @@ class SupportController extends Controller
                     SupportLog::firstOrCreate([
                         'support_id'          => $support->id,
                         'support_option_id'   =>$log->support_option_id,
-                        'amount'              =>$log->ammount,
+                        'amount'              =>$log->amount,
                         'price'               =>$log->price,
                         'condition'           =>$condition,
                         'description'         =>$msg,
                     ]);
                 }
             }
-            //return view('client.support.partial.complete.returnSample');
             return redirect(route('complete.get',['orderNumber'=>$request->orderNumber]));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
@@ -386,10 +387,22 @@ class SupportController extends Controller
                     "mid"                =>env('INICIS_MARKET_ID'),
                     "tid"                =>$support->inicis_tid,
                     "msg"                =>"개인결제취소",
-                    "hashData"           =>$inicis->refundHash($support->inicis_patMethod,$timestamp,$request->getClientIp(),$support->inicis_tid),
+                    "hashData"           =>$inicis->refundHash($support->inicis_payMethod,$timestamp,$request->getClientIp(),$support->inicis_tid),
                 ));
                 if(is_array($response)){
                     $response = json_encode($response);
+                }
+                if($response->resultCode == 00){
+                    foreach($support->option as $option){
+                        SupportLog::create([
+                            'support_id' => $support->id,
+                            'support_option_id' => $option->id,
+                            'amount' => $option->amount,
+                            'price'  => $option->option->price,
+                            'condition'=>12
+                        ]);
+                    }
+
                 }
                 return view('client.mypage.support.refund',compact('response'));
             } else {
