@@ -25,24 +25,8 @@ Route::group(['middleware'=>'locale'],function(){
     Route::get('/', 'Client\HomeController@index');
     // 메인 메뉴 - 디자이너 페이지
     Route::resource('designer', 'Client\MainMenu\DesignerController')->only('index','show');
-    // 메인 메뉴 - 브랜드 페이지
-    Route::resource('brand', 'Client\MainMenu\BrandController');
-    // 메인 메뉴 - 뉴스 페이지
-    Route::resource('news', 'Client\MainMenu\NewsController');
     //test
     Route::resource('menu', 'Client\MainMenu\MenuController');
-    // 메인 메뉴 - Women's apparel
-    Route::resource('women', 'Client\MainMenu\WomenController');
-    // 메인 메뉴 - Men's apparel
-    Route::resource('men', 'Client\MainMenu\MenController');
-    // 메인 메뉴 - New
-    Route::resource('new', 'Client\MainMenu\NewController');
-    // 메인 메뉴 - Special
-    Route::resource('special', 'Client\MainMenu\SpecialController');
-    // 메인 메뉴 - Collection
-    Route::resource('collection', 'Client\MainMenu\CollectionController');
-    // 메인 메뉴 - Event
-    Route::resource('event', 'Client\MainMenu\EventController');
     // 검색
     Route::resource('search', 'Client\Search\SearchController');
     // 회원가입 - 약관동의
@@ -109,7 +93,7 @@ Route::group(['middleware'=>'locale'],function(){
     // 마이페이지 - 포트폴리오
     Route::resource('mypage_portfolio', 'Client\MyPage\PortfolioController');
     // 마이페이지 - 적립금
-    Route::resource('mypage_point', 'Client\MyPage\PointController');
+    //Route::resource('mypage_point', 'Client\MyPage\PointController');
     /************************** 권한 필요 **************************/
     Route::group(['middleware' => 'auth'],function() {
 

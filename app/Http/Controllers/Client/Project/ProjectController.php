@@ -28,8 +28,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class ProjectController extends Controller
-{
+class ProjectController extends Controller {
+    /************************************************************************
+     * Construct
+     * @description :
+     ************************************************************************/
+    public function __construct() {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      * @description 프로젝트 만들기/수정하기 - 카테고리 ajax
@@ -39,20 +45,6 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         try {
-            if ($request->material_id > 0){                                                                             // 1차 -> 2차 카테고리
-                $datas = Material::where('group_id', $request->material_id)->get();
-                $name = 'material';
-            }
-
-            if ($request->ajax()){                                                                                      // 원단/재질 카테고리
-                $view = view('client.project.partial.render.material', compact('datas','name'))->render();
-
-                return response()->json(['html'=>$view],200, [],JSON_PRETTY_PRINT);
-            } else {
-                // 브랜드 소개 default 값
-                // $introduction = Portfolio::where('user_id', auth()->user()->id);
-                return view('client.project.index');
-            }
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
