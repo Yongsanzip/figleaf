@@ -3,7 +3,7 @@
     <div class="user-info-wrap">
         <div class="user-info">
             <p class="user-id">{{auth()->user()->name}}({{auth()->user()->email}})<span>님</span></p>
-            <div class="badge badge-skyblue">new</div>
+            <div class="badge badge-skyblue">{{auth()->user()->role->role_name}}</div>
         </div>
         <div class="user-point" style="display: none">
             <p class="caption">point</p>

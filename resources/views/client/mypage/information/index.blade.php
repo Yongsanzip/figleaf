@@ -29,7 +29,6 @@ $tab='info';
                                 <th>이름</th>
                                 <td>
                                     <input type="text" class="input-field" placeholder="이름" value="{{$datas->name}}">
-                                    <div class="badge badge-skyblue">new</div>
                                 </td>
                             </tr>
                             <tr>
