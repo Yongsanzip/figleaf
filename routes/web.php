@@ -25,6 +25,10 @@ Route::group(['middleware'=>'locale'],function(){
     Route::get('/', 'Client\HomeController@index');
     // 메인 메뉴 - 디자이너 페이지
     Route::resource('designer', 'Client\MainMenu\DesignerController')->only('index','show');
+    // 메인 메뉴 - 브랜드 페이지
+    Route::resource('brand', 'Client\MainMenu\BrandController');
+    // 메인 메뉴 - 뉴스 페이지
+    Route::resource('news', 'Client\MainMenu\NewsController');
     //test
     Route::resource('menu', 'Client\MainMenu\MenuController');
     // 검색
