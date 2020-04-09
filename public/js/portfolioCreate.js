@@ -629,6 +629,6 @@ var fn_portfolio_submit = function(f){
     // 시즌 카운트
     document.getElementById('season_count').value =  document.getElementsByClassName('lookbook-season').length;
 
-    gn_validation(f);
+    return gn_validation(f);
 
 };
