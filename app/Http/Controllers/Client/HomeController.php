@@ -16,12 +16,12 @@ class HomeController extends Controller
      * @return view
      */
     public function index() {
-        $designer = Portfolio::where('hidden_yn', 0)->whereHas('contentDetails', function ($q) {                        // 디자이너 - 포트폴리오
+        $designer = Portfolio::where('hidden_yn', 0)->where('open_yn', 1)->whereHas('contentDetails', function ($q) {   // 디자이너 - 포트폴리오
             $q->where('status', 0);
             $q->where('content_id', 1);
         })->orderBy('created_at', 'desc')->limit(8)->get();
 
-        $brand = Portfolio::where('hidden_yn', 0)->whereHas('contentDetails', function ($q) {                           // 브랜드 - 포트폴리오
+        $brand = Portfolio::where('hidden_yn', 0)->where('open_yn', 1)->whereHas('contentDetails', function ($q) {      // 브랜드 - 포트폴리오
             $q->where('status', 0);
             $q->where('content_id', 2);
             $q->where('hidden_yn', 0);

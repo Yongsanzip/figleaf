@@ -26,7 +26,9 @@ class DesignerController extends Controller {
      ************************************************************************/
     public function index(){
         try {
-            $datas = User::whereRoleId(2)->limit(8)->with('portfolio')->has('portfolio')->paginate(20);
+            $datas = User::whereRoleId(2)->whereHas('portfolio', function ($q) {
+                $q->where('open_yn', 1);
+            })->limit(8)->with('portfolio')->has('portfolio')->paginate(20);
             return view('client.mainMenu.designer.index',compact('datas'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
