@@ -33,8 +33,6 @@ $tab = 'portfolio';
                     <li class="tab-on fill"><span>디자이너 프로필</span></li>
                     <li><span>브랜드</span></li>
                     <li><span>룩북</span></li>
-                    <li><span>프로젝트</span></li>
-                    <li><span>뉴스&블로그</span></li>
                     <li><span>연락처</span></li>
                 </ul>
 
@@ -45,6 +43,7 @@ $tab = 'portfolio';
                         @csrf
                         <!-- 01 프로필 -->
                         <div class="tab-contents-box edit-on">
+                            <img src="{{ asset('storage/'.(count($datas->portfolio_images) > 0 ? $datas->portfolio_images->first()->image_path : '#'))}}" alt="">
                             <!-- 01-A 대표이미지 -->
                             <div class="input-item">
                                 <h3 class="title">대표이미지(썸네일)</h3>
@@ -74,9 +73,9 @@ $tab = 'portfolio';
                                     </label>
                                 </div>
                                 <div class="textarea-list profile-text-list">
-                                    <textarea class="textarea" id="context_kor" lang="ko" placeholder="한국어">{{$datas->content_en ? $datas->content_ko}}</textarea>
+                                    <textarea class="textarea" id="context_kor" lang="ko" placeholder="한국어">{{$datas->content_en ? $datas->content_ko : ''}}</textarea>
                                     <textarea class="textarea hide" id="context_eng" lang="en" placeholder="English">{{$datas->content_en ? $datas->content_en : ''}}</textarea>
-                                    <textarea class="textarea hide" id="context_chn" lang="ch" placeholder="汉语">{{$datas->content_en ? $datas->content_cn}}</textarea>
+                                    <textarea class="textarea hide" id="context_chn" lang="ch" placeholder="汉语">{{$datas->content_en ? $datas->content_cn : ''}}</textarea>
                                 </div>
                             </div>
                             <!-- 01-C 히스토리 -->
@@ -295,144 +294,6 @@ $tab = 'portfolio';
                                     <!-- script add item -->
                                 </div>
                                 <button class="btn-black" type="button" onclick="fnAddLookbook()">시즌추가</button>
-                            </div>
-                        </div>
-                        <!-- 04 프로젝트 -->
-                        <div class="tab-contents-box">
-                            <!-- result none -->
-                            <!-- <div class="result-none">생성된 프로젝트가 자동으로 등록됩니다. </div> -->
-
-                            <!-- result something-->
-                            <div class="card-list">
-                                <!-- card * 20 -->
-                                <div class="card">
-                                    <div class="card-image">
-                                        <img src="../images/dummy/img-dummy-01.png" alt="">
-                                    </div>
-                                    <div class="card-contents">
-                                        <div class="text-box">
-                                            <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                            <p class="card-text"> 강주원 </p>
-                                        </div>
-
-                                        <div class="card-info">
-                                            <div class="rating">
-                                                <div class="rating-bar" style="width: 80%">80</div>
-                                            </div>
-                                            <div class="info-box-list">
-                                                <div class="info-box amount">
-                                                    180개 남음
-                                                </div>
-                                                <div class="info-box date">
-                                                    6일 남음
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 성공할경우 뱃지 출력 -->
-                                    <div class="badge badge-orange">성공</div>
-                                    <!-- 진행중인 경우 뱃지 출력 -->
-                                    <!-- <div class="badge badge-green">진행중</div> -->
-                                    <!-- 실패한 경우 뱃지 출력 -->
-                                    <!-- <div class="badge badge-grey">실패</div> -->
-
-                                    <a href="" class="link"></a>
-                                </div>
-                                <!-- //card -->
-                                <div class="card">
-                                    <div class="card-image">
-                                        <img src="../images/dummy/img-dummy-01.png" alt="">
-                                    </div>
-                                    <div class="card-contents">
-                                        <div class="text-box">
-                                            <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                            <p class="card-text"> 강주원 </p>
-                                        </div>
-
-                                        <div class="card-info">
-                                            <div class="rating">
-                                                <div class="rating-bar" style="width: 80%">80</div>
-                                            </div>
-                                            <div class="info-box-list">
-                                                <div class="info-box amount">
-                                                    180개 남음
-                                                </div>
-                                                <div class="info-box date">
-                                                    6일 남음
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 성공할경우 뱃지 출력 -->
-                                    <div class="badge badge-orange">성공</div>
-                                    <!-- 진행중인 경우 뱃지 출력 -->
-                                    <!-- <div class="badge badge-green">진행중</div> -->
-                                    <!-- 실패한 경우 뱃지 출력 -->
-                                    <!-- <div class="badge badge-grey">실패</div> -->
-
-                                    <a href="" class="link"></a>
-                                </div>
-                                <div class="card">
-                                    <div class="card-image">
-                                        <img src="../images/dummy/img-dummy-01.png" alt="">
-                                    </div>
-                                    <div class="card-contents">
-                                        <div class="text-box">
-                                            <p class="card-title">서울패션위크 참가 패션브랜드에서 선보이는 럭셔리하고 심플한 주얼리 악세사리 모음</p>
-                                            <p class="card-text"> 강주원 </p>
-                                        </div>
-
-                                        <div class="card-info">
-                                            <div class="rating">
-                                                <div class="rating-bar" style="width: 80%">80</div>
-                                            </div>
-                                            <div class="info-box-list">
-                                                <div class="info-box amount">
-                                                    180개 남음
-                                                </div>
-                                                <div class="info-box date">
-                                                    6일 남음
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 성공할경우 뱃지 출력 -->
-                                    <div class="badge badge-orange">성공</div>
-                                    <!-- 진행중인 경우 뱃지 출력 -->
-                                    <!-- <div class="badge badge-green">진행중</div> -->
-                                    <!-- 실패한 경우 뱃지 출력 -->
-                                    <!-- <div class="badge badge-grey">실패</div> -->
-
-                                    <a href="" class="link"></a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- 05 뉴스블로그 -->
-                        <div class="tab-contents-box">
-                            <div class="news-wrap">
-                                <div class="news-list">
-                                    <!-- card -->
-                                    <div class="card">
-                                        <div class="card-image">
-                                            <img src="../images/dummy/img-dummy-01.png" alt="">
-                                        </div>
-                                        <div class="card-contents">
-                                            <p class="card-title">
-                                                천고에 이상의 듣기만 이성은 밝은 그들의 따뜻한 피다. 주며, 살았으며, 얼마나 얼마나 얼마나 거선의 위하여서 이성은 밝은 그들의 따뜻한.
-                                            </p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <p class="card-name">프레시안</p>
-                                            <p class="card-date">2019.08.22</p>
-                                        </div>
-                                        <button class="btn-remove" type="button" onclick="fnRemoveNews(this)"></button>
-                                    </div>
-                                    <!-- //card -->
-                                </div>
-                                <div class="btn-wrap">
-                                    <button class="btn-black" type="button">뉴스&블로그 추가</button>
-                                </div>
                             </div>
                         </div>
                         <!-- 06 연락처 -->
