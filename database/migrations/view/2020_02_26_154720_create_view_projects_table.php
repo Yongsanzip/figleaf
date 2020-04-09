@@ -35,7 +35,7 @@ class CreateViewProjectsTable extends Migration
                             LEFT JOIN category_details       AS cd ON pr.category2_id = cd.id
                             LEFT JOIN supports               AS sp ON sp.project_id   = pr.id
                             LEFT JOIN introductions          AS it ON it.project_id   = pr.id
-                        WHERE sp.condition = 2
+                        WHERE sp.condition in (0 , 2)
                         AND pr.deleted_at IS NULL
                         GROUP BY pr.id
                         ORDER BY created_at DESC;
