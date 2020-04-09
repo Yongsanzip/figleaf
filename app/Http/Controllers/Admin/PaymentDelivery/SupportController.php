@@ -25,9 +25,16 @@ class SupportController extends Controller {
      * @method      : GET
      * @return      : view , data , msg ...
      ************************************************************************/
-    public function index(){
+    public function index(Request $request){
         try {
-            $datas = Support::orderBy('created_at','DESC')->paginate(15);
+            if($request->input('searchKeyword')){
+                $keyword =$request->searchKeyword;
+                $datas =  Support::whereHas('project', function($q) use($keyword){
+                    $q->where('title', 'like', '%'.$keyword.'%');
+                })->paginate(15);
+            } else {
+                $datas = Support::orderBy('created_at','DESC')->paginate(15);
+            }
             return view('admin.paymentDelivery.support.index',compact('datas'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();

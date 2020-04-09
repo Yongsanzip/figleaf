@@ -17,14 +17,13 @@
             <div class="search">
                 <form action="{{route('admin_support.index')}}">
                     <div class="search-select">
-                        <select>
-                            <option>- 검색기준 -</option>
-                            <option>검색기준</option>
-                            <option>검색기준</option>
+                        <select name="searchCondition">
+                            <option disabled selected>- 검색기준 -</option>
+                            <option value="title" {{isset($_GET['searchCondition']) ? ($_GET['searchCondition'] == 'title' ? 'selected' :'') : ''}} >프로젝트명</option>
                         </select>
                     </div>
                     <div class="search-keyword">
-                        <input type="text" placeholder="검색어를 입력하세요" spellcheck="false">
+                        <input type="text" name="searchKeyword" value="{{(isset($_GET['searchKeyword'])) ? $_GET['searchKeyword'] : ''}}" class="required" data-title="검색어" placeholder="검색어를 입력하세요" spellcheck="false">
                         <button>검색</button>
                     </div>
                 </form>
@@ -57,7 +56,7 @@
                     <th>옵션</th>
                     <th>
                         결제상태
-                        <button class="sort-column">정렬</button>
+                        <?php /*<button class="sort-column">정렬</button>*/?>
                     </th>
                 </tr>
                 </thead>
