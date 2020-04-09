@@ -49,7 +49,7 @@
                     @endif
                 </p>
                 <p class="status-date">
-                    {{ date_format($data->deadline, 'Y년 m월 d일') }} 마감
+                    {{ $data->deadline ? date_format($data->deadline, 'Y년 m월 d일') : '-'}} 마감
                 </p>
             </div>
             <div class="status-item">
@@ -66,7 +66,7 @@
         <div class="project-owner">
             <p class="owner-caption">디자이너</p>
             <p class="owner-name ko">
-                {{ $data->introduction->designer_name }}
+                {{ $data->introduction ? $data->introduction->designer_name : '-'}}
             </p>
             @if(isset($portfolio))
             <p class="owner-text">

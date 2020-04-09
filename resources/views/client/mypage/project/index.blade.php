@@ -55,7 +55,7 @@ $tab = 'project';
                                         <p class="project-title">{{ $data->title }}</p>
                                     </div>
                                     <div class="project-date">
-                                        {{ $data->start_date ? $data->start_date->format('Y-m-d') : '' }} ~ {{ $data->deadline->format('Y-m-d') }}
+                                        {{ $data->start_date ? $data->start_date->format('Y-m-d') : '' }} ~ {{ $data->deadline ? $data->deadline->format('Y-m-d') : ''}}
                                     </div>
                                 </div>
                                 <!-- 프로젝트 상태에 따른 뱃지 -->

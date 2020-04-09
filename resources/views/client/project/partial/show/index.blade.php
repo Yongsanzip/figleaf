@@ -23,7 +23,7 @@
                         <!-- designer profile -->
                         <div class="designer-headline">
                             <div class="designer-name">
-                                {{ $data->introduction->designer_name }}
+                                {{ $data->introduction ? $data->introduction->designer_name : '-'}}
                             </div>
                             <div class="designer-type">
                                 standard
@@ -310,7 +310,7 @@
                                                     <img src="../images/common/img-project-end.png" alt="">
                                                 </div>
                                                 <div class="delivery-info">
-                                                    <p class="date">{{ $data->deadline->format('Y.m.d') }}</p>
+                                                    <p class="date">{{ $data->deadline? $data->deadline->format('Y.m.d') : ''}}</p>
                                                     <p class="text">프로젝트 종료</p>
                                                 </div>
                                             </li>
@@ -319,7 +319,7 @@
                                                     <img src="../images/common/img-project-make.png" alt="">
                                                 </div>
                                                 <div class="delivery-info">
-                                                    <p class="date">{{ $data->account_date->format('Y.m.d') }}</p>
+                                                    <p class="date">{{ $data->account_date ? $data->account_date->format('Y.m.d') :'' }}</p>
                                                     <p class="text">제작 시작(예상)</p>
                                                 </div>
                                             </li>
@@ -328,7 +328,7 @@
                                                     <img src="../images/common/img-project-delivery.png" alt="">
                                                 </div>
                                                 <div class="delivery-info">
-                                                    <p class="date">{{ $data->delivery_date->format('Y.m.d') }}</p>
+                                                    <p class="date">{{ $data->delivery_date ? $data->delivery_date->format('Y.m.d') : ''}}</p>
                                                     <p class="text">상품 배송(예상)</p>
                                                 </div>
                                             </li>
@@ -340,6 +340,7 @@
                                     </div>
                                 </div>
                                 <!-- contact -->
+                                @if($data->introduction)
                                 <div class="product-info-item">
                                     <h4 class="item-name">contact point</h4>
                                     <div class="contact-wrap">
@@ -395,6 +396,7 @@
                                     </div>
 
                                 </div>
+                                @endif
                             </div>
 
                         </div>

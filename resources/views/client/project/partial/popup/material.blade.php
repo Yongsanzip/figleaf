@@ -1,7 +1,7 @@
 <?php
 ?>
 <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-<script src="../js/projectAction.js"></script>
+<script src="{{asset('/js/projectAction.js')}}"></script>
 <script src="{{ asset('/js/common.js') }}"></script>
 <div class="drop-box">
     <div class="drop-header">재질</div>
