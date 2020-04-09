@@ -115,7 +115,7 @@ class ProjectController extends Controller
     {
         try {
             $data = Project::where('id', $id)->first();
-            $supporter_count = ViewProject::find($id)->supporter_count;                                                 // 후원자수 (후원취소자는 제외)
+            $supporter_count = ViewAdminProject::find($id)->supporter_count;                                                 // 후원자수 (후원취소자는 제외)
 
             return view('admin.project.partial.show.index', compact('data', 'supporter_count'));
         } catch (\Exception $e){
