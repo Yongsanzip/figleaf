@@ -111,7 +111,8 @@
 
 
             <!-- news -->
-            <section class="con-news">
+            <?php /*
+ <section class="con-news">
                 <div class="section-title-wrap">
                     <h2 class="section-title">news</h2>
                     <span class="caption">뉴스</span>
@@ -183,6 +184,7 @@
                     </div>
                 </div>
             </section>
+ */?>
             <!-- //news -->
         </div>
 
