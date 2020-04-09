@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="complate-box">
-                    <img src="{{asset('../images/common/logo.png')}}" alt="logo">
+                    <img src="{{asset('../images/common/logo-horizontal-black.png')}}" alt="logo">
                     <p class="text">
                         비밀번호를 재설정하기위에 메일을 보냈습니다.<br>
                         메일함을 확인하시고 비밀번호를 재설정해주세요!

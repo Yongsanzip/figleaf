@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="complate-box">
-                    <img src="../images/common/logo.png" alt="logo">
+                    <img src="{{asset('../images/common/logo-horizontal-black.png')}}" alt="logo">
                     <p class="text">
                         회원가입이 완료되었습니다.<br>
                         입력하신 이메일로 본인확인 메일을 보냈습니다.<br>
