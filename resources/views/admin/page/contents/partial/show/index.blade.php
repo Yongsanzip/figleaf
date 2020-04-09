@@ -67,21 +67,26 @@
                             <tr>
                                 <th><input type="checkbox" id="all_check" onclick="allCheck(this, 'contentsId')"></th>
                                 <th>디자이너명</th>
+                                @if(count($datas) > 0)
                                 <th>{{ $datas->first()->brand ? "브랜드명" : "프로젝트명" }}</th>
+                                @endif
                                 <th>바로가기</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($datas as $data)
+                            @forelse($datas as $data)
                             <tr>
-                                <td><input type="checkbox" name="contents_id[]" class="contentsId" value="{{ $data->p_id }}" {{ $data->contentsRelation($data->p_id, $menu->id) == true ?  'checked' : '' }}></td>
+                                <td><input type="checkbox" name="contents_id[]" class="contentsId" value="{{ $data->id }}" {{ $data->contentsRelation($data->id, $menu->id) == true ?  'checked' : '' }}></td>
                                 <td>{{ $data->user->name }}</td>
                                 <td>{{ $data->brand ? $data->brand->name_ko : $data->title }}</td>
                                 <td>
-                                    <button type="button" class="btn-s btn-white" onclick="window.open('{{ $data->brand ? '/admin_portfolio/'.$data->p_id : '/admin_project/'.$data->p_id }}')">바로가기</button>
+                                    <button type="button" class="btn-s btn-white" onclick="window.open('{{ $data->brand ? '/admin_portfolio/'.$data->id : '/admin_project/'.$data->id }}')">바로가기</button>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+
+
+                            @endforelse
                             </tbody>
                         </table>
 

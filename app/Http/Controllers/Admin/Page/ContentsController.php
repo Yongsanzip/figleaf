@@ -8,6 +8,7 @@ use App\Portfolio;
 use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ContentsController extends Controller
 {
@@ -81,12 +82,12 @@ class ContentsController extends Controller
     public function show($id)
     {
         if ($id == 1 || $id == 2) {                                                                                     // 포트폴리오
-            $datas = Portfolio::Leftjoin('content_details', function ($join) use ($id) {
+            $datas = Portfolio::where('open_yn',1)->Leftjoin('content_details', function ($join) use ($id) {
                     $join->on('portfolios.id', '=', 'content_details.model_id')
                         ->where('content_details.content_id', '=', $id)
                         ->where('content_details.status', '=', 0);
                 })
-                ->select('portfolios.*', 'portfolios.id as p_id', 'content_details.*')
+                ->select(DB::raw('portfolios.*', 'portfolios.id as id', 'content_details.*'))
                 ->orderBy('status', 'desc')
                 ->get();
             $menu = Content::find($id);
@@ -99,7 +100,7 @@ class ContentsController extends Controller
                         ->where('content_details.content_id', '=', $id)
                         ->where('content_details.status', '=', 1);
                 })
-                ->select('projects.*', 'projects.id as p_id', 'content_details.*')
+                ->select(DB::raw('projects.*', 'projects.id as p_id', 'content_details.*'))
                 ->orderBy('content_details.status', 'desc')
                 ->get();
             $menu = Content::find($id);
