@@ -51,9 +51,9 @@ $tab = 'portfolio';
                                 <h4 class="year">{{ $history->year }}</h4>
                                 <ul class="history">
                                     @if( app()->getLocale() =='ko')
-                                        <li>{{ $history->history_cn }}</li>
+                                        <li>{{ $history->history_ko }}</li>
                                     @elseif(app()->getLocale() =='en')
-                                        <li>{{ $history->history_cn }}</li>
+                                        <li>{{ $history->history_en }}</li>
                                     @elseif(app()->getLocale() =='cn')
                                         <li>{{ $history->history_cn }}</li>
                                     @else
@@ -191,7 +191,7 @@ $tab = 'portfolio';
                                 <li class="contact-item">
                                         <p class="contact-name">전화번호</p>
                                         <p class="contact-value">
-                                            {{$datas->phone}}
+                                            {{$datas->home_phone}}
                                         </p>
                                     </li>
                             @endif
@@ -218,7 +218,7 @@ $tab = 'portfolio';
                             @endif
                             @if($datas->instagram_hidden == 0)
                                 <li class="sns-item">
-                                    <a href="{{$datas->instgram}}" target="_blank">인스타그램</a>
+                                    <a href="{{$datas->instagram}}" target="_blank">인스타그램</a>
                                 </li>
                             @endif
                         </ul>
