@@ -632,3 +632,12 @@ var fn_portfolio_submit = function(f){
     return gn_validation(f);
 
 };
+
+var fn_look_book_delete = function(e){
+    var data ={'id':e};
+    callAjax('POST',true,'/delete_lookbook',"JSON",'JSON',data,gn_ajax_error,fn_del_lookbook_ajax_success);
+}
+var fn_del_lookbook_ajax_success = function(e){
+        alert("삭제되었습니다.");
+        document.getElementById("look_"+e.val).remove();
+}

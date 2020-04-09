@@ -9,6 +9,7 @@ $tab = 'portfolio';
         <div class="inner">
             <div class="con-portfolio-create">
                 <form action="{{route('mypage_portfolio.update',['id'=>$datas->id])}}" method="POST" enctype="multipart/form-data" onsubmit="return fn_portfolio_submit(this);">
+                    {!! method_field('PUT') !!}
                     <h2 class="portfolio-headline">portfolio</h2>
                     <!-- headline -->
                     <div class="headline-wrap">
@@ -91,7 +92,7 @@ $tab = 'portfolio';
                                         <div class="shape">汉语</div>
                                     </label>
                                 </div>
-                                <div class="history-list">
+                                <div class="history-list" id="history_list" data-key="history">
                                 @if($datas->histories())
                                     @foreach( $datas->histories() as $history)
                                         <!-- history item -->
@@ -115,43 +116,21 @@ $tab = 'portfolio';
                                             <!-- //history item -->
                                         @endforeach
                                     @else
-                                        <div class="input-item">
-                                            <h3 class="title">히스토리</h3>
-                                            <div class="lang-list history-lang">
-                                                <label class="lang-check">
-                                                    <input type="checkbox" lang="ko" checked disabled>
-                                                    <div class="shape">한국어</div>
-                                                </label>
-                                                <label class="lang-check">
-                                                    <input type="checkbox" lang="en" onchange="fnHistoryLang(this)">
-                                                    <div class="shape">ENG</div>
-                                                </label>
-                                                <label class="lang-check">
-                                                    <input type="checkbox" lang="ch" onchange="fnHistoryLang(this)">
-                                                    <div class="shape">汉语</div>
-                                                </label>
+                                        <div class="year-item">
+                                            <div class="year-row">
+                                                <input type="text" class="input-field required" data-title="히스토리 연도" data-key="year" placeholder="ex)2019/연도를 입력하세요.">
                                             </div>
-                                            <div class="history-list" id="history_list" data-key="history">
-                                                <div class="year-item">
-                                                    <div class="year-row">
-                                                        <input type="text" class="input-field required" data-title="히스토리 연도" data-key="year" placeholder="ex)2019/연도를 입력하세요.">
-                                                    </div>
-                                                    <div class="history-active-list">
-                                                        <div class="active-item">
-                                                            <ul class="active-list">
-                                                                <li><input type="text" lang="ko" data-key="history_ko" class="input-field history-active-item required " data-title="히스토리(한국어)" placeholder="활동(한국어)"></li>
-                                                                <li><input type="text" lang="en" data-key="history_en" class="input-field history-active-item hide" placeholder="Activities(English)"></li>
-                                                                <li><input type="text" lang="ch" data-key="history_cn" class="input-field history-active-item hide" placeholder="活动(汉语)"></li>
-                                                            </ul>
-                                                            <div class="btn-box">
-                                                                <button class="btn-black" type="button" onclick="fnAddHistoryActive(this)">추가</button>
-                                                            </div>
-                                                        </div>
+                                            <div class="history-active-list">
+                                                <div class="active-item">
+                                                    <ul class="active-list">
+                                                        <li><input type="text" lang="ko" data-key="history_ko" class="input-field history-active-item required " data-title="히스토리(한국어)" placeholder="활동(한국어)"></li>
+                                                        <li><input type="text" lang="en" data-key="history_en" class="input-field history-active-item hide" placeholder="Activities(English)"></li>
+                                                        <li><input type="text" lang="ch" data-key="history_cn" class="input-field history-active-item hide" placeholder="活动(汉语)"></li>
+                                                    </ul>
+                                                    <div class="btn-box">
+                                                        <button class="btn-black" type="button" onclick="fnAddHistoryActive(this)">추가</button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="control-wrap">
-                                                <button class="btn-black" type="button" onclick="fnAddHistoryYear()">연도추가</button>
                                             </div>
                                         </div>
                                     @endif
@@ -177,7 +156,7 @@ $tab = 'portfolio';
                                         <div class="shape">汉语</div>
                                     </label>
                                 </div>
-                                <div class="history-list award-list">
+                                <div class="history-list award-list" id="award_list" data-key="awards">
                                     @if($datas->awards())
                                         @foreach($datas->awards() as $awards)
                                             <div class="year-item">
@@ -239,7 +218,7 @@ $tab = 'portfolio';
                                         <div class="shape">汉语</div>
                                     </label>
                                 </div>
-                                <div class="society-list">
+                                <div class="society-list" id="society_list" data-key="society">
                                     @if($datas->association_activties())
                                         @foreach($datas->association_activties() as $association)
                                             <div class="year-item">
@@ -250,10 +229,6 @@ $tab = 'portfolio';
                                                 </div>
                                                 <div class="active-item">
                                                     <ul class="active-list">
-                                                        <li><input type="text" lang="ko" class="input-field society-active-item" placeholder="협회명(한국어)" value="{{ $association->association_ko }}"></li>
-                                                        <li><input type="text" lang="en" class="input-field society-active-item hide" placeholder="Name of Association(English)" value="{{ $association->association_en }}"></li>
-                                                        <li><input type="text" lang="ch" class="input-field society-active-item hide" placeholder="请输入协会(汉语)" value="{{ $association->association_cn }}"></li>
-
                                                         <li><input type="text" lang="ko" data-key="association_ko" class="input-field society-active-item required" data-title="협회(한국어)" placeholder="협회명(한국어)" value="{{ $association->association_ko }}"></li>
                                                         <li><input type="text" lang="en" data-key="association_en" class="input-field society-active-item hide" placeholder="Name of Association(English)" value="{{ $association->association_en }}"></li>
                                                         <li><input type="text" lang="ch" data-key="association_cn" class="input-field society-active-item hide" placeholder="请输入协会(汉语)" value="{{ $association->association_cn }}"></li>
@@ -364,14 +339,15 @@ $tab = 'portfolio';
                                 @if( $datas->look_books() )
                                     @foreach($datas->look_books as $look_book)
                                         <!-- lookbook item -->
-                                            <div class="lookbook-item">
+                                            <div class="lookbook-item" id="look_{{$look_book->id}}">
                                                 <div class="lookbook-name">
-                                                    <input type="text" name="season0" placeholder="시즌명(EX/2019)" class="input-field lookbook-season yearpicker" readonly value="{{$look_book->year}}">
-                                                    <select class="select" name="season_type0">
+                                                    <input type="text" placeholder="시즌명(EX/2019)" class="input-field lookbook-season" readonly value="{{$look_book->year}}">
+                                                    <select class="select" disabled>
                                                         <option selected disabled>전체</option>
                                                         <option {{$look_book->season == "S/S" ? 'selected':''}} value="S/S">SS</option>
                                                         <option {{$look_book->season == "F/W" ? 'selected':''}} value="F/W">FW</option>
                                                     </select>
+                                                    <button class="btn-black" type="button" onclick="fn_look_book_delete({{$look_book->id}})">삭제</button>
                                                 </div>
                                                 <div class="lookbook-contents-wrap">
                                                     <div class="lookbook-contents">

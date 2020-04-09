@@ -96,6 +96,7 @@ Route::group(['middleware'=>'locale'],function(){
     Route::resource('mypage_question', 'Client\MyPage\QuestionController');
     // 마이페이지 - 포트폴리오
     Route::resource('mypage_portfolio', 'Client\MyPage\PortfolioController');
+    Route::post('/delete_lookbook', 'Client\MyPage\PortfolioController@look_book_delete');
     // 마이페이지 - 적립금
     //Route::resource('mypage_point', 'Client\MyPage\PointController');
     /************************** 권한 필요 **************************/

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\MainMenu;
 
+use App\Category;
 use App\CategoryDetail;
 use App\Project;
 use Illuminate\Http\Request;
@@ -28,7 +29,6 @@ class MenuController extends Controller {
         try {
             $type = $request->type;
             $category_details_id = $request->category;
-
             if ($type == 'new') {
                 $content_id = 4;
             } elseif ($type == 'special') {
@@ -40,18 +40,14 @@ class MenuController extends Controller {
             } else {
                 $content_id = 0;
             }
-
+            $catogory_id = Category::whereCode($type)->first()->id;
             if ($content_id > 0) {                                                                                      // new, spacial, collection, event
                 $datas = Project::whereIn('condition', [2,4,5])->whereHas('contentDetails', function ($q) use ($content_id) {
                     $q->where('status', 1);
                     $q->where('content_id', $content_id);
                 })->orderBy('created_at','DESC')->paginate(20);
+                $category_details = CategoryDetail::where('category_id', $catogory_id)->get();
             } else {                                                                                                    // women's apparel or men's apparel
-                if ($type == 'women') {                                                                                 // women
-                    $catogory_id = 4;
-                } else {                                                                                                // men
-                    $catogory_id = 5;
-                }
 
                 $datas = Project::whereIn('condition', [2,4,5])->where('category_id', $catogory_id);
 

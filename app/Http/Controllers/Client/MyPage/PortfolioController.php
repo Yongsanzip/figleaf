@@ -234,10 +234,129 @@ class PortfolioController extends Controller {
     public function update(Request $request, $id){
         try {
 
+            $request->validate([
+                'portfolio_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            DB::beginTransaction();
+            $portfolio = Portfolio::find($id)->update([
+                'content_ko'        =>$request->context_ko,                                                             // 한글내용
+                'content_cn'        =>$request->context_cn,                                                             // 중문내용
+                'content_en'        =>$request->context_en,                                                             // 영문내용
+                'hidden_yn'         =>$request->hidden_yn ? 1 : 0,                                                      // 포트폴리오 숨김처리
+                'email'             =>$request->email,                                                                  // 이메일
+                'home_phone'        =>$request->home_phone,                                                             // 전화번호
+                'facebook'          =>$request->facebook,                                                               // 페이스북
+                'instagram'         =>$request->instagram,                                                              // 인스타그램
+                'twitter'           =>$request->twitter,                                                                // 트위터
+                'homepage'          =>$request->homepage,                                                               // 홈페이지
+                'email_hidden'      =>$request->email_hidden ? 1 : 0,                                                   // 이메일 숨김처리
+                'phone_hidden'      =>$request->phone_hidden ? 1 : 0,                                                   // 전화번호 숨김처리
+                'facebook_hidden'   =>$request->facebook_hidden ? 1 : 0,                                                // 페이스북 숨김처리
+                'instagram_hidden'  =>$request->instagram_hidden ? 1 : 0,                                               // 인스타그램 숨김처리
+                'twitter_hidden'    =>$request->twitter_hidden ? 1 : 0,                                                 // 트위터 숨김처리
+                'homepage_hidden'   =>$request->homepage_hidden ? 1 : 0,                                                // 홈페이지 숨김처리
+            ]);
+
+            $portfolio_image = $request->file('portfolio_image');
+            if($portfolio_image){
+                $savePath = $portfolio_image->store('images/portfolio/'.$portfolio->id.'/'.date('Y-m-d'), 'public');
+                PortfolioImage::wherePortfolioId($id)->update([
+                    'image_division'    => 1,
+                    'image_type'        =>$portfolio_image->getClientMimeType(),
+                    'image_path'        =>$savePath,
+                    'origin_name'       =>$portfolio_image->getClientOriginalName(),
+                ]);
+            }
+
+            // 브랜드 등록
+            $brand = Brand::wherePortfolioId($id)->update([
+                'name_ko'       =>$request->brand_name_ko ? $request->brand_name_ko : '',
+                'name_cn'       =>$request->brand_name_cn ? $request->brand_name_cn : '',
+                'name_en'       =>$request->brand_name_en ? $request->brand_name_en : '',
+                'contents_ko'   =>$request->brand_content_ko ? $request->brand_content_ko : '',
+                'contents_cn'   =>$request->brand_content_cn ? $request->brand_content_cn : '',
+                'contents_en'   =>$request->brand_content_en ? $request->brand_content_en : '',
+            ]);
+
+
+            $brand_logo_image = $request->file('brand_logo_image');
+            if($brand_logo_image){
+                $savePath = $brand_logo_image->store('images/portfolio/'.$portfolio->id.'/'.date('Y-m-d'), 'public');
+                PortfolioImage::wherePortfolioId($id)->whereImageDivision(2)->update([
+                    'image_type'        =>$brand_logo_image->getClientMimeType(),
+                    'image_path'        =>$savePath,
+                    'origin_name'       =>$brand_logo_image->getClientOriginalName(),
+                ]);
+            }
+
+            $brand_thumbnail_image = $request->file('brand_thumbnail_image');
+            if($brand_thumbnail_image){
+                $savePath = $brand_thumbnail_image->store('images/portfolio/'.$portfolio->id.'/'.date('Y-m-d'), 'public');
+                PortfolioImage::wherePortfolioId($id)->whereImageDivision(3)->update([
+                    'image_type'        =>$brand_thumbnail_image->getClientMimeType(),
+                    'image_path'        =>$savePath,
+                    'origin_name'       =>$brand_thumbnail_image->getClientOriginalName(),
+                ]);
+            }
+
+            // 히스토리
+            if(isset($request->history_array)){
+                foreach (json_decode($request->history_array,true) as $history){
+                    HistoryAward::wherePortfolioId($id)->whereType(0)->update($history);
+                }
+            }
+
+            // 수상내역
+            if(isset($request->awards_array)){
+                foreach (json_decode($request->awards_array, true) as $awards){
+                    HistoryAward::wherePortfolioId($id)->whereType(1)->update($awards);
+                }
+            }
+
+            // 협회활동동
+            if(isset($request->society_array)){
+                foreach (json_decode($request->society_array, true) as $society){
+                    AssociationActivity::wherePortfolioId($id)->update($society);
+                }
+            }
+
+            for($i = 0; $i< $request->season_count; $i++){
+                $season_type = 'season_type'.$i;
+                $season = 'season'.$i;
+                $look_book = LookBook::firstOrCreate([
+                    'portfolio_id' =>$id,
+                    'season'=>$season_type,
+                    'year'=>$season
+                ]);
+
+                $look_book_images = $request->file('images');
+                if($look_book_images) {
+                    foreach ($look_book_images[$i] as $image) {
+                        $savePath = $image->store('images/lookbook/'.$portfolio->id, 'public');
+                        LookBookImage::updateOrCreate([                                                                                // 포트폴리오 이미지 등록
+                            'look_book_id'      =>$look_book->id,
+                            'image_type'        =>$image->getClientMimeType(),
+                            'image_path'        =>$savePath,
+                            'origin_name'       =>$image->getClientOriginalName(),
+                        ]);
+                    }
+                }
+            }
+            DB::commit();
+            return redirect(route('mypage_portfolio.index'));
         } catch (\Exception $e){
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
             flash($msg)->error();
             return back();
+        }
+    }
+
+    public function look_book_delete(Request $request){
+        try {
+            LookBook::destroy($request->id);
+            return response()->json(['msg'=>'delete','val'=>$request->id],201,[],JSON_PRETTY_PRINT);
+        } catch (\Exception $e){
+            return response()->json(['msg'=>'delete'],566,[],JSON_PRETTY_PRINT);
         }
     }
 
