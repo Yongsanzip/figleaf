@@ -97,6 +97,7 @@ $tab = 'portfolio';
                                     @foreach( $datas->histories() as $history)
                                         <!-- history item -->
                                             <div class="year-item">
+                                                <input type="hidden" data-key="id" value="{{$history->id}}">
                                                 <div class="year-row">
                                                     <input type="text" class="input-field required" data-title="히스토리 연도" data-key="year" placeholder="ex)2019/연도를 입력하세요." value="{{ $history->year }}">
                                                 </div>
@@ -160,6 +161,7 @@ $tab = 'portfolio';
                                     @if($datas->awards())
                                         @foreach($datas->awards() as $awards)
                                             <div class="year-item">
+                                                <input type="hidden" data-key="id" value="{{$awards->id}}">
                                                 <div class="year-row">
                                                     <input type="text" class="input-field required" data-title="수상내역 연도" data-key="year" placeholder="ex)2019/연도를 입력하세요." value="{{ $awards->year }}">
                                                 </div>
@@ -222,6 +224,7 @@ $tab = 'portfolio';
                                     @if($datas->association_activties())
                                         @foreach($datas->association_activties() as $association)
                                             <div class="year-item">
+                                                <input type="hidden" data-key="id" value="{{$association->id}}">
                                                 <div class="year-row">
                                                     <input type="text" class="input-field"  data-key="start_year" placeholder="가입연도" value="{{$association->start_year}}">
                                                     <span class="waves">~</span>

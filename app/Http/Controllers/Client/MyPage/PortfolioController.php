@@ -232,7 +232,7 @@ class PortfolioController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function update(Request $request, $id){
-        try {
+//        try {
 
             $request->validate([
                 'portfolio_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -302,21 +302,45 @@ class PortfolioController extends Controller {
             // 히스토리
             if(isset($request->history_array)){
                 foreach (json_decode($request->history_array,true) as $history){
-                    HistoryAward::wherePortfolioId($id)->whereType(0)->update($history);
+                    if(isset($history['id'])){
+                       $historyData = HistoryAward::find($history['id']);
+                        unset($history['id']);
+                       $historyData->update($history);
+                    } else {
+                        $history['portfolio_id'] = $id;
+                        $history['type'] = '0';
+                        HistoryAward::create($history);
+                    }
+
                 }
             }
 
             // 수상내역
             if(isset($request->awards_array)){
                 foreach (json_decode($request->awards_array, true) as $awards){
-                    HistoryAward::wherePortfolioId($id)->whereType(1)->update($awards);
+                    if(isset($awards['id'])){
+                        $awardsData = HistoryAward::find($awards['id']);
+                        unset($awards['id']);
+                        $awardsData->update($awards);
+                    } else {
+                        $awards['portfolio_id'] = $id;
+                        $awards['type'] = '1';
+                        HistoryAward::create($awards);
+                    }
                 }
             }
 
             // 협회활동동
             if(isset($request->society_array)){
                 foreach (json_decode($request->society_array, true) as $society){
-                    AssociationActivity::wherePortfolioId($id)->update($society);
+                    if(isset($society['id'])){
+                        $societyData = AssociationActivity::find($society['id']);
+                        unset($society['id']);
+                        $societyData->update($society);
+                    } else {
+                        $society['portfolio_id'] = $id;
+                        AssociationActivity::create($society);
+                    }
                 }
             }
 
@@ -344,11 +368,11 @@ class PortfolioController extends Controller {
             }
             DB::commit();
             return redirect(route('mypage_portfolio.index'));
-        } catch (\Exception $e){
-            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
-            flash($msg)->error();
-            return back();
-        }
+//        } catch (\Exception $e){
+//            $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
+//            flash($msg)->error();
+//            return back();
+//        }
     }
 
     public function look_book_delete(Request $request){
