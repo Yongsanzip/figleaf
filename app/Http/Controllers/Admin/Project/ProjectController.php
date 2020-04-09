@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Project;
 use App\CategoryDetail;
 use App\Project;
 use App\ProjectImage;
-use App\ViewProject;
+use App\ViewAdminProject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -22,14 +22,14 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        try {
+//        try {
             $page_num        = 17;                                                                                      // 한 페이지에 17개
             $keyword         = $request->keyword;                                                                       // 검색어
             $option          = $request->option;                                                                        // 검색 select-option
             $search_category = $request->search_category;                                                               // 카테고리
             $status          = $request->status;                                                                        // 프로젝트 진행 상태
             $categories      = CategoryDetail::get();                                                                   // 2차카테고리
-            $datas           = new ViewProject();
+            $datas           = new ViewAdminProject();
 
             // 검색
             if ($option == 'title'){                                                                                    // 제목
@@ -62,11 +62,11 @@ class ProjectController extends Controller
 
             return view('admin.project.index', compact('datas', 'option', 'keyword', 'status', 'categories', 'search_category'));
 
-        } catch (\Exception $e){
+        /*} catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
             return view('errors.error',compact('description','title'));
-        }
+        }*/
     }
 
     /**

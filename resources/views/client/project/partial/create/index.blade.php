@@ -573,17 +573,17 @@
                             <div class="schedule-wrap">
                                 <div class="schedule">
                                     <span>프로젝트 마감일</span>은
-                                    <input type="text" class="input-field datepicker" name="deadline" id="deadline" onchange="dateChange()" value="{{ $data ? $data->deadline->format('Y-m-d') : '' }}" readonly>
+                                    <input type="text" class="input-field datepicker" name="deadline" id="deadline" onchange="dateChange()" value="{{ $data ? ($data->deadline ? $data->deadline->format('Y-m-d') : '') : '' }}" readonly>
                                     이며,
 
                                 </div>
                                 <div class="schedule">
                                     이에 따라 <span>프로젝트 정산일</span>은 영업일 7일 뒤인
-                                    <input type="text" class="input-field" name="account_date" id="account_date" value="{{ $data ? $data->account_date->format('Y-m-d') : '' }}" readonly>이고,
+                                    <input type="text" class="input-field" name="account_date" id="account_date" value="{{ $data ? ($data->account_date ? $data->account_date->format('Y-m-d') : '') : '' }}" readonly>이고,
                                 </div>
                                 <div class="schedule">
                                     프로젝트 마감일 후
-                                    <input type="text" class="input-field datepicker" name="delivery_date" id="delivery_date" value="{{ $data ? $data->delivery_date->format('Y-m-d') : '' }}" readonly>
+                                    <input type="text" class="input-field datepicker" name="delivery_date" id="delivery_date" value="{{ $data ? ($data->delivery_date ? $data->delivery_date->format('Y-m-d') : '') : '' }}" readonly>
                                     에 배송을 진행하되,
                                 </div>
                                 <div class="schedule">
