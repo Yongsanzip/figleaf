@@ -13,25 +13,18 @@ $tab='message';
         <div class="inner">
             <div class="con-mypage">
                 <h2 class="title">my page</h2>
-                <div class="text-center">
-                    <div class="user-info-wrap">
-                        <div class="user-info">
-                            <p class="user-id">김해우(hwkim920615)<span>님</span></p>
-                            <div class="badge badge-skyblue">new</div>
-                        </div>
-                        <div class="user-point">
-                            <p class="caption">point</p>
-                            <p class="point">3,442</p>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- menu list -->
                     @include('client.mypage.partial.navi')
                 <!--// menu list -->
 
-                <!-- mypage contents -->
                 <div class="mypage-contents">
+                    <p class="card-message">
+                        준비중입니다.
+                    </p>
+                </div>
+
+                <!-- mypage contents -->
+                {{--<div class="mypage-contents">
                     <div class="mypage-tab-list">
                         <a href="" class="mypage-tab on">문의/후원한 프로젝트</a>
                         <a href="" class="mypage-tab">만든 프로젝트</a>
@@ -123,7 +116,7 @@ $tab='message';
                     <div class="btn-wrap">
                         <button class="btn-black">더보기</button>
                     </div>
-                </div>
+                </div>--}}
                 <!--// mypage contents -->
 
 

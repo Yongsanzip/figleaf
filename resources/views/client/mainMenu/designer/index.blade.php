@@ -4,12 +4,7 @@
 @extends('client.layouts.app')
 @section('content')
     <main class="container con-main">
-        <!-- hero -->
-        @include('client.layouts.partial.hero')
-        <!-- //hero -->
-
-
-        <div class="inner">
+      <div class="inner">
             <!-- designer -->
             <section class="con-designer">
                 <div class="section-title-wrap">

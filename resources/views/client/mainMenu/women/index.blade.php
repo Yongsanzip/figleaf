@@ -5,11 +5,6 @@
 @section('content')
 
     <main class="container">
-    <!-- hero -->
-    @include('client.layouts.partial.hero')
-    <!-- //hero -->
-
-
         <div class="inner">
             <section class="con-project">
 
