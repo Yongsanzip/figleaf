@@ -40,9 +40,9 @@
                 <li>
                     <a href="/brand">Brand</a>
                 </li>
-                <li>
+                {{--<li>
                     <a href="/news">News</a>
-                </li>
+                </li>--}}
                 <li>
                     <a href="{{route('menu.index',['type'=>'women'])}}">Women's Apparel</a>
                 </li>
@@ -114,7 +114,7 @@
             <ul class="category">
                 <li><a href="/designer">designer</a></li>
                 <li><a href="/brand">brand</a></li>
-                <li><a href="/news">news</a></li>
+                {{--<li><a href="/news">news</a></li>--}}
             </ul>
             <ul class="category">
                 <li><a href="{{route('menu.index',['type'=>'women'])}}">women's apparel</a></li>
