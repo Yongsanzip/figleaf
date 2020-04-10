@@ -446,7 +446,13 @@ class ProjectController extends Controller {
             $date_diff = ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24));                 // 남은시간 (남은 일자)
             $auth_check = Auth::check();
 
-            return view('client.project.partial.show.index', compact('data', 'portfolio', 'communities', 'supporter_count', 'total_cost', 'date_diff', 'datas','auth_check'));
+            if ($supporter_count >= $data->success_count) {                                                             // 후원 개수 >= 성공 개수
+                $sold_out = 1;                                                                                          // 품절
+            } else {
+                $sold_out = 0;
+            }
+
+            return view('client.project.partial.show.index', compact('data', 'portfolio', 'communities', 'supporter_count', 'total_cost', 'date_diff', 'datas','auth_check', 'sold_out'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';

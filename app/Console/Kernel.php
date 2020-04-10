@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Project;
 use App\Support;
+use App\SupportLog;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -31,24 +32,29 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->call(function () {
+
+        })->everyMinute();
+
+        $schedule->call(function(){
             $now = Carbon::now();
             $today = $now->format('Y-m-d');
             $datas = Project::where('deadline', $today)->get();
 
-            foreach ($datas as $data) {                                      // 프로젝트 마감일인 경우 완료처리 (성공 또는 실패)
-                $support = Support::where('project_id', $data->id)->where('condition', 0)->get();
-                $supporter_count = count($support);
-                if ($supporter_count >= $data->success_count) {             // 성공
-                    $data->condition = 5;
-                    $data->save();
-                } else {                                                    // 실패
-                    $data->condition = 4;
-                    $data->save();
+            if (count($datas) > 0) {
+                foreach ($datas as $data) {                                             // 프로젝트 마감일인 경우 완료처리 (성공 또는 실패)
+                    $support = Support::where('project_id', $data->id)->where('condition', 2)->get();
+                    $supporter_count = count($support);
+                    $success_count = floor($data->success_count * 0.7);           // 70% 이상이면 성공
+                    if ($supporter_count >= $success_count) {                           // 성공
+                        $data->condition = 5;
+                        $data->save();
+                    } else {                                                            // 실패
+                        $data->condition = 4;
+                        $data->save();
+                    }
                 }
             }
-        })->everyMinute();
 
-        $schedule->call(function(){
             $util = new \INIStdPayUtil();
             $inicis = new Inicis();
             $request = new Request();

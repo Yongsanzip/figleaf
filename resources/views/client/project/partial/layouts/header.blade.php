@@ -120,8 +120,10 @@
                 </ul>
                 @if($page_type =='project')
                             <div class="btn-wrap">
-                                @if(in_array($data->condition,[2,5]))
-                                <button class="btn-white" type="button" onclick="supportSubmit(this.parentElement.parentElement)">후원하기</button>
+                                @if($sold_out ? $sold_out > 0 : false)
+                                    <div class="btn-white" style="cursor: default">품절</div>
+                                @elseif(in_array($data->condition,[2,5]))
+                                    <button class="btn-white" type="button" onclick="supportSubmit(this.parentElement.parentElement)">후원하기</button>
                                 @endif
                                 <?/*<a class="btn-white" href="">후원내역 상세보기</a>*/?>
                                 <?/*<a class="btn-white" href="">프로젝트 관리하기</a>*/?>
