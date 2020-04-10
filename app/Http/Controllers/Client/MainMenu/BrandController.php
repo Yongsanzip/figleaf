@@ -28,6 +28,7 @@ class BrandController extends Controller{
         try {
             $datas = User::whereRoleId(2)->whereHas('portfolio', function ($q) {
                 $q->where('open_yn', 1);
+                $q->where('hidden_yn', 1);
             })->limit(8)->with('portfolio')->has('portfolio')->paginate(20);
             return view('client.mainMenu.brand.index',compact('datas'));
         } catch (\Exception $e){

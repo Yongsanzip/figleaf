@@ -27,7 +27,7 @@ class CreatePortfoliosTable extends Migration
             $table->string('history')->nullable()->comment('히스토리');
             $table->string('awards')->nullable()->comment('수상내역');
             $table->string('association')->nullable()->comment('협회활동');
-            $table->boolean('hidden_yn')->default(0)->comment('숨김여부(미숨김:0, 숨김:1)');
+            $table->boolean('hidden_yn')->default(0)->comment('숨김여부(안보임:0, 보임:1)');
             $table->boolean('open_yn')->default(0)->comment('열람여부(미열람:0, 열람:1)');
             $table->string('email')->nullable()->comment('이메일');
             //전화번호, 페이스북, 인스타그램, 트위터, 홈페이지
