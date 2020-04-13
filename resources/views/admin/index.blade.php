@@ -99,7 +99,7 @@
                         <tr>
                             <th>제목</th>
                             <th>후원자명</th>
-                            <th>후원자 아이디</th>
+                            <th>후원자 이메일</th>
                             <th>후원금액</th>
                         </tr>
                         </thead>
@@ -108,7 +108,7 @@
                         <tr>
                             <td>{{ $support->project->title }}</td>
                             <td>{{ $support->user->name }}</td>
-                            <td>{{ $support->user->username }}</td>
+                            <td>{{ $support->user->email }}</td>
                             <td>{{ $support->total_amount }}원</td>
                         </tr>
                         @endforeach
@@ -130,14 +130,14 @@
                     <table class="table-data table-normal">
                         <thead>
                         <tr>
-                            <th>아이디</th>
+                            <th>이메일</th>
                             <th>이름</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($users as $user)
                         <tr>
-                            <td>{{ $user->username }}</td>
+                            <td>{{ $user->email }}</td>
                             <td>{{ $user->name }}</td>
                         </tr>
                         @endforeach
