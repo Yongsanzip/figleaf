@@ -12,7 +12,7 @@
             <!-- headline -->
             <div class="headline">
                 <h2>Home</h2>
-                <p>2019년 9월 16일 12:45 기준</p>
+                <p>{{ $now->format('Y년 m월 d일 H:i') }} 기준</p>
             </div>
             <!-- //headline -->
 
@@ -20,7 +20,7 @@
             <div class="dropdown-group">
                 <div class="dropdown-header">
                     <h3>대기중인 프로젝트 수</h3>
-                    <p>80개</p>
+                    <p>{{ count($project_1) }}개</p>
                     <div class="btn-drop"></div>
                 </div>
                 <div class="dropdown-contents">
@@ -35,44 +35,18 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($project_1 as $project)
                         <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>박초롱초롱빛나리</td>
-                            <td>30</td>
-                            <td>2019-00-00</td>
-                            <td>2019-00-00</td>
+                            <td>{{ $project->title }}</td>
+                            <td>{{ $project->user->name }}</td>
+                            <td>{{ $project->success_count }}</td>
+                            <td>{{ $proejct->start_date->format('Y-m-d') }}</td>
+                            <td>{{ $project->deadline->format('Y-m-d') }}</td>
                         </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>박초롱초롱빛나리</td>
-                            <td>30</td>
-                            <td>2019-00-00</td>
-                            <td>2019-00-00</td>
-                        </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>박초롱초롱빛나리</td>
-                            <td>30</td>
-                            <td>2019-00-00</td>
-                            <td>2019-00-00</td>
-                        </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>박초롱초롱빛나리</td>
-                            <td>30</td>
-                            <td>2019-00-00</td>
-                            <td>2019-00-00</td>
-                        </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>박초롱초롱빛나리</td>
-                            <td>30</td>
-                            <td>2019-00-00</td>
-                            <td>2019-00-00</td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
-                    <a href="" class="more">더보기</a>
+                    <a href="/admin_project?status=1" class="more">더보기</a>
                 </div>
             </div>
             <!-- //dropdown -->
@@ -81,7 +55,7 @@
             <div class="dropdown-group">
                 <div class="dropdown-header">
                     <h3>진행중인 프로젝트 수</h3>
-                    <p>80개</p>
+                    <p>{{ count($project_2) }}개</p>
                     <div class="btn-drop"></div>
                 </div>
                 <div class="dropdown-contents">
@@ -96,44 +70,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>박초롱초롱빛나리</td>
-                            <td>30</td>
-                            <td>2019-00-00</td>
-                            <td>2019-00-00</td>
-                        </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>박초롱초롱빛나리</td>
-                            <td>30</td>
-                            <td>2019-00-00</td>
-                            <td>2019-00-00</td>
-                        </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>박초롱초롱빛나리</td>
-                            <td>30</td>
-                            <td>2019-00-00</td>
-                            <td>2019-00-00</td>
-                        </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>박초롱초롱빛나리</td>
-                            <td>30</td>
-                            <td>2019-00-00</td>
-                            <td>2019-00-00</td>
-                        </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>박초롱초롱빛나리</td>
-                            <td>30</td>
-                            <td>2019-00-00</td>
-                            <td>2019-00-00</td>
-                        </tr>
+                        @foreach($project_2 as $project)
+                            <tr>
+                                <td>{{ $project->title }}</td>
+                                <td>{{ $project->user->name }}</td>
+                                <td>{{ $project->success_count }}</td>
+                                <td>{{ $proejct->start_date->format('Y-m-d') }}</td>
+                                <td>{{ $project->deadline->format('Y-m-d') }}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
-                    <a href="" class="more">더보기</a>
+                    <a href="/admin_project?status=2" class="more">더보기</a>
                 </div>
             </div>
             <!-- //dropdown -->
@@ -142,7 +90,7 @@
             <div class="dropdown-group">
                 <div class="dropdown-header">
                     <h3>오늘 하루 펀딩 참여 수</h3>
-                    <p>80개</p>
+                    <p>{{ count($supports) }}개</p>
                     <div class="btn-drop"></div>
                 </div>
                 <div class="dropdown-contents">
@@ -156,39 +104,17 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($supports as $support)
                         <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>김도토리</td>
-                            <td>ilovecat_koreancat</td>
-                            <td>5,000,000원</td>
+                            <td>{{ $support->project->title }}</td>
+                            <td>{{ $support->user->name }}</td>
+                            <td>{{ $support->user->username }}</td>
+                            <td>{{ $support->total_amount }}원</td>
                         </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>김도토리</td>
-                            <td>ilovecat_koreancat</td>
-                            <td>5,000,000원</td>
-                        </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>김도토리</td>
-                            <td>ilovecat_koreancat</td>
-                            <td>5,000,000원</td>
-                        </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>김도토리</td>
-                            <td>ilovecat_koreancat</td>
-                            <td>5,000,000원</td>
-                        </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>김도토리</td>
-                            <td>ilovecat_koreancat</td>
-                            <td>5,000,000원</td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
-                    <a href="" class="more">더보기</a>
+                    <a href="/admin_support" class="more">더보기</a>
                 </div>
             </div>
             <!-- //dropdown -->
@@ -197,53 +123,27 @@
             <div class="dropdown-group">
                 <div class="dropdown-header">
                     <h3>오늘 가입한 유저 수</h3>
-                    <p>16명</p>
+                    <p>{{ count($users) }}명</p>
                     <div class="btn-drop"></div>
                 </div>
                 <div class="dropdown-contents">
                     <table class="table-data table-normal">
                         <thead>
                         <tr>
-                            <th>제목</th>
-                            <th>후원자명</th>
-                            <th>후원자 아이디</th>
-                            <th>후원금액</th>
+                            <th>아이디</th>
+                            <th>이름</th>
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($users as $user)
                         <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>김도토리</td>
-                            <td>ilovecat_koreancat</td>
-                            <td>5,000,000원</td>
+                            <td>{{ $user->username }}</td>
+                            <td>{{ $user->name }}</td>
                         </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>김도토리</td>
-                            <td>ilovecat_koreancat</td>
-                            <td>5,000,000원</td>
-                        </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>김도토리</td>
-                            <td>ilovecat_koreancat</td>
-                            <td>5,000,000원</td>
-                        </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>김도토리</td>
-                            <td>ilovecat_koreancat</td>
-                            <td>5,000,000원</td>
-                        </tr>
-                        <tr>
-                            <td>끝나지 않는 나의 비지니스</td>
-                            <td>김도토리</td>
-                            <td>ilovecat_koreancat</td>
-                            <td>5,000,000원</td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
-                    <a href="" class="more">더보기</a>
+                    <a href="/admin_information" class="more">더보기</a>
                 </div>
             </div>
             <!-- //dropdown -->
@@ -252,7 +152,7 @@
             <div class="dropdown-group">
                 <div class="dropdown-header">
                     <h3>오늘의 1:1 문의</h3>
-                    <p>80개</p>
+                    <p>{{ count($questions) }}개</p>
                     <div class="btn-drop"></div>
                 </div>
                 <div class="dropdown-contents">
@@ -265,40 +165,22 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($questions as $question)
                         <tr>
-                            <td>2019-00-00 00:00</td>
-                            <td>박다람쥐</td>
-                            <td>끝나지 않는 나의 비지니스</td>
+                            <td>{{ $question->created_at->format('Y-m-d H:i:s') }}</td>
+                            <td>{{ $question->title }}</td>
+                            <td>{{ $question->content }}</td>
                         </tr>
-                        <tr>
-                            <td>2019-00-00 00:00</td>
-                            <td>박다람쥐</td>
-                            <td>끝나지 않는 나의 비지니스</td>
-                        </tr>
-                        <tr>
-                            <td>2019-00-00 00:00</td>
-                            <td>박다람쥐</td>
-                            <td>끝나지 않는 나의 비지니스</td>
-                        </tr>
-                        <tr>
-                            <td>2019-00-00 00:00</td>
-                            <td>박다람쥐</td>
-                            <td>끝나지 않는 나의 비지니스</td>
-                        </tr>
-                        <tr>
-                            <td>2019-00-00 00:00</td>
-                            <td>박다람쥐</td>
-                            <td>끝나지 않는 나의 비지니스</td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
-                    <a href="" class="more">더보기</a>
+                    <a href="/admin_question" class="more">더보기</a>
                 </div>
             </div>
             <!-- //dropdown -->
 
             <!-- dropdown -->
-            <div class="dropdown-group">
+            {{--<div class="dropdown-group">
                 <div class="dropdown-header">
                     <h3>배송진행이 필요한 프로젝트 수</h3>
                     <p>32개</p>
@@ -343,7 +225,7 @@
                     </table>
                     <a href="" class="more">더보기</a>
                 </div>
-            </div>
+            </div>--}}
             <!-- //dropdown -->
 
 

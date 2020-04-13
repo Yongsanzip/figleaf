@@ -22,7 +22,7 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-//        try {
+        try {
             $page_num        = 17;                                                                                      // 한 페이지에 17개
             $keyword         = $request->keyword;                                                                       // 검색어
             $option          = $request->option;                                                                        // 검색 select-option
@@ -62,11 +62,11 @@ class ProjectController extends Controller
 
             return view('admin.project.index', compact('datas', 'option', 'keyword', 'status', 'categories', 'search_category'));
 
-        /*} catch (\Exception $e){
+        } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
             return view('errors.error',compact('description','title'));
-        }*/
+        }
     }
 
     /**
