@@ -87,7 +87,7 @@ class RegisterController extends Controller
             $subject ='가입인증메일';
             $check = User::whereEmail($request->email)->first();
             if(isset($check)){
-                $mail = Mail::to($request->email)->from(['name' => 'figleaf'])->send(new VerifyMail($check,$subject,$check->verified_token));
+                $mail = Mail::to($request->email)->send(new VerifyMail($check,$subject,$check->verified_token));
                 flash('이미 존재하는 이메일입니다.')->important();
                 return redirect('/');
             } else {
