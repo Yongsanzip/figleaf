@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('cellphone', 50)->comment('휴대폰번호');
             $table->string('zip_code', 30)->nullable()->comment('우편번호');
             $table->string('address')->comment('주소');
-            $table->string('address_detail')->comment('상세주소');
+            $table->string('address_detail')->nullable()->comment('상세주소');
             //gender는 radio button
             $table->tinyInteger('gender')->comment('성별(남:0, 여:1)');
             $table->tinyInteger('grade')->comment('등급(ex.골드회원, 실버회원)');
