@@ -7,6 +7,7 @@
  * @return string
  ********************************************/
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -562,8 +563,10 @@ if (! function_exists('check_ssl_protocol')) {
 
     function check_ssl_protocol(){
         // $CI		=& get_instance();
-        $ssl = "";
-        $ssl = ((!empty($_SERVER['HTTPS'])) && ($_SERVER['HTTPS']=='on')) ? true : false;
+        $ssl = false;
+        if (!Request::secure() && App::environment() === 'production') {
+            $ssl = true;
+        }
         return $ssl;
     }
 }
