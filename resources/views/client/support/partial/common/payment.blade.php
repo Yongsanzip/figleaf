@@ -54,6 +54,7 @@
         }
     }
     var fn_support_ajax_success = function(e){
+        console.log(e);
         var data = JSON.parse(e.returnData);
         document.getElementById('version').value=data.version;
         document.getElementById('mid').value=data.mid;
