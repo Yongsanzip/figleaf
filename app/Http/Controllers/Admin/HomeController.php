@@ -28,7 +28,7 @@ class HomeController extends Controller {
      * @return      : view , data , msg ...
      ************************************************************************/
     public function index(){
-//        try {
+        try {
             $now = Carbon::now();
             $today = $now->format('Y-m-d');
             $project_1 = Project::where('condition', 1)->get();                                                                  // 대기중
@@ -38,11 +38,11 @@ class HomeController extends Controller {
             $questions = Question::where('created_at', '>=', $today.' 00:00:00')->where('created_at', '<=', $today.' 59:59:59')->get();  // 오늘 1:1 문의
 
             return view('admin.index', compact('project_1', 'project_2', 'supports', 'users', 'questions', 'now'));
-//        } catch (\Exception $e){
-//            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
-//            $title = '500 ERROR';
-//            return view('errors.error',compact('description','title'));
-//        }
+        } catch (\Exception $e){
+            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
+            $title = '500 ERROR';
+            return view('errors.error',compact('description','title'));
+        }
     }
 
     /************************************************************************
