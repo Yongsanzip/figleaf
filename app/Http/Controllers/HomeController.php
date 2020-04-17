@@ -23,7 +23,8 @@ class HomeController extends Controller {
      ************************************************************************/
     public function index(){
         try {
-
+            var_dump($_SERVER['REMOTE_ADDR']);
+            return view('welcome');
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
