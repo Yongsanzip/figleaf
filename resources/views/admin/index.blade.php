@@ -41,7 +41,7 @@
                             <td>{{ $project->title }}</td>
                             <td>{{ $project->user->name }}</td>
                             <td>{{ $project->success_count }}</td>
-                            <td>{{ $proejct->start_date->format('Y-m-d') }}</td>
+                            <td>{{ $project->start_date->format('Y-m-d') }}</td>
                             <td>{{ $project->deadline->format('Y-m-d') }}</td>
                         </tr>
                         @endforeach
