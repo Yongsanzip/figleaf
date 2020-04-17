@@ -54,7 +54,7 @@ class SupportController extends Controller
             $banks                      = Bank::whereUseYn(1)->get();
 
             $last_support_id = Support::orderBy('id','DESC')->first() ? Support::orderBy('created_at','DESC')->first()->id : 1;
-
+            $option_arr=[];
             $option_arr = array();
             for ($i = 0; $i < count($option_id); $i++) {
                 $option_arr['option_id'][$i] = $option_id[$i];                                                          // 옵션 주문 id
@@ -85,7 +85,7 @@ class SupportController extends Controller
 
             for ($i = 0; $i < count($option_id); $i++) {
                 $option = Option::find($option_id[$i]);
-                $options = SupportOption::create([
+                $options = SupportOption::firstOrCreate([
                     'support_id'=>$support->id,
                     'option_id'=>$option_id[$i],
                     'amount'   =>$request->option_amount[$i],
@@ -116,8 +116,6 @@ class SupportController extends Controller
                 , 'prevUrl'
                 , 'auth_check'
             ];
-            error_log(1);
-            //return view('client.support.index', compact($returnData));
             return redirect(route('support_order',['id'=>$support->id]));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
@@ -144,7 +142,7 @@ class SupportController extends Controller
             $date_diff                  = ceil((strtotime($data->deadline) - strtotime("now"))/(60*60 *24));// 남은시간 (남은 일자)
             $data                       = Project::where('id',$porject_id)->first();                                    // 프로젝트 데이터
             $banks                      = Bank::whereUseYn(1)->get();
-
+            $option_arr ='';
             $option_arr = array();
             foreach ($support->support_options as $i => $option) {
                 $option_arr['option_id'][$i] = $option->id;                                                             // 옵션 주문 id
