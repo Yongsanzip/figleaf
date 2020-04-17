@@ -80,6 +80,7 @@
         INIStdPay.pay("supportForm");
     }
     var fn_support_ajax_error = function(e){
+        console.log(e);
         alert(e.msg);
     }
     function cardShow(){
