@@ -14,7 +14,7 @@
 Route::GET('/locale/{locale}','LocaleController@locale')->name('locale');
 
 Auth::routes();
-Route::resource('test','HomeController');
+//Route::resource('test','HomeController');
 // 이메일 인증
 Route::get('verified_email','Auth\RegisterController@verified_email')->name('verified_email');
 // 비밀번호 재설정 send_reset_email 보내기
