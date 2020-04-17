@@ -23,8 +23,7 @@ class HomeController extends Controller {
      ************************************************************************/
     public function index(){
         try {
-            var_dump($_SERVER['REMOTE_ADDR']);
-            var_dump(isset($_SERVER['HTTPS']));
+            var_dump(get_connet_protocol());
             return view('welcome');
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
