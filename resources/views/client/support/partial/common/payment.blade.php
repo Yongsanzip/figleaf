@@ -80,7 +80,7 @@
         INIStdPay.pay("supportForm");
     }
     var fn_support_ajax_error = function(e){
-        alert(e.msg);
+        alert(JSON.parse(e).msg);
     }
     function cardShow(){
         document.getElementById("acceptmethod").value = "BILLAUTH(card):FULLVERIFY";
