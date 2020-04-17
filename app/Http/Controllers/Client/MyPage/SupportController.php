@@ -26,7 +26,7 @@ class SupportController extends Controller {
      ************************************************************************/
     public function index(){
         try {
-            $datas = Support::whereUserId(auth()->user()->id)->orderBy('created_at','DESC')->paginate(8);
+            $datas = Support::whereUserId(auth()->user()->id)->whereCondition(2)->orderBy('created_at','DESC')->paginate(8);
         return view('client.mypage.support.index',compact('datas'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
