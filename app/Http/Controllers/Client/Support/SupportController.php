@@ -180,12 +180,12 @@ class SupportController extends Controller
             $support = Support::whereSupportCode($request->support_code)->first();
             if(!isset($support)){
                 $msg ='주문내역이 존재하지 않습니다.';
-                return response()->json(['msg'=>$msg],'219',[], JSON_PRETTY_PRINT);
+                return response()->json(['msg'=>$msg],'599',[], JSON_PRETTY_PRINT);
 
             }  else {
                 if($support->total_amount != $request->price){
                     $msg ='요청하신 금액와 주문금액이 일치하지 않습니다..';
-                    return response()->json(['msg'=>$msg],'219',[], JSON_PRETTY_PRINT);
+                    return response()->json(['msg'=>$msg],'599',[], JSON_PRETTY_PRINT);
                 }
 
                 $support->receiver                   =$request->receiver;
