@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Portfolio;
 use App\Project;
-use Illuminate\Http\Request;
+use Request;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
@@ -16,6 +16,7 @@ class HomeController extends Controller
      * @return view
      */
     public function index() {
+        var_dump(Request::secure());
         $designer = Portfolio::where('hidden_yn', 1)->where('open_yn', 1)->whereHas('contentDetails', function ($q) {   // 디자이너 - 포트폴리오
             $q->where('status', 0);
             $q->where('content_id', 1);
