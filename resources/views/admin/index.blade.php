@@ -35,6 +35,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @if(count($project_1) > 0)
                         @foreach($project_1 as $project)
                         <tr>
                             <td>{{ $project->title }}</td>
@@ -44,6 +45,11 @@
                             <td>{{ $project->deadline->format('Y-m-d') }}</td>
                         </tr>
                         @endforeach
+                            @else
+                            <tr>
+                                <td colspan="5">프로젝트가 존재하지 않습니다.</td>
+                            </tr>
+                        @endif
                         </tbody>
                     </table>
                     <a href="/admin_project?status=1" class="more">더보기</a>
@@ -70,15 +76,21 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @if(count($project_2)>0)
                         @foreach($project_2 as $project)
                             <tr>
                                 <td>{{ $project->title }}</td>
                                 <td>{{ $project->user->name }}</td>
                                 <td>{{ $project->success_count }}</td>
-                                <td>{{ $proejct->start_date->format('Y-m-d') }}</td>
-                                <td>{{ $project->deadline->format('Y-m-d') }}</td>
+                                <td>{{ $project->start_date ? $project->start_date->format('Y-m-d') : '-'}}</td>
+                                <td>{{ $project->deadline ? $project->deadline->format('Y-m-d') : '-'}}</td>
                             </tr>
                         @endforeach
+                            @else
+                            <tr>
+                                <td colspan="5">존재하는 프로젝트가 없습니다.</td>
+                            </tr>
+                        @endif
                         </tbody>
                     </table>
                     <a href="/admin_project?status=2" class="more">더보기</a>
