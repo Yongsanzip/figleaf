@@ -208,17 +208,17 @@ $tab = 'portfolio';
                         <ul class="sns-list">
                             @if($datas->facebook_hidden == 0)
                                 <li class="sns-item">
-                                    <a href="{{$datas->facebook}}" target="_blank">페이스북</a>
+                                    <a href="{{substr($datas->facebook,0,4) == 'http' ? $datas->facebook : '//'.$datas->facebook}}" target="_blank">페이스북</a>
                                 </li>
                             @endif
                             @if($datas->twitter_hidden == 0)
                                 <li class="sns-item">
-                                    <a href="{{$datas->twitter}}" target="_blank">트위터</a>
+                                    <a href="{{substr($datas->twitter,0,4) == 'http' ? $datas->twitter : '//'.$datas->twitter}}" target="_blank">트위터</a>
                                 </li>
                             @endif
                             @if($datas->instagram_hidden == 0)
                                 <li class="sns-item">
-                                    <a href="{{$datas->instagram}}" target="_blank">인스타그램</a>
+                                    <a href="{{substr($datas->instagram,0,4) == 'http' ? $datas->instagram : '//'.$datas->instagram}}" target="_blank">인스타그램</a>
                                 </li>
                             @endif
                         </ul>
