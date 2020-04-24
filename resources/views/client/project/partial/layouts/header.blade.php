@@ -41,11 +41,11 @@
             <div class="status-item">
                 <p class="status-name">남은 시간</p>
                 <p class="status-value">
-                    @if($date_diff > 0)
-                        {{ $date = floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) }}
+                    @if($date_diff >= 0)
+                        {{ $date = floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) +1 }}
                         <span>일</span>
                     @else
-                        마감
+                        마감 ({{ $data->condition == 4 ? '실패' : '성공' }})
                     @endif
                 </p>
                 <p class="status-date">
@@ -122,6 +122,8 @@
                             <div class="btn-wrap">
                                 @if($sold_out ? $sold_out > 0 : false)
                                     <div class="btn-white" style="cursor: default">품절</div>
+                                @elseif($date_diff < 0)
+                                    <div class="btn-white" style="cursor: default">마감</div>
                                 @elseif(in_array($data->condition,[2,5]))
                                     <button class="btn-white" type="button" onclick="supportSubmit(this.parentElement.parentElement)">후원하기</button>
                                 @endif

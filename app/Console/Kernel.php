@@ -31,14 +31,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->call(function () {
-
-        })->everyMinute();
 
         $schedule->call(function(){
             $now = Carbon::now();
-            $today = $now->format('Y-m-d');
-            $datas = Project::where('deadline', $today)->get();
+            $yesterday = $now->subDay()->format('Y-m-d');
+            $datas = Project::where('deadline', $yesterday)->get();
 
             if (count($datas) > 0) {
                 foreach ($datas as $data) {                                             // 프로젝트 마감일인 경우 완료처리 (성공 또는 실패)

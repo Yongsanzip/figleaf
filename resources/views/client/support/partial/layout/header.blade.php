@@ -41,8 +41,8 @@
             <div class="status-item">
                 <p class="status-name">남은 시간</p>
                 <p class="status-value">
-                    @if($date_diff > 0)
-                        {{ $date = floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) }}
+                    @if($date_diff >= 0)
+                        {{ $date = floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) +1 }}
                         <span>일</span>
                     @else
                         마감

@@ -229,7 +229,7 @@
                                             {{ $data->success_count - $data->supportCount($data->id) }}개 남음
                                         </div>
                                         <div class="info-box date">
-                                            {{ floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) > 0 ? floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)).'일 남음' : '마감' }}
+                                            {{ floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) +1 >= 0 ? floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24))+1 .'일 남음' : '마감' }}
                                         </div>
                                     </div>
                                 </div>
@@ -286,7 +286,7 @@
                                                 {{ $data->success_count - $data->supportCount($data->id) }}개 남음
                                             </div>
                                             <div class="info-box date">
-                                                {{ floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) > 0 ? floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)).'일 남음' : '마감' }}
+                                                {{ floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24)) +1 >= 0 ? floor((strtotime($data->deadline) - strtotime("now"))/(60*60 *24))+1 .'일 남음' : '마감' }}
                                             </div>
                                         </div>
                                     </div>

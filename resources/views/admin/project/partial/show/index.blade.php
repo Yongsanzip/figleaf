@@ -90,15 +90,15 @@
                         </tr>
                         <tr>
                             <th class="text-right">프로젝트 시작일</th>
-                            <td>{{ $data->start_date }}</td>
+                            <td>{{ $data->start_date ? $data->start_date->format('Y-m-d') : '' }}</td>
                         </tr>
                         <tr>
                             <th class="text-right">프로젝트 마감일</th>
-                            <td>{{ $data->deadline }}</td>
+                            <td>{{ $data->deadline ? $data->deadline->format('Y-m-d') : ''}}</td>
                         </tr>
                         <tr>
                             <th class="text-right">상품배송 예상일</th>
-                            <td>{{ $data->delivery_date }}</td>
+                            <td>{{ $data->delivery_date ? $data->delivery_date->format('Y-m-d') : '' }}</td>
                         </tr>
                         <tr>
                             <th class="text-right">지연예상기간</th>
