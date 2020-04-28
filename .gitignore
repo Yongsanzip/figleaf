@@ -15,3 +15,4 @@ yarn-error.log
 /public/html/inicis
 /public/html/libs
 /resources/views/client/support/partial/complete/returnSample.blade.php
+.git
