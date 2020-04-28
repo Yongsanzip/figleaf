@@ -343,7 +343,7 @@ function fnAddSociety(){
         '                 </div>' +
         '                 <div class="active-item">' +
         '                     <ul class="active-list">' +
-        '                         <li><input type="text" lang="ko" data-key="association_ko" class="input-field society-active-item required" data-title="협회명(한국어)" placeholder="협회명(한국어)"></li>';
+        '                         <li><input type="text" lang="ko" data-key="association_ko" class="input-field society-active-item" data-title="협회명(한국어)" placeholder="협회명(한국어)"></li>';
 
     //english check
     if(fnCheckSocietyLang('en')){

@@ -180,7 +180,7 @@ $tab = 'portfolio';
                                         </div>
                                         <div class="active-item">
                                             <ul class="active-list">
-                                                <li><input type="text" lang="ko" data-key="association_ko" class="input-field society-active-item required" data-title="협회(한국어)" placeholder="협회명(한국어)"></li>
+                                                <li><input type="text" lang="ko" data-key="association_ko" class="input-field society-active-item" data-title="협회(한국어)" placeholder="협회명(한국어)"></li>
                                                 <li><input type="text" lang="en" data-key="association_en" class="input-field society-active-item hide" placeholder="Name of Association(English)"></li>
                                                 <li><input type="text" lang="ch" data-key="association_cn" class="input-field society-active-item hide" placeholder="请输入协会(汉语)"></li>
                                             </ul>
