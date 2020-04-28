@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email',60)->unique();
             $table->string('password')->comment('비밀번호');
             $table->string('name',30)->comment('이름');
-            $table->string('home_phone',50)->comment('전화번호');
+            $table->string('home_phone',50)->nullable()->comment('전화번호');
             $table->string('cellphone', 50)->comment('휴대폰번호');
             $table->string('zip_code', 30)->nullable()->comment('우편번호');
             $table->string('address')->comment('주소');

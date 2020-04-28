@@ -51,8 +51,8 @@
                             <!-- <p class="text-error">필수항목입니다. 입력해주세요</p> -->
                         </div>
                         <div class="input-item">
-                            <p class="input-name">전화번호*</p>
-                            <input type="tel" class="input-field required" name="home_phone" data-title="전화번호" placeholder="(-)없이 입력해주세요">
+                            <p class="input-name">전화번호</p>
+                            <input type="tel" class="input-field" name="home_phone" data-title="전화번호" placeholder="(-)없이 입력해주세요">
                             <!-- error -->
                             <!-- <p class="text-error">필수항목입니다. 입력해주세요</p> -->
                             <!-- <p class="text-error">형식이 올바르지 않습니다.</p> -->
