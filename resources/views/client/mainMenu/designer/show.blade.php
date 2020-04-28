@@ -228,10 +228,6 @@ $tab = 'portfolio';
                     </div>
 
                 </div>
-                <!-- //contact -->
-                <div class="btn-wrap btn-edit-wrap">
-                    <a class="btn-black">수정하기</a>
-                </div>
             </div>
         </div>
 

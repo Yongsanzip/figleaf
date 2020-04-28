@@ -48,6 +48,10 @@
                     <td>{{$datas->gender == 0 ? '남자' :'여자'}}</td>
                 </tr>
                 <tr>
+                    <th>등급</th>
+                    <td>{{$datas->role->role_name}}</td>
+                </tr>
+                <tr>
                     <th>이메일</th>
                     <td>
                         {{$datas->email}}
