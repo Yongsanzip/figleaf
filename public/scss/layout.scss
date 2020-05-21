@@ -344,14 +344,8 @@ a{
                 letter-spacing: 0.4px;
                 margin-bottom:10px;
             }
-            .auth-link{
+            .login-link{
                 color:#606060;
-            }
-            .auth-link-row{
-                margin-bottom: 5px;
-                &:last-child{
-                    margin-bottom: 0;
-                }
             }
         }
         .category-box{
@@ -666,7 +660,6 @@ a{
             font-weight: 700;
             line-height: 21px;
             letter-spacing: 1px;
-            margin-bottom: 4px;
         }
         .card-text{
             font-size:13px;
@@ -687,39 +680,6 @@ a{
                     height:100%;
                     background:black;
                 }
-            }
-            .info-box-list {
-                margin-top: 10px;
-            }
-
-            .info-box {
-                display: inline-block;
-                font-size: 12px;
-                color: #2d2d2d;
-                line-height: 20px;
-                margin-right: 16px;
-                padding-left: 20px;
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    left: 0;
-                    top: 2px;
-                    display: inline-block;
-                    width: 16px;
-                    height: 16px;
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    background-size: contain;
-                }
-            }
-
-            .amount::before {
-                background-image: url('#{$commonPath}/ic-product.png');
-            }
-
-            .date::before {
-                background-image: url('#{$commonPath}/ic-calandar.png');
             }
         }
     }
@@ -873,14 +833,11 @@ a{
     color: white;
     font-size: 14px;
     height:40px;
-    line-height: 36px;
+    line-height: 40px;
     text-align: center;
     text-transform: uppercase;
     font-weight:500;
     cursor: pointer;
-    &:hover{
-        color:white;
-    }
 }
 .btn-white{
     display: inline-block;
@@ -890,14 +847,11 @@ a{
     border:1px solid black;
     font-size: 14px;
     height:40px;
-    line-height: 36px;
+    line-height: 40px;
     text-align: center;
     text-transform: uppercase;
     font-weight: 500;
     cursor: pointer;
-    &:hover{
-        color:black;
-    }
 }
 .btn-green{
     display: inline-block;
@@ -913,10 +867,6 @@ a{
     font-weight:500;
     cursor: pointer;
 }
-.btn-m{
-    height: 32px;
-    line-height: 28px;
-}
 /* input */
 .checkbox-wrap{
     display: inline-block;
@@ -929,9 +879,8 @@ a{
         font-size:14px;
         line-height: 16px;
         vertical-align: top;
-        margin-left:5px;
-        font-weight: 400;
-        margin-top: 2px;
+        margin-left:2px;
+        margin-top: 3px;
     }
 }
 
@@ -947,19 +896,14 @@ a{
             font-size:12px;
             padding: 3px 4px;
             a{
-                color: black;
-                padding: 0 5px;
-                border: 0;
-                border-radius: 0;
+                padding: 0px 5px;
             }
         }
         .on{
             color:white;
             font-weight: 700;
             a{
-                color: white;
-                background: black;
-                border-color: white;
+                background:black;
             }
         }
         .prev{
@@ -969,11 +913,6 @@ a{
             background:url('#{$commonPath}/ic-arrow-left-black.png') center no-repeat;
             background-size:16px 16px;
             margin-right:4px;
-            a{
-                width: 100%;
-                height: 100%;
-                background: transparent;
-            }
         }
         .next{
             font-size:0;
@@ -981,11 +920,6 @@ a{
             height:24px;
             background:url('#{$commonPath}/ic-arrow-right-black.png') center no-repeat;
             background-size:16px 16px;
-            a{
-                width: 100%;
-                height: 100%;
-                background: transparent;
-            }
         }
     }
 }

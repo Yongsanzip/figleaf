@@ -1386,7 +1386,6 @@ button {
   margin-left: 10px;
 }
 .con-mypage .mypage-contents .select {
-  width: calc(100% - 657px);
   box-sizing: border-box;
   -webkit-appearance: none;
   -webkit-border-radius: 0;
@@ -1678,9 +1677,9 @@ button {
 .header-sub .logo {
   margin: auto;
   font-size: 0;
-  width: 105px;
+  width: 120px;
   height: 48px;
-  background: url("../images/common/logo.png") no-repeat center;
+  background: url("../images/common/logo-horizontal-black.png") no-repeat center;
   background-size: cover;
 }
 .header-sub .logo a {
@@ -4659,6 +4658,7 @@ button {
   text-transform: uppercase;
   letter-spacing: 10px;
   font-weight: 300;
+  margin-bottom: 30px;
 }
 .con-portfolio-view .headline-wrap {
   margin-bottom: 30px;
@@ -4666,6 +4666,29 @@ button {
 .con-portfolio-view .headline-wrap .headline {
   text-transform: uppercase;
   letter-spacing: 10px;
+}
+.con-portfolio-view .designer-name {
+  font-size: 36px;
+  font-weight: 700;
+  background: #181818;
+  color: white;
+  letter-spacing: 10px;
+  padding: 24px 32px;
+}
+.con-portfolio-view .designer-name span {
+  display: inline-block;
+  font-size: 16px;
+  letter-spacing: 4px;
+  font-weight: 400;
+  vertical-align: middle;
+  text-transform: capitalize;
+}
+.con-portfolio-view .designer-type {
+  background: #eeeeee;
+  font-size: 24px;
+  padding: 20px 32px;
+  text-transform: uppercase;
+  letter-spacing: 8px;
 }
 .con-portfolio-view .contents-wrap {
   margin-bottom: 80px;

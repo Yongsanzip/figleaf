@@ -337,14 +337,8 @@ a:hover, a:focus {
   letter-spacing: 0.4px;
   margin-bottom: 10px;
 }
-.header .navigation .user-box .auth-link {
+.header .navigation .user-box .login-link {
   color: #606060;
-}
-.header .navigation .user-box .auth-link-row {
-  margin-bottom: 5px;
-}
-.header .navigation .user-box .auth-link-row:last-child {
-  margin-bottom: 0;
 }
 .header .navigation .category-box {
   padding: 20px;
@@ -659,7 +653,6 @@ a:hover, a:focus {
   font-weight: 700;
   line-height: 21px;
   letter-spacing: 1px;
-  margin-bottom: 4px;
 }
 .card .card-contents .card-text {
   font-size: 13px;
@@ -679,35 +672,6 @@ a:hover, a:focus {
 .card .card-contents .card-info .rating .rating-bar {
   height: 100%;
   background: black;
-}
-.card .card-contents .card-info .info-box-list {
-  margin-top: 10px;
-}
-.card .card-contents .card-info .info-box {
-  display: inline-block;
-  font-size: 12px;
-  color: #2d2d2d;
-  line-height: 20px;
-  margin-right: 16px;
-  padding-left: 20px;
-}
-.card .card-contents .card-info .info-box::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 2px;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}
-.card .card-contents .card-info .amount::before {
-  background-image: url("../images/common/ic-product.png");
-}
-.card .card-contents .card-info .date::before {
-  background-image: url("../images/common/ic-calandar.png");
 }
 .card .card-footer {
   font-size: 12px;
@@ -866,14 +830,11 @@ a:hover, a:focus {
   color: white;
   font-size: 14px;
   height: 40px;
-  line-height: 36px;
+  line-height: 40px;
   text-align: center;
   text-transform: uppercase;
   font-weight: 500;
   cursor: pointer;
-}
-.btn-black:hover {
-  color: white;
 }
 
 .btn-white {
@@ -884,14 +845,11 @@ a:hover, a:focus {
   border: 1px solid black;
   font-size: 14px;
   height: 40px;
-  line-height: 36px;
+  line-height: 40px;
   text-align: center;
   text-transform: uppercase;
   font-weight: 500;
   cursor: pointer;
-}
-.btn-white:hover {
-  color: black;
 }
 
 .btn-green {
@@ -909,11 +867,6 @@ a:hover, a:focus {
   cursor: pointer;
 }
 
-.btn-m {
-  height: 32px;
-  line-height: 28px;
-}
-
 /* input */
 .checkbox-wrap {
   display: inline-block;
@@ -927,9 +880,8 @@ a:hover, a:focus {
   font-size: 14px;
   line-height: 16px;
   vertical-align: top;
-  margin-left: 5px;
-  font-weight: 400;
-  margin-top: 2px;
+  margin-left: 2px;
+  margin-top: 3px;
 }
 
 /* pagination */
@@ -946,19 +898,14 @@ a:hover, a:focus {
   padding: 3px 4px;
 }
 .pagination-wrap .pagination li a {
-  color: black;
-  padding: 0 5px;
-  border: 0;
-  border-radius: 0;
+  padding: 0px 5px;
 }
 .pagination-wrap .pagination .on {
   color: white;
   font-weight: 700;
 }
 .pagination-wrap .pagination .on a {
-  color: white;
   background: black;
-  border-color: white;
 }
 .pagination-wrap .pagination .prev {
   font-size: 0;
@@ -968,22 +915,12 @@ a:hover, a:focus {
   background-size: 16px 16px;
   margin-right: 4px;
 }
-.pagination-wrap .pagination .prev a {
-  width: 100%;
-  height: 100%;
-  background: transparent;
-}
 .pagination-wrap .pagination .next {
   font-size: 0;
   width: 24px;
   height: 24px;
   background: url("../images/common/ic-arrow-right-black.png") center no-repeat;
   background-size: 16px 16px;
-}
-.pagination-wrap .pagination .next a {
-  width: 100%;
-  height: 100%;
-  background: transparent;
 }
 
 /******** media query ********/
