@@ -78,7 +78,7 @@
                             <p class="input-name">성별</p>
                             <div class="gender">
                                 <label class="checkbox-wrap">
-                                    <input type="radio" name="gender" value="0">
+                                    <input type="radio" name="gender" value="0" checked>
                                     <p>남자</p>
                                 </label>
                                 <label class="checkbox-wrap">
