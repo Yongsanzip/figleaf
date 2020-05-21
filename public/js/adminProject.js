@@ -122,7 +122,7 @@ var storeAnswer = function(i) {
     };
 
     if (confirm('작성하시겠습니까?')) {
-        callAjax('POST',true,'/admin_question/'+id,"JSON",'JSON',data,error,success);
+        callAjax('POST',true,'/admin_question',"JSON",'JSON',data,error,success);
     }
 };
 
