@@ -7,7 +7,7 @@
     <div style="width:100%;max-width:800px;margin: auto;text-align: center;">
         <div style="padding:80px 0;">
             <div style="width: 50%;min-width:150px;max-width: 240px;margin: auto;margin-bottom:50px;">
-                <img src="https://figleaf.co.kr/images/common/logo-horizontal-black.png" alt="logo">
+                <img src="https://figleaf.co.kr/images/common/logo-horizontal-black.png" alt="logo" style="width: 100%">
             </div>
             <h2 style="font-size:32px;font-weight: 300;color:#181818;margin-bottom:40px;">안녕하세요 피그리프입니다.</h2>
             <p style="font-size:14px;color:#181818;font-weight:400;margin-bottom:40px;">
