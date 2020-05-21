@@ -82,7 +82,7 @@ $tab = 'project';
                             <div class="project-notice">
                                 <h2 class="notice-title">Designer</h2>
                                 <ul class="notice-list">
-                                    <li>아직 프젝트를 생성할 권한이없습니다.</li>
+                                    <li>아직 프로젝트를 생성할 권한이없습니다.</li>
                                     <li>프로젝트를 등록하고 싶으시다면, 포트폴리오를 생성하고 디자이너로 전환해보세요!</li>
                                 </ul>
                             </div>
