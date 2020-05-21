@@ -53,7 +53,7 @@ $tab = 'portfolio';
                             </div>
                             <!-- 01-B 프로필설명 -->
                             <div class="input-item profile-text">
-                                <h3 class="title">프로필 설명</h3>
+                                <h3 class="title">* 프로필 설명</h3>
                                 <div class="lang-list">
                                     <label class="lang-check">
                                         <input type="checkbox" lang="ko" checked disabled>
@@ -76,7 +76,7 @@ $tab = 'portfolio';
                             </div>
                             <!-- 01-C 히스토리 -->
                             <div class="input-item">
-                                <h3 class="title">히스토리</h3>
+                                <h3 class="title">* 히스토리</h3>
                                 <div class="lang-list history-lang">
                                     <label class="lang-check">
                                         <input type="checkbox" lang="ko" checked disabled>
@@ -116,7 +116,7 @@ $tab = 'portfolio';
                             </div>
                             <!-- 01-D 수상내역 -->
                             <div class="input-item">
-                                <h3 class="title">수상내역</h3>
+                                <h3 class="title">* 수상내역</h3>
                                 <div class="lang-list award-lang">
                                     <label class="lang-check">
                                         <input type="checkbox" lang="ko" checked disabled>
@@ -156,7 +156,7 @@ $tab = 'portfolio';
                             </div>
                             <!-- 01-E 협회 -->
                             <div class="input-item">
-                                <h3 class="title">협회</h3>
+                                <h3 class="title">* 협회</h3>
                                 <div class="lang-list society-lang">
                                     <label class="lang-check">
                                         <input type="checkbox" lang="ko" checked disabled>
@@ -198,7 +198,7 @@ $tab = 'portfolio';
                         <div class="tab-contents-box">
                             <!-- 02-A 브랜드명 -->
                             <div class="input-item brand-name">
-                                <h3 class="title">브랜드명</h3>
+                                <h3 class="title">* 브랜드명</h3>
                                 <div class="lang-list">
                                     <label class="lang-check">
                                         <input type="checkbox" lang="ko" checked disabled>
@@ -221,7 +221,7 @@ $tab = 'portfolio';
                             </div>
                             <!-- 02-B 대표이미지 -->
                             <div class="input-item">
-                                <h3 class="title">대표이미지(썸네일)</h3>
+                                <h3 class="title">* 대표이미지(썸네일)</h3>
                                 <p class="text-caption">최소 280*360px의 jpg, jpeg, png파일(10MB 미만)</p>
                                 <label class="upload-file">
                                     <input type="file" name="brand_thumbnail_image" onchange="fnUploadFile(this)" accept="image/jpeg, image/jpg, image/png">
@@ -241,7 +241,7 @@ $tab = 'portfolio';
                             </div>
                             <!-- 02-D 브랜드설명 -->
                             <div class="input-item">
-                                <h3 class="title">브랜드 설명</h3>
+                                <h3 class="title">* 브랜드 설명</h3>
                                 <div class="lang-list">
                                     <label class="lang-check">
                                         <input type="checkbox" lang="ko" checked disabled>

@@ -26,18 +26,7 @@
                 <tr>
                     <th>회원구분</th>
                     <td>
-                        <select class="text-field w-120px">
-                            <option disabled selected>회원구분{{$datas->role_id}}</option>
-                            @if($roles)
-                                @foreach($roles as $role)
-                                    <option value="{{$role->id}}" {{$datas->role_id == $role->id ? 'selected' : ''}}>{{$role->role_name}}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                        <label class="checkbox-group">
-                            <input type="checkbox">
-                            <p>프로젝트 등록 허가</p>
-                        </label>
+                        {{$datas->role->role_name}}
                     </td>
                 </tr>
                 <tr>

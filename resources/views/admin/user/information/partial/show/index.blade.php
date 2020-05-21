@@ -27,10 +27,6 @@
                         @if( in_array($datas->role_id,array(1,2),true) )
                         <div class="badge badge-green">유저</div>
                         @endif
-                        <label class="checkbox-group">
-                            <input type="checkbox">
-                            <p>프로젝트 등록 허가</p>
-                        </label>
                         @if( in_array($datas->role_id,array(3,4),true) )
                         <div class="badge badge-red">관리자</div>
                         @endif

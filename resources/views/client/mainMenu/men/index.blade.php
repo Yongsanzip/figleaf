@@ -22,7 +22,7 @@
                         <a href="">top</a>
                     </li>
                     <li>
-                        <a href="">t-shirts/handie</a>
+                        <a href="">t-shirts/HOODIE</a>
                     </li>
                     <li>
                         <a href="">pants</a>
