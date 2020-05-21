@@ -39,6 +39,7 @@ Route::group(['middleware'=>'locale'],function(){
     Route::post('/agree_complete','Auth\AgreeController@complete');
     // 회원가입
     Route::post('/register', 'Auth\RegisterController@create')->name('register');
+    Route::post('/check_email','Auth\RegisterController@check_email');
     // 이메일 찾기
     Route::resource('email_find', 'Auth\Email\EmailFindController');
     // 문의하기

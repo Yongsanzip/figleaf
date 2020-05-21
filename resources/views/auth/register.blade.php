@@ -25,7 +25,12 @@
                         </div>
                         <div class="input-item">
                             <p class="input-name">이메일*</p>
-                            <input type="email" class="input-field required" data-title="이메일" name="email" placeholder="이메일" autofocus>
+                            <input type="email" id="email" class="input-field required" data-title="이메일" name="email" placeholder="이메일" autofocus onchange="fn_email_check(this);">
+                            <div>
+                                <p id="email_regex" class="text-error" style="display: none;">이메일 형식이 잘못되었습니다.</p>
+                                <p id="email_check_fail" class="text-error" style="display: none;">이미사용되고 있는 아이디 입니다.</p>
+                                <p id="email_check_success" class="text-success" style="display: none;">사용가능한 이메일입니다.</p>
+                            </div>
                             <!-- error -->
                             <!-- <p class="text-error">필수항목입니다. 입력해주세요</p> -->
                             <!-- <p class="text-error">형식이 올바르지 않습니다.</p> -->
@@ -33,9 +38,6 @@
                         <div class="input-item">
                             <p class="input-name">비밀번호*</p>
                             <input type="password" class="input-field" name="password" placeholder="비밀번호">
-                            <!-- error -->
-                            <!-- <p class="text-error">필수항목입니다. 입력해주세요.</p> -->
-                            <!-- <p class="text-error">형식이 올바르지 않습니다.</p> -->
                         </div>
                         <div class="input-item">
                             <p class="input-name">비밀번호 확인*</p>
@@ -125,6 +127,28 @@
                 return false;
             }
             return false;
+        }
+        var fn_email_check = function(e){
+            document.getElementById('email_regex').style.display='none';
+            if(isEmail(e.value)){
+                var params = {email:e.value};
+                callAjax('POST',true,'/check_email','JSON','JSON',params,gn_ajax_error,fn_check_email_success);
+            } else {
+                document.getElementById('email').focus();
+                document.getElementById('email').value = '';
+                document.getElementById('email_regex').style.display='block';
+            }
+
+        }
+        var fn_check_email_success = function(e){
+            if(e.status){
+                document.getElementById('email_check_success').style.display='block';
+                document.getElementById('email_check_fail').style.display='none';
+            } else {
+                document.getElementById('email_check_success').style.display='none';
+                document.getElementById('email_check_fail').style.display='block';
+                document.getElementById('email').value='';
+            }
         }
     </script>
 
