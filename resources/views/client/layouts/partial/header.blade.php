@@ -83,7 +83,7 @@
 
     <!-- mobile -->
     <div class="mobile">
-        <h1 class="logo"><a href="#">피그리프</a></h1>
+        <h1 class="logo"><a href="/">피그리프</a></h1>
         <button class="btn-search" onclick="fnOpenSearch();">검색</button>
         <div class="btn-hamburger" onclick="fnOpenNav();">
             <span>menu</span>
