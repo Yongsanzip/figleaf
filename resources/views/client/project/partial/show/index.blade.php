@@ -464,21 +464,21 @@
                     <p class="modal-title">디자이너에게 문의하기</p>
                     <div class="row">
                         <p class="title">project</p>
-                        <p class="project-name">가볍고 활동하기 좋은 면 슬립</p>
+                        <p class="project-name">{{$data->title}}</p>
                         <div class="project-category">
-                            <span>women's apparel</span>
-                            <span>top</span>
+                            <span>{{ $data->category->category_name }}</span>
+                            <span>{{ $data->category_detail->category_name}}</span>
                         </div>
                     </div>
                     <div class="row">
                         <p class="subtitle">project introduction</p>
                         <p class="designer-text">
-                            이것을 만천하의 우리의 전인 굳세게 속에 할지라도 위하여서. 소리다.이것은 투명하되 꽃 그들은 것이다. 동산에는 따뜻한 뛰노는 때문이다. 얼마나 따뜻한 보배를 아름답고 모래뿐일 가지에 뛰노는 지혜는 약동하다. 피어나는 것이 이것을 밥을 피가 영원히 힘있다. 청춘이 품으며, 낙원을 이상은 인간의 날카로우나 아니한 운다. 넣는 그림자는 인생에 우리는 앞이 피다. 열락의 바이며, 있을 끓는 이것이다. 따뜻한 없는 황금시대를 못하다 피는 청춘을 주며, 가진 것이다. 바이며, 것은 기관과 투명하되 얼마나 가진 뿐이다.
+                            {{ $data->summary }}
                         </p>
                     </div>
                     <div class="row">
                         <p class="subtitle">designer</p>
-                        <p class="owner-name">김해우<span>haewoo kim</span></p>
+                        <p class="owner-name">{{$data->user->name}}</p>
                         <textarea class="textarea" placeholder="문의 내용을 입력하세요" spellcheck="false"></textarea>
                     </div>
                     <div class="btn-wrap">
