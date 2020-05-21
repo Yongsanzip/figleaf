@@ -13,7 +13,7 @@ class AddUsersToMessageDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::table('message_details', function (Blueprint $table) {
+        Schema::table('messages', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
@@ -25,8 +25,8 @@ class AddUsersToMessageDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::table('message_details', function (Blueprint $table) {
-            $table->dropForeign('message_details_user_id_foreign');
+        Schema::table('messages', function (Blueprint $table) {
+            $table->dropForeign('messages_user_id_foreign');
         });
     }
 }

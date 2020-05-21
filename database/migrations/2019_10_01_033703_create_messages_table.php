@@ -18,6 +18,7 @@ class CreateMessagesTable extends Migration
             //컬럼 명세
             $table->bigIncrements('id');
             $table->bigInteger('project_id')->unsigned()->comment('프로젝트 id');
+            $table->bigInteger('user_id')->unsigned()->comment('유저 id');
             $table->timestamps();
             $table->softDeletes();
         });

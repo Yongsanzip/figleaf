@@ -19,7 +19,6 @@ class CreateMessageDetailsTable extends Migration
             //컬럼 명세
             $table->bigIncrements('id');
             $table->bigInteger('message_id')->unsigned()->comment('메세지 id');
-            $table->bigInteger('user_id')->unsigned()->comment('유저 id');
             $table->text('content')->comment('컨텐츠');
             $table->tinyInteger('write_yn')->default(0)->comment('읽음 여부');
             $table->timestamps();
