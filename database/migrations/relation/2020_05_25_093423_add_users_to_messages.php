@@ -27,7 +27,7 @@ class AddUsersToMessages extends Migration
     public function down()
     {
         Schema::table('messages', function (Blueprint $table) {
-            $table->dropForeign(['messages_user_id_foreign','messages_project_user_id_foreign']);
+            $table->dropForeign(['user_id','project_user_id']);
         });
     }
 }
