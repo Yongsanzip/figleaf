@@ -1,6 +1,7 @@
 <?php
 // url : /mypage_message/1
 // 메시지 상세보기
+$tab='message';
 ?>
 @extends('client.layouts.app')
 @section('content')
@@ -11,88 +12,67 @@
         <div class="inner">
             <div class="con-mypage">
                 <h2 class="title">my page</h2>
-                <div class="text-center">
-                    <div class="user-info-wrap">
-                        <div class="user-info">
-                            <p class="user-id">김해우(hwkim920615)<span>님</span></p>
-                            <div class="badge badge-skyblue">new</div>
-                        </div>
-                        <div class="user-point">
-                            <p class="caption">point</p>
-                            <p class="point">3,442</p>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- menu list -->
-                <ul class="menu-list">
-                    <li>
-                        <a href="">회원정보</a>
-                    </li>
-                    <li>
-                        <a href="">후원 현황</a>
-                    </li>
-                    <li>
-                        <a href="">내가 만든 프로젝트</a>
-                    </li>
-                    <li>
-                        <a href="">작성한 커뮤니티</a>
-                    </li>
-                    <li class="on">
-                        <a href="">메시지</a>
-                    </li>
-                    <li>
-                        <a href="">1:1 문의</a>
-                    </li>
-                    <li>
-                        <a href="">포트폴리오</a>
-                    </li>
-                </ul>
+            @include('client.mypage.partial.navi')
+            <!--// menu list -->
                 <!--// menu list -->
 
                 <!-- mypage contents -->
                 <div class="mypage-contents">
                     <div class="message-header">
-                        <p class="message-name">김해우</p>
-                        <h2 class="message-title">미리 준비하는 서울 패션 위크 컬렉션에등장한 두툼한 겨울 코트 1+1 이벤트</h2>
-                        <a href="" class="btn-white">프로젝트로 이동</a>
+                        <p class="message-name">{{$project->user->name}}</p>
+                        <h2 class="message-title">{{$project->title}}</h2>
+                        <a href="{{route('project.show',['id'=>$project->id])}}" class="btn-white">프로젝트로 이동</a>
                     </div>
-                    <div class="message-contents">
+                    <div class="message-contents" id="scroll_area"  style="overflow:auto" >
                         <ul class="message-list">
                             <!-- 날짜 -->
                             <li class="date">
-                                <p>2019.09.18</p>
+                                <p>{{\Carbon\Carbon::today()->format('Y-m-d')}}</p>
                             </li>
-                            <!-- 받은 메세지 -->
-                            <li class="receive">
-                                <div class="bubble">
-                                    <p class="text">안녕하세요 김해우 고객님,<br> 무엇을 도와드릴까요</p>
-                                    <span class="time">13:00</span>
-                                </div>
-                            </li>
-                            <!-- 보낸 메세지 -->
-                            <li class="send">
-                                <div class="bubble">
-                                    <p class="text">안녕하세요</p>
-                                    <span class="time">13:00</span>
-                                </div>
-                            </li>
+                            <div id="message_list" class="message-list" >
+                            @forelse($datas as $key=>$data)
+                                @if($data->user_id == auth()->user()->id)
+                                    <!-- 보낸 메세지 -->
+                                        <li class="send">
+                                            <div class="bubble">
+                                                <p class="text">{{$data->content}}</p>
+                                                <span class="time">{{$data->created_at->format('H:i')}}</span>
+                                            </div>
+                                        </li>
+                                @else
+                                    <!-- 받은 메세지 -->
+                                        <li class="receive">
+                                            <div class="bubble">
+                                                <p class="text">{{$data->content}}</p>
+                                                <span class="time">{{$data->created_at->format('H:i')}}</span>
+                                            </div>
+                                        </li>
+                                    @endif
+                                @if($key+1==$datas->count())
+                                        <input type="hidden" id="last_id" value="{{$data->id}}">
+                                @endif
+                                @empty
+                                @endforelse
+                            </div>
                         </ul>
                     </div>
                     <div class="message-footer">
-                        <form>
-                            <textarea class="textarea" spellcheck="false" placeholder="내용을 입력해주세요"></textarea>
-                            <button class="btn-black">전송</button>
-                        </form>
+                        <input type="hidden" id="designer_name" value="{{$project->user->name}}" />
+                        <textarea id="message_content" name="content" class="textarea" placeholder="문의 내용을 입력하세요" spellcheck="false"></textarea>
+                        <button onclick="gn_detail_send_message('{{$id}}')" class="btn-black">전송</button>
                     </div>
                 </div>
-                <!--// mypage contents -->
-
-
             </div>
         </div>
-
     </main>
-
-
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded',function(){
+            document.getElementById('scroll_area').scrollTo(0, document.getElementById('scroll_area').scrollHeight);
+            setInterval(function () {
+                gn_get_message_list('{{$id}}',document.getElementById('last_id').value);
+            },3000);
+        })
+    </script>
+    <!--// mypage contents -->
 @endsection

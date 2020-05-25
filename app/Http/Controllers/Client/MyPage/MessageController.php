@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client\MyPage;
 
 use App\Message;
 use App\MessageDetail;
+use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -27,25 +28,13 @@ class MessageController extends Controller{
      ************************************************************************/
     public function index(){
         try {
-            $datas = Message::
-            return view('client.mypage.message.index');
-        } catch (\Exception $e){
-            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
-            $title = '500 ERROR';
-            return view('errors.error',compact('description','title'));
-        }
-    }
+            if(auth()->user()->is_designer()){
+                $datas = Message::where('project_user_id','=',auth()->user()->id)->get();
+            } else {
+                $datas = Message::where('user_id','=',auth()->user()->id)->get();
+            }
 
-    /************************************************************************
-     * Display create view
-     * @description : 설명1 - 설명2
-     * @url         : /url
-     * @method      : GET
-     * @return      : view , data , msg ...
-     ************************************************************************/
-    public function create(){
-        try {
-
+            return view('client.mypage.message.index',compact('datas'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
@@ -63,8 +52,10 @@ class MessageController extends Controller{
     public function store(Request $request){
         try {
             if(Auth::check()){
+                $project = Project::find($request->project);
                 $message = Message::firstOrCreate([
-                    'project_id'=>$request->project,
+                    'project_id'=>$project->id,
+                    'project_user_id'=>$project->user_id,
                     'user_id'=>auth()->user()->id,
                 ]);
                 $detail = MessageDetail::create([
@@ -96,7 +87,10 @@ class MessageController extends Controller{
      ************************************************************************/
     public function show($id){
         try {
-
+        $datas = MessageDetail::whereMessageId($id)->whereDate('created_at',\Carbon\Carbon::today())->get();
+        $project = Project::find(Message::find($id)->project_id);
+        $last_id = MessageDetail::whereMessageId($id)->orderBy('created_at','DESC')->first()->id;
+        return view('client.mypage.message.partial.show.index',compact('datas','project','id'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
@@ -104,22 +98,6 @@ class MessageController extends Controller{
         }
     }
 
-    /************************************************************************
-     * Display edit view
-     * @description : 설명1 - 설명2
-     * @url         : /url/{id}/edit
-     * @method      : /GET
-     * @return      : view , data , msg ...
-     ************************************************************************/
-    public function edit($id) {
-        try {
-
-        } catch (\Exception $e){
-            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
-            $title = '500 ERROR';
-            return view('errors.error',compact('description','title'));
-        }
-    }
 
     /************************************************************************
      * Display update action
@@ -130,7 +108,18 @@ class MessageController extends Controller{
      ************************************************************************/
     public function update(Request $request, $id){
         try {
+            $msg = '';
+            $detail = MessageDetail::create([
+                'message_id'=>$id,
+                'user_id'=>auth()->user()->id,
+                'content'=>$request->contents,
+            ]);
+            $code = 1;
+            $datas = MessageDetail::whereMessageId($id)->where('id','>',$request->last_id)->whereDate('created_at',\Carbon\Carbon::today())->get();
+            $id=$detail->id;
 
+            $view = view('client.mypage.message.partial.detail', compact('datas'))->render();
+            return response()->json(['html'=>$view,'code'=>$code,'last_id'=>$id],200,[],JSON_PRETTY_PRINT);
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
@@ -138,20 +127,19 @@ class MessageController extends Controller{
         }
     }
 
-    /************************************************************************
-     * Display destroy action
-     * @description : 설명 1 설명
-     * @url         : /url/{id}
-     * @method      : DELETE
-     * @return      : view , data , msg ...
-     ************************************************************************/
-    public function destroy($id) {
-        try {
+    public function message_render(Request $request){
+            $datas = MessageDetail::whereMessageId($request->message)->where('id','>',$request->last_id)->whereDate('created_at',\Carbon\Carbon::today())->orderBy('created_at',"DESC")->get();
+            if($datas->count() >0){
+                $code = 1;
+                $id = $datas->first()->id;
+                $view = view('client.mypage.message.partial.detail', compact('datas'))->render();
+            } else {
+                $code =0;
+                $view ='';
+                $id = '';
+            }
 
-        } catch (\Exception $e){
-            $description = '잘못된 접근입니다. <br>'.$e->getMessage();
-            $title = '500 ERROR';
-            return view('errors.error',compact('description','title'));
-        }
+            return response()->json(['html'=>$view,'code'=>$code,'last_id'=>$id],200,[],JSON_PRETTY_PRINT);
     }
+
 }

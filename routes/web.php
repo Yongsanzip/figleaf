@@ -93,6 +93,7 @@ Route::group(['middleware'=>'locale'],function(){
     Route::resource('mypage_community', 'Client\MyPage\CommunityController');
     // 마이페이지 - 메시지
     Route::resource('mypage_message', 'Client\MyPage\MessageController');
+    Route::post('/get_message', 'Client\MyPage\MessageController@message_render');
     // 마이페이지 - 1:1 문의
     Route::resource('mypage_question', 'Client\MyPage\QuestionController');
     // 마이페이지 - 포트폴리오

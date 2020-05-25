@@ -223,14 +223,34 @@ function isEmail(asValue) {
 
 
 
-var fn_send_message =function(f){
+var fn_send_message =function(f,func){
     if(document.getElementById('message_content').value != null){
         if(confirm(document.getElementById('designer_name').innerText+" 디자이너님 에게 메세지를 전송하시겠습니까?")){
             var params = {project:f,contents:document.getElementById('message_content').value};
-            callAjax('POST',true,'/mypage_message','JSON','JSON',params,gn_ajax_error,fn_send_success_ajax);
+            callAjax('POST',true,'/mypage_message','JSON','JSON',params,gn_ajax_error,func);
         }
     } else {
         alert("문의내용을 입력해주세요!");
         return false;
     }
 }
+
+var gn_detail_send_message = function(f){
+    var last_id = document.getElementById('last_id').value;
+    var params = {contents:document.getElementById('message_content').value,last_id:last_id};
+    callAjax('PUT',true,'/mypage_message/'+f,'JSON','JSON',params,gn_ajax_error,gn_send_message_success);
+}
+
+var gn_send_message_success = function(e){
+    if(e.code){
+        console.log(e.last_id);
+        $('#message_list').append(e.html);
+        document.getElementById('last_id').value = e.last_id;
+    }
+};
+
+
+var gn_get_message_list = function(e,last_id){
+    var params = {message:e,last_id:last_id};
+    callAjax('POST',true,'/get_message','JSON','JSON',params,gn_ajax_error,gn_send_message_success);
+};

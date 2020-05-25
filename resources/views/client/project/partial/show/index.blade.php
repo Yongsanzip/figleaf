@@ -481,7 +481,7 @@
                         <textarea id="message_content" name="content" class="textarea" placeholder="문의 내용을 입력하세요" spellcheck="false"></textarea>
                     </div>
                     <div class="btn-wrap">
-                        <button type="button" class="btn-black" onclick="fn_send_message('{{$data->id}}')">메세지 전송하기</button>
+                        <button type="button" class="btn-black" onclick="fn_send_message('{{$data->id}}',fn_send_success_ajax)">메세지 전송하기</button>
                     </div>
                 <button class="btn-close" onclick="fnCloseModal()">모달닫기</button>
             </div>

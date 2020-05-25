@@ -20,92 +20,55 @@ $tab='message';
                 <!-- mypage contents -->
                 <div class="mypage-contents">
                     <div class="mypage-tab-list">
-                        <a href="" class="mypage-tab on">문의/후원한 프로젝트</a>
-                        <a href="" class="mypage-tab">만든 프로젝트</a>
+                        @if(auth()->user()->is_designer())
+                            <a href="" class="mypage-tab on">만든 프로젝트</a>
+                            @else
+                            <a href="" class="mypage-tab on">문의/후원한 프로젝트</a>
+                        @endif
+
+
                     </div>
                     <div class="project-message-list">
-                        <!-- card * 10 -->
-                        <div class="project-message-card">
-                            <div class="card-image">
-                                <img src="../images/dummy/img-dummy-01.png" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="card-header">
-                                    <h3 class="card-title">
-                                        <a href="">
-                                            미리 준비하는 서울패션위크 컬렉션에 등장한 두툼한 겨울코트 1+1 이벤트
-                                        </a>
-                                    </h3>
-                                    <div class="new">new</div>
-                                    <p class="card-date">2019.08.22 12:30</p>
+                        @forelse($datas as $data)
+                            <div class="project-message-card">
+                                <div class="card-image">
+                                    <img src="../images/dummy/img-dummy-01.png" alt="">
                                 </div>
-                                <p class="card-name">Sophie Morrison</p>
-                                <p class="card-message">
-                                    제가 후원한 프로젝트 관련하여 질문이 있어 문의 드렸습니다. 배송 일자가 아직은 정해지지 않은 것 인가요?
-                                </p>
-                            </div>
-                        </div>
-                        <!--// card -->
-                        <div class="project-message-card">
-                            <div class="card-image">
-                                <img src="../images/dummy/img-dummy-01.png" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="card-header">
-                                    <h3 class="card-title">
-                                        <a href="">
-                                            미리 준비하는 서울패션위크 컬렉션에 등장한 두툼한 겨울코트 1+1 이벤트
-                                        </a>
-                                    </h3>
-                                    <div class="new">new</div>
-                                    <p class="card-date">2019.08.22 12:30</p>
+                                <div class="card-contents">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            <a href="{{route('mypage_message.show',['id'=>$data->id])}}">
+                                                {{$data->project->title}}
+                                            </a>
+                                        </h3>
+                                        <div class="new">new</div>
+                                        <p class="card-date">{{$data->latest_time()->created_at}}</p>
+                                    </div>
+                                    <p class="card-name">{{$data->user->name}}</p>
+                                    <p class="card-message">
+                                        {{$data->latest_time()->content}}
+                                    </p>
                                 </div>
-                                <p class="card-name">Sophie Morrison</p>
-                                <p class="card-message">
-                                    제가 후원한 프로젝트 관련하여 질문이 있어 문의 드렸습니다. 배송 일자가 아직은 정해지지 않은 것 인가요?
-                                </p>
                             </div>
-                        </div>
-                        <div class="project-message-card">
-                            <div class="card-image">
-                                <img src="../images/dummy/img-dummy-01.png" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="card-header">
-                                    <h3 class="card-title">
-                                        <a href="">
-                                            미리 준비하는 서울패션위크 컬렉션에 등장한 두툼한 겨울코트 1+1 이벤트
-                                        </a>
-                                    </h3>
-                                    <div class="new">new</div>
-                                    <p class="card-date">2019.08.22 12:30</p>
+                            @empty
+                            <div class="project-message-card">
+                                    <div class="card-image">
+                                        <img src="../images/common/img-empty-mail.png" alt="" width="100px">
+                                    </div>
+                                    <div class="card-contents">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <a href="">
+                                                    받은 메세지가 존재하지 않습니다.
+                                                </a>
+                                            </h3>
+                                        </div>
+                                        <p class="card-name">받은 메세지가 존재하지 않습니다.</p>
+                                        <p class="card-message">
+                                        </p>
+                                    </div>
                                 </div>
-                                <p class="card-name">Sophie Morrison</p>
-                                <p class="card-message">
-                                    제가 후원한 프로젝트 관련하여 질문이 있어 문의 드렸습니다. 배송 일자가 아직은 정해지지 않은 것 인가요?
-                                </p>
-                            </div>
-                        </div>
-                        <div class="project-message-card">
-                            <div class="card-image">
-                                <img src="../images/dummy/img-dummy-01.png" alt="">
-                            </div>
-                            <div class="card-contents">
-                                <div class="card-header">
-                                    <h3 class="card-title">
-                                        <a href="">
-                                            미리 준비하는 서울패션위크 컬렉션에 등장한 두툼한 겨울코트 1+1 이벤트
-                                        </a>
-                                    </h3>
-                                    <div class="new">new</div>
-                                    <p class="card-date">2019.08.22 12:30</p>
-                                </div>
-                                <p class="card-name">Sophie Morrison</p>
-                                <p class="card-message">
-                                    제가 후원한 프로젝트 관련하여 질문이 있어 문의 드렸습니다. 배송 일자가 아직은 정해지지 않은 것 인가요?
-                                </p>
-                            </div>
-                        </div>
+                        @endforelse
                     </div>
                     <div class="btn-wrap">
                         <button class="btn-black">더보기</button>
