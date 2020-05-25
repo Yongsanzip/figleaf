@@ -16,7 +16,7 @@ class MessageController extends Controller{
      * @description :
      ************************************************************************/
     public function __construct() {
-
+        $this->middleware('auth');
     }
 
     /************************************************************************
