@@ -17,14 +17,8 @@ $tab='message';
                     @include('client.mypage.partial.navi')
                 <!--// menu list -->
 
-                <div class="mypage-contents">
-                    <p class="card-message">
-                        준비중입니다.
-                    </p>
-                </div>
-
                 <!-- mypage contents -->
-                {{--<div class="mypage-contents">
+                <div class="mypage-contents">
                     <div class="mypage-tab-list">
                         <a href="" class="mypage-tab on">문의/후원한 프로젝트</a>
                         <a href="" class="mypage-tab">만든 프로젝트</a>
@@ -116,7 +110,7 @@ $tab='message';
                     <div class="btn-wrap">
                         <button class="btn-black">더보기</button>
                     </div>
-                </div>--}}
+                </div>
                 <!--// mypage contents -->
 
 

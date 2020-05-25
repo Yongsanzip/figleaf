@@ -460,7 +460,6 @@
         </div>
         <div class="modal-overlay">
             <div class="project-modal">
-                <form>
                     <p class="modal-title">디자이너에게 문의하기</p>
                     <div class="row">
                         <p class="title">project</p>
@@ -478,15 +477,26 @@
                     </div>
                     <div class="row">
                         <p class="subtitle">designer</p>
-                        <p class="owner-name">{{$data->user->name}}</p>
-                        <textarea class="textarea" placeholder="문의 내용을 입력하세요" spellcheck="false"></textarea>
+                        <p id="designer_name" class="owner-name">{{$data->user->name}}</p>
+                        <textarea id="message_content" name="content" class="textarea" placeholder="문의 내용을 입력하세요" spellcheck="false"></textarea>
                     </div>
                     <div class="btn-wrap">
-                        <button class="btn-black">메세지 전송하기</button>
+                        <button type="button" class="btn-black" onclick="fn_send_message('{{$data->id}}')">메세지 전송하기</button>
                     </div>
-                </form>
                 <button class="btn-close" onclick="fnCloseModal()">모달닫기</button>
             </div>
         </div>
     </main>
+    <script type="text/javascript">
+        var fn_send_success_ajax = function(e){
+            if(e.code == 999){
+                alert(e.msg);
+                location.href='/login';
+            } else {
+                alert(e.msg);
+                location.href='/mypage_message';
+            }
+
+        }
+    </script>
 @endsection

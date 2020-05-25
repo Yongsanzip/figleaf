@@ -13,7 +13,8 @@ class AddColumnMessageTable extends Migration
      */
     public function up() {
         Schema::table('messages', function (Blueprint $table) {
-            $table->bigInteger('user_id')->unsigned()->comment('사용자 ID : 메세지 등록자 ID');
+            $table->bigInteger('user_id')->unsigned()->comment('발신자 ID');
+            $table->bigInteger('project_user_id')->unsigned()->comment('수신자ID');
         });
     }
 
@@ -24,7 +25,7 @@ class AddColumnMessageTable extends Migration
      */
     public function down() {
         Schema::table('messages', function (Blueprint $table) {
-            $table->dropColumn(['user_id']);
+            $table->dropColumn(['user_id','project_user_id']);
         });
     }
 }

@@ -220,3 +220,17 @@ function isEmail(asValue) {
     return regExp.test(asValue); // 형식에 맞는 경우 true 리턴
 
 }
+
+
+
+var fn_send_message =function(f){
+    if(document.getElementById('message_content').value != null){
+        if(confirm(document.getElementById('designer_name').innerText+" 디자이너님 에게 메세지를 전송하시겠습니까?")){
+            var params = {project:f,contents:document.getElementById('message_content').value};
+            callAjax('POST',true,'/mypage_message','JSON','JSON',params,gn_ajax_error,fn_send_success_ajax);
+        }
+    } else {
+        alert("문의내용을 입력해주세요!");
+        return false;
+    }
+}
