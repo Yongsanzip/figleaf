@@ -87,7 +87,7 @@ class MessageController extends Controller{
      ************************************************************************/
     public function show($id){
         try {
-        $datas = MessageDetail::whereMessageId($id)->whereDate('created_at',\Carbon\Carbon::today())->get();
+        $datas = MessageDetail::whereMessageId($id)->whereBetween('created_at',[\Carbon\Carbon::today()->subDays(7),\Carbon\Carbon::today()])->get();
         $project = Project::find(Message::find($id)->project_id);
         $last_id = MessageDetail::whereMessageId($id)->orderBy('created_at','DESC')->first()->id;
         return view('client.mypage.message.partial.show.index',compact('datas','project','id'));
@@ -128,7 +128,7 @@ class MessageController extends Controller{
     }
 
     public function message_render(Request $request){
-            $datas = MessageDetail::whereMessageId($request->message)->where('id','>',$request->last_id)->whereDate('created_at',\Carbon\Carbon::today())->orderBy('created_at',"DESC")->get();
+            $datas = MessageDetail::whereMessageId($request->message)->where('id','>',$request->last_id)->whereBetween('created_at',[\Carbon\Carbon::today()->subDays(7),\Carbon\Carbon::today()])->orderBy('created_at',"DESC")->get();
             if($datas->count() >0){
                 $code = 1;
                 $id = $datas->first()->id;
