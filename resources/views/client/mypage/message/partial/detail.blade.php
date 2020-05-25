@@ -3,7 +3,7 @@
         <!-- 보낸 메세지 -->
         <li class="send">
             <div class="bubble">
-                <p class="text">{{$data->content}}</p>
+                <p class="text">{!! nl2br($data->content)!!}</p>
                 <span class="time">{{$data->created_at->format('H:i')}}</span>
             </div>
         </li>
@@ -11,7 +11,7 @@
         <!-- 받은 메세지 -->
         <li class="receive">
             <div class="bubble">
-                <p class="text">{{$data->content}}</p>
+                <p class="text">{!! nl2br($data->content)!!}</p>
                 <span class="time">{{$data->created_at->format('H:i')}}</span>
             </div>
         </li>

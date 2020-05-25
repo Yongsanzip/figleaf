@@ -236,16 +236,24 @@ var fn_send_message =function(f,func){
 }
 
 var gn_detail_send_message = function(f){
-    var last_id = document.getElementById('last_id').value;
-    var params = {contents:document.getElementById('message_content').value,last_id:last_id};
-    callAjax('PUT',true,'/mypage_message/'+f,'JSON','JSON',params,gn_ajax_error,gn_send_message_success);
+    if(gn_nullCheck(document.getElementById('message_content').value)){
+        if(confirm("해당내용을 전송하시겠습니까?")){
+            var last_id = document.getElementById('last_id').value;
+            var params = {contents:document.getElementById('message_content').value,last_id:last_id};
+            callAjax('PUT',true,'/mypage_message/'+f,'JSON','JSON',params,gn_ajax_error,gn_send_message_success);
+        }
+    } else {
+        alert('내용을 입력해주세요');
+        document.getElementById('message_content').focus();
+    }
+
 }
 
 var gn_send_message_success = function(e){
     if(e.code){
-        console.log(e.last_id);
         $('#message_list').append(e.html);
         document.getElementById('last_id').value = e.last_id;
+        document.getElementById('message_content').value='';
     }
 };
 
