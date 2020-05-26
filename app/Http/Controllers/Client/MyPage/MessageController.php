@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client\MyPage;
 use App\Message;
 use App\MessageDetail;
 use App\Project;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -87,7 +88,7 @@ class MessageController extends Controller{
      ************************************************************************/
     public function show($id){
         try {
-        $datas = MessageDetail::whereMessageId($id)->whereBetween('created_at',[\Carbon\Carbon::today()->subDays(7),\Carbon\Carbon::today()])->get();
+        $datas = MessageDetail::whereMessageId($id)->whereBetween('created_at',[date(\Carbon\Carbon::now()->subDays(7)),date(\Carbon\Carbon::now())])->get();
         $project = Project::find(Message::find($id)->project_id);
         $last_id = MessageDetail::whereMessageId($id)->orderBy('created_at','DESC')->first()->id;
         return view('client.mypage.message.partial.show.index',compact('datas','project','id'));
@@ -109,17 +110,26 @@ class MessageController extends Controller{
     public function update(Request $request, $id){
         try {
             $msg = '';
-            $detail = MessageDetail::create([
-                'message_id'=>$id,
-                'user_id'=>auth()->user()->id,
-                'content'=>$request->contents,
-            ]);
-            $code = 1;
-            $datas = MessageDetail::whereMessageId($id)->where('id','>',$request->last_id)->whereDate('created_at',\Carbon\Carbon::today())->get();
-            $id=$detail->id;
+            $check = MessageDetail::whereMessageId($id)->orderBy('created_at','DESC')->first()->created_at;
+            if($check > Carbon::now()->subSeconds(10)){
+                $msg = '메세지는 10초마다 전송이 가능합니다.';
+                $code = 998;
+                $datas=[];
+            } else {
+                $detail = MessageDetail::create([
+                    'message_id'=>$id,
+                    'user_id'=>auth()->user()->id,
+                    'content'=>$request->contents,
+                ]);
+                $code = 1;
+                $datas = MessageDetail::whereMessageId($id)->where('id','>',$request->last_id)->whereDate('created_at',\Carbon\Carbon::today())->get();
+                $id=$detail->id;
+                $msg = '';
+            }
+
 
             $view = view('client.mypage.message.partial.detail', compact('datas'))->render();
-            return response()->json(['html'=>$view,'code'=>$code,'last_id'=>$id],200,[],JSON_PRETTY_PRINT);
+            return response()->json(['html'=>$view,'code'=>$code,'last_id'=>$id,'msg'=>$msg],200,[],JSON_PRETTY_PRINT);
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
@@ -128,7 +138,7 @@ class MessageController extends Controller{
     }
 
     public function message_render(Request $request){
-            $datas = MessageDetail::whereMessageId($request->message)->where('id','>',$request->last_id)->whereBetween('created_at',[\Carbon\Carbon::today()->subDays(7),\Carbon\Carbon::today()])->orderBy('created_at',"DESC")->get();
+            $datas = MessageDetail::whereMessageId($request->message)->where('id','>',$request->last_id)->whereBetween('created_at',[\Carbon\Carbon::now()->subDays(7),\Carbon\Carbon::now()])->orderBy('created_at',"DESC")->get();
             if($datas->count() >0){
                 $code = 1;
                 $id = $datas->first()->id;

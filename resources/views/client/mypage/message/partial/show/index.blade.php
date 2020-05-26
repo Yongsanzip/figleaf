@@ -71,7 +71,7 @@ $tab='message';
             document.getElementById('scroll_area').scrollTo(0, document.getElementById('scroll_area').scrollHeight);
             setInterval(function () {
                 gn_get_message_list('{{$id}}',document.getElementById('last_id').value);
-            },3000);
+            },10000);
         })
     </script>
     <!--// mypage contents -->

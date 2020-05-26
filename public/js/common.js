@@ -250,10 +250,17 @@ var gn_detail_send_message = function(f){
 }
 
 var gn_send_message_success = function(e){
-    if(e.code){
+
+    if(e.code == 1){
         $('#message_list').append(e.html);
         document.getElementById('last_id').value = e.last_id;
         document.getElementById('message_content').value='';
+    } else if(e.code == 998){
+        alert(e.msg);
+        document.getElementById('message_content').value='';
+    } else if(e.code ==999){
+        alert(e.msg);
+        window.location.href='/login';
     }
 };
 
