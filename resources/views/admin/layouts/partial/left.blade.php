@@ -21,6 +21,11 @@
                 <li><a href="{{route('admin_portfolio.index')}}">포트폴리오</a></li>
                 {{--<li><a href="{{route('admin_message.index')}}">메세지</a></li>--}}
                 <li><a href="{{route('admin_question.index')}}">1:1 문의</a></li>
+                <li>
+                    @if(auth()->user()->in_admin())
+                    <a href="{{route('admin_admin.index')}}">관리자정보</a>
+                    @endif
+                </li>
             </ul>
         </li>
         <li>

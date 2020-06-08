@@ -146,5 +146,5 @@ Route::group(['middleware'=>'only_admin'],function(){
     Route::POST('/check_designer','Admin\User\PortfolioController@check_designer')->name('check_designer');
 // 관리자 회원 - 1:1 문의
     Route::resource('admin_question', 'Admin\User\QuestionController');
-    Route::resource('admin_admin','Admin\Admin\AdminController');
+    Route::resource('admin_admin','Admin\Admin\AdminController')->middleware('admin');
 });
