@@ -12,8 +12,8 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $category_name = ["Designer", "Brand", "NEWS", "Women's apparel", "Men's apparel", "New", "Special", "Collection", "Event"];
-        $category_code = ["designer", "brand", "news", "women", "men", "new", "special", "collection", "event"];
+        $category_name = ["Designer", "Brand", "NEWS", "Women's apparel", "Men's apparel",  "Special", "Collection", "Event"];
+        $category_code = ["designer", "brand", "news", "women", "men",  "special", "collection", "event"];
         for($i = 0; $i < count($category_name); $i++) {
             DB::table('categories')->insert([
                 'category_name' => $category_name[$i],

@@ -366,11 +366,10 @@ $tab = 'portfolio';
                                             </div>
                                         @endforeach
                                     @endif
-                                    <div class="lookbook-item">
+                                    <div class="lookbook-item lookbook-new">
                                         <div class="lookbook-name">
                                             <input type="text" name="season0" placeholder="시즌명(EX/2019)" class="input-field lookbook-season yearpicker" readonly>
                                             <select class="select" name="season_type0">
-                                                <option selected disabled>전체</option>
                                                 <option value="S/S">SS</option>
                                                 <option value="F/W">FW</option>
                                             </select>
@@ -380,7 +379,7 @@ $tab = 'portfolio';
                                                 <!-- script add item-->
                                             </div>
                                             <label class="upload-image">
-                                                <input type="file" title="0" accept="image/jpeg, image/jpg, image/png" onchange="fnAddLookbookItemInit(this)">
+                                                <input type="file" name="images[0][]" title="0" accept="image/jpeg, image/jpg, image/png" onchange="fnAddLookbookItemInit(this)">
                                                 <span class="shape">클릭하여 사진을 추가하세요</span>
                                             </label>
                                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\PaymentDelivery;
 
+use App\Project;
 use Inicis;
 use App\Support;
 use App\SupportLog;
@@ -27,6 +28,7 @@ class SupportController extends Controller {
      ************************************************************************/
     public function index(Request $request){
         try {
+            session()->put('admin_support_page',$request->page ? $request->page : 1);
             if($request->input('searchKeyword')){
                 $keyword =$request->searchKeyword;
                 $datas =  Support::whereHas('project', function($q) use($keyword){
@@ -86,7 +88,9 @@ class SupportController extends Controller {
      ************************************************************************/
     public function show($id){
         try {
-
+            $page = session()->get('admin_support_page');
+            $datas = Project::find($id);
+            return view('admin.paymentDelivery.support.partial.show.index',compact('datas','page'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';

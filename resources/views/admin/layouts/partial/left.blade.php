@@ -32,7 +32,7 @@
             </ul>
         </li>
         <li>
-            <a alt="">결제/배송</a>
+            <a alt="">결제</a>
             <ul class="lnb-child">
                 <li><a href="{{route('admin_support.index')}}">후원내역</a></li>
                 {{--<li><a href="{{route('admin_delivery.index')}}">배송내역</a></li>--}}

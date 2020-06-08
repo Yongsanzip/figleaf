@@ -24,10 +24,16 @@ class PortfolioController  extends Controller {
      * @method      : GET
      * @return      : view , data , msg ...
      ************************************************************************/
-    public function index(){
+    public function index(Request $request){
         try {
-            $datas = Portfolio::orderBy('created_at','desc')->paginate(15);
-            return view('admin.user.portfolio.index',compact('datas'));
+            $condition = ["name"=>'회원명',"email"=>'이메일'];
+            if($request->searchCondition){
+                $datas = Portfolio::whereHas('user',function($q) use($request){return $q->where($request->searchCondition,'LIKE','%'.$request->searchKeyword.'%');})->paginate(15);
+            } else {
+                $datas = Portfolio::orderBy('created_at','desc')->paginate(15);
+            }
+
+            return view('admin.user.portfolio.index',compact('datas','condition'));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';

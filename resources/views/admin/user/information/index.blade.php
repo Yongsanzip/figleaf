@@ -14,23 +14,24 @@
             <!-- //headline -->
 
             <!-- search -->
-            <form action="{{route('admin_information.index')}}" method="GET" onsubmit="return fn_admin_information(f);">
+
             <div class="search">
+                <form action="{{route('admin_information.index')}}" method="GET" onsubmit="return fn_admin_information(f);">
                 <div class="search-select">
                     <select name="searchCondition" data-title="검색기준" class="required">
                         <option disabled selected>- 검색기준 -</option>
-                        <option value="name">회원명</option>
-                        <option value="email">이메일</option>
-                        <option value="home_phone">휴대전화번호</option>
-                        <option value="cellphone">휴대전화번호</option>
+                        @foreach($condition as $key=>$data)
+                            <option value="{{$key}}" {{(isset($_GET['searchCondition'])) ? ($_GET['searchCondition'] == $key ? 'selected' : '') : ''}} >{{$data}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="search-keyword">
-                    <input type="text" name="searchKeyword" placeholder="검색어를 입력하세요" class="required" spellcheck="false" data-title="검색어">
+                    <input type="text" name="searchKeyword" placeholder="검색어를 입력하세요" class="required" spellcheck="false" data-title="검색어" value="{{(isset($_GET['searchKeyword'])) ?  $_GET['searchKeyword']: ''}}">
                     <button type="submit">검색</button>
                 </div>
+                </form>
             </div>
-            </form>
+
 
             <!-- table 20 row-->
             <table class="table-data table-normal">

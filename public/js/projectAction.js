@@ -1,30 +1,34 @@
 document.addEventListener('DOMContentLoaded',function () {
-    document.getElementById('popup_guide').addEventListener('click', function () {
-        popup("/story_telling", "가이드");
-    });
+    try{
+        document.getElementById('popup_guide').addEventListener('click', function () {
+            popup("/story_telling", "가이드");
+        });
 
-    document.getElementById('popup_fee').addEventListener('click', function () {
-        popup("/popup_fees", "수수료 정책");
-    });
+        document.getElementById('popup_fee').addEventListener('click', function () {
+            popup("/popup_fees", "수수료 정책");
+        });
 
-    document.getElementById('company_radio').addEventListener('click', function () {
-        document.getElementById('company_number_display').style.display = "";
-        document.getElementById('company_file_display').style.display = "";
-    });
+        document.getElementById('company_radio').addEventListener('click', function () {
+            document.getElementById('company_number_display').style.display = "";
+            document.getElementById('company_file_display').style.display = "";
+        });
 
-    document.getElementById('personal_radio').addEventListener('click', function () {
-        document.getElementById('company_number_display').style.display = "none";
-        document.getElementById('company_file_display').style.display = "none";
-    });
+        document.getElementById('personal_radio').addEventListener('click', function () {
+            document.getElementById('company_number_display').style.display = "none";
+            document.getElementById('company_file_display').style.display = "none";
+        });
 
-    // 개요 - 프토젝트 카테고리
-    document.getElementById('first_category').addEventListener('change', function (e) {
-        category(this);
-    });
+        // 개요 - 프토젝트 카테고리
+        document.getElementById('first_category').addEventListener('change', function (e) {
+            category(this);
+        });
 
-    var first_category = document.getElementById('first_category');
-    if (first_category.value) {
-        category(first_category);
+        var first_category = document.getElementById('first_category');
+        if (first_category.value) {
+            category(first_category);
+        }
+    } catch (e){
+
     }
 });
 

@@ -42,7 +42,7 @@
                         <div class="input-item">
                             <p class="input-name">비밀번호 확인*</p>
                             <input type="password" class="input-field" name="password_confirmation" placeholder="비밀번호 확인">
-                            <p class="text-caption">영문, 숫자, 특수문자(!@#$%^&*+=-)를 조합한 n자 이상</p>
+                            <p class="text-caption">영문, 숫자, 특수문자(!@#$%^&*+=-)를 조합한 8자 이상</p>
                             <!-- error -->
                             <!-- <p class="text-error">동일한 비밀번호를 입력해주세요</p> -->
                         </div>
@@ -126,7 +126,7 @@
                 alert("비밀번호는 8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다.");
                 return false;
             }
-            return false;
+            return true;
         }
         var fn_email_check = function(e){
             document.getElementById('email_regex').style.display='none';

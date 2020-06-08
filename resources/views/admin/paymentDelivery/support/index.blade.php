@@ -42,6 +42,7 @@
                     <col>
                     <col>
                     <col>
+                    <col>
 
                     <col width="10%">
                 </colgroup>
@@ -54,6 +55,7 @@
                     <th>이메일</th>
                     <th>후원자명</th>
                     <th>옵션</th>
+                    <th>후원금액</th>
                     <th>
                         결제상태
                         <?php /*<button class="sort-column">정렬</button>*/?>
@@ -69,13 +71,14 @@
                                 @else
                                     <td></td>
                                 @endif
-                                <td>{{project_status($data->project->condition)}}</td>
-                                <td class="text-left">{{$data->project->title}}</td>
-                                <td>{{$data->created_at}}</td>
-                                <td>{{$data->user->email}}</td>
-                                <td>{{$data->user->name}}</td>
-                                <td>{{$data->support_options->first()->option->option_name}} {{count($data->support_options) > 1 ? "외 ". count($data->support_options) .' 개' : '' }}</td>
-                                <td>{{support_condition($data->condition)}}</td>
+                                <td onclick="fn_detail_link({{$data->project->id}})">{{project_status($data->project->condition)}}</td>
+                                <td onclick="fn_detail_link({{$data->project->id}})" class="text-left">{{$data->project->title}}</td>
+                                <td onclick="fn_detail_link({{$data->project->id}})">{{$data->created_at}}</td>
+                                <td onclick="fn_detail_link({{$data->project->id}})">{{$data->user->email}}</td>
+                                <td onclick="fn_detail_link({{$data->project->id}})">{{$data->user->name}}</td>
+                                <td onclick="fn_detail_link({{$data->project->id}})">{{$data->support_options->first()->option->option_name}} {{count($data->support_options) > 1 ? "외 ". count($data->support_options) .' 개' : '' }}</td>
+                                <td onclick="fn_detail_link({{$data->project->id}})">{{$data->total_amount}} 원</td>
+                                <td onclick="fn_detail_link({{$data->project->id}})">{{support_condition($data->condition)}}</td>
                             </tr>
                         @endforeach
                     @else
@@ -127,6 +130,9 @@
             alert(e.msg);
             location.reload();
             console.log(e);
+        }
+        var fn_detail_link =function(e){
+            location.href='/admin_support/'+e;
         }
     </script>
 @endsection

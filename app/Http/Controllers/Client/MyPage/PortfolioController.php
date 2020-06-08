@@ -164,29 +164,33 @@ class PortfolioController extends Controller {
             }
 
             for($i = 0; $i< $request->season_count; $i++){
-                $season_type = 'season_type'.$i;
-                $season = 'season'.$i;
+                $ty = 'season_type'.$i;
+                $se = 'season'.$i;
+                $season_type = $request->$ty;
+                $season = $request->$se;
                 $look_book = LookBook::firstOrCreate([
                     'portfolio_id' =>$portfolio->id,
                     'season'=>$season_type,
                     'year'=>$season
                 ]);
 
-                $look_book_images = $request->file('images');
+                $look_book_images = $request->file('images')[$i];
                 if($look_book_images) {
-                    foreach ($look_book_images[$i] as $image) {
-                        $savePath = $image->store('images/lookbook/'.$portfolio->id, 'public');
-                        LookBookImage::updateOrCreate([                                                                                // 포트폴리오 이미지 등록
-                            'look_book_id'      =>$look_book->id,
-                            'image_type'        =>$image->getClientMimeType(),
-                            'image_path'        =>$savePath,
-                            'origin_name'       =>$image->getClientOriginalName(),
-                        ]);
+                    foreach ($look_book_images as $key =>$image) {
+                        if ($key != count($look_book_images)) {
+                            $savePath = $image->store('images/lookbook/' . $portfolio->id, 'public');
+                            LookBookImage::updateOrCreate([                                                                                // 포트폴리오 이미지 등록
+                                'look_book_id' => $look_book->id,
+                                'image_type' => $image->getClientMimeType(),
+                                'image_path' => $savePath,
+                                'origin_name' => $image->getClientOriginalName(),
+                            ]);
+                        }
                     }
                 }
             }
             DB::commit();
-            return redirect(route('mypage_portfolio.index'));
+            //return redirect(route('mypage_portfolio.index'));
         } catch (\Exception $e){
             DB::rollBack();
             $msg = '잘못된 접근입니다. <br>'.$e->getMessage();
@@ -343,26 +347,29 @@ class PortfolioController extends Controller {
                     }
                 }
             }
-
             for($i = 0; $i< $request->season_count; $i++){
-                $season_type = 'season_type'.$i;
-                $season = 'season'.$i;
+                $ty = 'season_type'.$i;
+                $se = 'season'.$i;
+                $season_type = $request->$ty;
+                $season = $request->$se;
                 $look_book = LookBook::firstOrCreate([
                     'portfolio_id' =>$id,
                     'season'=>$season_type,
                     'year'=>$season
                 ]);
 
-                $look_book_images = $request->file('images');
+                $look_book_images = $request->file('images')[$i];
                 if($look_book_images) {
-                    foreach ($look_book_images[$i] as $image) {
-                        $savePath = $image->store('images/lookbook/'.$portfolio->id, 'public');
-                        LookBookImage::updateOrCreate([                                                                                // 포트폴리오 이미지 등록
-                            'look_book_id'      =>$look_book->id,
-                            'image_type'        =>$image->getClientMimeType(),
-                            'image_path'        =>$savePath,
-                            'origin_name'       =>$image->getClientOriginalName(),
-                        ]);
+                    foreach ($look_book_images as $key =>$image) {
+                        if($key != count($look_book_images)){
+                            $savePath = $image->store('images/lookbook/'.$id, 'public');
+                            LookBookImage::updateOrCreate([                                                                                // 포트폴리오 이미지 등록
+                                'look_book_id'      =>$look_book->id,
+                                'image_type'        =>$image->getClientMimeType(),
+                                'image_path'        =>$savePath,
+                                'origin_name'       =>$image->getClientOriginalName(),
+                            ]);
+                        }
                     }
                 }
             }

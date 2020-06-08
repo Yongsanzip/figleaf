@@ -707,7 +707,7 @@ var projectValidation = function (form_name) {
         var twitter = document.getElementById('twitter').value;
 
         if (!designer_name || !brand_name  || !email || !phone || !homepage || !facebook || !instagram || !twitter) {
-            alert('디자이너/브랜드 소개는 필수 입력입니다.');
+            alert('디자이너/브랜드 파트 입력은 필수 입력입니다.');
             valueCheck = false;
             return false;
         } else {

@@ -16,17 +16,20 @@
 
             <!-- search -->
             <div class="search">
-                <div class="search-select">
-                    <select>
-                        <option disabled selected>- 검색기준 -</option>
-                        <option>검색기준</option>
-                        <option>검색기준</option>
-                    </select>
-                </div>
-                <div class="search-keyword">
-                    <input type="text" placeholder="검색어를 입력하세요" spellcheck="false">
-                    <button>검색</button>
-                </div>
+                <form action="{{route('admin_portfolio.index')}}" onsubmit="return gn_check_search_form(this);">
+                    <div class="search-select">
+                        <select name="searchCondition" data-title="검색기준" class="required">
+                            <option disabled selected>- 검색기준 -</option>
+                            @foreach($condition as $key=>$data)
+                                <option value="{{$key}}" {{(isset($_GET['searchCondition'])) ? ($_GET['searchCondition'] == $key ? 'selected' : '') : ''}} >{{$data}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="search-keyword">
+                        <input type="text" name="searchKeyword" placeholder="검색어를 입력하세요" class="required" spellcheck="false" data-title="검색어" value="{{(isset($_GET['searchKeyword'])) ?  $_GET['searchKeyword']: ''}}">
+                        <button>검색</button>
+                    </div>
+                </form>
             </div>
 
             <!-- table 20 row-->
@@ -85,6 +88,9 @@
 <script>
     var fn_link = function(e) {
         location.href='/admin_portfolio/'+e;
+    }
+    var gn_check_search_form = function(f){
+        gn_validation(f);
     }
 </script>
 @endsection

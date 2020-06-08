@@ -17,7 +17,7 @@ $tab = 'project';
                 <!--// menu list -->
 
 
-                @if(auth()->user()->role_id == 2)
+                @if(auth()->user()->role_id >= 2)
                 <!-- mypage contents -->
                 <div class="mypage-contents">
                     <div class="project-btn-wrap">
@@ -63,6 +63,8 @@ $tab = 'project';
                                     <div class="badge badge-green">진행중</div>
                                 @elseif($data->condition == 4)
                                     <div class="badge badge-grey">실패</div>
+                                @elseif($data->condition == 1)
+                                    <div class="badge badge-grey">검토대기중</div>
                                 @elseif($data->condition == 5)
                                     <div class="badge badge-orange">성공</div>
                                 @endif
@@ -87,13 +89,20 @@ $tab = 'project';
                                 </ul>
                             </div>
                             <div class="project-btn-wrap" style="text-align: center;">
-                                <a href="{{route('mypage_portfolio.index') }}" class="btn-black">디자이너 등록 요청</a>
+                                @if($status)
+                                    <span onclick="fn_status_alert()" class="btn-black">디자이너 승인 대기중</span>
+                                    @else
+                                    <a href="{{route('mypage_portfolio.index') }}" class="btn-black">디자이너 등록 요청</a>
+                                @endif
                             </div>
                         </div>
                 @endif
             </div>
         </div>
-
     </main>
-
+<script>
+    var fn_status_alert = function(){
+        alert('디자이너 요청 승인 대기중입니다.');
+    }
+</script>
 @endsection

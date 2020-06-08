@@ -17,11 +17,12 @@ class SupportSeeder extends Seeder
             'updated_at'        => date('Y-m-d H:i:s', time()),
         ]);
         for ($i = 1; $i < 300; $i++) {
+
             $support = \App\Support::create([
                 'user_id'           => mt_rand(1,5),
                 'project_id'        => mt_rand(1,99),
                 'supporter'         => '테스트후원자'.$i,
-                'total_amount'      => 100,
+                'total_amount'      => 0,
                 'phone'             => '01012341234',
                 'email'             => 'test@test.com',
                 'receiver'          => '테스트'.$i,
@@ -30,19 +31,29 @@ class SupportSeeder extends Seeder
                 'address'           => '서울특별시 용산구 문배동 3-3',
                 'address_detail'    => '105~108',
                 'requirement'       => '요청사항',
+                'condition'         => 2,
                 'created_at'        => date('Y-m-d H:i:s', time()),
                 'updated_at'        => date('Y-m-d H:i:s', time()),
             ]);
 
             $option = \App\Option::where('project_id', $support->project_id)->first();
 
-            \App\SupportOption::create([
+            $so = \App\SupportOption::create([
                 'support_id'        => $support->id,
                 'option_id'         => $option->id,
                 'created_at'        => date('Y-m-d H:i:s', time()),
                 'updated_at'        => date('Y-m-d H:i:s', time()),
             ]);
-
+            $rand = mt_rand(1,20);
+            $log = \App\SupportLog::create([
+                'support_id' => $support->id,
+                'support_option_id' => $so->id,
+                'amount' => $rand,
+                'price' => $option->price * $rand,
+                'condition' => 2,
+            ]);
+            $support->total_amount = $log->price;
+            $support->save();
             \App\Payment::create([
                 'support_id'                => $support->id,
                 'bank_id'                   => mt_rand(1,44),

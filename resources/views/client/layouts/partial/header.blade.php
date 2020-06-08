@@ -50,9 +50,6 @@
                     <a href="{{route('menu.index',['type'=>'men'])}}">Men's Apparel</a>
                 </li>
                 <li>
-                    <a href="{{route('menu.index',['type'=>'new'])}}">New</a>
-                </li>
-                <li>
                     <a href="{{route('menu.index',['type'=>'special'])}}">Special</a>
                 </li>
                 <li>

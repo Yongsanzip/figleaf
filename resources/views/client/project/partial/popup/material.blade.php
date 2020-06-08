@@ -77,7 +77,6 @@
             </div>
             <button class="btn-white" type="button" onclick="popup_material_close()">완료</button>
         </div>
-
     </div>
 </div>
 

@@ -15,7 +15,13 @@
                 </h2>
                 <label class="checkbox-group mt-16">
                     <input type="checkbox" id="open_yn" name="open_yn" onclick="fn_check_designer(this);" data-title="{{$datas->user->user_code}}" {{$datas->open_yn ==1 ? 'checked' : ''}} >
-                    <p>열람여부</p>
+                    <p>
+                        열람여부
+                        @if($datas->user->role->id == 1)
+                            <span style="font-size: 6px; color: grey;"><small >(열람여부를 체크하시면 디이너로 등급이 올라갑니다.)</small></span>
+                        @endif
+                    </p>
+
                 </label>
                 <div class="portfolio-show-box">
                         @csrf

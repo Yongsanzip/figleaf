@@ -34,7 +34,7 @@ class ProjectController extends Controller {
      * @description :
      ************************************************************************/
     public function __construct() {
-        $this->middleware('auth');
+        $this->middleware('auth')->only('store','create','update','edit');
     }
     /**
      * Display a listing of the resource.
@@ -45,6 +45,20 @@ class ProjectController extends Controller {
     public function index(Request $request)
     {
         try {
+            if ($request->material_id > 0){                                                                             // 1차 -> 2차 카테고리
+                $datas = Material::where('group_id', $request->material_id)->get();
+                $name = 'material';
+            }
+
+            if ($request->ajax()){                                                                                      // 원단/재질 카테고리
+                $view = view('client.project.partial.render.material', compact('datas','name'))->render();
+
+                return response()->json(['html'=>$view],200, [],JSON_PRETTY_PRINT);
+            } else {
+                // 브랜드 소개 default 값
+                // $introduction = Portfolio::where('user_id', auth()->user()->id);
+                return view('client.project.index');
+            }
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();
             $title = '500 ERROR';
@@ -118,7 +132,10 @@ class ProjectController extends Controller {
                     'summary'               => $request->project_summary,
                     'success_count'         => $request->success_count,
                 ]);
-
+                if($project->condition == 3){
+                    $project->condition =1;
+                    $project->save();
+                }
                 if ($project->progress != 100) {
                     $project->progress = 15;
                     $project->save();

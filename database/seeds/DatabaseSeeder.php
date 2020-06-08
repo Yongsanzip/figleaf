@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             //필수 요소
+            //은행 리스트 테이블 데이터 세팅
+            BanksTableSeeder::class,
             //유저 권한 테이블 데이터 세팅
             RolesTableSeeder::class,
             //유저 테이블
@@ -25,8 +27,6 @@ class DatabaseSeeder extends Seeder
             SizeCategoriesTableSeeder::class,
             //결제 셀렉트 테이블 데이터 세팅
             PaymentSelectsTableSeeder::class,
-            //은행 리스트 테이블 데이터 세팅
-            BanksTableSeeder::class,
             //카드리스트
             CardSeeder::class,
             //취급정보 탭 테이블 데이터 세팅
@@ -44,12 +44,12 @@ class DatabaseSeeder extends Seeder
 
             /******************** 테스트 데이터 ********************/
             //부가 요소
-            // PortfolioSeeder::class,
-            // ProjectSeeder::class,
-            //SupportSeeder::class,
-            // CommunitySeeder::class,
-            // QuestionSeeder::class,
-            // ContentDetailsSeeder::class
+            PortfolioSeeder::class,
+            ProjectSeeder::class,
+            SupportSeeder::class,
+            CommunitySeeder::class,
+            QuestionSeeder::class,
+            ContentDetailsSeeder::class
         ]);
 
     }

@@ -13,7 +13,7 @@ class CategoryDetailsTableSeeder extends Seeder
     public function run()
     {
         //Women's apparel 2차 카테고리 세팅
-        $womens_apparels = ["View All", "Outer", "Top", "T-shirt/Handie", "Pants", "Sports", "Dress", "Skirts", "Shoes", "Acc"];
+        $womens_apparels = ["New","View All", "Outer", "Top", "T-shirt/Handie", "Pants", "Sports", "Dress", "Skirts", "Shoes", "Acc"];
         $category = DB::table('categories')->where('category_name', "Women's apparel")->first();
         for($i = 0; $i < count($womens_apparels); $i++) {
             DB::table('category_details')->insert([
@@ -24,7 +24,7 @@ class CategoryDetailsTableSeeder extends Seeder
             ]);
         }
         //Men's apparel 2차 카테고리 세팅
-        $mens_apparels = ["View All", "Outer", "Pants", "Sports", "T-shirts/Handie", "Top", "Shoes", "Acc"];
+        $mens_apparels = ["New","View All", "Outer", "Pants", "Sports", "T-shirts/Handie", "Top", "Shoes", "Acc"];
         $category = DB::table('categories')->where('category_name', "Men's apparel")->first();
         for($i = 0; $i < count($mens_apparels); $i++) {
             DB::table('category_details')->insert([

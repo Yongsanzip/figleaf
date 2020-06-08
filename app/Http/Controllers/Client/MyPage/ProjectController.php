@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\MyPage;
 
+use App\Portfolio;
 use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,11 +15,11 @@ class ProjectController extends Controller
      * @url /mypage_project
      * @return view
      */
-    public function index()
-    {
+    public function index() {
+        $status = Portfolio::whereUserId(auth()->user()->id)->count();
         $datas = Project::where('user_id', auth()->user()->id)->where('progress', 100)->orderBy('created_at', 'desc')->get();
 
-        return view('client.mypage.project.index', compact('datas'));
+        return view('client.mypage.project.index', compact('datas','status'));
     }
 
     /**

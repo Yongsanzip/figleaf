@@ -530,11 +530,10 @@ function fnRemoveLookbookItem(e){
 function fnAddLookbook(){
     var lookbookList = document.getElementsByClassName('lookbook-list')[0];
     var item = document.getElementsByClassName('lookbook-item');
-    var lookbookItem = '<div class="lookbook-item">' +
+    var lookbookItem = '<div class="lookbook-item lookbook-new">' +
         '                  <div class="lookbook-name">' +
         '                      <input type="text"  placeholder="시즌명(EX/2019)" name="season'+item.length+'" class="input-field lookbook-season yearpicker" readonly>' +
         '                      <select class="select"  name="season_type'+item.length+'">' +
-        '                          <option selected disabled>전체</option>' +
         '                          <option value="S/S">SS</option>' +
         '                          <option value="F/W">FW</option>' +
         '                      </select>' +
@@ -627,7 +626,7 @@ var fn_portfolio_submit = function(f){
     // 협회
     gn_make_input_json('society_list' ,'input' , 'society_array');
     // 시즌 카운트
-    document.getElementById('season_count').value =  document.getElementsByClassName('lookbook-season').length;
+    document.getElementById('season_count').value =  document.getElementsByClassName('lookbook-new').length;
 
     return gn_validation(f);
 

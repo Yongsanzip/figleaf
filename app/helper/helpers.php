@@ -605,6 +605,29 @@ if (! function_exists('project_status')) {
     }
 }
 
+if (! function_exists('project_status_class')) {
+
+    function project_status_class($status){
+        switch ($status){
+            case 0 : return "badge-yellow";
+                break;
+            case 1: return "badge-yellow";
+                break;
+            case 2: return "badge-green";
+                break;
+            case 3: return "badge-red";
+                break;
+            case 4: return "badge-gray";
+                break;
+            case 5: return "badge-green";
+                break;
+            default : return "badge-red";
+                break;
+        }
+
+    }
+}
+
 if (! function_exists('support_condition')) {
 
     function support_condition($status){

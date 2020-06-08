@@ -29,4 +29,7 @@ class Support extends Model {
     /*******************************************************************
      * @return HasOne
      *******************************************************************/
+    public function support_log(){
+        return $this->hasOne('App\SupportLog','support_id','id');
+    }
 }

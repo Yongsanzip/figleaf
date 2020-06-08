@@ -23,10 +23,16 @@ class InformationController extends Controller {
      * @method      : GET
      * @return      : view , data , msg ...
      ************************************************************************/
-    public function index() {
+    public function index(Request $request) {
         try {
-            $datas = User::where('role_id','!=',4)->paginate(15);
-            return view('admin.user.information.index',compact('datas'));
+            $condition = ["name"=>'회원명',"email"=>'이메일',"cellphone"=>'전화번호'];
+            if($request->searchCondition){
+                $datas = User::where('role_id','!=',4)->where($request->searchCondition,'LIKE','%'.$request->searchKeyword.'%')->paginate(15);
+            } else {
+                $datas = User::where('role_id','!=',4)->paginate(15);
+            }
+
+            return view('admin.user.information.index',compact('datas','condition'));
         } catch (\Exception $e) {
             $msg = '잘못된 접근입니다. <br>' . $e->getMessage();
             flash($msg)->error();

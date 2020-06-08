@@ -269,3 +269,29 @@ var gn_get_message_list = function(e,last_id){
     var params = {message:e,last_id:last_id};
     callAjax('POST',true,'/get_message','JSON','JSON',params,gn_ajax_error,gn_send_message_success);
 };
+
+
+var IsNumber = function(arg){
+    var chars = "0123456789";
+    if(containsCharsOnly(arg,chars)){
+        return containsCharsOnly(arg,chars);
+    } else {
+        return containsCharsOnly(arg,chars);
+    }
+
+};
+
+var containsCharsOnly = function(arg,chars){
+    if(!gn_nullCheck(arg)){
+        return false;
+    } else {
+        var inx = 0;
+        var argLen = arg.length;
+        for(;inx < argLen;inx++){
+            if(chars.indexOf(arg.charAt(inx)) == -1){
+                return false;
+            }
+        }
+        return true;
+    }
+};

@@ -84,6 +84,10 @@ class Project extends Model {
         return $this->hasMany('App\ContentDetail', 'model_id', 'id')->where('status', 1)->orderBy('content_details.model_id', 'asc');
     }
 
+    //후원내역
+    public function supports(){
+        return $this->hasMany('App\Support','project_id','id');
+    }
 
     /*******************************************************************
      * @return HasOne

@@ -28,7 +28,7 @@
                     <h2 class="headline">프로젝트 만들기/수정하기</h2>
                 </div>
                 <div class="project-btn-wrap">
-                    <a href="" class="btn-white">미리보기</a>
+{{--                    <a href="" class="btn-white">미리보기</a>--}}
                     <button type="button" class="btn-black" id="store_btn">검토요청하기</button>
                 </div>
                 <!-- //headline -->
@@ -92,7 +92,7 @@
                             <!-- 01-D 성공갯수 -->
                             <div class="input-item">
                                 <h3 class="title">성공 갯수</h3>
-                                <input type="text" class="input-field" name="success_count" id="success_count" value="{{ $data ? $data->success_count : '' }}" placeholder="최소 10개 ~ 최대 30개">
+                                <input type="number" class="input-field" name="success_count" onchange="fn_check_only_number(this)"  id="success_count" value="{{ $data ? $data->success_count : '' }}" placeholder="최소 10개 ~ 최대 30개">
                             </div>
                         </div>
                     </form>
@@ -620,17 +620,17 @@
                                 <div class="introduction-item">
                                     <span class="item-name">디자이너명</span>
                                     <input type="text" class="input-field" name="designer_name" id="designer_name" placeholder="디자이너명을 입력하세요"
-                                           value="{{ $data ? ($data->introduction ? $data->introduction->designer_name : auth()->user()->name) : auth()->user()->name }}">
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->designer_name : auth()->user()->name) : auth()->user()->name }}" readonly>
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">브랜드명</span>
                                     <input type="text" class="input-field" name="brand_name" id="brand_name" placeholder="브랜드명을 입력하세요"
-                                           value="{{ $data ? ($data->introduction ? $data->introduction->brand_name : $portfolio->brand->name_ko) : $portfolio->brand->name_ko }}">
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->brand_name : $portfolio->brand->name_ko) : $portfolio->brand->name_ko }}" readonly>
                                 </div>
                                 <div class="introduction-item">
                                     <span class="item-name">이메일</span>
                                     <input type="email" class="input-field" name="email" id="email" placeholder="이메일을 입력하세요"
-                                           value="{{ $data ? ($data->introduction ? $data->introduction->email : $portfolio->email) : $portfolio->email }}">
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->email : $portfolio->email) : $portfolio->email }}" readonly>
                                     <label class="checkbox-wrap">
                                         {{ $portfolio_email_hidden = $portfolio->email_hidden == 1 ? 'checked' : '' }}
                                         <input type="checkbox" name="email_hidden"
@@ -642,7 +642,7 @@
                                 <div class="introduction-item">
                                     <span class="item-name">전화번호</span>
                                     <input type="tel" class="input-field" name="phone" id="phone" placeholder="전화번호를 입력하세요"
-                                           value="{{ $data ? ($data->introduction ? $data->introduction->phone : $portfolio->home_phone) : $portfolio->home_phone }}">
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->phone : $portfolio->home_phone) : $portfolio->home_phone }}" readonly>
                                     <label class="checkbox-wrap">
                                         {{ $portfolio_phone_hidden = $portfolio->phone_hidden == 1 ? 'checked' : '' }}
                                         <input type="checkbox" name="phone_hidden"
@@ -654,7 +654,7 @@
                                 <div class="introduction-item">
                                     <span class="item-name">페이스북</span>
                                     <input type="text" class="input-field" name="facebook" id="facebook" placeholder="페이스북 계정을 입력하세요"
-                                           value="{{ $data ? ($data->introduction ? $data->introduction->facebook : $portfolio->facebook) : $portfolio->facebook }}">
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->facebook : $portfolio->facebook) : $portfolio->facebook }}" readonly>
                                     <label class="checkbox-wrap">
                                         {{ $portfolio_facebook_hidden = $portfolio->facebook_hidden == 1 ? 'checked' : '' }}
                                         <input type="checkbox" name="facebook_hidden"
@@ -666,7 +666,7 @@
                                 <div class="introduction-item">
                                     <span class="item-name">인스타그램</span>
                                     <input type="text" class="input-field" name="instagram" id="instagram" placeholder="인스타그램 계정을 입력하세요"
-                                           value="{{ $data ? ($data->introduction ? $data->introduction->instagram : $portfolio->instagram) : $portfolio->instagram }}">
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->instagram : $portfolio->instagram) : $portfolio->instagram }}" readonly>
                                     <label class="checkbox-wrap">
                                         {{ $portfolio_instagram_hidden = $portfolio->instagram_hidden == 1 ? 'checked' : '' }}
                                         <input type="checkbox" name="instagram_hidden"
@@ -678,7 +678,7 @@
                                 <div class="introduction-item">
                                     <span class="item-name">트위터</span>
                                     <input type="text" class="input-field" name="twitter" id="twitter" placeholder="트위터 계정을 입력하세요"
-                                           value="{{ $data ? ($data->introduction ? $data->introduction->twitter : $portfolio->twitter) : $portfolio->twitter }}">
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->twitter : $portfolio->twitter) : $portfolio->twitter }}" readonly>
                                     <label class="checkbox-wrap">
                                         {{ $portfolio_twitter_hidden = $portfolio->twitter_hidden == 1 ? 'checked' : '' }}
                                         <input type="checkbox" name="twitter_hidden"
@@ -690,7 +690,7 @@
                                 <div class="introduction-item">
                                     <span class="item-name">홈페이지</span>
                                     <input type="text" class="input-field" name="homepage" id="homepage" placeholder="홈페이지 url을 입력하세요"
-                                           value="{{ $data ? ($data->introduction ? $data->introduction->homepage : $portfolio->homepage) : $portfolio->homepage }}">
+                                           value="{{ $data ? ($data->introduction ? $data->introduction->homepage : $portfolio->homepage) : $portfolio->homepage }}" readonly>
                                     <label class="checkbox-wrap">
                                         {{ $portfolio_homepage_hidden = $portfolio->homepage_hidden == 1 ? 'checked' : '' }}
                                         <input type="checkbox" name="homepage_hidden"
@@ -778,7 +778,12 @@
 
         });
 
-
+        var fn_check_only_number = function(e){
+            if(!IsNumber(e.value) || e.value ==''){
+                alert("숫자만 입력해 주세요");
+                e.value='';
+            }
+        };
         function dateChange() {
             var deadline = document.getElementById('deadline').value;
             var degreeDate = new Date(deadline);

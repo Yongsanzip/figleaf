@@ -26,7 +26,7 @@ class ProjectSeeder extends Seeder
                 'count'                 => 0,
                 'condition'             => rand(1,5),
                 'title'                 => $faker->text(20),
-                'summary'               => '개요입니다.',
+                'summary'               => $faker->text(200),
                 'success_count'         => 20,
                 'comment'               => 'TEST',
                 'deadline'              => $faker->dateTimeBetween('-1 months','+2 months'),
