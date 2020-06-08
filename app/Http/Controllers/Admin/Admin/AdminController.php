@@ -6,6 +6,7 @@ use App\Notice;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Controllers\Controller;
@@ -18,6 +19,19 @@ class AdminController {
      ************************************************************************/
     public function __construct() {
 
+    }
+
+    /************************************************************************
+     * Construct
+     * @description :
+     ************************************************************************/
+    protected function validator(array $data) {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'cellphone'=>['required', 'string', 'max:255'],
+            'address'=>['required', 'string', 'max:255'],
+            'address_detail'=>['required', 'string', 'max:255'],
+        ]);
     }
 
     /************************************************************************
@@ -64,6 +78,17 @@ class AdminController {
      ************************************************************************/
     public function store(Request $request){
         try {
+            $vali = Validator::make($request->all,[
+                'name' => ['required', 'string', 'max:255'],
+                'cellphone'=>['required', 'string', 'max:255'],
+                'address'=>['required', 'string', 'max:255'],
+                'address_detail'=>['required', 'string', 'max:255'],
+                'password' => ['required', 'string', 'max:255'],
+            ]);
+            if($vali->fails()){
+                return back()->with('alert','입력된값이 올바르지않습니다');
+            }
+
             $user = User::firstOrCreate([
                 'role_id'       => 3,
                 'email'         => $request->email,
@@ -137,6 +162,23 @@ class AdminController {
      ************************************************************************/
     public function update(Request $request, $id){
         try {
+
+        if ($this->validator($request->all())->fails()){
+            return back()->with('alert','입력된값이 올바르지않습니다');
+        }
+            $user = User::find($id);
+            $user->email = $request->email;
+            $user->name = $request->name;
+            $user->cellphone = $request->cellphone;
+            $user->address = $request->address;
+            $user->address_detail = $request->address_detail;
+            $user->gender = $request->gender;
+            if($request->password){
+                $user->password =bcrypt($request->password);
+            }
+            $user->save();
+
+            flash('수정되었습니다')->clear();
             return  redirect(route('admin_admin.show',['id'=>$id]));
         } catch (\Exception $e){
             $description = '잘못된 접근입니다. <br>'.$e->getMessage();

@@ -30,28 +30,26 @@
                 <tr>
                     <th>*이름</th>
                     <td>
-                        <input type="text" class="input-field" name="name">
+                        {{$datas->name}}
                     </td>
                 </tr>
                 <tr>
                     <th>*이메일</th>
                     <td>
-                        <input type="text" class="input-field" name="email">
+                        {{$datas->email}}
                     </td>
                 </tr>
                 <tr>
                     <th>*휴대폰번호</th>
                     <td>
-                        <input type="tel" class="input-field" name="cellphone">
+                        {{$datas->cellphone}}
                     </td>
                 </tr>
                 <tr>
                     <th>*주소</th>
-                    <td><input type="text"></td>
-                </tr>
-                <tr>
-                    <th>*비밀번호</th>
-                    <td><input type="password" name="password"></td>
+                    <td>
+                        ({{$datas->zip_code}}) {{$datas->address}}  {{$datas->address_detail}}
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -60,7 +58,7 @@
                 <a href="{{route('admin_admin.index')}}" class="btn-white btn-m w-100px mr-20">목록</a>
                 <button onclick="fn_destroy_notice(); " class="btn-white btn-m w-100px">삭제</button>
                 <a href="{{route('admin_admin.edit',['id'=>$datas->id])}}" class="btn-black btn-m w-100px ml-4">수정</a>
-                <form id="notice_destroy_form" action="{{route('admin_notice.destroy',['id'=>$datas->id])}}" method="POST">
+                <form id="admin_destroy_form" action="{{route('admin_admin.destroy',['id'=>$datas->id])}}" method="POST">
                     @csrf
                     {!! method_field('DELETE') !!}
                 </form>
@@ -70,8 +68,8 @@
     </div>
     <script type="text/javascript">
         var fn_destroy_notice = function(){
-            if(confirm('해당 공지사항을 삭제하시겠습니까')){
-                document.getElementById('notice_destroy_form').submit();
+            if(confirm('해당 관리자를 삭제하시겠습니까')){
+                document.getElementById('admin_destroy_form').submit();
             }
         }
     </script>

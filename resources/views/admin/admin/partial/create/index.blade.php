@@ -44,7 +44,7 @@
                     <tr>
                         <th>*휴대폰번호</th>
                         <td>
-                            <input type="tel" class="input-field required" name="cellphone">
+                            <input type="tel" class="input-field required" data-title="휴대폰번호" name="cellphone">
                         </td>
                     </tr>
                     <tr>

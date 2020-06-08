@@ -130,9 +130,7 @@ class RegisterController extends Controller
      ************************************************************************/
     public function check_email(Request $request){
         try {
-            error_log($request->email);
             $status = empty(User::whereEmail($request->email)->first());
-            error_log($status);
             return response()->json(['status'=>$status],200,[],JSON_PRETTY_PRINT);
         } catch (\Exception $e){
             return response()->json(['msg'=>$e->getMessage()],500,[],JSON_PRETTY_PRINT);
