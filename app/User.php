@@ -75,17 +75,6 @@ class User extends Authenticatable {
         return false;
     }
 
-    /**************************************************************
-     * @function in_semi_admin
-     * @description 프로젝트 허가자 체크
-     * @return boolean
-     **************************************************************/
-    public function in_semi_admin(){
-        if($this->role_id == 3){
-            return true;
-        }
-        return false;
-    }
 
     /**************************************************************
      * @function is_designer
